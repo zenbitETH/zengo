@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Baumans&family=Exo:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header {
+  @apply
+  fixed top-0 w-full px-5 sm:px-24 py-3 rounded z-20 /*backdrop-blur-md*/
+}
+
+
+.wrap {
+  @apply
+  flex flex-wrap justify-between items-center
+}
+
+.navbar {
+  @apply
+  grid grid-cols-5
+  bg-gray-300/50 items-center border-white xl:border-r border-y xl:rounded-r-gen
+  fixed bottom-0 xl:grid-cols-1 xl:left-0 align-middle	
+  w-full xl:w-20 xl:h-[80%] xl:grid-rows-3 grid-cols-4
+  xl:py-20  xl:inset-y-0 xl:my-auto 
+}
+
+.imageBG {
+  @apply grid items-center
+  h-16 w-16 p-1 cursor-pointer rounded-full
+  hover:bg-gray-500/70 focus:bg-cata-100 mx-auto
+}
+
+.carButton {
+  @apply
+  absolute z-10 top-1/2 hover:bg-gray-300/50 rounded-full h-14 w-14 grid items-center text-center 
+}
+
+.card0, .formCard, .detailCard {
+  @apply
+  mx-3 md:mx-24 
+  bg-gray-300/20 border-white border
+  rounded-gen
+  grid  
+  h-[fit] xl:h-[80vh]
+}
+
+.card0 {
+  @apply
+  xl:grid-rows-1
+  grid-cols-12 
+}
+
+.formCard {
+  @apply
+  w-2/5 mx-auto
+}
+
+.detailCard {
+  @apply
+  grid-cols-3 gap-3 p-3
+  grid-rows-6
+}
+
+.propDashboard {
+  @apply
+  rounded-gen col-span-10 border p-5 border-white  
+  grid grid-cols-3 gap-3 overflow-auto h-full scrollbar-hide
+}
+
+.newProp, .newEvidence {
+  @apply 
+  grid items-center text-center hover:font-bold animate-pulse text-2xl cursor-pointer border-dashed border-2 hover:animate-none
+  font-bau 
+}
+
+.formBT {
+  @apply
+  px-10 py-3 bg-mods-100 rounded-gen cursor-pointer text-white text-2xl font-bau
+}
+
+.blockedEvidence {
+  @apply
+  grid items-center text-center font-bau animate-pulse text-3xl cursor-not-allowed	 rounded-dd text-white row-span-2
+  from-cata-300 to-mods-300 bg-gradient-to-r
+}
+
+.blockedEvidence2 {
+  @apply
+  grid items-center text-center font-bau animate-pulse text-2xl cursor-not-allowed rounded-dd bg-gray-500/50 text-white
+  
+}
+
+.newEvidence {
+  @apply
+  border-gray-500/75 rounded-dd font-bau
+}
+
+.propCard {
+  @apply
+  grid grid-rows-2 border-gray-500/50 border-2 h-[375px] rounded-gen font-bau
+}
+
+.stateCard, .voteCard {
+  @apply 
+  rounded-gen grid items-center font-bau 
+}
+
+.stateCard {
+  @apply
+  bg-mods-100/75
+}
+
+.voteCard {
+  @apply
+  grid grid-cols-2
+}
+
+.daoMembers {
+  @apply
+  rounded-gen col-span-2 p-3 grid grid-cols-2 grid-rows-6 font-exo gap-3 text-gray-700
+
+}
+
+.cardBT {
+  @apply
+  bg-white/75 text-gray-500 hover:text-gray-900 w-auto mx-auto px-3 py-2 cursor-pointer shadow-lg hover:shadow-none rounded-dd mt-8 hover:ease-in hover:bg-white text-lg
+}
+
+.formProgress {
+  @apply
+  w-1/2 mx-auto  my-4
+}
+
+.progressCircles {
+  @apply
+  w-10 h-10 mx-auto rounded-full text-lg flex items-center text-center grid text-white font-bold
+}
+
+.progressBar {
+  @apply
+  w-2/6  items-center align-middle content-center flex
+}
+
+.barContainer {
+  @apply
+  w-full rounded items-center align-middle flex-1
+}
+
+.barBar {
+  @apply
+  text-xs leading-none py-1 text-center
+}
+
+.barPhase {
+  @apply
+  font-bold text-cata-100
+}
+
+.formLabel {
+  @apply
+  pb-2 font-bau text-xl text-gray-700 text-left
+}
+
+.formFile {
+  @apply
+  w-full rounded-dd border-2 border-white border-dashed cursor-pointer hover:bg-gray-300/50 h-full grid items-center
+}
+
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+.MapPlaceHolder {
+  height: auto !important;
+  width: auto !important;
+}
+
+.GMAPS {
+  border-radius: 100px;
+  overflow: hidden;
+  
+}
