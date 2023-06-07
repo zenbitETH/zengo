@@ -19,7 +19,7 @@ export default function Form3 (props: any) {
       };
 
     return(
-        <div className='p-5 gap-5 grid grid-cols-2'>
+        <div className='p-3 gap-5 grid grid-cols-2'>
             
             <div className="col-span-2">
                 <div className='formLabel'>Evidence Date</div>

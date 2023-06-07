@@ -17,7 +17,7 @@ export default function Form1 (props: any) {
       };
 
     return(
-        <div className='p-5 gap-5 grid'>
+        <div className='p-3 gap-5 grid'>
             <div>
                 <div className='formLabel'>Proposal Title</div>
         
@@ -38,7 +38,7 @@ export default function Form1 (props: any) {
             </div>
             <div className='row-span-2 w-full mx-auto h-72'>
                 <div className='formLabel'>Description</div>
-                <textarea placeholder='Describe your proposal' className='p-5 text-black w-full mx-auto rounded-dd placeholder:italic h-full border-color1-500' onChange={handleDescriptionChange}></textarea>
+                <textarea placeholder='Describe your proposal' className='p-3 text-black w-full mx-auto rounded-dd placeholder:italic h-full border-color1-500' onChange={handleDescriptionChange}></textarea>
             </div>
         </div>
     )

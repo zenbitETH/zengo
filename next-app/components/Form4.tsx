@@ -24,7 +24,7 @@ interface Form4Props {
 export default function Form4 (props: Form4Props) {
     const {proposal} = props;
     return(
-        <div className='p-5 gap-3 grid grid-cols-2 '>
+        <div className='p-3 gap-3 grid grid-cols-2 '>
             <div className="h-full">
                 <div className="bg-white h-full rounded-dd grid ">
                     <div className="text-left font-bau p-3">

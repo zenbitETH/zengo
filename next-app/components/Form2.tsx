@@ -66,7 +66,7 @@ export default function Form2 (props: any) {
     const {nextStep} = props;
     
     return(
-        <div className='p-5 gap-5 grid font-exo'>
+        <div className='p-3 gap-5 grid font-exo'>
             <div>
                 <div className='formLabel'>Proposal location</div>
                 <div className="h-96 bg-gray-300 rounded-dd  relative grid text-center pt-5 border-gray-500 border border-t-0">
