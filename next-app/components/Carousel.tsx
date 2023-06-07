@@ -1,80 +1,70 @@
 import React, { useState } from 'react';
-import Image from 'next/image'
-import car1 from '../assets/Carousel1.png'
-import car2 from '../assets/Carousel2.png'
-import car3 from '../assets/Carousel3.png'
-import car4 from '../assets/Carousel4.png'
-import car5 from '../assets/Carousel5.png'
-import car6 from '../assets/Carousel6.png'
-import prev from '../assets/prev.svg'
-import next from '../assets/next.svg'
-import foot from '../assets/footer.png'
+import Image from 'next/image';
+import logo from '../assets/zengo.svg'
 
+
+interface Section {
+  id: number;
+  title: string;
+}
+
+const sections: Section[] = [
+  { id: 1, title: 'Start' },
+  { id: 2, title: 'Setting' },
+];
 
 const Carousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeSection, setActiveSection] = useState<Section>(sections[0]);
 
-  const handlePrevious = () => {
-    setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
+  const goToPrevious = () => {
+    const currentIndex = sections.findIndex((section) => section.id === activeSection.id);
+    if (currentIndex > 0) {
+      setActiveSection(sections[currentIndex - 1]);
+    }
   };
 
-  const handleNext = () => {
-    setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
+  const goToNext = () => {
+    const currentIndex = sections.findIndex((section) => section.id === activeSection.id);
+    if (currentIndex < sections.length - 1) {
+      setActiveSection(sections[currentIndex + 1]);
+    }
   };
 
-  const images = [
-    car1,
-    car2,
-    car3,
-    car4,
-    car5,
-    car6
-  ];
 
   return (
-    <div className="overflow-hidden text-center h-full grid items-center mx-36">
-      <div className='relative'>
-        <button
-          className="carButton left-0"
-          onClick={handlePrevious}
-        >
-          <Image
-          className=''
-          src={prev}
-          width={25}
-          height={25}
-          alt="Carousel Button"
-          />
-        </button>
-        <button
-          className="carButton right-0"
-          onClick={handleNext}
-        >
-          <Image
-          className=''
-          src={next}
-          width={25}
-          height={25}
-          alt="Carousel Button"
-          />
-        </button>
+    <div className="overflow-hidden text-center h-full grid items-center mx-24 py-24 relative">
+      {activeSection.id === 1 && (
+      <div className='mx-96 gap-3 font-bau'>
         <Image
-          className="w-full z-0 h-64 object-cover "
-          src={images[currentIndex]}
-          width={1920}
-          height={1080}
-          alt="Carousel Image"
-        />
+          src={logo}
+          height={300}
+          width={1488}
+          alt='zengo logo'
+          />
       </div>
-      <div className='fixed bottom-5 max-w-2xl fixed left-1/2 -translate-x-1/2'>
-        <Image
-          src={foot}
-          width={800}
-          height={101}
-          alt="Carousel Image"
-        />
-        
-      </div>
+      )}
+
+      {activeSection.id === 2 && (
+      <div>hello</div>
+      )}
+      <button
+        className="absolute left-0 top-1/2 transform
+         -translate-y-1/2 bg-gray-200 hover:text-white
+          hover:bg-red-500 text-2xl m-auto h-12 w-12 px-2
+          rounded-full shadow-md items-center grid text-center"
+        onClick={goToPrevious}
+      >
+        ◀
+      </button>
+      <button
+        className="absolute right-0 top-1/2 transform
+         -translate-y-1/2 bg-gray-200 hover:text-white
+          hover:bg-red-500 text-2xl  m-auto h-12 w-12 px-2
+          rounded-full shadow-md items-center grid text-center"
+        onClick={goToNext}
+      >
+        ►
+      </button>
     </div>
   );
 };
