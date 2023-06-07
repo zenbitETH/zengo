@@ -4,7 +4,7 @@ import file from "../assets/file2.jpg"
 
 export default function proposalDetail() {
     return (
-        <div className="from-cata-300 to-mods-300 bg-gradient-to-br 
+        <div className="from-ssss to-mod bg-gradient-to-br 
         h-screen grid items-center text-center mx-auto">
             <div className="detailCard">
                 
@@ -51,7 +51,7 @@ export default function proposalDetail() {
                         <div className="
                             absolute bottom-0 left-1/2 -translate-x-1/2 w-full 
                             text-center italic text-white 
-                            bg-mods-900/75
+                            bg-mod
                             p-3 rounded-b-dd"
                         >
                              Queretaro, Mexico, 20.587834, -100.389245

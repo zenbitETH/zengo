@@ -4,7 +4,7 @@ import file from "../assets/file.png"
 
 export default function proposalDetail() {
     return (
-        <div className="from-cata-300 to-mods-300 bg-gradient-to-br 
+        <div className="from-ssss to-mod bg-gradient-to-br 
         h-screen grid items-center text-center mx-auto">
             <div className="detailCard">
                 
@@ -52,7 +52,7 @@ export default function proposalDetail() {
                         <div className="
                             absolute bottom-0 left-1/2 -translate-x-1/2 w-full 
                             text-center italic text-white 
-                            bg-mods-900/75
+                            bg-mod
                             p-3 rounded-b-dd"
                         >
                              Queretaro, Mexico, 20.587834, -100.389245
@@ -172,7 +172,7 @@ export default function proposalDetail() {
                 </div>
                 <div className="grid grid-rows-2 gap-3 row-span-6 ">
 
-                    <div className="stateCard  from-cata-300 to-mods-300 bg-gradient-to-r row-span-2">
+                    <div className="stateCard  from-ssss to-mod bg-gradient-to-r row-span-2">
                         <div className="mx-auto grid gap-3">
                             <div className=" text-white text-3xl">Proposal State</div>
                             <div className="text-7xl">Voting</div>

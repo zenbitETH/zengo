@@ -96,7 +96,7 @@ const Form = () => {
   }, [triggerTx])
 
   return (
-    <div className="from-cata-300 to-mods-300 bg-gradient-to-br 
+    <div className="from-ssss to-mod bg-gradient-to-br 
     h-screen grid items-center text-center mx-auto">
       <form className='formCard'>
         {currentStep === 1 && (

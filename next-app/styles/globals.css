@@ -6,13 +6,17 @@
 
 .header {
   @apply
-  fixed top-0 w-full px-5 sm:px-24 py-3 rounded z-20 /*backdrop-blur-md*/
+  fixed top-0 w-full px-5 sm:px-24 py-3 rounded z-20 /*backdrop-blur-md*/font-bau
 }
 
+.homeBT {
+  @apply 
+  rounded-dd bg-gradient-to-br from-white/25 to-white/20 px-5 py-3 cursor-pointer hover:shadow-lg hover:bg-white/75 text-white hover:text-bgd text-lg 
+}
 
 .wrap {
   @apply
-  flex flex-wrap justify-between items-center
+  flex flex-wrap justify-end items-center
 }
 
 .navbar {
@@ -27,7 +31,7 @@
 .imageBG {
   @apply grid items-center
   h-16 w-16 p-1 cursor-pointer rounded-full
-  hover:bg-gray-500/70 focus:bg-cata-100 mx-auto
+  hover:bg-gray-500/70 focus:bg-mod mx-auto
 }
 
 .carButton {
@@ -75,13 +79,13 @@
 
 .formBT {
   @apply
-  px-10 py-3 bg-mods-100 rounded-gen cursor-pointer text-white text-2xl font-bau
+  px-10 py-3 bg-mod rounded-gen cursor-pointer text-white text-2xl font-bau
 }
 
 .blockedEvidence {
   @apply
   grid items-center text-center font-bau animate-pulse text-3xl cursor-not-allowed	 rounded-dd text-white row-span-2
-  from-cata-300 to-mods-300 bg-gradient-to-r
+  from-mod to-mod bg-gradient-to-r
 }
 
 .blockedEvidence2 {
@@ -107,7 +111,7 @@
 
 .stateCard {
   @apply
-  bg-mods-100/75
+  bg-mod/75
 }
 
 .voteCard {
@@ -153,7 +157,7 @@
 
 .barPhase {
   @apply
-  font-bold text-cata-100
+  font-bold text-mod
 }
 
 .formLabel {
