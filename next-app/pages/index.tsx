@@ -1,11 +1,17 @@
+import { useAccount } from "wagmi";
 import type { NextPage } from 'next';
 import Carousel from '../components/Carousel';
+import DaoProposals from "../components/DaoProposals";
 
 
 const Home: NextPage = () => {
+const { isConnected } = useAccount();
   return (
-    <div className='from-cata-300 to-mods-300 bg-gradient-to-br h-screen'>
-      <Carousel/>
+    <div className='from-cit to-mod bg-gradient-to-t h-screen'>
+      {!isConnected &&<Carousel/>}
+      {isConnected && (
+        <DaoProposals/>
+      )}
     </div>
 
   );

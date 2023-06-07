@@ -1,11 +1,11 @@
-import Map from "../components/Map"
+import Map from "./Map"
 import Link from "next/link"
 import Image from "next/image"
 import file from "../assets/file.png"
 
 export default function daoProposals () {
     return(
-        <div className='from-cata-300 to-mods-300 bg-gradient-to-br h-screen grid items-center'>
+        <div className='h-screen grid items-center'>
             <div className="card0">
                 <div className="propDashboard">
                     <div className="propCard relative">
@@ -29,7 +29,7 @@ export default function daoProposals () {
                                     items-center text-center 
                                     font-bold text-xl 
                                     rounded-tr-gen rounded-bl-gen 
-                                    bg-cata-300"
+                                    bg-ssss"
                                 >
                                     Voting
                                 </div>
@@ -47,7 +47,7 @@ export default function daoProposals () {
                                 </div>
                                 <Link href='/proposal-id'>
                                     <div className="
-                                        bg-mods-300/50 hover:bg-mods-300 
+                                        bg-mod hover:bg-mod 
                                         cursor-pointer hover:text-white 
                                         grid items-center 
                                         text-xl px-10 
@@ -63,7 +63,7 @@ export default function daoProposals () {
                             <div className="
                                 absolute bottom-0 left-1/2 -translate-x-1/2 w-full 
                                 text-center italic text-white
-                                bg-mods-900/75
+                                bg-mod
                                 p-3 rounded-b-dd"
                             >
                                 Queretaro, Mexico, 20.587834, -100.389245
@@ -110,7 +110,7 @@ export default function daoProposals () {
                                 </div>
                                 <Link href='/proposal-id-2'>
                                     <div className="
-                                        bg-mods-300/50 hover:bg-mods-300 
+                                        bg-mod hover:bg-mod 
                                         cursor-pointer hover:text-white 
                                         grid items-center 
                                         text-xl px-10 
@@ -126,7 +126,7 @@ export default function daoProposals () {
                             <div className="
                                 absolute bottom-0 left-1/2 -translate-x-1/2 w-full 
                                 text-center italic text-white
-                                bg-mods-900/75
+                                bg-mod
                                 p-3 rounded-b-dd"
                             >
                                 Queretaro, Mexico, 20.587834, -100.389245
