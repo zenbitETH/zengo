@@ -9,21 +9,21 @@ import { Chain } from '@wagmi/core'
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
  
-export const filecoin: Chain = {
-  id: 3141,
-  name: 'Filecoin - Hyperspace testnet',
-  network: 'filecoin',
+export const optimism: Chain = {
+  id: 420,
+  name: 'Optimism Goerli Testnet',
+  network: 'Op Goerli',
   nativeCurrency: {
     decimals: 18,
-    name: 'Filecon',
-    symbol: 'tFIL',
+    name: 'OPEther',
+    symbol: 'oETH',
   },
   rpcUrls: {
-    default: { http: ['https://api.hyperspace.node.glif.io/rpc/v1'] },
+    default: { http: ['https://endpoints.omniatech.io/v1/op/goerli/public'] },
   },
   blockExplorers: {
-    etherscan: { name: 'Filfox', url: 'https://hyperspace.filfox.info/en' },
-    default: { name: 'FilFox', url: 'https://hyperspace.filfox.info/en' },
+    etherscan: { name: '', url: 'https://optimism.io' },
+    default: { name: 'FilFox', url: 'https://optimism.io' },
   },
   //contracts: {
   //  multicall3: {
@@ -34,9 +34,9 @@ export const filecoin: Chain = {
 }
 
 const { chains, provider } = configureChains(
-  [filecoin], 
+  [optimism], 
   [
-    jsonRpcProvider({ rpc: () => ({ http: "https://api.hyperspace.node.glif.io/rpc/v1" }) }),  //<<<< New RPC Provider
+    jsonRpcProvider({ rpc: () => ({ http: "https://endpoints.omniatech.io/v1/op/goerli/public" }) }),  //<<<< New RPC Provider
     publicProvider(),
     // No need to alchemy
   ]
@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           overlayBlur: 'large',
         })}
         chains={chains}>
-        <Navbar/>
+        
         <Header/>
         <Component {...pageProps} />
       </RainbowKitProvider>
