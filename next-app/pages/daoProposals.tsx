@@ -1,14 +1,10 @@
 import React from 'react';
-import Map from "./Map"
 import Link from "next/link"
-import Image from "next/image"
-import file from "../assets/file.png"
-
 
 export default function daoProposals () {
     
     return(
-        <div className='h-screen grid items-center '>
+        <div className='h-screen from-cit to-mod bg-gradient-to-t grid items-center '>
             <div className="card0">
                 <div className="propDashboard">
                     <div className="propCard relative">
@@ -23,7 +19,6 @@ export default function daoProposals () {
                             <div className="
                                 col-span-2                                 
                                 border-gray-500/50 
-                             
                                 rounded-gen grid grid-rows-3"
                             >
                                 <div className="
@@ -39,6 +34,7 @@ export default function daoProposals () {
                                     <div className="mx-auto">
                                         <div className="completed"></div>     
                                     </div>
+                                    {/* This will change depending on the proposal stage (pending, currentCit, currentMod, completed) */}
                                     <div className="mx-auto flex gap-1 h-full items-center pl-3">
                                         <div className="completed"></div>     
                                         <div className="currentCit"></div>
@@ -68,7 +64,7 @@ export default function daoProposals () {
                         <div className="newProp">+ Add a new proposal</div>
                     </Link>
                 </div>
-                <div className='grid h-full col-span-2 p-3 gap-3 font-bau text-2xl'>
+                <div className='sortProposals'>
                     <div className='propBT'>Ver todas</div>
                     <div className='propBT'>Mis propuestas</div>
                     <div className='propBT'>Por tipo</div>
