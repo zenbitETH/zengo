@@ -65,7 +65,7 @@ export default function daoProposals () {
                         </div>
                     </div>
                     <Link href='/newProposal'>
-                        <div className="newProp ">+ Add a new proposal</div>
+                        <div className="newProp">+ Add a new proposal</div>
                     </Link>
                 </div>
                 <div className='grid h-full col-span-2 p-3 gap-3 font-bau text-2xl'>

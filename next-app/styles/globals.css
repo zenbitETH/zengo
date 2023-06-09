@@ -14,6 +14,11 @@
   rounded-dd bg-gradient-to-br from-white/25 to-white/20 px-5 py-3 cursor-pointer hover:shadow-lg hover:bg-white/75 text-bgd/50 hover:text-bgd text-2xl 
 }
 
+.propBT {
+  @apply
+  border text-white rounded-dd text-center grid items-center hover:bg-white/50 hover:text-bgd cursor-pointer
+}
+
 .wrap {
   @apply
   flex flex-wrap justify-end items-center
@@ -67,14 +72,15 @@
 
 .propDashboard {
   @apply
-  rounded-gen col-span-10 border p-3 border-white  
-  grid grid-cols-3 gap-3 overflow-auto h-full scrollbar-hide
+  rounded-gen col-span-10 p-3 border-white  
+  grid grid-cols-2 gap-3 overflow-auto scrollbar-hide place-content-start
 }
 
 .newProp, .newEvidence {
   @apply 
-  grid items-center text-center hover:font-bold animate-pulse text-2xl cursor-pointer border-dashed border-2 hover:animate-none
-  font-bau 
+  grid items-center text-center font-bau text-white text-2xl border-dashed border-2 animate-pulse
+  cursor-pointer hover:font-bold hover:animate-none hover:bg-white/50 hover:text-bgd rounded-dd
+   
 }
 
 .formBT {
@@ -91,7 +97,6 @@
 .blockedEvidence2 {
   @apply
   grid items-center text-center font-bau animate-pulse text-2xl cursor-not-allowed rounded-dd bg-gray-500/50 text-white
-  
 }
 
 .newEvidence {
@@ -101,8 +106,34 @@
 
 .propCard {
   @apply
-  grid grid-rows-2 border-gray-500/50 border-2 h-[375px] rounded-gen font-bau
+  grid border-gray-500/50 rounded-gen font-bau h-fit
 }
+
+.pending, .currentMod, .currentCit, .completed {
+  @apply 
+  h-3 w-3 rounded-full
+}
+
+.pending {
+  @apply
+  bg-gray-300
+}
+
+.currentCit {
+  @apply
+  bg-cit
+}
+
+.currentMod {
+  @apply
+  bg-mod
+}
+
+.completed {
+  @apply
+  bg-gray-500
+}
+
 
 .stateCard, .voteCard {
   @apply 
@@ -118,6 +149,7 @@
   @apply
   grid grid-cols-2
 }
+
 
 .daoMembers {
   @apply
