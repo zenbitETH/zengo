@@ -21,12 +21,12 @@ export default function Form1 (props: any) {
             <div>
                 <div className='formLabel'>Proposal Title</div>
         
-                <input type='text' placeholder='Name your proposal' className='placeholder:italic px-6 py-3 text-black w-full border-color1-500 mx-auto rounded-dd' onChange={handleNameChange}></input>
+                <input type='text' placeholder='Name your proposal' className='input' onChange={handleNameChange}></input>
         
             </div>
             <div>
                 <div className='formLabel'>Type of proposal</div>
-                <select className='pl-5 text-black w-full rounded-dd px-6 py-3 border-color1-500' defaultValue="" onChange={handleTypeChange}>
+                <select className='drop' defaultValue="" onChange={handleTypeChange}>
                     <option className='formLabel' value="" selected>Please select</option>
                     <option>🗳️ Improvement in public administration</option>
                     <option>🌳 Face-to-face event</option>

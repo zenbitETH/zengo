@@ -4,6 +4,30 @@
 @tailwind components;
 @tailwind utilities;
 
+.modal-background {
+  @apply
+  fixed top-0 w-full h-full grid items-center left-1/2 -translate-x-1/2 
+  bg-bgd/90 z-10
+
+}
+
+.modal {
+  @apply
+  p-6
+  mx-auto rounded-dd font-exo
+  relative
+}
+
+.drop {
+  @apply
+  pl-5 text-black w-full rounded-dd px-6 py-3 border-mod
+}
+
+.input {
+  @apply
+  placeholder:italic px-6 py-3 text-black w-full border-mod mx-auto rounded-dd
+}
+
 .header {
   @apply
   fixed top-0 w-full px-5 sm:px-24 py-3 rounded z-20 /*backdrop-blur-md*/font-bau
@@ -12,7 +36,7 @@
 .homeBT {
   @apply 
   rounded-dd border text-white border px-5 py-3 cursor-pointer hover:shadow-lg 
-  hover:bg-white/50 hover:text-bgd text-2xl 
+  hover:bg-white/50 hover:text-bgd text-2xl font-bau
 }
 
 .modBT {
@@ -24,6 +48,11 @@
 .propBT {
   @apply
   border text-white rounded-dd text-center grid items-center hover:bg-white/50 hover:text-bgd cursor-pointer
+}
+
+.closeBT {
+  @apply 
+  w-10 h-10 border rounded-full absolute top-5 right-5 grid items-center text-white hover:bg-white/50 hover:text-bgd
 }
 
 .wrap {
@@ -58,7 +87,7 @@
 
 .carButton {
   @apply
-  absolute z-10 top-1/2 hover:bg-gray-300/50 rounded-full h-14 w-14 grid items-center text-center 
+  absolute top-1/2 hover:bg-gray-300/50 rounded-full h-14 w-14 grid items-center text-center 
 }
 
 .card0, .formCard, .detailCard {
@@ -225,7 +254,7 @@
 
 .formLabel {
   @apply
-  pb-2 font-bau text-xl text-gray-700 text-left
+  pb-2 font-bau text-xl text-white text-left
 }
 
 .formFile {
