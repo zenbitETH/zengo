@@ -13,13 +13,11 @@ module.exports = {
 			bgd: "#101427",
 			cit: "#F3A754",
 			mod: "#008A8A",
-
 		},
         fontFamily: {
 				bau: ['Baumans'],
 				exo: ['Exo'],
 			},
-
 		borderRadius: {
 			'dc': '12px',
 			'dd': '40px',

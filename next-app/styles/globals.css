@@ -15,6 +15,12 @@
   hover:bg-white/50 hover:text-bgd text-2xl 
 }
 
+.modBT {
+  @apply
+  absolute left-1/2 -translate-x-1/2 bottom-3 text-center border rounded-dd py-3 text-bgd  px-5
+  hover:bg-white/50 hover:text-bgd cursor-pointer font-bau text-2xl text-white
+}
+
 .propBT {
   @apply
   border text-white rounded-dd text-center grid items-center hover:bg-white/50 hover:text-bgd cursor-pointer
@@ -28,10 +34,20 @@
 .navbar {
   @apply
   grid grid-cols-5
-  bg-white/10 items-center border-white xl:border-r border-y xl:rounded-r-gen
+  bg-white/20 items-center xl:rounded-r-gen
   fixed bottom-0 xl:grid-cols-1 xl:left-0 align-middle	
   w-full xl:w-20 xl:h-[80%] xl:grid-rows-3 grid-cols-4
   xl:py-20  xl:inset-y-0 xl:my-auto 
+}
+
+.modGrid {
+  @apply
+  grid gap-2 font-exo relative h-full text-sm  text-center place-content-start
+}
+
+.modInfo {
+  @apply
+  grid grid-cols-12 text-left  items-center h-fit
 }
 
 .imageBG {
@@ -60,6 +76,15 @@
   grid-cols-12 
 }
 
+.card1 {
+  @apply
+  mx-3 md:mx-24
+  h-screen xl:h-[80vh]
+  grid gap-5
+  grid-cols-5
+  font-bau
+}
+
 .formCard {
   @apply
   w-2/5 mx-auto
@@ -75,6 +100,11 @@
   @apply
   rounded-gen col-span-10 p-3 border-white  
   grid grid-cols-2 gap-3 overflow-auto scrollbar-hide place-content-start
+}
+
+.sortProposals {
+  @apply
+  grid h-full col-span-2 p-3 gap-3 font-bau text-2xl
 }
 
 .newProp, .newEvidence {

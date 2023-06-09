@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
-
 import Form1 from "../components/Form1";
 import Form2 from "../components/Form2";
 import Form3 from "../components/Form3";
@@ -96,8 +95,7 @@ const Form = () => {
   }, [triggerTx])
 
   return (
-    <div className="from-ssss to-mod bg-gradient-to-br 
-    h-screen grid items-center text-center mx-auto">
+    <div className="from-cit to-yellow-900 bg-gradient-to-t h-screen grid items-center text-center mx-auto">
       <form className='formCard'>
         {currentStep === 1 && (
           <div className=''>
