@@ -11,7 +11,8 @@
 
 .homeBT {
   @apply 
-  rounded-dd bg-gradient-to-br from-white/25 to-white/20 px-5 py-3 cursor-pointer hover:shadow-lg hover:bg-white/75 text-bgd/50 hover:text-bgd text-2xl 
+  rounded-dd border text-white border px-5 py-3 cursor-pointer hover:shadow-lg 
+  hover:bg-white/50 hover:text-bgd text-2xl 
 }
 
 .propBT {
@@ -27,7 +28,7 @@
 .navbar {
   @apply
   grid grid-cols-5
-  bg-gray-300/50 items-center border-white xl:border-r border-y xl:rounded-r-gen
+  bg-white/10 items-center border-white xl:border-r border-y xl:rounded-r-gen
   fixed bottom-0 xl:grid-cols-1 xl:left-0 align-middle	
   w-full xl:w-20 xl:h-[80%] xl:grid-rows-3 grid-cols-4
   xl:py-20  xl:inset-y-0 xl:my-auto 
@@ -47,7 +48,7 @@
 .card0, .formCard, .detailCard {
   @apply
   mx-3 md:mx-24 
-  bg-gray-300/20 border-white border
+  bg-white/10 border-white border
   rounded-gen
   grid  
   h-[fit] xl:h-[80vh]
