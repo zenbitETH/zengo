@@ -1,16 +1,16 @@
 import { useAccount } from "wagmi";
 import type { NextPage } from 'next';
 import Carousel from '../components/Carousel';
-import DaoProposals from "../components/DaoProposals";
+import Ceremony from "../components/Ceremony";
 
 
 const Home: NextPage = () => {
 const { isConnected } = useAccount();
   return (
     <div className='from-cit to-mod bg-gradient-to-t h-screen'>
-      {!isConnected &&<Carousel/>}
+      {!isConnected && <Carousel/>}
       {isConnected && (
-        <DaoProposals/>
+        <Ceremony/>
       )}
     </div>
 
