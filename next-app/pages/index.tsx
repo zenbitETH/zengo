@@ -6,6 +6,7 @@ import Ceremony from "../components/Ceremony";
 
 const Home: NextPage = () => {
 const { isConnected } = useAccount();
+
   return (
     <div className='from-cit to-mod bg-gradient-to-t h-screen'>
       {!isConnected && <Carousel/>}
@@ -13,7 +14,6 @@ const { isConnected } = useAccount();
         <Ceremony/>
       )}
     </div>
-
   );
 };
 

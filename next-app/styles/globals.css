@@ -139,7 +139,7 @@
 .newProp, .newEvidence {
   @apply 
   grid items-center text-center font-bau text-white text-2xl border-dashed border-2 animate-pulse
-  cursor-pointer hover:font-bold hover:animate-none hover:bg-white/50 hover:text-bgd rounded-dd h-40
+  cursor-pointer hover:font-bold hover:animate-none hover:bg-white/50 hover:text-bgd rounded-dd h-full
    
 }
 
@@ -202,7 +202,7 @@
 
 .stateCard {
   @apply
-  bg-mod/75
+  bg-mod
 }
 
 .voteCard {
@@ -219,7 +219,8 @@
 
 .cardBT {
   @apply
-  bg-white/75 text-gray-500 hover:text-gray-900 w-auto mx-auto px-3 py-2 cursor-pointer shadow-lg hover:shadow-none rounded-dd mt-8 hover:ease-in hover:bg-white text-lg
+  bg-white/75 text-gray-500 hover:text-gray-900 
+  w-auto mx-auto px-3 py-2 cursor-pointer shadow-lg hover:shadow-none rounded-dd mt-8 hover:ease-in hover:bg-white
 }
 
 .formProgress {
