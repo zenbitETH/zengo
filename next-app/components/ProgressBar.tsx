@@ -43,15 +43,15 @@ export default function ProgressBar (props: any) {
                 </div>
 
                 <div className={currentStep === 2 ? "font-bold underline underline-offset-4" : ""}>
-                    Location
+                    Ubicación
                 </div>
 
                 <div className={currentStep === 3 ? "font-bold underline underline-offset-4" : ""}>
-                    Evidence
+                    Evidencia
                 </div>
 
                 <div className={currentStep === 4 ? "font-bold underline underline-offset-4" : ""}>
-                    Confirm
+                    Confirmar
                 </div>
             </div>
         </div>

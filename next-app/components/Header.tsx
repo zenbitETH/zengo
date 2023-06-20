@@ -50,7 +50,7 @@ export default function Header() {
                       
                         if (chain.unsupported) {
                           return (
-                            <button onClick={openChainModal} type="button">
+                            <button className='homeBT' onClick={openChainModal} type="button">
                               Red incorrecta
                             </button>
                           );

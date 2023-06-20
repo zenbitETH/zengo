@@ -63,9 +63,9 @@
 .navbar {
   @apply
   grid grid-cols-5
-  bg-white/20 items-center xl:rounded-r-gen
+  bg-black/20 items-center xl:rounded-r-gen
   fixed bottom-0 xl:grid-cols-1 xl:left-0 align-middle	
-  w-full xl:w-20 xl:h-[80%] xl:grid-rows-3 grid-cols-4
+  w-full xl:w-20 xl:h-[80%] xl:grid-rows-4 grid-cols-4
   xl:py-20  xl:inset-y-0 xl:my-auto 
 }
 
@@ -93,7 +93,7 @@
 .card0, .formCard, .detailCard {
   @apply
   mx-3 md:mx-24 
-  bg-white/10 border-white border
+  bg-black/25
   rounded-gen
   grid  
   h-[fit] xl:h-[80vh]
@@ -139,7 +139,7 @@
 .newProp, .newEvidence {
   @apply 
   grid items-center text-center font-bau text-white text-2xl border-dashed border-2 animate-pulse
-  cursor-pointer hover:font-bold hover:animate-none hover:bg-white/50 hover:text-bgd rounded-dd
+  cursor-pointer hover:font-bold hover:animate-none hover:bg-white/50 hover:text-bgd rounded-dd h-40
    
 }
 
