@@ -43,6 +43,17 @@ export default function Navbar() {
               />  
             </a>
           </Link>
+          <Link href=''>
+            <a className='imageBG'>
+              <Image
+                src={icon4}
+                width={45}
+                height={45}
+                className=" cursor-pointer"
+                alt='Profile'
+              />  
+            </a>
+          </Link>
         </div>
     </nav>
     )
