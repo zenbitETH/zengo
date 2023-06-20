@@ -28,10 +28,10 @@ export default function Form4 (props: Form4Props) {
             <div className="h-full">
                 <div className="bg-white h-full rounded-dd grid ">
                     <div className="text-left font-bau p-3">
-                        <div className="text-xl">{proposal?.name || "Proposal title"}</div>
-                        <div className="italic">{proposal?.type || "Proposal type"}</div>
+                        <div className="text-xl">{proposal?.name || "Título de la propuesta"}</div>
+                        <div className="italic">{proposal?.type || "Tipo de propuesta"}</div>
                         <div className="text-justify pt-3 font-exo">
-                            {proposal?.description || "Proposal type"} 
+                            {proposal?.description || "Este el ejemplo de una propuesta"} 
                         </div>
                     </div>
                     
@@ -43,7 +43,7 @@ export default function Form4 (props: Form4Props) {
                             bg-gray-800/75  
                             p-3 rounded-b-dd"
                         >
-                            Queretaro, Mexico, 20.587834, -100.389245
+                            Queretaro, Mexico
                         </div>
                         
                     </div>
@@ -53,9 +53,9 @@ export default function Form4 (props: Form4Props) {
                 <div className="grid grid-rows-2 h-full gap-3">
                     <div className="bg-white border-gray-400 border-2 h-full rounded-dd">
                         <div className="text-left font-bau p-3">
-                            <div>{proposal?.evidence?.date || "Evidence date"}</div>
+                            <div>{proposal?.evidence?.date || "20/06/2023"}</div>
                             <div className="text-justify pt-3 font-exo">
-                                {proposal?.evidence?.description || "Evidence description"}
+                                {proposal?.evidence?.description || "Aquí va la descrición de tu propuesta  "}
                             </div>
                         </div>
                     </div>
