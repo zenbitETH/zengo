@@ -1,11 +1,12 @@
 import Map from "../components/Map"
-import Image from "next/image"
-import file from "../assets/file2.jpg"
 import Link from "next/link"
+import Image from "next/image"
+import file from "../assets/file.png"
+import photo from "../assets/file2.jpg"
 
 export default function proposalDetail() {
     return (
-        <div className="from-cit to-mod bg-gradient-to-t 
+        <div className="from-cit to-mod bg-gradient-to-br 
         h-screen grid items-center text-center mx-auto">
             <div className="detailCard">
                 <div className="bg-white/50 rounded-dd h-full grid grid-rows-4 items-center gap-5 relative row-span-6 font-">
@@ -38,7 +39,7 @@ export default function proposalDetail() {
                         </div>
                         <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
                             <Image
-                                src={file}
+                                src={photo}
                                 width={1920}
                                 height={1080}
                                 alt="Carousel Button"
@@ -59,11 +60,88 @@ export default function proposalDetail() {
                              Queretaro, Mexico
                         </div>
                     </div>
+                  
+                    
+                    
+                    
                 </div>
-                
                 <div className=" bg-white/50 rounded-dd row-span-6"> 
-                    <div className=" grid grid-rows-2  p-3 gap-3 h-full">
-                        <div className="blockedEvidence ">Los moderadores revisarán tu propuesta</div>
+                    <div className=" grid grid-rows-4  p-3 gap-3 h-full">
+                        <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
+                            <div className="bg-white rounded-dd ">
+                                <div className="text-left font-bau p-3">
+                                    <div className="text-justify text-sm pt-3 font-exo font-bold">
+                                         Solicitud municipal subida el 04/06/2023
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
+                            <Image
+                                src={file}
+                                width={1920}
+                                height={1080}
+                                alt="Carousel Button"
+                                className="rounded-dd"
+                            />
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
+                            <div className="bg-white rounded-dd ">
+                                <div className="text-left font-bau p-3">
+                                    <div className="text-justify text-sm pt-3 font-exo font-bold">
+                                         Respuesta municipal subida el 10/06/2023
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
+                            <Image
+                                src={file}
+                                width={1920}
+                                height={1080}
+                                alt="Carousel Button"
+                                className="rounded-dd"
+                            />
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
+                            <div className="bg-white rounded-dd ">
+                                <div className="text-left font-bau p-3">
+                                    <div className="text-justify text-sm pt-3 font-exo font-bold">
+                                         Solicitud estatal subida el 20/06/2023
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
+                            <Image
+                                src={file}
+                                width={1920}
+                                height={1080}
+                                alt="Carousel Button"
+                                className="rounded-dd"
+                            />
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
+                            <div className="bg-white rounded-dd ">
+                                <div className="text-left font-bau p-3">
+                                    <div className="text-justify text-sm pt-3 font-exo font-bold">
+                                         Respuesta estatal subida el 20/06/2023
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
+                            <Image
+                                src={file}
+                                width={1920}
+                                height={1080}
+                                alt="Carousel Button"
+                                className="rounded-dd"
+                            />
+                            </div>
+                        </div>
+
+                 
+                        
                         
                         
                         
@@ -128,16 +206,22 @@ export default function proposalDetail() {
                         <div className="stateCard row-span-2 ">
                             <div className="mx-auto grid gap-3">
                                 <div className=" text-white text-3xl">Estado de la propuesta</div>
-                                <div className="text-7xl text-white font-exo">Por verificar</div>
-                                <div className="grid grid-cols-3 gap-3 px-3 items-center">
-                                    <Link href='/proposal-id-3'>
-                                        <div className="cardBT	"> <span className="text-2xl">🔍 </span>Verificación municipal</div>
-                                    </Link>
-                                        <div className="cardBT	"> <span className="text-2xl">🗳️ </span>Lista para fondeo</div>
-                                        <div className="cardBT"> <span className="text-2xl">❌ </span>Rechazar propuesta</div>
+                                <div className="text-7xl font-exo text-white">Por verificar
+                                    <div className="text-2xl italic">Verificar gestión estatal</div>
                                 </div>
+                                <div className="grid grid-cols-3 items-center px-3 gap-3">
+                                    <Link href='/proposal-id-3'>
+                                        <div className="cardBT	"> <span className="text-2xl">🔍 </span>Verificación en PNT</div>
+                                    </Link>
+                                    <div className="cardBT	"> <span className="text-2xl">🗳️ </span>Lista para fondeo</div>
+                                    <div className="cardBT	"> <span className="text-2xl">✅ </span>Propuesta resuelta</div>
+                                </div>
+
+
+                          
                             </div>
                         </div>
+                       
                         
                     
                     

@@ -1,50 +1,53 @@
 import Map from "../components/Map"
+import Link from "next/link"
 import Image from "next/image"
+import photo from "../assets/file2.jpg"
 import file from "../assets/file.png"
 
 export default function proposalDetail() {
     return (
-        <div className="from-ssss to-mod bg-gradient-to-br 
+        <div className="from-cit to-mod bg-gradient-to-br 
         h-screen grid items-center text-center mx-auto">
             <div className="detailCard">
                 
-                <div className="bg-white/50 rounded-dd h-full grid grid-rows-4 items-center gap-5 relative row-span-6 font-">
+            <div className="bg-white/50 rounded-dd h-full grid grid-rows-4 items-center gap-5 relative row-span-6 font-">
                     <div className="text-lg absolute top-0 right-0 p-3 bg-gray-500 rounded-tr-dd rounded-bl-dd text-white">
-                        <div className="italic"> Proposal #1</div>
-                        <div className="text-[12px] -mb-2">made on 02/06/2023</div>
-                        <div className="text-[12px]">made by 0x04...5cC9</div>
+                        <div className="italic"> Propuesta #1</div>
+                        <div className="text-[12px] -mb-2">Hecha el 02/06/2023</div>
+                        <div className="text-[12px]">por 0x04...5cC9</div>
                     </div>  
                     <div className="text-left font-bau row-span-2 px-8 pt-10">
                         
-                        <div className="text-2xl font-bold justify">Test proposal</div>
-                        <div className="italic"> <span className="not-italic text-xl">💻</span>Online event</div>
+                        <div className="text-2xl font-bold justify">Limpiar el parque Santa Mónica</div>
+                        <div className="italic"> <span className="not-italic text-xl">👷</span>Solicitud de mantenimiento</div>
                         <div className="text-justify pt-3 font-exo text-lg">
-                            This is a test description for the first proposal This is a test description for the first proposal 
-                            This is a test description for the first proposal This is a test description for the first proposal This is a test description for the first proposal This is a test description for the first proposal 
+                            Se solicita limpieza en el parque Santa Mónica, se añaden fotos del estado actual
                         </div>
                     </div>
                     
                     
                     <div className="grid grid-cols-2 gap-3 mx-8 items-center  bg-white rounded-dd relative">
-                        <div className="bg-white rounded-dd h-full ">
+                        <div className="bg-white rounded-2xl h-full ">
                             <div className="text-left font-bau p-3">
+                                <div className="text-justify text-sm pt-3 font-exo font-bold">
+                                     Evidencia del 02/06/2023
+                                </div>
                                 
                                 <div className="text-justify text-sm pt-3 font-exo">
-                                    Test description for the evidence
+                                    Foto del parque
                                 </div>
                             </div>
                         </div>
                         <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
                             <Image
-                                src={file}
+                                src={photo}
                                 width={1920}
                                 height={1080}
                                 alt="Carousel Button"
-                                className="rounded-dd"
+                                className="rounded-2xl"
                             />
                         </div>
-                        <div className="absolute top-0 right-0 p-2 bg-gray-500 rounded-bl-dd rounded-tr-dd text-white text-sm italic">Initial Evidence
-                        <div className="text-[12px] text-center">01/01/2017</div></div>
+            
                     </div>
 
                     <div className="h-full relative">
@@ -52,24 +55,26 @@ export default function proposalDetail() {
                         <div className="
                             absolute bottom-0 left-1/2 -translate-x-1/2 w-full 
                             text-center italic text-white 
-                            bg-mod
-                            p-3 rounded-b-dd"
+                            bg-cit
+                            p-3 rounded-b-2xl"
                         >
-                             Queretaro, Mexico, 20.587834, -100.389245
+                             Queretaro, Mexico
                         </div>
                     </div>
-                  
-                    
-                    
-                    
                 </div>
                 <div className=" bg-white/50 rounded-dd row-span-6"> 
                     <div className=" grid grid-rows-2  p-3 gap-3 h-full">
+                       
+                       
                         <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
                             <div className="bg-white rounded-dd ">
                                 <div className="text-left font-bau p-3">
+                                    <div className="text-justify text-sm pt-3 font-exo font-bold">
+                                         Solicitud municipal subida el 04/06/2023
+                                    </div>
+
                                     <div className="text-justify text-sm pt-3 font-exo">
-                                        Test description for the local evidence request
+                                        Solicitud en la delegación Felipe Carrillo Puerto de mantenimiento y limpieza del parque santa mónica
                                     </div>
                                 </div>
                             </div>
@@ -82,17 +87,16 @@ export default function proposalDetail() {
                                 className="rounded-dd"
                             />
                             </div>
-                            <div className="absolute top-0 right-0 p-2 bg-gray-500 rounded-bl-dd rounded-tr-dd text-white text-sm">
-                                <div className="italic"> Local Response</div>
-                                <div className="text-[12px] -mb-1">02/06/2023</div>
-                                <div className="text-[12px]">upload by 0x04...5cC9</div>
-                            </div>
                         </div>
                         <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
                             <div className="bg-white rounded-dd ">
                                 <div className="text-left font-bau p-3">
+                                    <div className="text-justify text-sm pt-3 font-exo font-bold">
+                                         Respuesta municipal subida el 10/06/2023
+                                    </div>
+
                                     <div className="text-justify text-sm pt-3 font-exo">
-                                        Test description for the local evidence response
+                                        Respuesta de la delegación Felipe Carrillo Puerto para el mantenimiento y limpieza del parque santa mónica
                                     </div>
                                 </div>
                             </div>
@@ -105,12 +109,8 @@ export default function proposalDetail() {
                                 className="rounded-dd"
                             />
                             </div>
-                            <div className="absolute top-0 right-0 p-2 bg-gray-500 rounded-bl-dd rounded-tr-dd text-white text-sm">
-                                <div className="italic"> Local Response</div>
-                                <div className="text-[12px] -mb-1">02/06/2023</div>
-                                <div className="text-[12px]">upload by 0x04...5cC9</div>
-                            </div>
                         </div>
+                 
                         
                         
                        
@@ -172,18 +172,23 @@ export default function proposalDetail() {
                 </div>
                 <div className="grid grid-rows-2 gap-3 row-span-6 ">
 
-                    <div className="stateCard  from-ssss to-mod bg-gradient-to-r row-span-2">
-                        <div className="mx-auto grid gap-3">
-                            <div className=" text-white text-3xl">Proposal State</div>
-                            <div className="text-7xl">Voting</div>
-                            <div className="voteCard">
-                                <div className="italic col-span-2">0/10 citizen moderators have voted <br/>
-                                    2/10 government moderators have votes</div>
-                                <div className="cardBT"><span className="text-5xl">👍</span></div>
-                                <div className="cardBT"><span className="text-5xl">👎</span></div>
+                        <div className="stateCard row-span-2 ">
+                            <div className="mx-auto grid gap-3">
+                                <div className=" text-white text-3xl">Estado de la propuesta</div>
+                                <div className="text-7xl font-exo text-white">Por verificar
+                                    <div className="text-2xl italic">Verificar gestión municipal</div>
+                                </div>
+                                <div className="grid grid-cols-3 items-center px-3 gap-3">
+                                    <Link href='/proposal-id-3'>
+                                        <div className="cardBT	"> <span className="text-2xl">🔍 </span>Verificación estatal</div>
+                                    </Link>
+                                    <div className="cardBT	"> <span className="text-2xl">🗳️ </span>Lista para fondeo</div>
+                                    <div className="cardBT	"> <span className="text-2xl">✅ </span>Propuesta resuelta</div>
+                                </div>
+
+                          
                             </div>
                         </div>
-                    </div>
                         
                     
                     
