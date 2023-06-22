@@ -71,7 +71,7 @@ export default function proposalDetail() {
                             <div className="bg-white rounded-dd ">
                                 <div className="text-left font-bau p-3">
                                     <div className="text-justify text-sm pt-3 font-exo font-bold">
-                                         Solicitud municipal subida el 04/06/2023
+                                        Solicitud municipal subida el 04/06/2023
                                     </div>
                                 </div>
                             </div>
