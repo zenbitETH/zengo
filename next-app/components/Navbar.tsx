@@ -32,7 +32,7 @@ export default function Navbar() {
               />
             </a>
           </Link>
-          <Link href=''>
+          <Link href='/fondeoPlural'>
             <a className='imageBG'>
               <Image
                 src={icon3}
@@ -43,7 +43,7 @@ export default function Navbar() {
               />  
             </a>
           </Link>
-          <Link href=''>
+          <Link href='/seguimiento'>
             <a className='imageBG'>
               <Image
                 src={icon4}
