@@ -33,10 +33,12 @@
   fixed top-0 w-full px-5 sm:px-24 py-3 rounded z-20 /*backdrop-blur-md*/font-bau
 }
 
+/* Buttons */
+
 .homeBT {
   @apply 
   rounded-dd border text-white border px-5 py-3 cursor-pointer hover:shadow-lg 
-  hover:bg-white/50 hover:text-bgd text-2xl font-bau
+  hover:bg-white/50 hover:text-bgd text-2xl font-bau 
 }
 
 .modBT {
@@ -53,6 +55,11 @@
 .closeBT {
   @apply 
   w-10 h-10 border rounded-full absolute top-5 right-5 grid items-center text-white hover:bg-white/50 hover:text-bgd
+}
+
+.newBT {
+  @apply
+  bg-black/50 rounded-dd grid items-center w-96 cursor-pointer hover:text-bgd hover:shadow-lg
 }
 
 .wrap {
