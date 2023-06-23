@@ -45,7 +45,22 @@ const Carousel: React.FC = () => {
       )}
 
       {activeSection.id === 2 && (
-      <div>hello</div>
+      <div>Problema</div>
+      )}
+      {activeSection.id === 3 && (
+      <div>Ciclos de gobernanza de zango</div>
+      )}
+       {activeSection.id === 4 && (
+      <div>Roles zengo</div>
+      )}
+       {activeSection.id === 4 && (
+      <div>Proceso de verificación</div>
+      )}
+      {activeSection.id === 4 && (
+      <div>Voto Plural</div>
+      )}
+      {activeSection.id === 4 && (
+      <div>Seguimiento</div>
       )}
       <button
         className="absolute left-0 top-1/2 transform
