@@ -9,8 +9,13 @@ interface Section {
 }
 
 const sections: Section[] = [
-  { id: 1, title: 'Start' },
-  { id: 2, title: 'Setting' },
+  { id: 1, title: 'Home' },
+  { id: 2, title: 'Problem' },
+  { id: 3, title: 'Zengo Model' },
+  { id: 4, title: 'Zengo Roles' },
+  { id: 5, title: 'Verification' },
+  { id: 6, title: 'Decentralized Budget' },
+  { id: 7, title: 'Following' },
 ];
 
 const Carousel: React.FC = () => {
@@ -43,23 +48,22 @@ const Carousel: React.FC = () => {
           />
       </div>
       )}
-
       {activeSection.id === 2 && (
       <div>Problema</div>
       )}
       {activeSection.id === 3 && (
-      <div>Ciclos de gobernanza de zango</div>
+      <div>Modelo Zengo</div>
       )}
        {activeSection.id === 4 && (
       <div>Roles zengo</div>
       )}
-       {activeSection.id === 4 && (
-      <div>Proceso de verificación</div>
+       {activeSection.id === 5 && (
+      <div>Verificación</div>
       )}
-      {activeSection.id === 4 && (
-      <div>Voto Plural</div>
+      {activeSection.id === 6 && (
+      <div>Presupuesto Descentralizado</div>
       )}
-      {activeSection.id === 4 && (
+      {activeSection.id === 7 && (
       <div>Seguimiento</div>
       )}
       <button
