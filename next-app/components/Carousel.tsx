@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import logo from '../assets/zengo.svg'
+import car1 from '../assets/car1.png'
+import car2 from '../assets/car2.png'
+import car3 from '../assets/car3.png'
+import car4 from '../assets/car4.png'
 
 
 interface Section {
@@ -14,8 +17,6 @@ const sections: Section[] = [
   { id: 3, title: 'Zengo Model' },
   { id: 4, title: 'Zengo Roles' },
   { id: 5, title: 'Verification' },
-  { id: 6, title: 'Decentralized Budget' },
-  { id: 7, title: 'Following' },
 ];
 
 const Carousel: React.FC = () => {
@@ -37,52 +38,72 @@ const Carousel: React.FC = () => {
 
 
   return (
-    <div className="overflow-hidden text-center h-full grid items-center mx-24 py-24 relative">
+    <div className="overflow-hidden text-center h-full grid items-center mx-28 relative">
       {activeSection.id === 1 && (
       <div className='mx-96 gap-3 font-bau'>
-        <Image
-          src={logo}
-          height={300}
-          width={1488}
-          alt='zengo logo'
-          />
+        <iframe
+          className="absolute top-0 left-0 w-full h-full"
+          src="https://www.youtube.com/embed/G7e5jdp9mhc"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          title="YouTube video player"
+        />
       </div>
       )}
       {activeSection.id === 2 && (
-      <div>Problema</div>
+      <div className='m-10'>
+        <Image 
+        src={car1}
+        width={1920}
+        height={1080}
+        alt='descripción'/>
+      </div>
       )}
       {activeSection.id === 3 && (
-      <div>Modelo Zengo</div>
+      <div className='m-10'>
+      <Image 
+        src={car2}
+        width={1920}
+        height={1080}
+        alt='Usuarios'/>
+      </div>
       )}
        {activeSection.id === 4 && (
-      <div>Roles zengo</div>
+      <div className='m-10'>
+        <Image 
+          src={car3}
+          width={1920}
+          height={1080}
+          alt='Modelo Zengo'/>
+      </div>
       )}
        {activeSection.id === 5 && (
-      <div>Verificación</div>
-      )}
-      {activeSection.id === 6 && (
-      <div>Presupuesto Descentralizado</div>
-      )}
-      {activeSection.id === 7 && (
-      <div>Seguimiento</div>
+      <div className='m-10'>
+        <Image 
+          src={car4}
+          width={1920}
+          height={1080}
+          alt='Modelo Zengo'/>
+      </div>
       )}
       <button
         className="absolute left-0 top-1/2 transform
          -translate-y-1/2 bg-gray-200 hover:text-white
-          hover:bg-red-500 text-2xl m-auto h-12 w-12 px-2
+          hover:bg-cit text-2xl m-auto h-12 w-12 px-2
           rounded-full shadow-md items-center grid text-center"
         onClick={goToPrevious}
       >
-        ◀
+        ⏴
       </button>
       <button
         className="absolute right-0 top-1/2 transform
          -translate-y-1/2 bg-gray-200 hover:text-white
-          hover:bg-red-500 text-2xl  m-auto h-12 w-12 px-2
+          hover:bg-mod text-2xl  m-auto h-12 w-12 px-2
           rounded-full shadow-md items-center grid text-center"
         onClick={goToNext}
       >
-        ►
+        ⏵
       </button>
     </div>
   );
