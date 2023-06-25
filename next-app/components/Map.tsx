@@ -40,17 +40,9 @@ const Map: NextPage = () => {
 
   return (
     <div className='GMAPS'>
-      <GoogleMap
-        options={mapOptions}
-        zoom={14}
-        center={mapCenter}
-        mapTypeId={google.maps.MapTypeId.ROADMAP}
-        /*mapContainerStyle={containerStyle}*/
-        
-        onLoad={() => console.log('Map Component Loaded...')}    
-      >
-          <MarkerF position={mapCenter} onLoad={() => console.log('Marker Loaded')} />
-    </GoogleMap>
+  
+/
+    
     </div>
   );
 };
