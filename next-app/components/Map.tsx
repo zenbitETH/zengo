@@ -2,14 +2,14 @@ import { useLoadScript, GoogleMap, MarkerF } from '@react-google-maps/api';
 import type { NextPage } from 'next';
 import { useMemo } from 'react';
 
-const containerStyle = {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    overflow: 'hidden',
-    borderBottomLeftRadius: '22px',
-    borderBottomRightRadius: '22px',
-};
+//const containerStyle = {
+//    width: '100%',
+//    height: '100%',
+//    position: 'absolute',
+//    overflow: 'hidden',
+//    borderBottomLeftRadius: '22px',
+//    borderBottomRightRadius: '22px',
+//};
 
 const Map: NextPage = () => {
   const libraries = useMemo(() => ['places'], []);
@@ -45,7 +45,7 @@ const Map: NextPage = () => {
         zoom={14}
         center={mapCenter}
         mapTypeId={google.maps.MapTypeId.ROADMAP}
-        mapContainerStyle={containerStyle}
+        /*mapContainerStyle={containerStyle}*/
         
         onLoad={() => console.log('Map Component Loaded...')}    
       >
