@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.icons {
+  @apply
+  fill-white hover:fill-cit cursor-pointer
+}
+
 .modal-background {
   @apply
   fixed top-0 w-full h-full grid items-center left-1/2 -translate-x-1/2 
