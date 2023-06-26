@@ -38,11 +38,11 @@ const Carousel: React.FC = () => {
 
 
   return (
-    <div className="overflow-hidden text-center h-full grid items-center mx-28 relative">
+    <div className="overflow-hidden text-center h-screen grid items-center xl:mx-28 relative">
       {activeSection.id === 1 && (
-      <div className='mx-96 gap-3 font-bau'>
+      <div className='md:mx-20 gap-3 font-bau md:h-[30rem] h-[20rem] grid items-center py-5'>
         <iframe
-          className="absolute top-0 left-0 w-full h-full"
+          className="w-full h-full rounded-dd"
           src="https://www.youtube.com/embed/G7e5jdp9mhc"
           frameBorder="0"
           allow="autoplay; encrypted-media"
