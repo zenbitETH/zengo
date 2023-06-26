@@ -7,7 +7,7 @@
 
 .icons {
   @apply
-  fill-white hover:fill-cit cursor-pointer
+  fill-white/50 hover:fill-white cursor-pointer
 }
 
 .modal-background {
