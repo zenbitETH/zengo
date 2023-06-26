@@ -52,7 +52,7 @@ const Carousel: React.FC = () => {
       </div>
       )}
       {activeSection.id === 2 && (
-      <div className='mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto '>
+      <div className='mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar '>
         <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1'>
           <div className='text-3xl font-bau text-left mb-3'>Descripción General</div>
           <div className='text-sm md:text-base text-justify '>
