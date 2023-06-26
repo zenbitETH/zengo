@@ -46,8 +46,11 @@ export default function Header() {
                             <div className=''>
                               
                               <div className='fixed left-1/2 -translate-x-1/2 top-5 grid grid-cols-2 gap-5'>
+                                
                                 <Link href="https://certamentransparencia.org.mx/" >
-                                  <Image height={75} width={150} src={cit} alt='Certamen de Innovación en transparencia 2023' className='cursor-pointer hover:opacity-100 rounded-full opacity-50'/>
+                                  <div className='text-center'>
+                                    <Image height={50} width={100} src={cit} alt='Certamen de Innovación en transparencia 2023' className='cursor-pointer hover:opacity-100 rounded-full opacity-50'/>
+                                  </div>
                                 </Link>
                                 <div className='grid grid-cols-3 gap-10 grid items-center'>
                                   <Link href="https://twitter.com/zenbitMX">

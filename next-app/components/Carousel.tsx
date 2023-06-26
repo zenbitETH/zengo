@@ -88,22 +88,16 @@ const Carousel: React.FC = () => {
       </div>
       )}
       <button
-        className="absolute left-0 top-1/2 transform
-         -translate-y-1/2 bg-gray-200 hover:text-white
-          hover:bg-cit text-2xl m-auto h-12 w-12 px-2
-          rounded-full shadow-md items-center grid text-center"
+        className="carBT left-0"
         onClick={goToPrevious}
       >
-        ⏴
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"> <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/> </svg>
       </button>
       <button
-        className="absolute right-0 top-1/2 transform
-         -translate-y-1/2 bg-gray-200 hover:text-white
-          hover:bg-mod text-2xl  m-auto h-12 w-12 px-2
-          rounded-full shadow-md items-center grid text-center"
+        className="carBT right-0"
         onClick={goToNext}
       >
-        ⏵
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" className='fill-bgd/50 hover:fill-white'  viewBox="0 0 16 16"> <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/> </svg>
       </button>
     </div>
   );

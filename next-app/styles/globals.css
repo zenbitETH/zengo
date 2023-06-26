@@ -5,10 +5,7 @@
 @tailwind utilities;
 
 
-.icons {
-  @apply
-  fill-white/50 hover:fill-white cursor-pointer
-}
+
 
 .modal-background {
   @apply
@@ -98,10 +95,21 @@
   hover:bg-gray-500/70 focus:bg-mod mx-auto
 }
 
-.carButton {
+
+.icons {
   @apply
-  absolute top-1/2 hover:bg-gray-300/50 rounded-full h-14 w-14 grid items-center text-center 
+  fill-white/50 hover:fill-white cursor-pointer
 }
+
+.carBT {
+  @apply
+  absolute top-1/2 transform
+ -translate-y-1/2 bg-gray-200 hover:text-white
+  hover:bg-cit text-2xl m-auto h-12 w-12 px-2
+  rounded-full shadow-md items-center grid text-center
+  fill-bgd/50 hover:fill-white
+}
+
 
 .card0, .formCard, .detailCard {
   @apply
