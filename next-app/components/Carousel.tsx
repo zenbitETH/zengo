@@ -82,17 +82,17 @@ const Carousel: React.FC = () => {
             <div className='text-sm md:text-base text-justify pb-3'>
               En zengo, los usuarios tienen la posibilidad de adoptar uno de los tres roles 
               disponibles en la aplicación, cada uno de los cuales contribuye en distintas etapas de los ciclos de gobernanza 
-              y cuenta con funciones específicas (consulta página 3).
+              y cuenta con funciones específicas.
             </div>
-            <div className=''>
-              <Image src={car1} height={150} width={640} alt='Usuarios zengo'></Image>
+            <div className='pt-3'>
+              <Image src={car1} height={120} width={512} alt='Usuarios zengo'></Image>
             </div>
           </div>
           <div className='bg-black/20 rounded-dd h-full p-5'>
             <div className='text-3xl font-bau text-left mb-3'>Modelo zengo</div>
             <div className='text-sm md:text-base text-justify mb-2'>
               En zengo, seguimos un enfoque de ciclos de gobernanza abiertos, en los cuales ciudadanos y representantes de los sectores 
-              público y privado colaboran en las cuatro etapas que componen cada ciclo (consulta página 4)
+              público y privado colaboran en las cuatro etapas que componen cada ciclo.
             </div>
             <div className=''>
               <Image src={car2} height={150} width={640} alt='Usuarios zengo'></Image>
