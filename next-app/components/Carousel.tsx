@@ -6,6 +6,7 @@ import car3 from '../assets/car3.png'
 import car4 from '../assets/car4.png'
 import car5 from '../assets/car5.png'
 import car6 from '../assets/car6.png'
+import car7 from '../assets/car7.png'
 
 
 interface Section {
@@ -57,7 +58,7 @@ const Carousel: React.FC = () => {
       <div className='mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar'>
         <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1'>
           <div className='text-3xl font-bau text-left mb-3'>Descripción General</div>
-          <div className='text-sm md:text-base text-justify '>
+          <div className='text-sm md:text-base xl:text-lg text-justify'>
             Zengo: Presupuesto descentralizado es una aplicación colaborativa que impulsa la transparencia en la gobernanza urbana
             mediante el uso de software de código abierto y tecnologías descentralizadas. Nuestra plataforma permite la participación 
             ciudadana a través del registro de propuestas que abordan las necesidades reales de la comunidad, y cuenta con un presupuesto 
@@ -106,56 +107,115 @@ const Carousel: React.FC = () => {
       {activeSection.id === 3 && 
       <div className='mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar'>
         <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1  grid'>
-          <div className='text-3xl font-bau text-left mb-2'>Modelo Zengo</div>
-          <div className='text-sm md:text-base text-justify mb-2 h-full'>
-            Zengo cuenta con un modelo que combina diversas tecnologías para automatizar y descentralizar el proceso de gobernanza. Este proceso se divide 
-            en ciclos que constan de cuatro etapas, en las cuales los participantes desempeñan un papel clave en la coordinación de la gobernanza a nivel municipal, 
-            estatal o nacional, así como en la distribución y seguimiento del presupuesto descentralizado.
-            <br/><br/>
-            En esta página, se proporciona una visión general de cada una de las etapas de los ciclos de gobernanza en Zengo. Durante estas etapas, los ciudadanos, 
-            los moderadores y el equipo de Zenbit participan activamente. En las siguientes páginas, se presentan imágenes que representan de forma clara el proceso 
-            de gobernanza, lo que te permitirá entender cómo evoluciona cada propuesta.
-          </div>
+          <div className='text-3xl font-bau text-left mb-2'>Usuarios de Zengo</div>
+            <div className=''>
+              <Image src={car3} height={220} width={522} alt='Usuarios zengo'></Image>
+            </div>
         </div>
         <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1 '>
-          <div className='text-3xl font-bau text-left mb-2 '>Vista general del ciclo</div>
-            <div className='pt-16'>
-              <Image src={car2} height={150} width={640} alt='Usuarios zengo'></Image>
+          <div className='text-3xl font-bau text-left mb-2 '>Desarrolladores</div>
+            <div className='text-sm md:text-base text-justify'>
+              Zengo es un bien público desarrollado con software de código abierto y tecnologías descentralizadas. Esto permite que su 
+              código sea copiado o modificado por cualquier usuario. Además del equipo de zengo, otras organizaciones o equipos de 
+              desarrolladores pueden utilizarlo para organizar sus propias rondas de gobernanza o añadir funciones adicionales. 
+              <br/><br/>
+              Este enfoque fomenta la Investigación y Desarrollo Colectivo (I+D+C), acelerando el desarrollo a través del enfoque del 
+              código abierto y asegurando la sustentabilidad mediante mecanismos de fondeo para bienes públicos en las tecnologías 
+              descentralizadas.
             </div>
         </div>
-        <div className='bg-black/20 rounded-dd h-full p-5 col-span-2'>
-          <div className='text-3xl font-bau text-left mb-2'>Estapas del ciclo de gobernanza</div>
-          <div className='grid md:grid-cols-3'>
-            <div>
-              <Image src={car4} height={235} width={303} alt='Usuarios zengo'></Image>
+        <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1 '>
+          <div className='text-3xl font-bau text-left mb-2 '>Público en general</div>
+            <div className='text-sm md:text-base text-justify'>
+              Los ciclos de gobernanza en zengo comienzan a partir de propuestas realizadas en la plataforma. Cualquier usuario que se 
+              conecte a la aplicación puede ingresar propuestas a través de una dirección de ether. El uso de ether garantiza la privacidad 
+              de los usuarios, ya que no se requiere ningún dato personal, número telefónico y/o correo electrónico. 
+              <br/><br/>
+              Si ya tienes una dirección en ether, puedes crear propuestas en cualquier momento. En caso de no tener una dirección y querer 
+              generar una, puedes consultar el tutorial en go.zenbit.mx o participar en una de nuestras sesiones virtuales o presenciales 
+              organizadas por el equipo de zengo.
             </div>
-            <div>
-              <Image src={car5} height={317} width={690} alt='Usuarios zengo'></Image>
-            </div>
-            <div>
-              <Image src={car6} height={235} width={349} alt='Usuarios zengo'></Image>
-            </div>
-          </div>
-          
         </div>
+        <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1 '>
+          <div className='text-3xl font-bau text-left mb-2 '>Moderadores</div>
+            <div className='text-sm md:text-base text-justify'>
+              En zengo, reconocemos la importancia de garantizar la veracidad y confiabilidad de las propuestas de gobernanza urbana. 
+              Por esta razón, contamos con representantes de diferentes sectores de la sociedad que desempeñan el rol de moderadores. 
+              Estos moderadores son responsables de los procesos de confirmación y seguimiento.
+              <br/><br/>
+              Cualquier representante interesado puede participar en las ceremonias virtuales o presenciales en las que se registran o retiran a los 
+              moderadores. Zengo ha establecido cinco categorías de representantes que desempeñan esta función de moderación, seleccionados según su 
+              adscripción o sus funciones.
+            </div>
+        </div>
+
       </div>
       }
        {activeSection.id === 4 && (
-      <div className='m-10'>
-        <Image 
-          src={car4}
-          width={1920}
-          height={1080}
-          alt='Modelo Zengo'/>
-      </div>
+       <div className='mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar'>
+       <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1  grid'>
+         <div className='text-3xl font-bau text-left mb-2'>Modelo Zengo</div>
+         <div className='text-sm md:text-base text-justify mb-2 h-full'>
+           Zengo cuenta con un modelo que combina diversas tecnologías para automatizar y descentralizar el proceso de gobernanza. Este proceso se divide 
+           en ciclos que constan de cuatro etapas, en las cuales los participantes desempeñan un papel clave en la coordinación de la gobernanza a nivel municipal, 
+           estatal o nacional, así como en la distribución y seguimiento del presupuesto descentralizado.
+           <br/><br/>
+           En esta página, se proporciona una visión general de cada una de las etapas de los ciclos de gobernanza en Zengo. Durante estas etapas, los ciudadanos, 
+           los moderadores y el equipo de Zenbit participan activamente. En las siguientes páginas, se presentan imágenes que representan de forma clara el proceso 
+           de gobernanza, lo que te permitirá entender cómo evoluciona cada propuesta.
+         </div>
+       </div>
+       <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1 '>
+         <div className='text-3xl font-bau text-left mb-2 '>Vista general del ciclo</div>
+           <div className='pt-16'>
+             <Image src={car2} height={150} width={640} alt='Usuarios zengo'></Image>
+           </div>
+       </div>
+       <div className='bg-black/20 rounded-dd h-full p-5 col-span-2'>
+         <div className='text-3xl font-bau text-left mb-2'>Estapas del ciclo de gobernanza</div>
+         <div className='grid md:grid-cols-3'>
+           <div>
+             <Image src={car4} height={235} width={303} alt='Usuarios zengo'></Image>
+           </div>
+           <div>
+             <Image src={car5} height={317} width={690} alt='Usuarios zengo'></Image>
+           </div>
+           <div>
+             <Image src={car6} height={235} width={349} alt='Usuarios zengo'></Image>
+           </div>
+         </div>
+         
+       </div>
+     </div>
       )}
        {activeSection.id === 5 && (
-      <div className='m-10'>
-        <Image 
-          src={car4}
-          width={1920}
-          height={1080}
-          alt='Modelo Zengo'/>
+      <div className='mx-96 py-24 gap-5 h-full grid items-center text-white font-exo overflow-y-auto hide-scrollbar'>
+        <div>
+          <Image src={car7} height={194} width={697} alt='Usuarios zengo'></Image>
+        </div>
+        <div className='text-2xl text-justify mb-2 h-full'>
+         Zengo fue desarrollado por Zenbit.eth un laboratorio digital de bienes públicos para entornos urbanos. Todo el código es de licencia libre y puede ser copiado
+         o modificado sin restricciones. 
+         <br/><br/>
+         Zenbit.eth solo se hace responsable del contenido y transacciones publicadas en la plataforma Zengo.
+        </div>
+        <div className='text-2xl grid grid-cols-2 mb-2 h-full'>
+          <div className='col-span-2 text-3xl font-bau'>Presentan</div>
+          <div className='font-bau'>
+            Maggie Hernandez
+            <div className='font-exo text-base'>
+              <div>Diseño y gestión de PI</div>
+              <div>maggie@zenbit.mx</div>
+            </div>
+          </div>
+          <div className='font-bau'>
+            Habacuc Vera
+            <div className='font-exo text-base'>
+              <div>Investigación y Desarrollo</div>
+              <div>habacuc@zenbit.mx</div>
+            </div>
+          </div>
+        </div>
       </div>
       )}
       <button
