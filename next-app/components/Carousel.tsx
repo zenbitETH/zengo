@@ -189,11 +189,11 @@ const Carousel: React.FC = () => {
      </div>
       )}
        {activeSection.id === 5 && (
-      <div className='mx-96 py-24 gap-5 h-full grid items-center text-white font-exo overflow-y-auto hide-scrollbar'>
+      <div className='mx-3 md:mx-96 py-24 gap-5 h-full grid items-center text-white font-exo overflow-y-auto hide-scrollbar'>
         <div>
           <Image src={car7} height={194} width={697} alt='Usuarios zengo'></Image>
         </div>
-        <div className='text-2xl text-justify mb-2 h-full'>
+        <div className='md:text-2xl text-justify h-full'>
          Zengo fue desarrollado por Zenbit.eth un laboratorio digital de bienes públicos para entornos urbanos. Todo el código es de licencia libre y puede ser copiado
          o modificado sin restricciones. 
          <br/><br/>
