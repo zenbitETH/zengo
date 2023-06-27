@@ -4,6 +4,8 @@ import car1 from '../assets/car1.png'
 import car2 from '../assets/car2.png'
 import car3 from '../assets/car3.png'
 import car4 from '../assets/car4.png'
+import car5 from '../assets/car5.png'
+import car6 from '../assets/car6.png'
 
 
 interface Section {
@@ -52,7 +54,7 @@ const Carousel: React.FC = () => {
       </div>
       )}
       {activeSection.id === 2 && (
-      <div className='mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar '>
+      <div className='mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar'>
         <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1'>
           <div className='text-3xl font-bau text-left mb-3'>Descripción General</div>
           <div className='text-sm md:text-base text-justify '>
@@ -95,21 +97,49 @@ const Carousel: React.FC = () => {
               público y privado colaboran en las cuatro etapas que componen cada ciclo.
             </div>
             <div className=''>
-              <Image src={car2} height={150} width={640} alt='Usuarios zengo'></Image>
+              <Image src={car2} height={120} width={512} alt='Usuarios zengo'></Image>
             </div>
           </div>
         </div>
       </div>
       )}
-      {activeSection.id === 3 && (
-      <div className='m-10'>
-      <Image 
-        src={car3}
-        width={1920}
-        height={1080}
-        alt='Usuarios'/>
+      {activeSection.id === 3 && 
+      <div className='mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar'>
+        <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1  grid'>
+          <div className='text-3xl font-bau text-left mb-2'>Modelo Zengo</div>
+          <div className='text-sm md:text-base text-justify mb-2 h-full'>
+            Zengo cuenta con un modelo que combina diversas tecnologías para automatizar y descentralizar el proceso de gobernanza. Este proceso se divide 
+            en ciclos que constan de cuatro etapas, en las cuales los participantes desempeñan un papel clave en la coordinación de la gobernanza a nivel municipal, 
+            estatal o nacional, así como en la distribución y seguimiento del presupuesto descentralizado.
+            <br/><br/>
+            En esta página, se proporciona una visión general de cada una de las etapas de los ciclos de gobernanza en Zengo. Durante estas etapas, los ciudadanos, 
+            los moderadores y el equipo de Zenbit participan activamente. En las siguientes páginas, se presentan imágenes que representan de forma clara el proceso 
+            de gobernanza, lo que te permitirá entender cómo evoluciona cada propuesta.
+          </div>
+        </div>
+        <div className='bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1 '>
+          <div className='text-3xl font-bau text-left mb-2 '>Vista general del ciclo</div>
+            <div className='pt-16'>
+              <Image src={car2} height={150} width={640} alt='Usuarios zengo'></Image>
+            </div>
+        </div>
+        <div className='bg-black/20 rounded-dd h-full p-5 col-span-2'>
+          <div className='text-3xl font-bau text-left mb-2'>Estapas del ciclo de gobernanza</div>
+          <div className='grid md:grid-cols-3'>
+            <div>
+              <Image src={car4} height={235} width={303} alt='Usuarios zengo'></Image>
+            </div>
+            <div>
+              <Image src={car5} height={317} width={690} alt='Usuarios zengo'></Image>
+            </div>
+            <div>
+              <Image src={car6} height={235} width={349} alt='Usuarios zengo'></Image>
+            </div>
+          </div>
+          
+        </div>
       </div>
-      )}
+      }
        {activeSection.id === 4 && (
       <div className='m-10'>
         <Image 
