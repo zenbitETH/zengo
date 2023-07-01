@@ -4,6 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+
 .modal-background {
   @apply
   fixed top-0 w-full h-full grid items-center left-1/2 -translate-x-1/2 
@@ -33,10 +46,12 @@
   fixed top-0 w-full px-5 sm:px-24 py-3 rounded z-20 /*backdrop-blur-md*/font-bau
 }
 
+/* Buttons */
+
 .homeBT {
   @apply 
   rounded-dd border text-white border px-5 py-3 cursor-pointer hover:shadow-lg 
-  hover:bg-white/50 hover:text-bgd text-2xl font-bau
+  hover:bg-white/50 hover:text-bgd text-2xl font-bau 
 }
 
 .modBT {
@@ -55,6 +70,11 @@
   w-10 h-10 border rounded-full absolute top-5 right-5 grid items-center text-white hover:bg-white/50 hover:text-bgd
 }
 
+.newBT {
+  @apply
+  bg-black/50 rounded-dd grid items-center w-96 cursor-pointer hover:text-bgd hover:shadow-lg
+}
+
 .wrap {
   @apply
   flex flex-wrap justify-end items-center
@@ -63,9 +83,9 @@
 .navbar {
   @apply
   grid grid-cols-5
-  bg-white/20 items-center xl:rounded-r-gen
+  bg-black/20 items-center xl:rounded-r-gen
   fixed bottom-0 xl:grid-cols-1 xl:left-0 align-middle	
-  w-full xl:w-20 xl:h-[80%] xl:grid-rows-3 grid-cols-4
+  w-full xl:w-20 xl:h-[80%] xl:grid-rows-4 grid-cols-4
   xl:py-20  xl:inset-y-0 xl:my-auto 
 }
 
@@ -85,15 +105,26 @@
   hover:bg-gray-500/70 focus:bg-mod mx-auto
 }
 
-.carButton {
+
+.icons {
   @apply
-  absolute top-1/2 hover:bg-gray-300/50 rounded-full h-14 w-14 grid items-center text-center 
+  fill-white/50 hover:fill-white cursor-pointer
 }
+
+.carBT {
+  @apply
+  fixed bottom-0 transform
+ -translate-y-1/2 border
+  hover:bg-white/50 text-2xl m-auto h-12 w-12 px-2
+  rounded-full shadow-md items-center grid text-center
+  fill-white/50 hover:fill-bgd backdrop-blur-lg
+}
+
 
 .card0, .formCard, .detailCard {
   @apply
   mx-3 md:mx-24 
-  bg-white/10 border-white border
+  bg-black/25
   rounded-gen
   grid  
   h-[fit] xl:h-[80vh]
@@ -139,7 +170,7 @@
 .newProp, .newEvidence {
   @apply 
   grid items-center text-center font-bau text-white text-2xl border-dashed border-2 animate-pulse
-  cursor-pointer hover:font-bold hover:animate-none hover:bg-white/50 hover:text-bgd rounded-dd
+  cursor-pointer hover:font-bold hover:animate-none hover:bg-white/50 hover:text-bgd rounded-dd h-full
    
 }
 
@@ -202,7 +233,7 @@
 
 .stateCard {
   @apply
-  bg-mod/75
+  bg-mod
 }
 
 .voteCard {
@@ -219,7 +250,8 @@
 
 .cardBT {
   @apply
-  bg-white/75 text-gray-500 hover:text-gray-900 w-auto mx-auto px-3 py-2 cursor-pointer shadow-lg hover:shadow-none rounded-dd mt-8 hover:ease-in hover:bg-white text-lg
+  bg-white/75 text-gray-500 hover:text-gray-900 
+  w-auto mx-auto px-3 py-2 cursor-pointer shadow-lg hover:shadow-none rounded-dd mt-8 hover:ease-in hover:bg-white
 }
 
 .formProgress {

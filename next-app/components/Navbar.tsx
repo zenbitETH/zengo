@@ -32,10 +32,21 @@ export default function Navbar() {
               />
             </a>
           </Link>
-          <Link href=''>
+          <Link href='/fondeoPlural'>
             <a className='imageBG'>
               <Image
                 src={icon3}
+                width={45}
+                height={45}
+                className=" cursor-pointer"
+                alt='Profile'
+              />  
+            </a>
+          </Link>
+          <Link href='/seguimiento'>
+            <a className='imageBG'>
+              <Image
+                src={icon4}
                 width={45}
                 height={45}
                 className=" cursor-pointer"

@@ -63,7 +63,8 @@ export default function proposalDetail() {
                 
                 <div className=" bg-white/50 rounded-dd row-span-6"> 
                     <div className=" grid grid-rows-2  p-3 gap-3 h-full">
-                        <div className="blockedEvidence ">Los moderadores revisarán tu propuesta</div>
+                        <div className="newEvidence ">Subir archivo de resultados 1 </div>
+                        <div className="newEvidence ">Subir archivo de resultados 2 <br /> (opcional) </div>
                         
                         
                         
@@ -128,14 +129,10 @@ export default function proposalDetail() {
                         <div className="stateCard row-span-2 ">
                             <div className="mx-auto grid gap-3">
                                 <div className=" text-white text-3xl">Estado de la propuesta</div>
-                                <div className="text-7xl text-white font-exo">Por verificar</div>
-                                <div className="grid grid-cols-3 gap-3 px-3 items-center">
-                                    <Link href='/proposal-id-3'>
-                                        <div className="cardBT	"> <span className="text-2xl">🔍 </span>Verificación municipal</div>
-                                    </Link>
-                                        <div className="cardBT	"> <span className="text-2xl">🗳️ </span>Lista para fondeo</div>
-                                        <div className="cardBT"> <span className="text-2xl">❌ </span>Rechazar propuesta</div>
+                                <div className="text-7xl text-white font-exo">Segumiento
+                                    <div className="text-2xl italic pt-3">En espera de archivos de resultados</div>
                                 </div>
+               
                             </div>
                         </div>
                         

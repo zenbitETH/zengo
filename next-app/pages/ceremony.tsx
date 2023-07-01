@@ -49,7 +49,7 @@ export default function Ceremony() {
                 </div>
             )}
             <div className="card1">
-                <div className="rounded-dd p-3 text-white bg-white/20 relative">
+                <div className="rounded-dd p-3 text-white bg-black/20 relative">
                     <div className="text-xl pb-3">Organizaciones Civiles</div> 
                     <div className="modGrid">
                         <div className="modInfo">
@@ -59,17 +59,17 @@ export default function Ceremony() {
                         </div>
                     </div>
                 </div>
-                <div className="rounded-dd p-3 text-white bg-white/20">
+                <div className="rounded-dd p-3 text-white bg-black/20">
                     <div className="text-xl pb-3">Sector Privado</div> 
 
                 </div>
-                <div className="rounded-dd p-3 text-white bg-white/20">
+                <div className="rounded-dd p-3 text-white bg-black/20">
                     <div className="text-xl pb-3">Academia</div> 
                 </div>
-                <div className="rounded-dd p-3 text-white bg-white/20">
+                <div className="rounded-dd p-3 text-white bg-black/20">
                     <div className="text-xl pb-3">Gobierno</div> 
                 </div>
-                <div className="rounded-dd p-3 text-white bg-white/20">
+                <div className="rounded-dd p-3 text-white bg-black/20">
                     <div className="text-xl pb-3">Moderador Abierto</div> 
                 </div>
             </div>

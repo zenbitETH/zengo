@@ -95,7 +95,7 @@ const Form = () => {
   }, [triggerTx])
 
   return (
-    <div className="from-cit to-yellow-900 bg-gradient-to-t h-screen grid items-center text-center mx-auto">
+    <div className="from-cit to-cit bg-gradient-to-b h-screen grid items-center text-center mx-auto">
       <form className='formCard'>
         {currentStep === 1 && (
           <div className=''>
@@ -121,14 +121,14 @@ const Form = () => {
             <Form4 proposal={proposal}/>
           </div>
         )}
-        <div className=" flex justify-between m-auto gap-5">
+        <div className=" flex justify-between  m-auto mb-5 gap-5">
           {currentStep !== 1 && (
             <button
               type='button'
               className="formBT"
               onClick={prevStep}
             >
-              Previous
+              Regresar
             </button>
           )}
           {currentStep !== 4 ? (
@@ -137,7 +137,7 @@ const Form = () => {
               className="formBT"
               onClick={nextStep}
             >
-              Next
+              Siguiente
             </button>
           ) : (
             <button
@@ -145,14 +145,14 @@ const Form = () => {
               className="formBT"
               onClick={() => uploadMetadata()}              
             >
-              {ipfsLoading ? "Uploading to IPFS..." : isLoading ? "Uploading transaction..." : "Submit"}
+              {ipfsLoading ? "Uploading to IPFS..." : isLoading ? "Uploading transaction..." : "Registrar propuesta"}
             </button>
           )}
         </div>
 
         {isSuccess && (
         <div className=" flex justify-between m-auto gap-5">
-          Your proposal was created succesfully! 
+          Tu propuesta se creo satisfactoriamente! 
           <div>
             <Link href={`https://hyperspace.filfox.info/en/message/${data?.hash}`} > View CID on explorer </Link>
           </div>

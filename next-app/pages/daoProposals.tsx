@@ -10,10 +10,10 @@ export default function daoProposals () {
                     <div className="propCard relative">
                         <div className="bg-white rounded-gen grid grid-cols-6 relative">
                             <div className="col-span-4 p-3">
-                                <div className="italic">Proposal #2</div>
-                                <div className="font-bold text-2xl">Clean the park</div>
-                                <div className="italic"> <span className="not-italic text-2xl">👷</span>Request work or maintenance</div>
-                                <div className="">made on 02/06/2023</div>
+                                <div className="italic">Propuesta #1</div>
+                                <div className="font-bold text-2xl">Limpiar el parque Santa Mónica</div>
+                                <div className="italic"> <span className="not-italic text-2xl">👷</span>Solicitud de mantenimiento</div>
+                                <div className="">hecha el 02/06/2023</div>
                                 <div className="">Queretaro, Mexico</div>
                             </div>
                             <div className="
@@ -28,7 +28,7 @@ export default function daoProposals () {
                                     rounded-tr-gen rounded-bl-gen 
                                     bg-cit"
                                 >
-                                    On review
+                                    Verificación
                                 </div>
                                 <div className="text-center grid grid-cols-3 items-center gap-3 mx-auto p-3 w-full divide-x divide-gray-300">
                                     <div className="mx-auto">
@@ -36,8 +36,8 @@ export default function daoProposals () {
                                     </div>
                                     {/* This will change depending on the proposal stage (pending, currentCit, currentMod, completed) */}
                                     <div className="mx-auto flex gap-1 h-full items-center pl-3">
-                                        <div className="completed"></div>     
-                                        <div className="currentCit"></div>
+                                        <div className="completed"></div>
+                                        <div className="currentMod"></div>
                                         <div className="pending"></div>
                                     </div>
                                     <div className="mx-auto h-full grid items-center pl-3">
@@ -54,14 +54,14 @@ export default function daoProposals () {
                                         rounded-tl-gen
                                         rounded-br-gen"
                                     > 
-                                        Details
+                                        Detalles
                                     </div>
                                 </Link>
                             </div>
                         </div>
                     </div>
                     <Link href='/newProposal'>
-                        <div className="newProp">+ Add a new proposal</div>
+                        <div className="newProp">+ Añadir propuesta</div>
                     </Link>
                 </div>
                 <div className='sortProposals'>
