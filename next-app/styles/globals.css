@@ -58,9 +58,15 @@
   hover:bg-white/50 hover:text-bgd cursor-pointer font-bau text-2xl text-white
 }
 
+.propBT, .propCD {
+  @apply
+  border text-white rounded-dd text-center grid items-center cursor-pointer 
+}
+
 .propBT {
   @apply
-  border text-white rounded-dd text-center grid items-center hover:bg-white/50 hover:text-bgd cursor-pointer
+  hover:bg-white/50
+  hover:text-bgd
 }
 
 .closeBT {
