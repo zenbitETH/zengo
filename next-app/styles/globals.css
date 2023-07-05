@@ -60,13 +60,14 @@
 
 .propBT, .propCD {
   @apply
-  border text-white rounded-dd text-center grid items-center cursor-pointer 
+  border text-white rounded-dd text-center grid items-center 
 }
 
 .propBT {
   @apply
   hover:bg-white/50
   hover:text-bgd
+  cursor-pointer 
 }
 
 .closeBT {

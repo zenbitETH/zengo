@@ -224,7 +224,7 @@ export default function daoProposals () {
                     </div>
                 </div>
                 <div className='sortProposals grid-rows-2'>
-                    <div className='propBT'>
+                    <div className='propCD'>
                         <div>
                             <div className='text-6xl font-bold'>25 / 25</div>
                             <div>puntos plurales</div> 
