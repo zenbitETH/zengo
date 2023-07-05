@@ -1,5 +1,7 @@
 # Zengo: Presupuesto Descentralizado
 
+![Zengo cover](https://bafybeielx7v54tiirx4o2ptk5zjsxuo44cao3rnckemi2ddsq6vrlaoafu.ipfs.nftstorage.link/)
+
 ## Descripción General:
 
 Zengo: presupuesto descentralizado es una aplicación colaborativa que impulsa la transparencia en la gobernanza urbana a través de software de código abierto y tecnologías descentralizadas. Nuestra plataforma permite la participación ciudadana mediante el registro de propuestas que abordan las necesidades reales de la comunidad, y cuenta con un presupuesto descentralizado que los moderadores pueden asignar a dichas propuestas.  
@@ -34,7 +36,7 @@ Zengo cuenta con un modelo que combina diversas tecnologías para automatizar y 
 
 Esta página muestra una visión general de las etapas que conforman los ciclos de gobernanza en Zengo. En estas etapas participan activamente los ciudadanos, los moderados y el equipo de Zenbit. Además, en las páginas siguientes encontrarás imágenes que representan el proceso de gobernanza de manera clara y visual, lo que te permitirá entender cómo evoluciona cada propuesta.
 
-## Etapas del ciclo de gobernanza**
+## Etapas del ciclo de gobernanza
 
 ### 1. Registro
 
