@@ -14,6 +14,8 @@ Como visión, aspiramos a ser un referente en la transformación de la gestión 
 
 ## Usuarios de Zengo.
 
+![Zengo users](https://bafybeiepj7fyompdu6zsq7ugokvroxv4vga7ma6xtwf3ttinqfpdeqk5uu.ipfs.nftstorage.link/)
+
 En Zengo, los usuarios tienen la posibilidad de adoptar uno de los tres roles disponibles en la aplicación, cada uno de los cuales contribuye en distintas etapas de los ciclos de gobernanza y cuenta con funciones específicas: 
 
 ### 1. Público en general:
@@ -29,6 +31,8 @@ Zengo es un bien público desarrollado con software de código abierto y tecnolo
 En Zengo, reconocemos la importancia de garantizar la veracidad y confiabilidad de las propuestas de gobernanza urbana. Por esta razón, contamos con representantes de diferentes sectores de la sociedad que desempeñen el rol de moderadores. Estos moderadores son responsables del proceso de verificación. Cualquier representante interesado puede unirse a las ceremonias virtuales o presenciales en las que se registran o retiran a los moderadores. Zengo ha establecido cinco categorías de representantes que cumplen con esta función: organización civil, sector privado, academia, gobierna y categoría abierta.
 
 ## Modelo de Zengo
+
+![Zengo model](https://bafybeiaaujqvh72jqm2v36ck45mjd2sbuu3nze7subdkh2iiduq6ggry4u.ipfs.nftstorage.link/)
 
 En Zengo, seguimos un enfoque de ciclos de gobernanza abiertos, en los cuales ciudadanos y representantes de los sectores público y privado colaboran en las cuatro etapas que componen cada ciclo: 1) registro, 2) verificación, 3) fondeo, 4) seguimiento.  
 
