@@ -15,12 +15,10 @@
   scrollbar-width: none;  /* Firefox */
 }
 
-
-
 .modal-background {
   @apply
   fixed top-0 w-full h-full grid items-center left-1/2 -translate-x-1/2 
-  bg-bgd/90 z-10
+  bg-bgd/50 z-10 backdrop-blur-md
 
 }
 
@@ -29,6 +27,7 @@
   p-6
   mx-auto rounded-dd font-exo
   relative
+  
 }
 
 .drop {
@@ -60,9 +59,16 @@
   hover:bg-white/50 hover:text-bgd cursor-pointer font-bau text-2xl text-white
 }
 
+.propBT, .propCD {
+  @apply
+  border text-white rounded-dd text-center grid items-center 
+}
+
 .propBT {
   @apply
-  border text-white rounded-dd text-center grid items-center hover:bg-white/50 hover:text-bgd cursor-pointer
+  hover:bg-white/50
+  hover:text-bgd
+  cursor-pointer 
 }
 
 .closeBT {

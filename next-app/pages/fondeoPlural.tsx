@@ -223,17 +223,22 @@ export default function daoProposals () {
                         </div>
                     </div>
                 </div>
-                <div className='sortProposals'>
-                 
-                        
-            
-                    <div className='propBT'>
+                <div className='sortProposals grid-rows-2'>
+                    <div className='propCD'>
                         <div>
                             <div className='text-6xl font-bold'>25 / 25</div>
                             <div>puntos plurales</div> 
                        </div>
                     </div>
-                  
+                    <div className='propCD'>
+                        <div className='grid items-center'>
+                            <div className='text-5xl font-bold'>1,000 DAI</div>
+                            <div className='text-xl'>en el presupuesto descentralizado</div> 
+                       </div>
+                       <div className='mx-auto'>
+                            <div className='homeBT'>Despositar</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

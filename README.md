@@ -75,3 +75,4 @@ Esta página muestra una visión general de las etapas que conforman los ciclos 
 1. Reporte y verificación de resultados
     1. (M) Los moderadores deben verificar la autenticidad de la evidencia presentada para respaldar el uso de los recursos asignados a cada propuesta. Después de revisar la evidencia, los moderadores llegan a un consenso sobre la integridad de los proyectos, asegurándose de que cumplan con las restricciones establecidas.  
     2. (P) Los ciudadanos deben cargar en la plataforma, la evidencia que demuestre el uso adecuado de los fondos asignados para su propuesta y esperar a recibir el estado de finiquito. Aquellas propuestas que hayan sido concluidas correctamente permitirán que los ciudadanos puedan participar en la asignación en futuros ciclos de gobernanza.
+
