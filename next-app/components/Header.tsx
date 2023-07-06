@@ -94,7 +94,7 @@ export default function Header() {
                       
                         return (
                           <div style={{ display: 'flex', gap: 12 }}>
-                            {/*<Navbar/>*/}
+                            <Navbar/>
                             <div className='homeBT'>Gas</div>
                             <button className='homeBT' onClick={openAccountModal} type="button">
                               Cuenta
