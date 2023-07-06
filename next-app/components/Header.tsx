@@ -94,7 +94,7 @@ export default function Header() {
                       
                         return (
                           <div style={{ display: 'flex', gap: 12 }}>
-                            <Navbar/>
+                            {/*<Navbar/>*/}
                             <Link href='/gasStation'>
                               <div className='homeBT'>Gas</div>
                             </Link>
