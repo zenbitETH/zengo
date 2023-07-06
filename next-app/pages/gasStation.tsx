@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
+import poap from '../assets/poaptest.png'
 
 export default function GasStation() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,19 +25,21 @@ export default function GasStation() {
                     </div>
                     <div className="homeBT mt-5 w-fit mx-auto" onClick={handleOpenModal}>Obtener POAP</div>
                     {isModalOpen && (
-                        <div className="modal-background ">
-                            <div className="modal bg-mod/70 ">
-                                <button className='closeBT' onClick={handleCloseModal}>x</button>
-                                <form className='grid gap-6 text-left'>
-                                    <label className='formLabel' htmlFor="tipo-de-moderador">Tu poap va en camino</label>
-                                    
-                                    
-
-                                    <input className='homeBT mx-auto mt-5' type="submit" value="Registrarse" />
-                                </form>
-
+                    <div className="modal-background">
+                        <div className="modal bg-white/50 text-bgd ">
+                            <button className='closeBT' onClick={handleCloseModal}>x</button>
+                            <div className='grid gap-6 p-3'>
+                                <div>
+                                    <Image src={poap} height={250} width={250} alt='onboarding POAP'
+                                    className='rounded-full animate-pulse' /*animate-none after POAP is claimed*//>
+                                </div>
+                                <div className='text-2xl font-bau'>Tu poap va en camino</div>
+                                <div className='text-xl animate-pulse'  /*animate-none and "Tu dirección 0x123abc recibio el POAP que certifica <br/>tu asistencia al evento de intrroducción a Zengo" after POAP is claimed*/>
+                                    cargando...
+                                </div>
                             </div>
                         </div>
+                    </div>
                     )}
 
                 </div>
