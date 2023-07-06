@@ -6,16 +6,13 @@ import { MarketAPI } from "@zondax/filecoin-solidity/contracts/v0.8/mocks/Market
 import { CommonTypes } from "@zondax/filecoin-solidity/contracts/v0.8/types/CommonTypes.sol";
 import { MarketTypes } from "@zondax/filecoin-solidity/contracts/v0.8/types/MarketAPI.sol";
 
-// row 4-7 can be deleted
-
-
 contract SpaceTimeDAO is AccessControl {
 
     bytes32 internal constant MODERATOR = keccak256("MODERATOR");
     bytes32 internal constant CATALYST = keccak256("CATALYST");
     uint32 internal proposalId;
-    MarketAPI marketApiInstance = MarketAPI(marketApiAddress); // this can be deleted
-    struct Deal { // struct can also be deleted
+    MarketAPI marketApiInstance = MarketAPI(marketApiAddress);
+    struct Deal {
         address minerAddress;
         address clientAddress;
         uint256 startDate;
@@ -26,14 +23,14 @@ contract SpaceTimeDAO is AccessControl {
         bytes32 contentCID;
     }
 
-    mapping(bytes32 => Deal) public deals; // can be deleted
-    mapping(bytes => bool) public cidSet; // can be deleted
-    mapping(bytes => uint) public cidSizes; // can be deleted
-    mapping(bytes => mapping(uint64 => bool)) public cidProviders; // can be deleted
+    mapping(bytes32 => Deal) public deals;
+    mapping(bytes => bool) public cidSet;
+    mapping(bytes => uint) public cidSizes;
+    mapping(bytes => mapping(uint64 => bool)) public cidProviders;
     mapping(uint32 => Proposal) public proposalDetail;
     mapping(address => mapping(uint32 => bool)) proposalVoted; 
     
-    enum DealStatus { // can be deleted
+    enum DealStatus {
         Inactive,
         Active,
         Terminated
@@ -47,7 +44,7 @@ contract SpaceTimeDAO is AccessControl {
         string cid;
     }
 
-    enum Status { // Proposals have different status
+    enum Status {
         Review,
         Filtering,
         Filtering_Vote,
@@ -59,9 +56,9 @@ contract SpaceTimeDAO is AccessControl {
     error AlreadyVoted();
     error ProposalNotCreated();
 
-    event NewProposal(uint32 id, address owner, string cid); // cid needs to updated here
+    event NewProposal(uint32 id, address owner, string cid);
     event StateUpdateProposal(uint32 id, Status newState);
-    event CidUpdateProposal(uint32 id, string cid);    // not needed
+    event CidUpdateProposal(uint32 id, string cid);    
     event TotalUpvoteUpdateProposal(uint32 id, uint32 totalUpvote);
     event TotalDownvoteUpdateProposal(uint32 id, uint32 totalDownvote);    
 
