@@ -25,7 +25,7 @@ export default function GasStation() {
     return (
         <div className="from-cit to-mod bg-gradient-to-t h-screen grid items-center text-center mx-auto">
              
-            <div className="grid grid-cols-2 gap-3 px-32 py-20 h-full text-white font-bau">
+            <div className="grid 2xl:grid-cols-2 gap-3 px-32 py-20 h-full text-white font-bau">
                 <div className="bg-black/20 rounded-dd h-full p-3 grid items-center">
                     <div className="text-3xl">1. Obtén el POAP que certifica tu participación:</div>
                     <div className="mx-32 grid">
