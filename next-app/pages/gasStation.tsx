@@ -4,6 +4,7 @@ import poap from '../assets/poaptest.png'
 
 export default function GasStation() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModal2Open, setIsModal2Open] = useState(false);
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -11,6 +12,14 @@ export default function GasStation() {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+    };
+
+    const handleOpenModal2 = () => {
+        setIsModal2Open(true);
+    };
+
+    const handleCloseModal2 = () => {
+        setIsModal2Open(false);
     };
 
     return (
@@ -46,7 +55,21 @@ export default function GasStation() {
                 <div className="bg-black/20 rounded-dd h-full p-3 grid items-center ">
                     <div className="text-3xl">2 Obtén gas con tu POAP del evento</div>
                     <div className="text-6xl animate-pulse font-exo"> No cuentas con el POAP</div>
-                    <div className="homeBT mt-10 w-fit mx-auto" >Obtener gas</div>
+                    <div className="homeBT mt-10 w-fit mx-auto" onClick={handleOpenModal2}>Obtener gas</div>
+                    {isModal2Open && (
+                    <div className="modal-background">
+                        <div className="modal bg-white/30 ">
+                            <button className='closeBT' onClick={handleCloseModal2}>x</button>
+                            <div className='grid gap-6 p-10'>
+                                <div className='text-2xl font-bau'>Tu ETH va en camino</div>
+                                <span className='text-8xl animate-pulse'>🔥</span>
+                                <div className='text-xl animate-pulse' /*animate-none and "Tu dirección 0x123abc recibio 0.001 ETH para el gas de tus interacciones en Zengo" after gas is claimed*/>
+                                    cargando...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    )}
                 </div> 
             </div>
         </div>
