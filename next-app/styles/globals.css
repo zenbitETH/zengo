@@ -18,7 +18,7 @@
 .modal-background {
   @apply
   fixed top-0 w-full h-full grid items-center left-1/2 -translate-x-1/2 
-  bg-bgd/90 z-10 backdrop-blur-lg
+  bg-bgd/50 z-10 backdrop-blur-md
 
 }
 
@@ -27,6 +27,7 @@
   p-6
   mx-auto rounded-dd font-exo
   relative
+  
 }
 
 .drop {

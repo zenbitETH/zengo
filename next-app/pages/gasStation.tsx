@@ -26,7 +26,7 @@ export default function GasStation() {
                     <div className="homeBT mt-5 w-fit mx-auto" onClick={handleOpenModal}>Obtener POAP</div>
                     {isModalOpen && (
                     <div className="modal-background">
-                        <div className="modal bg-white/50 text-bgd ">
+                        <div className="modal bg-white/30 ">
                             <button className='closeBT' onClick={handleCloseModal}>x</button>
                             <div className='grid gap-6 p-3'>
                                 <div>
