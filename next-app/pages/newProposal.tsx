@@ -95,7 +95,7 @@ const Form = () => {
   }, [triggerTx])
 
   return (
-    <div className="from-cit to-cit bg-gradient-to-b h-screen grid items-center text-center mx-auto">
+    <div className="from-cit/50 to-cit bg-gradient-to-b h-screen grid items-center text-center mx-auto">
       <form className='formCard'>
         {currentStep === 1 && (
           <div className=''>
@@ -125,7 +125,7 @@ const Form = () => {
           {currentStep !== 1 && (
             <button
               type='button'
-              className="formBT"
+              className="homeBT"
               onClick={prevStep}
             >
               Regresar
@@ -134,7 +134,7 @@ const Form = () => {
           {currentStep !== 4 ? (
             <button
               type='button'
-              className="formBT"
+              className="homeBT "
               onClick={nextStep}
             >
               Siguiente
@@ -142,7 +142,7 @@ const Form = () => {
           ) : (
             <button
               type='button'
-              className="formBT"
+              className="homeBT"
               onClick={() => uploadMetadata()}              
             >
               {ipfsLoading ? "Uploading to IPFS..." : isLoading ? "Uploading transaction..." : "Registrar propuesta"}

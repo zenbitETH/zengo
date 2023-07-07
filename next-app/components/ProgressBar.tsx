@@ -5,31 +5,31 @@ export default function ProgressBar (props: any) {
             <div className="formProgress">
                 <div className="flex ">
                     <div className="flex-1">
-                        <div className="progressCircles bg-gray-300" />
+                        <div className={currentStep === 1 ? "progressCircles bg-cit animate-pulse" : "progressCircles bg-none"} />
                     </div>
                     <div className="progressBar">
                         <div className="barContainer">
-                            <div className="barBar bg-gray-300"></div>
+                            <div className="barBar bg-white/20"></div>
                         </div>
                     </div>
                     <div className="flex-1">
-                        <div className="progressCircles bg-gray-300" />
+                    <div className={currentStep === 2 ? "progressCircles bg-cit animate-pulse" : "progressCircles bg-none"} />
                     </div>
                     <div className="progressBar ">
                         <div className="barContainer">
-                            <div className="barBar bg-gray-300" ></div>
+                            <div className="barBar bg-white/20" ></div>
                         </div>
                     </div>
                     <div className="flex-1">
-                        <div className="progressCircles bg-gray-300" />
+                        <div className={currentStep === 3 ? "progressCircles bg-cit animate-pulse" : "progressCircles bg-none"} />
                     </div>
                     <div className="progressBar">
                         <div className="barContainer">
-                            <div className="barBar bg-gray-300"></div>
+                            <div className="barBar bg-white/20"></div>
                         </div>
                     </div>
                     <div className="flex-1">
-                        <div className="progressCircles bg-gray-300" />
+                        <div className={currentStep === 4 ? "progressCircles bg-cit animate-pulse" : "progressCircles bg-none"} />
                     </div>
                 </div>
             </div>

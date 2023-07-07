@@ -182,7 +182,7 @@
 
 .formBT {
   @apply
-  px-10 py-3 bg-mod rounded-gen cursor-pointer text-white text-2xl font-bau
+  px-10 py-3 rounded-gen cursor-pointer text-white text-2xl font-bau
 }
 
 .blockedEvidence {
@@ -267,7 +267,7 @@
 
 .progressCircles {
   @apply
-  w-10 h-10 mx-auto rounded-full text-lg flex items-center text-center grid text-white font-bold
+  w-10 h-10 mx-auto rounded-full text-lg flex items-center text-center grid text-white font-bold border-2
 }
 
 .progressBar {
