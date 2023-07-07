@@ -95,7 +95,7 @@ const Form = () => {
   }, [triggerTx])
 
   return (
-    <div className="from-cit/50 to-cit bg-gradient-to-t h-screen grid items-center text-center mx-auto">
+    <div className="from-cit/50 to-cit bg-gradient-to-t h-screen grid items-center text-center mx-auto px-3">
       <form className='formCard'>
         {currentStep === 1 && (
           <div className=''>
@@ -121,7 +121,7 @@ const Form = () => {
             <Form4 proposal={proposal}/>
           </div>
         )}
-        <div className=" flex justify-between  m-auto mb-5 gap-5">
+        <div className=" flex justify-between  m-auto gap-5 xl:pt-0 xl:pb-0 pt-9 pb-3">
           {currentStep !== 1 && (
             <button
               type='button'

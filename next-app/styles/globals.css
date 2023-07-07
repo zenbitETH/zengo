@@ -153,7 +153,7 @@
 
 .formCard {
   @apply
-  w-2/5 mx-auto
+  xl:w-2/5 mx-auto w-full
 }
 
 .detailCard {
@@ -262,7 +262,27 @@
 
 .formProgress {
   @apply
-  w-1/2 mx-auto  my-4
+  w-full px-10  mt-5 text-white font-exo mb-10
+}
+
+.stepOff, .stepOn {
+  @apply
+  font-exo text-white
+}
+
+.stepOn {
+  @apply 
+  underline underline-offset-2 font-bold
+}
+
+.tittleOff, .tittleOn {
+  @apply
+  absolute left-1/2 -translate-x-1/2
+}
+
+.tittleOn {
+  @apply
+  underline underline-offset-4 font-bold
 }
 
 .progressCircles {
@@ -272,7 +292,7 @@
 
 .progressBar {
   @apply
-  w-2/6  items-center align-middle content-center flex
+  w-2/6 align-middle content-center flex items-center 
 }
 
 .barContainer {
