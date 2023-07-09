@@ -2,6 +2,7 @@ import { useAccount } from "wagmi";
 import type { NextPage } from 'next';
 import Carousel from '../components/Carousel';
 import Link from "next/link";
+// var cors = require("cors");
 
 
 const Home: NextPage = () => {

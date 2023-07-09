@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import poap from '../assets/poaptest.png'
+import { useAccount } from 'wagmi';
+import axios from 'axios';
 
 export default function GasStation() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModal2Open, setIsModal2Open] = useState(false);
+    const [secretWord, setSecretWord] = useState("");
+    const { address } = useAccount();
+
+    useEffect(() => {
+        console.log(secretWord)
+    }, [address, secretWord])
+    
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -16,11 +25,34 @@ export default function GasStation() {
 
     const handleOpenModal2 = () => {
         setIsModal2Open(true);
+
     };
 
     const handleCloseModal2 = () => {
         setIsModal2Open(false);
     };
+
+    const claimPoap = () => {
+        const options = {
+            method: 'POST',
+            headers: {
+              accept: 'application/json',
+              'content-type': 'application/json',
+              authorization: "Bearer HBqdJKphhBVAA9gUFlPKrpt5C__9DXUHXZL5nxBUtAh0dSfMsMznH2dyjhYZcmky",
+              'x-api-key': '0yYbM2ktD4SPSsFu1TXidinC7Q2ACRN9LmkWSQQGX2T809jdVYsoGiHmNSr0a4dBEafZ7hcMUz6IXrQUhx7cjHo46MWP5pTS3jBwfJeOW00h70EeA0JU6XQ7fx3v1QD7'
+            },
+            body: JSON.stringify({
+              sendEmail: true,
+              address: address,
+              secret: secretWord
+            })
+          };
+          
+          fetch('https://api.poap.tech/actions/claim-qr', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    }
 
     return (
         <div className="from-cit to-mod bg-gradient-to-t h-screen grid items-center text-center mx-auto">
@@ -30,9 +62,9 @@ export default function GasStation() {
                     <div className="text-3xl">1. Obtén el POAP que certifica tu participación:</div>
                     <div className="mx-32 grid">
                         <div className="text-xl font-exo pb-5">Ingresa la palabra secreta del evento:</div>
-                        <input type='text' placeholder='Escribe la palabra una vez que termine el evento' className='input font-exo text-xl'></input>
+                        <input type='text' placeholder='Escribe la palabra una vez que termine el evento' className='input font-exo text-xl' onChange={e => setSecretWord(e.target.value)}></input>
                     </div>
-                    <div className="homeBT mt-5 w-fit mx-auto" onClick={handleOpenModal}>Obtener POAP</div>
+                    <div className="homeBT mt-5 w-fit mx-auto" onClick={claimPoap}>Obtener POAP</div>
                     {isModalOpen && (
                     <div className="modal-background">
                         <div className="modal bg-white/30 ">

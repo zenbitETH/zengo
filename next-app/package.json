@@ -11,6 +11,8 @@
   "dependencies": {
     "@rainbow-me/rainbowkit": "^0.8.1",
     "@react-google-maps/api": "^2.18.1",
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
     "ethers": "^5.0.0",
     "ipfs-http-client": "^60.0.0",
     "next": "^12.1.6",
