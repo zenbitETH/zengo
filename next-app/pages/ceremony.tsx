@@ -12,7 +12,7 @@ export default function Ceremony() {
     };
 
     return (
-        <div className="bg-mod text-center h-full grid items-center py-20 relative">
+        <div className="bg-mod text-center xl:h-screen h-full grid items-center py-20 relative">
             <div className="fixed top-7 left-1/2 -translate-x-1/2 text-2xl font-bau text-white">Moderadores</div>
             <div className="modBT" onClick={handleOpenModal}>Registrarse</div>
 
@@ -49,28 +49,75 @@ export default function Ceremony() {
                 </div>
             )}
             <div className="card1">
-                <div className="rounded-dd p-3 text-white bg-black/20 relative">
+                <div className="rounded-dd pt-3 text-white bg-black/20 relative">
                     <div className="text-xl pb-3">Organizaciones Civiles</div> 
                     <div className="modGrid">
+                        
                         <div className="modInfo">
-                            <div>1.</div>
-                            <div className="col-span-5">Representante</div>
-                            <div className="col-span-6">Gobierno de Nuevo Leon</div>
+                            <div className=''>1 </div>
+                            <div className='col-span-11'>
+                                <div className="font-bau text-lg "> Director de comunicación social</div>
+                                <div className="text-sm">Instituto Nacional De Transparencia</div>
+                            </div>
+                        </div>
+                        <div className="modInfo">
+                            <div className=''>2 </div>
+                            <div className='col-span-11'>
+                                <div className="font-bau text-lg "> Director de comunicación social</div>
+                                <div className="text-sm">Instituto Nacional De Transparencia</div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+                <div className="rounded-dd pt-3 text-white bg-black/20">
+                    <div className="text-xl pb-3">Sector Privado</div>
+                    <div className="modGrid">
+                        <div className="modInfo">
+                            <div className=''>1 </div>
+                            <div className='col-span-11'>
+                                <div className="font-bau text-lg "> Director de comunicación social</div>
+                                <div className="text-sm">Instituto Nacional De Transparencia</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div className="rounded-dd pt-3 text-white bg-black/20">
+                    <div className="text-xl pb-3">Academia</div>
+                    <div className="modGrid">
+                        <div className="modInfo">
+                            <div className=''>1 </div>
+                            <div className='col-span-11'>
+                                <div className="font-bau text-lg "> Director de comunicación social</div>
+                                <div className="text-sm">Instituto Nacional De Transparencia</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="rounded-dd p-3 text-white bg-black/20">
-                    <div className="text-xl pb-3">Sector Privado</div> 
-
-                </div>
-                <div className="rounded-dd p-3 text-white bg-black/20">
-                    <div className="text-xl pb-3">Academia</div> 
-                </div>
-                <div className="rounded-dd p-3 text-white bg-black/20">
+                <div className="rounded-dd pt-3  text-white bg-black/20">
                     <div className="text-xl pb-3">Gobierno</div> 
+                    <div className="modGrid">
+                        <div className="modInfo">
+                            <div className=''>1 </div>
+                            <div className='col-span-11'>
+                                <div className="font-bau text-lg "> Director de comunicación social</div>
+                                <div className="text-sm">Instituto Nacional De Transparencia</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="rounded-dd p-3 text-white bg-black/20">
+                <div className="rounded-dd pt-3  text-white bg-black/20">
                     <div className="text-xl pb-3">Moderador Abierto</div> 
+                    <div className="modGrid">
+                        <div className="modInfo">
+                            <div className=''>1 </div>
+                            <div className='col-span-11'>
+                                <div className="font-bau text-lg "> Director de comunicación social</div>
+                                <div className="text-sm">Instituto Nacional De Transparencia</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             

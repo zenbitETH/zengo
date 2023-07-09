@@ -55,8 +55,8 @@
 
 .modBT {
   @apply
-  absolute left-1/2 -translate-x-1/2 bottom-3 text-center border rounded-dd py-3 text-bgd  px-5
-  hover:bg-white/50 hover:text-bgd cursor-pointer font-bau text-2xl text-white
+  fixed left-1/2 -translate-x-1/2 bottom-3 text-center border rounded-dd py-3 text-bgd  px-5
+  hover:bg-white/50 hover:text-bgd cursor-pointer font-bau text-2xl text-white backdrop-blur-lg
 }
 
 .propBT, .propCD {
@@ -97,12 +97,12 @@
 
 .modGrid {
   @apply
-  grid gap-2 font-exo relative h-full text-sm  text-center place-content-start
+  grid gap-3 font-exo relative h-full text-sm  text-center place-content-start md:grid-cols-2 grid-cols-1 xl:grid-cols-1 xl:text-lg
 }
 
 .modInfo {
   @apply
-  grid grid-cols-12 text-left  items-center h-fit
+  grid  text-left  items-center h-fit bg-white/10 px-3 grid-cols-12 rounded-dd
 }
 
 .imageBG {
@@ -146,14 +146,14 @@
   @apply
   mx-3 md:mx-24
   h-screen xl:h-[80vh]
-  grid gap-5
-  grid-cols-5
+  grid gap-3
+  2xl:grid-cols-5
   font-bau
 }
 
 .formCard {
   @apply
-  w-2/5 mx-auto
+  xl:w-2/5 mx-auto w-full
 }
 
 .detailCard {
@@ -182,7 +182,7 @@
 
 .formBT {
   @apply
-  px-10 py-3 bg-mod rounded-gen cursor-pointer text-white text-2xl font-bau
+  px-10 py-3 rounded-gen cursor-pointer text-white text-2xl font-bau
 }
 
 .blockedEvidence {
@@ -262,17 +262,37 @@
 
 .formProgress {
   @apply
-  w-1/2 mx-auto  my-4
+  w-full px-10  mt-5 text-white font-exo mb-10
+}
+
+.stepOff, .stepOn {
+  @apply
+  font-exo text-white
+}
+
+.stepOn {
+  @apply 
+  underline underline-offset-2 font-bold
+}
+
+.tittleOff, .tittleOn {
+  @apply
+  absolute left-1/2 -translate-x-1/2
+}
+
+.tittleOn {
+  @apply
+  underline underline-offset-4 font-bold
 }
 
 .progressCircles {
   @apply
-  w-10 h-10 mx-auto rounded-full text-lg flex items-center text-center grid text-white font-bold
+  w-10 h-10 mx-auto rounded-full text-lg flex items-center text-center grid text-white font-bold border-2
 }
 
 .progressBar {
   @apply
-  w-2/6  items-center align-middle content-center flex
+  w-2/6 align-middle content-center flex items-center 
 }
 
 .barContainer {
