@@ -232,6 +232,7 @@ export default function daoProposals () {
                             <div className='text-6xl font-bold'>1,000 DAI</div>
                             <div>en el presupuesto descentralizado</div> 
                        </div>
+                       
                     </div>
                   
                 </div>

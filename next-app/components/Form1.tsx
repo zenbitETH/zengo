@@ -38,7 +38,7 @@ export default function Form1 (props: any) {
             </div>
             <div className='row-span-2 w-full mx-auto h-52'>
                 <div className='formLabel'>Descripción</div>
-                <textarea placeholder='Describe tu propuesta' className='p-3 pb-5 text-black w-full mx-auto rounded-dd placeholder:italic h-full border-color1-500' onChange={handleDescriptionChange}></textarea>
+                <textarea placeholder='Describe tu propuesta' className='p-3 pb-5 text-black w-full mx-auto rounded-3xl placeholder:italic h-full border-color1-500' onChange={handleDescriptionChange}></textarea>
             </div>
         </div>
     )

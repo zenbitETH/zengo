@@ -32,7 +32,7 @@
 
 .drop {
   @apply
-  pl-5 text-black w-full rounded-dd px-6 py-3 border-mod
+  pl-5 text-black w-full rounded-dd px-6 py-3 border-mod font-exo italic
 }
 
 .input {
@@ -98,6 +98,7 @@
 .modGrid {
   @apply
   grid gap-3 font-exo relative h-full text-sm  text-center place-content-start md:grid-cols-2 grid-cols-1 xl:grid-cols-1 xl:text-lg
+  px-3
 }
 
 .modInfo {
@@ -258,6 +259,11 @@
   @apply
   bg-white/75 text-gray-500 hover:text-gray-900 
   w-auto mx-auto px-3 py-2 cursor-pointer shadow-lg hover:shadow-none rounded-dd mt-8 hover:ease-in hover:bg-white
+}
+
+.formBG {
+  @apply
+  from-cit/90 to-cit bg-gradient-to-t grid items-center text-center mx-auto px-3 py-20
 }
 
 .formProgress {
