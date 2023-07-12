@@ -95,7 +95,7 @@ const Form = () => {
   }, [triggerTx])
 
   return (
-    <div className="from-cit/50 to-cit bg-gradient-to-t h-screen grid items-center text-center mx-auto px-3 py-20 xl:py-0">
+    <div className="from-cit/90 to-cit bg-gradient-to-t h-screen grid items-center text-center mx-auto px-3 py-20 xl:py-0">
       <form className='formCard'>
         {currentStep === 1 && (
           <div className=''>
