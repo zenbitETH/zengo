@@ -44,10 +44,10 @@ const Map: NextPage = () => {
         zoom={14}
         center={mapCenter}
         mapTypeId={google.maps.MapTypeId.ROADMAP}
-        mapContainerStyle={containerStyle}
+        //mapContainerStyle={containerStyle}
         onLoad={() => console.log('Map Component Loaded...')}    
       >
-        <MarkerF position={mapCenter} onLoad={() => console.log('Marker Loaded')} />
+        {/*<MarkerF position={mapCenter} onLoad={() => console.log('Marker Loaded')} />*/}
     </GoogleMap>
   
 
