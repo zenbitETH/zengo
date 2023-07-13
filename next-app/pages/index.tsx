@@ -14,8 +14,8 @@ const { isConnected } = useAccount();
       {isConnected && (
         <div className=" grid items-center h-screen text-white font-bau text-center">
 
-          
-          <div className=" mx-auto grid grid-cols-3 gap-3 h-96 ">
+          <div className=" mx-auto grid xl:grid-cols-3 gap-3 ">
+            <div className="text-5xl animate-pulse xl:col-span-3 pb-3">Pronto comenzará el registro de propuestas y moderadores</div>
             <Link href='/gasStation'>
               <div className="newBT hover:bg-white/75">
                 <div className="text-9xl">⛽
@@ -23,8 +23,6 @@ const { isConnected } = useAccount();
                 </div>
               </div>
             </Link>
-          <div className="text-6xl animate-pulse">Pronto comenzará el registro de propuestas y moderadores</div>
-          <div className=" mx-auto grid grid-cols-2 gap-3 h-96 ">
             <Link href='/newProposal'>
               <div className="newBT hover:bg-cit/75">
                 <div className="text-9xl">🗳️
@@ -39,11 +37,7 @@ const { isConnected } = useAccount();
                 </div>
               </div>
             </Link>
-
             </div>
-            
-            </div>
-
         </div>
       )}
     </div>
