@@ -95,9 +95,6 @@ export default function Header() {
                         return (
                           <div style={{ display: 'flex', gap: 12 }}>
                             {/*<Navbar/>*/}
-                            <Link href='/gasStation'>
-                              <div className='homeBT'>Gas</div>
-                            </Link>
                             <button className='homeBT' onClick={openAccountModal} type="button">
                               Cuenta
                             </button>
