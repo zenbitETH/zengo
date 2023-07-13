@@ -16,7 +16,6 @@ const { isConnected } = useAccount();
 
           
           <div className=" mx-auto grid grid-cols-3 gap-3 h-96 ">
-            <div className="text-4xl animate-pulse col-span-3">Pronto comenzará el registro de propuestas y moderadores</div>
             <Link href='/gasStation'>
               <div className="newBT hover:bg-white/75">
                 <div className="text-9xl">⛽
