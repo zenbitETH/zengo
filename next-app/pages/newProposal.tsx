@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
 import Form1 from "../components/Form1";
@@ -100,9 +100,9 @@ const Form = () => {
       <form className='formCard'>
         {currentStep === 1 && (
           <div className=''>
-           <ProgressBar currentStep={1}/>
-           <Form1 proposal={proposal} setProposal={setProposal} nextStep={nextStep} />
-          </div>
+            <ProgressBar currentStep={1}/>
+            <Form1 proposal={proposal} setProposal={setProposal} nextStep={nextStep} />
+         </div>
         )}
         {currentStep === 2 && (
           <div className=''>
@@ -153,8 +153,16 @@ const Form = () => {
 
         {isSuccess && (
         <div className=" modal-background">
-          <div className="modal bg-cit/70 ">¡Tu propuesta se creo satisfactoriamente! </div>
+        <div className="modal bg-cit/60 h-96 grid items-center ">
+          <div>
+            <div className='text-8xl animate-bounce'>🗳️</div>
+            <div className='text-xl text-white animation-pulse '>¡Tu propuesta ha sido creada! </div>
+          </div>
+          <Link href='/daoProposals'>
+            <div className='homeBT'>Ir a panel de propuestas</div>
+          </Link>
         </div>
+     </div>
         )}
       </form>
     </div>
