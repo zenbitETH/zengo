@@ -82,7 +82,7 @@
 
 .newBT {
   @apply
-  bg-black/50 rounded-dd grid items-center w-96 cursor-pointer hover:text-bgd hover:shadow-lg
+  bg-black/50 rounded-dd grid items-center xl:w-96 cursor-pointer hover:text-bgd hover:shadow-lg p-3
 }
 
 .wrap {
