@@ -4,9 +4,12 @@ import Link from "next/link"
 export default function daoProposals () {
     
     return(
-        <div className='h-screen from-cit to-mod bg-gradient-to-t grid items-center '>
+        <div className='min-h-screen h-full from-cit to-mod bg-gradient-to-t grid items-center py-20 '>
             <div className="card0">
                 <div className="propDashboard">
+                    <Link href='/newProposal'>
+                        <div className="newProp">+ Añadir propuesta</div>
+                    </Link>
                     <div className="propCard relative">
                         <div className="bg-white rounded-gen grid grid-cols-6 relative">
                             <div className="col-span-4 p-3">
@@ -60,13 +63,12 @@ export default function daoProposals () {
                             </div>
                         </div>
                     </div>
-                    <Link href='/newProposal'>
-                        <div className="newProp">+ Añadir propuesta</div>
-                    </Link>
+                    
+                    
                 </div>
                 <div className='sortProposals'>
                     <div className='propBT'>Ver todas</div>
-                    <div className='propBT'>Mis propuestas</div>
+                    <div className='propBT px-1'>Mis propuestas</div>
                     <div className='propBT'>Por tipo</div>
                 </div>
             </div>

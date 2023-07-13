@@ -49,8 +49,8 @@
 
 .homeBT {
   @apply 
-  rounded-dd border text-white border px-5 py-3 cursor-pointer hover:shadow-lg 
-  hover:bg-white/50 hover:text-bgd text-2xl font-bau 
+  rounded-dd border text-white border xl:px-5 px-3 py-3 cursor-pointer hover:shadow-lg 
+  hover:bg-white/50 hover:text-bgd text-sm xl:text-2xl font-bau 
 }
 
 .modBT {
@@ -68,7 +68,11 @@
   @apply
   hover:bg-white/50
   hover:text-bgd
-  cursor-pointer 
+  cursor-pointer
+  xl:text-2xl
+  text-sm
+  py-3
+  backdrop-blur-lg
 }
 
 .closeBT {
@@ -140,7 +144,7 @@
 .card0 {
   @apply
   xl:grid-rows-1
-  grid-cols-12 
+  xl:grid-cols-12
 }
 
 .card1 {
@@ -165,13 +169,14 @@
 
 .propDashboard {
   @apply
-  rounded-gen col-span-10 p-3 border-white  
-  grid grid-cols-2 gap-3 overflow-auto scrollbar-hide place-content-start
+  rounded-gen xl:col-span-10 p-3 border-white  
+  grid xl:grid-cols-2 gap-3 overflow-auto scrollbar-hide place-content-start
 }
 
 .sortProposals {
   @apply
-  grid h-full col-span-2 p-3 gap-3 font-bau text-2xl
+  grid grid-cols-3 xl:grid-cols-1 xl:col-span-2
+  xl:h-full p-3 xl:gap-3 gap-1 font-bau text-2xl xl:relative fixed top-0 left-0
 }
 
 .newProp, .newEvidence {
