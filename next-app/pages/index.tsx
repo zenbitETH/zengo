@@ -2,6 +2,7 @@ import { useAccount } from "wagmi";
 import type { NextPage } from 'next';
 import Carousel from '../components/Carousel';
 import Link from "next/link";
+// var cors = require("cors");
 
 
 const Home: NextPage = () => {
@@ -12,6 +13,7 @@ const { isConnected } = useAccount();
       {!isConnected && <Carousel/>}
       {isConnected && (
         <div className=" grid items-center h-screen text-white font-bau text-center">
+
           
           <div className=" mx-auto grid grid-cols-3 gap-3 h-96 ">
             <div className="text-4xl animate-pulse col-span-3">Pronto comenzará el registro de propuestas y moderadores</div>
@@ -22,6 +24,8 @@ const { isConnected } = useAccount();
                 </div>
               </div>
             </Link>
+          <div className="text-6xl animate-pulse">Pronto comenzará el registro de propuestas y moderadores</div>
+          <div className=" mx-auto grid grid-cols-2 gap-3 h-96 ">
             <Link href='/newProposal'>
               <div className="newBT hover:bg-cit/75">
                 <div className="text-9xl">🗳️
@@ -36,11 +40,11 @@ const { isConnected } = useAccount();
                 </div>
               </div>
             </Link>
-            
-            
-            
+
             </div>
             
+            </div>
+
         </div>
       )}
     </div>
