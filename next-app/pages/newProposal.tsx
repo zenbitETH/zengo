@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Link from 'next/link';
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
 import Form1 from "../components/Form1";
@@ -94,6 +94,7 @@ const Form = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggerTx])
 
+
   return (
     <div className={currentStep === 4 ? "formBG h-full xl:h-screen py-20" : "formBG h-screen"}>
       <form className='formCard'>
@@ -143,7 +144,7 @@ const Form = () => {
             <button
               type='button'
               className="homeBT"
-              onClick={() => uploadMetadata()}              
+              onClick={() => uploadMetadata()}                
             >
               {ipfsLoading ? "Uploading to IPFS..." : isLoading ? "Uploading transaction..." : "Registrar propuesta"}
             </button>
@@ -151,11 +152,8 @@ const Form = () => {
         </div>
 
         {isSuccess && (
-        <div className=" flex justify-between m-auto gap-5">
-          Tu propuesta se creo satisfactoriamente! 
-          <div>
-            <Link href={`https://hyperspace.filfox.info/en/message/${data?.hash}`} > View CID on explorer </Link>
-          </div>
+        <div className=" modal-background">
+          <div className="modal bg-cit/70 ">¡Tu propuesta se creo satisfactoriamente! </div>
         </div>
         )}
       </form>
