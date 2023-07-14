@@ -24,7 +24,7 @@ module.exports = {
 			'dc': '12px',
 			'dd': '40px',
 			'gen': '32px',
-			'med': '20px',
+			'med': '22px',
 			'but': '52px',
 		},
     },

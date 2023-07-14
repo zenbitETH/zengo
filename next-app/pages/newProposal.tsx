@@ -94,14 +94,15 @@ const Form = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggerTx])
 
+
   return (
-    <div className="from-cit/50 to-cit bg-gradient-to-t h-screen grid items-center text-center mx-auto px-3">
+    <div className={currentStep === 4 ? "formBG h-full xl:h-screen py-20" : "formBG h-screen"}>
       <form className='formCard'>
         {currentStep === 1 && (
           <div className=''>
-           <ProgressBar currentStep={1}/>
-           <Form1 proposal={proposal} setProposal={setProposal} nextStep={nextStep} />
-          </div>
+            <ProgressBar currentStep={1}/>
+            <Form1 proposal={proposal} setProposal={setProposal} nextStep={nextStep} />
+         </div>
         )}
         {currentStep === 2 && (
           <div className=''>
@@ -121,7 +122,7 @@ const Form = () => {
             <Form4 proposal={proposal}/>
           </div>
         )}
-        <div className=" flex justify-between  m-auto gap-5 xl:pt-0 xl:pb-0 pt-9 pb-3">
+        <div className="flex justify-between  m-auto gap-5 xl:pt-0 xl:pb-0 pt-9 pb-3">
           {currentStep !== 1 && (
             <button
               type='button'
@@ -143,7 +144,7 @@ const Form = () => {
             <button
               type='button'
               className="homeBT"
-              onClick={() => uploadMetadata()}              
+              onClick={() => uploadMetadata()}                
             >
               {ipfsLoading ? "Uploading to IPFS..." : isLoading ? "Uploading transaction..." : "Registrar propuesta"}
             </button>
@@ -151,12 +152,17 @@ const Form = () => {
         </div>
 
         {isSuccess && (
-        <div className=" flex justify-between m-auto gap-5">
-          Tu propuesta se creo satisfactoriamente! 
+        <div className=" modal-background">
+        <div className="modal bg-cit/60 h-96 grid items-center ">
           <div>
-            <Link href={`https://hyperspace.filfox.info/en/message/${data?.hash}`} > View CID on explorer </Link>
+            <div className='text-8xl animate-bounce'>🗳️</div>
+            <div className='text-xl text-white animation-pulse '>¡Tu propuesta ha sido creada! </div>
           </div>
+          <Link href='/daoProposals'>
+            <div className='homeBT'>Ir a panel de propuestas</div>
+          </Link>
         </div>
+     </div>
         )}
       </form>
     </div>
