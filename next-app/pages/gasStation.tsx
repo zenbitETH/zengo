@@ -8,11 +8,16 @@ import axios from 'axios';
 
 // poap api key: 0yYbM2ktD4SPSsFu1TXidinC7Q2ACRN9LmkWSQQGX2T809jdVYsoGiHmNSr0a4dBEafZ7hcMUz6IXrQUhx7cjHo46MWP5pTS3jBwfJeOW00h70EeA0JU6XQ7fx3v1QD7 
 
+
+
 export default function GasStation() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModal2Open, setIsModal2Open] = useState(false);
     const [secretWord, setSecretWord] = useState("");
     const { address } = useAccount();
+
+    const poap_api_key = "0yYbM2ktD4SPSsFu1TXidinC7Q2ACRN9LmkWSQQGX2T809jdVYsoGiHmNSr0a4dBEafZ7hcMUz6IXrQUhx7cjHo46MWP5pTS3jBwfJeOW00h70EeA0JU6XQ7fx3v1QD7"
+    const accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5qQTNOalpGUWpkRE9ESTNRa0V3UlVSRE9VVkVNRVUxT1VVd1JrSTNNRGs1TlRORVFqUTNSUSJ9.eyJpc3MiOiJodHRwczovL2F1dGguYWNjb3VudHMucG9hcC54eXovIiwic3ViIjoic3MybGNiM1Vmd1pKT0NNVkxTZmlERUNkckd0YThVWmhAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vYXBpLnBvYXAudGVjaCIsImlhdCI6MTY4OTQ4MTA5MSwiZXhwIjoxNjg5NTY3NDkxLCJhenAiOiJzczJsY2IzVWZ3WkpPQ01WTFNmaURFQ2RyR3RhOFVaaCIsInNjb3BlIjoibWludCIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbIm1pbnQiXX0.GflHKxcTpBkLyyjdcVmaeZQsazeb68Gu7X2ERJNceAqdXMpH-pHbldpMN7_GM5dnMj-TOMU5YeW7m-b_RMfweA1KVUwpeeu-Llg5TZtoZHMyTkT1g_LdwPwkDvEeYXdMWexGA2B0vvkSVJ8FLHyVY8bIQFZEVXKqLPL-OICyDCZAshIG4DfWtGQTFzHr-D9eCSanXsTYyy21JTu8yAMN2OSUOnFLgPyRaSGNy4Y3g0j7t4cRpI54VACGoARExmK29sm5igsxFA7t2ZoeAT66-MXpeezkrY25jDmqQYiwglhte3-Kxo1m-M516qRySkgZxkKlaNOkpC8hv9WdxvcRGg"
 
     useEffect(() => {
         console.log(secretWord)
@@ -36,20 +41,82 @@ export default function GasStation() {
         setIsModal2Open(false);
     };
 
-    const claimPoap = () => {
-        // step 1: getting qr hash
+    const claimPoap = async () => {
+        // step 1: getting qr hashes
         const options = {
             method: 'POST',
             headers: {
               accept: 'application/json',
               'content-type': 'application/json',
-              authorization: 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5qQTNOalpGUWpkRE9ESTNRa0V3UlVSRE9VVkVNRVUxT1VVd1JrSTNNRGs1TlRORVFqUTNSUSJ9.eyJpc3MiOiJodHRwczovL2F1dGguYWNjb3VudHMucG9hcC54eXovIiwic3ViIjoic3MybGNiM1Vmd1pKT0NNVkxTZmlERUNkckd0YThVWmhAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vYXBpLnBvYXAudGVjaCIsImlhdCI6MTY4OTI2MzUzNCwiZXhwIjoxNjg5MzQ5OTM0LCJhenAiOiJzczJsY2IzVWZ3WkpPQ01WTFNmaURFQ2RyR3RhOFVaaCIsInNjb3BlIjoibWludCIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbIm1pbnQiXX0.h5fPE-CRAU9f2avL-YWH4AQBi_aTRnxjTBewE4DDaPClC6uuc9_u3GZZzyPlCnWuJnt7sLDo8xG1aWjZHmcH9HDeLNUVRSwLMz8-1DLvxhvpYr2fvVwXzVDNNWprGWM5L2xYFehSnTto20EV4uUK-XoLdCrSqmXGTYXbf_ZxAYFGXXmtuWapj3tJxujpTXztJKaSHTi8veNbQv3DLWVC9-7JghSYT-t6Xip8xY8g6WNRdawE_X-SwAu-9swasvBrFBkv1jqfNVOJrz6OmQXcIDP5H-bd4m2fCYcYCG88NG0z0HdcHilkctqOQwPsshMKhkiYO4xtmyDxgBELWpUD6A',
-              'x-api-key': '0yYbM2ktD4SPSsFu1TXidinC7Q2ACRN9LmkWSQQGX2T809jdVYsoGiHmNSr0a4dBEafZ7hcMUz6IXrQUhx7cjHo46MWP5pTS3jBwfJeOW00h70EeA0JU6XQ7fx3v1QD7'
+              authorization: `Bearer ${accessToken}`,
+              'x-api-key': `${poap_api_key}`
             },
             body: JSON.stringify({secret_code: '859707'})
           };
           
-          fetch('https://api.poap.tech/event/141409/qr-codes', options)
+         let qr_hashes: any;
+         await fetch('https://api.poap.tech/event/141409/qr-codes', options)
+            .then(response => response.json())
+            // .then(response => console.log(response))
+            .then(response => {
+                qr_hashes = response
+            })
+            .catch(err => console.error(err))
+
+          await console.log("qr hashes are :", qr_hashes)
+
+          let claimable_qr: any;
+            // step 2: define which qr_hash is claimable
+            for (let i = 0; i < qr_hashes.length; i++) {
+                //  console.log(qr_hashes[i]); // prints all element one by one
+                if(qr_hashes[i].claimed == false){
+                    claimable_qr = qr_hashes[i].qr_hash;
+                    break
+                }
+              }
+              console.log("claimable_qr is: ", claimable_qr);
+
+      
+        //step 3: call the get claim_qr function to get the secret
+        const options2 = {
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              authorization: `Bearer ${accessToken}`,
+              'x-api-key': `${poap_api_key}`
+            }
+          };
+          
+          let qr_secret: any
+          await fetch(`https://api.poap.tech/actions/claim-qr?qr_hash=${claimable_qr}`, options2)
+            .then(response => response.json())
+            // .then(response => console.log(response))
+            .then(response => {
+                qr_secret = response
+            })
+            .catch(err => console.error(err));
+            
+           await console.log("secret code is: ", qr_secret.secret)
+
+           //step4: claim poap step
+
+           const options3 = {
+            method: 'POST',
+            headers: {
+              accept: 'application/json',
+              'content-type': 'application/json',
+              authorization: `Bearer ${accessToken}`,
+              'x-api-key': `${poap_api_key}`
+            },
+            body: JSON.stringify({
+              address: address,
+              qr_hash: claimable_qr,
+              secret: qr_secret.secret
+            })
+          };
+          await console.log(options3)
+
+         await fetch('https://api.poap.tech/actions/claim-qr', options3)
             .then(response => response.json())
             .then(response => console.log(response))
             .catch(err => console.error(err));
