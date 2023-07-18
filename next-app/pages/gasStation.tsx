@@ -14,14 +14,29 @@ export default function GasStation() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModal2Open, setIsModal2Open] = useState(false);
     const [secretWord, setSecretWord] = useState("");
+    const [hasPoap, setHasPoap] = useState(false);
     const { address } = useAccount();
 
+    const eventId = "141409"
     const poap_api_key = "0yYbM2ktD4SPSsFu1TXidinC7Q2ACRN9LmkWSQQGX2T809jdVYsoGiHmNSr0a4dBEafZ7hcMUz6IXrQUhx7cjHo46MWP5pTS3jBwfJeOW00h70EeA0JU6XQ7fx3v1QD7"
     const accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5qQTNOalpGUWpkRE9ESTNRa0V3UlVSRE9VVkVNRVUxT1VVd1JrSTNNRGs1TlRORVFqUTNSUSJ9.eyJpc3MiOiJodHRwczovL2F1dGguYWNjb3VudHMucG9hcC54eXovIiwic3ViIjoic3MybGNiM1Vmd1pKT0NNVkxTZmlERUNkckd0YThVWmhAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vYXBpLnBvYXAudGVjaCIsImlhdCI6MTY4OTQ4MTA5MSwiZXhwIjoxNjg5NTY3NDkxLCJhenAiOiJzczJsY2IzVWZ3WkpPQ01WTFNmaURFQ2RyR3RhOFVaaCIsInNjb3BlIjoibWludCIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbIm1pbnQiXX0.GflHKxcTpBkLyyjdcVmaeZQsazeb68Gu7X2ERJNceAqdXMpH-pHbldpMN7_GM5dnMj-TOMU5YeW7m-b_RMfweA1KVUwpeeu-Llg5TZtoZHMyTkT1g_LdwPwkDvEeYXdMWexGA2B0vvkSVJ8FLHyVY8bIQFZEVXKqLPL-OICyDCZAshIG4DfWtGQTFzHr-D9eCSanXsTYyy21JTu8yAMN2OSUOnFLgPyRaSGNy4Y3g0j7t4cRpI54VACGoARExmK29sm5igsxFA7t2ZoeAT66-MXpeezkrY25jDmqQYiwglhte3-Kxo1m-M516qRySkgZxkKlaNOkpC8hv9WdxvcRGg"
 
     useEffect(() => {
-        console.log(secretWord)
-    }, [address, secretWord])
+        const options = {
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              'x-api-key': poap_api_key
+            }
+          };
+          
+          fetch(`https://api.poap.tech/actions/scan/${address}/${eventId}`, options)
+            .then(response => response.json())
+            .then(response => {
+                response.statusCode === 404 ? setHasPoap(false) : setHasPoap(true)
+              })
+            .catch(err => console.error(err));
+    }, [address])
     
 
     const handleOpenModal = () => {
@@ -33,8 +48,8 @@ export default function GasStation() {
     };
 
     const handleOpenModal2 = () => {
+        console.log("can claim")
         setIsModal2Open(true);
-
     };
 
     const handleCloseModal2 = () => {
@@ -155,7 +170,7 @@ export default function GasStation() {
                 <div className="bg-black/20 rounded-dd h-full p-3 grid items-center ">
                     <div className="text-3xl">2 Obtén gas con tu POAP del evento</div>
                     <div className="text-6xl animate-pulse font-exo"> No cuentas con el POAP</div>
-                    <div className="homeBT mt-10 w-fit mx-auto" onClick={handleOpenModal2}>Obtener gas</div>
+                    <button className="homeBT mt-10 w-fit mx-auto" onClick={handleOpenModal2} disabled={hasPoap}>Obtener gas</button>
                     {isModal2Open && (
                     <div className="modal-background">
                         <div className="modal bg-white/30 ">
