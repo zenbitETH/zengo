@@ -31,7 +31,7 @@ export default function Form4 (props: Form4Props) {
                         <div className="text-3 text-2xl text-center">{proposal?.name || "Título de la propuesta"}</div>
                         <div className="italic text-center text-xl">{proposal?.type || "Tipo de propuesta"}</div>
                         <div className="text-justify py-1 font-exo break-all text-lg">
-                            {proposal?.description || "Este el ejemplo de unasdfkljsd;lfksdjlfkjsdklfjsdlkfjsdlkfjlsdkjflsdkjmflsdkjflksdjfklsdjflsdkjflsdkfjsdkljfsdlkasdlkfjsdklfjsdklfjsdklfjlsdkfjlsdkfjlsdkfjlksdfjklsdj propuesta"} 
+                            {proposal?.description || "Este es el ejemplo de una propuesta"} 
                         </div>
                     
                     <div className="mx-auto h-52 relative">
