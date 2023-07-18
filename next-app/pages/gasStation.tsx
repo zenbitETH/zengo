@@ -143,16 +143,29 @@ export default function GasStation() {
             <div className="grid 2xl:grid-cols-2 gap-3 px-3 xl:px-32 py-20 h-full text-white font-bau">
                 <div className="bg-black/20 rounded-dd h-full p-3 grid items-center">
                     <div className="text-3xl">1. Obtén el POAP que certifica tu participación:</div>
-                    <div className="md:mx-32 mx-3 grid">
-                        <div className="text-xl font-exo pb-5">Ingresa la palabra secreta del evento:</div>
-                        <input type='text' placeholder='Escribe la palabra una vez que termine el evento' className='input font-exo text-xl' onChange={e => setSecretWord(e.target.value)}></input>
+                    <div className="md:mx-16 mx-3 grid border rounded-dd p-3 animate-pulse" /*animate-none after POAP is claimed*/>
+                        <div>
+                            
+                            <div className='font-exo  p-3 gap-3 grid'>
+                                <div className='text-2xl font-bau'>Ceremonia de Moderadores</div>
+                                <div><Image src={poap} height={250} width={250} alt='onboarding POAP' className='rounded-full'/></div>
+                                
+                                <div className='text-sm xl:text-lg3'>Mar 24, 2023 - Mar 31, 2023 (UTC-06:00)
+                                    <div >Video Call (Zoom, GoogleMeet, etc) , POAPcet Onboarding</div>
+                                </div>
+                                
+                                <div className='xl:text-lg'>
+                                    Este POAP es certifica tu registro durante la ceremonia de moderadores y te otorga ⛽ gas para interactuar en zengo.
+                                </div>
+                            </div>
+                        </div>    
                     </div>
-                    <div className="homeBT mt-5 w-fit mx-auto" onClick={claimPoap}>Obtener POAP</div>
+                    <div className="homeBT mt-5 w-fit mx-auto" onClick={claimPoap}/* hidden after POAP is claimed*/>Obtener POAP</div>
                     {isModalOpen && (
                     <div className="modal-background">
                         <div className="modal bg-white/30 ">
                             <button className='closeBT' onClick={handleCloseModal}>x</button>
-                            <div className='grid gap-6 p-3'>
+                            <div className='grid '>
                                 <div>
                                     <Image src={poap} height={250} width={250} alt='onboarding POAP'
                                     className='rounded-full animate-pulse' /*animate-none after POAP is claimed*//>
@@ -169,8 +182,15 @@ export default function GasStation() {
                 </div>
                 <div className="bg-black/20 rounded-dd h-full p-3 grid items-center ">
                     <div className="text-3xl">2 Obtén gas con tu POAP del evento</div>
+                    <div className="text-6xl animate-pulse font-exo gap-3 grid "
+                     /* After POAP is claimed, replace text with 
+                        <div className='font-bau'> ¡Tienes el POAP!</div>
+                        <div className='text-xl'>Puedes solicitar 0.00025 ETH</div>
+                        <div className='text-9xl'>⛽</div>*/>
                     <div className="text-6xl animate-pulse font-exo"> No cuentas con el POAP</div>
-                    <button className="homeBT mt-10 w-fit mx-auto" onClick={handleOpenModal2} disabled={hasPoap}>Obtener gas</button>
+                        
+                    </div>
+                    <button className="poapBT mt-10 w-fit mx-auto cursor-not-allowed border-white/50 text-white/50 "/*cursor-pointer,text-white & border-white after POAP is claimed */ onClick={handleOpenModal2} disabled={hasPoap}>Obtener Gas</button>
                     {isModal2Open && (
                     <div className="modal-background">
                         <div className="modal bg-white/30 ">

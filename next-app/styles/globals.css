@@ -47,11 +47,22 @@
 
 /* Buttons */
 
-.homeBT {
+.homeBT, .poapBT {
   @apply 
-  rounded-dd border text-white border xl:px-5 px-3 py-3 cursor-pointer hover:shadow-lg 
-  hover:bg-white/50 hover:text-bgd text-sm xl:text-2xl font-bau 
+  rounded-dd border  xl:px-5 px-3 py-3  
+  text-sm xl:text-2xl font-bau
 }
+
+.homeBT {
+  @apply
+  text-white
+  hover:shadow-lg
+  cursor-pointer
+  hover:bg-white/50
+  hover:text-bgd
+}
+
+
 
 .modBT {
   @apply
