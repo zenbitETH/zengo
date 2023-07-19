@@ -22,21 +22,21 @@ export default function GasStation() {
     const accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5qQTNOalpGUWpkRE9ESTNRa0V3UlVSRE9VVkVNRVUxT1VVd1JrSTNNRGs1TlRORVFqUTNSUSJ9.eyJpc3MiOiJodHRwczovL2F1dGguYWNjb3VudHMucG9hcC54eXovIiwic3ViIjoic3MybGNiM1Vmd1pKT0NNVkxTZmlERUNkckd0YThVWmhAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vYXBpLnBvYXAudGVjaCIsImlhdCI6MTY4OTQ4MTA5MSwiZXhwIjoxNjg5NTY3NDkxLCJhenAiOiJzczJsY2IzVWZ3WkpPQ01WTFNmaURFQ2RyR3RhOFVaaCIsInNjb3BlIjoibWludCIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbIm1pbnQiXX0.GflHKxcTpBkLyyjdcVmaeZQsazeb68Gu7X2ERJNceAqdXMpH-pHbldpMN7_GM5dnMj-TOMU5YeW7m-b_RMfweA1KVUwpeeu-Llg5TZtoZHMyTkT1g_LdwPwkDvEeYXdMWexGA2B0vvkSVJ8FLHyVY8bIQFZEVXKqLPL-OICyDCZAshIG4DfWtGQTFzHr-D9eCSanXsTYyy21JTu8yAMN2OSUOnFLgPyRaSGNy4Y3g0j7t4cRpI54VACGoARExmK29sm5igsxFA7t2ZoeAT66-MXpeezkrY25jDmqQYiwglhte3-Kxo1m-M516qRySkgZxkKlaNOkpC8hv9WdxvcRGg"
 
     useEffect(() => {
-        const options = {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              'x-api-key': poap_api_key
-            }
-          };
-          
-          fetch(`https://api.poap.tech/actions/scan/${address}/${eventId}`, options)
-            .then(response => response.json())
-            .then(response => {
-                response.statusCode === 404 ? setHasPoap(false) : setHasPoap(true)
-              })
-            .catch(err => console.error(err));
-    }, [address])
+            const options = {
+                method: 'GET',
+                headers: {
+                  accept: 'application/json',
+                  'x-api-key': poap_api_key
+                }
+              };
+              fetch(`https://api.poap.tech/actions/scan/${address}/${eventId}`, options)
+                .then(response => response.json())
+                .then(response => {
+                    response.statusCode === 404 ? setHasPoap(false) : setHasPoap(true)
+                  })
+                .catch(err => console.error(err));
+                  console.log(hasPoap)
+    }, [address, hasPoap])
     
 
     const handleOpenModal = () => {
@@ -190,7 +190,7 @@ export default function GasStation() {
                     <div className="text-6xl animate-pulse font-exo"> No cuentas con el POAP</div>
                         
                     </div>
-                    <button className="poapBT mt-10 w-fit mx-auto cursor-not-allowed border-white/50 text-white/50 "/*cursor-pointer,text-white & border-white after POAP is claimed */ onClick={handleOpenModal2} disabled={hasPoap}>Obtener Gas</button>
+                    <button className="poapBT mt-10 w-fit mx-auto border-white/50 text-white/50 "/*cursor-pointer,text-white & border-white after POAP is claimed */ disabled={!hasPoap} onClick={handleOpenModal2} >Obtener Gas</button>
                     {isModal2Open && (
                     <div className="modal-background">
                         <div className="modal bg-white/30 ">
