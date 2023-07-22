@@ -366,8 +366,12 @@ a {
   width: auto !important;
 }
 
-.GMAPS {
+/* .GMAPS {
   border-radius: 100px;
   overflow: hidden;
   
+} */
+
+#map-parent > :nth-child(1){
+  border-radius: 50px;
 }
