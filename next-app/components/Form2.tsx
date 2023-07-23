@@ -72,11 +72,7 @@ export default function Form2 (props: any) {
                 <div id="map-parent" className="h-96 bg-gray-300 rounded-med relative grid text-center">
                     <Map/>
                     <input type='text' placeholder='Escribe una dirección para ubicar tu propuesta' 
-                      className='placeholder:italic px-6 py-3 text-black w-full mx-auto rounded-med absolute top-0 left-0'/>
-                    
-                    <div className="grid italic font-exo grid-cols-3 py-3 bg-gray-800/75 rounded-med absolute bottom-0 left-0 w-full text-white">
-                        <div>Queretaro, Mexico</div> 
-                    </div>    
+                      className='placeholder:italic px-6 py-3 text-black w-full mx-auto rounded-med absolute top-0 left-0'/>  
                 </div>   
                  
             </div>
