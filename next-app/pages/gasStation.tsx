@@ -139,13 +139,11 @@ export default function GasStation() {
 
     return (
         <div className="from-cit to-mod bg-gradient-to-t h-screen grid items-center text-center mx-auto">
-             
             <div className="grid 2xl:grid-cols-2 gap-3 px-3 xl:px-32 py-20 h-full text-white font-bau">
                 <div className="bg-black/20 rounded-dd h-full p-3 grid items-center">
                     <div className="text-3xl">1. Obtén el POAP que certifica tu participación:</div>
                     <div className="md:mx-16 mx-3 grid border rounded-dd p-3 animate-pulse" /*animate-none after POAP is claimed*/>
                         <div>
-                            
                             <div className='font-exo  p-3 gap-3 grid'>
                                 <div className='text-2xl font-bau'>Ceremonia de Moderadores</div>
                                 <div><Image src={poap} height={250} width={250} alt='onboarding POAP' className='rounded-full'/></div>

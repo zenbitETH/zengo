@@ -69,13 +69,12 @@ export default function Form2 (props: any) {
         <div className='p-3 gap-5 grid font-exo'>
             <div>
                 <div className='formLabel'>Ubicación de la propuesta</div>
-                <div id="map-parent" className="h-96 bg-gray-300 rounded-dd  relative grid text-center pt-5 border-gray-500 border border-t-0">
-                    
+                <div id="map-parent" className="h-96 bg-gray-300 rounded-med relative grid text-center">
                     <Map/>
-                    <input type='text' placeholder='Escribe una dirección para ubicar tu propuesta' className='placeholder:italic px-6 py-3 text-black w-full border-gray-500 mx-auto rounded-dd absolute top-0 left-0'>
-                    </input>
+                    <input type='text' placeholder='Escribe una dirección para ubicar tu propuesta' 
+                      className='placeholder:italic px-6 py-3 text-black w-full mx-auto rounded-med absolute top-0 left-0'/>
                     
-                    <div className="grid italic font-exo grid-cols-3 py-3 bg-gray-800/75 rounded-dd absolute -bottom-5 left-0 w-full text-white border border-gray-500">
+                    <div className="grid italic font-exo grid-cols-3 py-3 bg-gray-800/75 rounded-med absolute bottom-0 left-0 w-full text-white">
                         <div>Queretaro, Mexico</div> 
                     </div>    
                 </div>   
