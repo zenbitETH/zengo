@@ -1,13 +1,12 @@
 import { useLoadScript, GoogleMap, MarkerF } from '@react-google-maps/api';
 import type { NextPage } from 'next';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 const containerStyle = {
     width: '100%',
     height: '100%',
     position: 'absolute',
     overflow: 'hidden',
-    borderRadius: '22px',
 };
 
 const Map: NextPage = () => {
@@ -27,6 +26,8 @@ const Map: NextPage = () => {
     []
   );
 
+  // use this to manipulate the map after its been loaded.
+  const [map, setMap] = useState<google.maps.Map | null>(null);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
@@ -38,21 +39,16 @@ const Map: NextPage = () => {
   }
 
   return (
-    <div className='GMAPS'>
       <GoogleMap
         options={mapOptions}
         zoom={14}
         center={mapCenter}
         mapTypeId={google.maps.MapTypeId.ROADMAP}
         //mapContainerStyle={containerStyle}
-        onLoad={() => console.log('Map Component Loaded...')}    
+        onLoad={(map) => setMap(map)}    
       >
         {/*<MarkerF position={mapCenter} onLoad={() => console.log('Marker Loaded')} />*/}
     </GoogleMap>
-  
-
-    
-    </div>
   );
 };
 
