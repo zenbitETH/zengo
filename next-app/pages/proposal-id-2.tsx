@@ -48,7 +48,7 @@ export default function proposalDetail() {
             
                     </div>
 
-                    <div className="h-full relative">
+                    <div id="map-parent" className="grid h-full relative">
                         <Map/>
                         <div className="
                             absolute bottom-0 left-1/2 -translate-x-1/2 w-full 
