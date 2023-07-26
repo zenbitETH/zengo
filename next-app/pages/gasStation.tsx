@@ -5,11 +5,6 @@ import { useAccount } from 'wagmi';
 import axios from 'axios';
 
 
-
-// poap api key: 0yYbM2ktD4SPSsFu1TXidinC7Q2ACRN9LmkWSQQGX2T809jdVYsoGiHmNSr0a4dBEafZ7hcMUz6IXrQUhx7cjHo46MWP5pTS3jBwfJeOW00h70EeA0JU6XQ7fx3v1QD7 
-
-
-
 export default function GasStation() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModal2Open, setIsModal2Open] = useState(false);
@@ -17,9 +12,9 @@ export default function GasStation() {
     const [hasPoap, setHasPoap] = useState(false);
     const { address } = useAccount();
 
-    const eventId = "141409"
-    const poap_api_key = "0yYbM2ktD4SPSsFu1TXidinC7Q2ACRN9LmkWSQQGX2T809jdVYsoGiHmNSr0a4dBEafZ7hcMUz6IXrQUhx7cjHo46MWP5pTS3jBwfJeOW00h70EeA0JU6XQ7fx3v1QD7"
-    const accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5qQTNOalpGUWpkRE9ESTNRa0V3UlVSRE9VVkVNRVUxT1VVd1JrSTNNRGs1TlRORVFqUTNSUSJ9.eyJpc3MiOiJodHRwczovL2F1dGguYWNjb3VudHMucG9hcC54eXovIiwic3ViIjoic3MybGNiM1Vmd1pKT0NNVkxTZmlERUNkckd0YThVWmhAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vYXBpLnBvYXAudGVjaCIsImlhdCI6MTY4OTQ4MTA5MSwiZXhwIjoxNjg5NTY3NDkxLCJhenAiOiJzczJsY2IzVWZ3WkpPQ01WTFNmaURFQ2RyR3RhOFVaaCIsInNjb3BlIjoibWludCIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbIm1pbnQiXX0.GflHKxcTpBkLyyjdcVmaeZQsazeb68Gu7X2ERJNceAqdXMpH-pHbldpMN7_GM5dnMj-TOMU5YeW7m-b_RMfweA1KVUwpeeu-Llg5TZtoZHMyTkT1g_LdwPwkDvEeYXdMWexGA2B0vvkSVJ8FLHyVY8bIQFZEVXKqLPL-OICyDCZAshIG4DfWtGQTFzHr-D9eCSanXsTYyy21JTu8yAMN2OSUOnFLgPyRaSGNy4Y3g0j7t4cRpI54VACGoARExmK29sm5igsxFA7t2ZoeAT66-MXpeezkrY25jDmqQYiwglhte3-Kxo1m-M516qRySkgZxkKlaNOkpC8hv9WdxvcRGg"
+    const eventId = process.env.POAP_EVENT_ID 
+    const poap_api_key = process.env.POAP_API_KEY 
+    const accessToken = process.env.POAP_AUTH_TOKEN
 
     useEffect(() => {
             const options = {
