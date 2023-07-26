@@ -47,7 +47,7 @@ const Map: NextPage = () => {
         mapContainerStyle={containerStyle}
         onLoad={(map) => setMap(map)}    
       >
-        <MarkerF position={mapCenter} onLoad={() => console.log('Marker Loaded')} />
+        {/*<MarkerF position={mapCenter} onLoad={() => console.log('Marker Loaded')} />*/}
     </GoogleMap>
   );
 };
