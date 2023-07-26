@@ -34,7 +34,7 @@ export default function Form4 (props: Form4Props) {
                             {proposal?.description || "Este es el ejemplo de una propuesta"} 
                         </div>
                     
-                    <div className="mx-auto h-52 relative">
+                    <div id="map-parent" className="mx-auto h-52 relative">
                         <Map/>
                     </div>
                 </div>
