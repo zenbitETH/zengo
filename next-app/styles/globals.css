@@ -147,7 +147,7 @@
   @apply
   mx-3 md:mx-24 
   bg-black/25
-  rounded-gen
+  rounded-med
   grid  
   h-[fit] xl:h-[80vh]
 }
@@ -174,7 +174,7 @@
 
 .detailCard {
   @apply
-  grid-cols-3 gap-3 p-3
+  xl:grid-cols-3 gap-3 p-3
   grid-rows-6
 }
 
@@ -204,7 +204,7 @@
 
 .blockedEvidence {
   @apply
-  grid items-center text-center font-bau animate-pulse text-3xl cursor-not-allowed	 rounded-dd text-white row-span-2
+  grid items-center text-center font-bau animate-pulse md:text-3xl cursor-not-allowed	 rounded-dd text-white row-span-2
   from-mod to-mod bg-gradient-to-r
 }
 
@@ -274,7 +274,8 @@
 .cardBT {
   @apply
   bg-white/75 text-gray-500 hover:text-gray-900 
-  w-auto mx-auto px-3 py-2 cursor-pointer shadow-lg hover:shadow-none rounded-dd mt-8 hover:ease-in hover:bg-white
+  w-auto mx-auto px-1 py-2 cursor-pointer shadow-lg 
+  hover:shadow-none rounded-dd mt-8 hover:ease-in hover:bg-white
 }
 
 .formBG {
