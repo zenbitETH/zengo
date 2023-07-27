@@ -3,6 +3,7 @@ import Image from 'next/image';
 import poap from '../assets/poaptest.png'
 import { useAccount } from 'wagmi';
 import axios from 'axios';
+import { access } from 'fs';
 
 
 export default function GasStation() {
@@ -12,16 +13,20 @@ export default function GasStation() {
     const [hasPoap, setHasPoap] = useState(false);
     const { address } = useAccount();
 
-    const eventId = process.env.POAP_EVENT_ID 
-    const poap_api_key = process.env.POAP_API_KEY 
-    const accessToken = process.env.POAP_AUTH_TOKEN
+    const eventId = process.env.NEXT_PUBLIC_POAP_EVENT_ID
+    const poap_api_key = process.env.NEXT_PUBLIC_POAP_API_KEY
+    const accessToken = process.env.NEXT_PUBLIC_POAP_AUTH_TOKEN
+    const secretCode = process.env.NEXT_PUBLIC_POAP_EDIT_CODE
+
+    console.log("poapkey", eventId, poap_api_key, accessToken, secretCode)
+
 
     useEffect(() => {
             const options = {
                 method: 'GET',
                 headers: {
                   accept: 'application/json',
-                  'x-api-key': poap_api_key
+                  'x-api-key': `${poap_api_key}`
                 }
               };
               fetch(`https://api.poap.tech/actions/scan/${address}/${eventId}`, options)
@@ -61,11 +66,11 @@ export default function GasStation() {
               authorization: `Bearer ${accessToken}`,
               'x-api-key': `${poap_api_key}`
             },
-            body: JSON.stringify({secret_code: '859707'})
+            body: JSON.stringify({secret_code: `${secretCode}`})
           };
           
          let qr_hashes: any;
-         await fetch('https://api.poap.tech/event/141409/qr-codes', options)
+         await fetch(`https://api.poap.tech/event/${eventId}/qr-codes`, options)
             .then(response => response.json())
             // .then(response => console.log(response))
             .then(response => {
