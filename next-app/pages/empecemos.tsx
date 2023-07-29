@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import poap from '../assets/poaptest.png'
 import { useAccount } from 'wagmi';
-import axios from 'axios';
-import { access } from 'fs';
+import { IBundler, Bundler } from '@biconomy/bundler'
+import { BiconomySmartAccount, BiconomySmartAccountConfig, DEFAULT_ENTRYPOINT_ADDRESS } from "@biconomy/account"
+import { ChainId } from "@biconomy/core-types"
+import { IPaymaster, BiconomyPaymaster, IHybridPaymaster,SponsorUserOperationDto, PaymasterMode } from '@biconomy/paymaster'
+
 
 
 export default function GasStation() {
@@ -18,8 +21,33 @@ export default function GasStation() {
     const accessToken = process.env.NEXT_PUBLIC_POAP_AUTH_TOKEN
     const secretCode = process.env.NEXT_PUBLIC_POAP_EDIT_CODE
 
-    console.log("poapkey", eventId, poap_api_key, accessToken, secretCode)
+    // console.log("poapkey", eventId, poap_api_key, accessToken, secretCode)
 
+
+    // biconomy part
+
+
+const provider = new providers.JsonRpcProvider("https://rpc.ankr.com/optimism_goerli_testnet")
+const wallet = new Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY || "", provider);
+
+console.log("pk", process.env.NEXT_PUBLIC_PRIVATE_KEY)
+
+const bundler: IBundler = new Bundler({
+  bundlerUrl: 'https://bundler.biconomy.io/api/v2/420/abc',     
+  chainId: ChainId.OPTIMISM_GOERLI_TESTNET,
+  entryPointAddress: DEFAULT_ENTRYPOINT_ADDRESS,
+})
+
+const paymaster = new BiconomyPaymaster({
+  paymasterUrl: 'https://paymaster.biconomy.io/api/v1/420/naL6CUCdQ.858103be-f118-4248-b53b-98b2f5326240' // you can get this value from biconomy dashboard. https://dashboard.biconomy.io
+})
+
+const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
+  signer: wallet,
+  chainId: ChainId.OPTIMISM_GOERLI_TESTNET,
+  bundler: bundler,
+  paymaster:paymaster
+}
 
     useEffect(() => {
             const options = {
@@ -57,6 +85,7 @@ export default function GasStation() {
     };
 
     const claimPoap = async () => {
+        await setIsModalOpen(true);
         // step 1: getting qr hashes
         const options = {
             method: 'POST',
@@ -135,6 +164,55 @@ export default function GasStation() {
             .then(response => response.json())
             .then(response => console.log(response))
             .catch(err => console.error(err));
+
+        await setIsModalOpen(false)
+
+    }
+
+    const createAccount = async () => {
+        let biconomySmartAccount = new BiconomySmartAccount(biconomySmartAccountConfig)
+        biconomySmartAccount =  await biconomySmartAccount.init()
+        console.log("owner: ", biconomySmartAccount.owner)
+        console.log("address: ", await biconomySmartAccount.getSmartAccountAddress())
+        return biconomySmartAccount;
+      }
+
+    const claimViaPaymaster = async () => {
+        console.log("creating account")
+
+        const smartAccount = await createAccount();
+      
+        const incrementTx = new ethers.utils.Interface(["function claim()"]);
+          const data = incrementTx.encodeFunctionData("claim");
+      
+        const transaction = {
+          to: '0x2204a410Be3085CBA25b8A71017cB7870519D76D ', // smart contract 
+          data: data,
+          // value: ethers.utils.parseEther('0.01'),
+        }
+      
+        const partialUserOp = await smartAccount.buildUserOp([transaction])
+      
+        const biconomyPaymaster = smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
+      
+        let paymasterServiceData: SponsorUserOperationDto = {
+          mode: PaymasterMode.SPONSORED,
+          // optional params...
+        };
+      
+        console.log(partialUserOp)
+      
+        const paymasterAndDataResponse = await biconomyPaymaster.getPaymasterAndData(partialUserOp, paymasterServiceData);
+        partialUserOp.paymasterAndData = paymasterAndDataResponse.paymasterAndData;
+      
+        const userOpResponse = await smartAccount.sendUserOp(partialUserOp)
+      
+        console.log(userOpResponse)
+      
+        const transactionDetail = await userOpResponse.wait()
+      
+        console.log("transaction detail below")
+        console.log(transactionDetail)
     }
 
     return (
@@ -188,7 +266,7 @@ export default function GasStation() {
                     <div className="text-6xl animate-pulse font-exo"> No cuentas con el POAP</div>
                         
                     </div>
-                    <button className="poapBT mt-10 w-fit mx-auto border-white/50 text-white/50 "/*cursor-pointer,text-white & border-white after POAP is claimed */ disabled={!hasPoap} onClick={handleOpenModal2} >Obtener Gas</button>
+                    <button className="poapBT mt-10 w-fit mx-auto border-white/50 text-white/50 "/*cursor-pointer,text-white & border-white after POAP is claimed */ disabled={!hasPoap} onClick={() => claimViaPaymaster()} >Obtener Gas</button>
                     {isModal2Open && (
                     <div className="modal-background">
                         <div className="modal bg-white/30 ">
