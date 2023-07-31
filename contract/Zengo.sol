@@ -1,10 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
+interface ERC20Token {
+    function transfer(address to, uint256 value) external returns (bool);
+}
+
 contract ZengoDAO {
     address public owner;
     uint256 public registrationDuration;
     uint256 public pluralVotingPoints;
+    address public votingTokenAddress; // Address of the ERC20 voting token
 
     struct Proposal {
         uint256 id;
@@ -34,10 +39,11 @@ contract ZengoDAO {
         _;
     }
 
-    constructor(uint256 _registrationDuration, uint256 _pluralVotingPoints) {
+     constructor(uint256 _registrationDuration, uint256 _pluralVotingPoints, address _votingTokenAddress) {
         owner = msg.sender;
         registrationDuration = _registrationDuration;
         pluralVotingPoints = _pluralVotingPoints;
+        votingTokenAddress = _votingTokenAddress; // Set the address of the ERC20 voting token
         moderators[msg.sender] = true;
         moderatorList.push(msg.sender);
     }
@@ -85,8 +91,12 @@ contract ZengoDAO {
     function allocateFunds(uint256 _proposalId) external onlyModerator {
         require(!proposals[_proposalId].isVerified, "The proposal is already funded");
 
-        // Add logic to allocate funds based on plural voting points.
-        // You may use an ERC20 token for voting points and funding.
+        // Ensure the proposal has received enough votes to be eligible for funding
+        require(proposals[_proposalId].votes >= pluralVotingPoints, "Insufficient votes for funding");
+
+        // Transfer funds (voting tokens) from the contract to the proposal submitter
+        ERC20Token votingToken = ERC20Token(votingTokenAddress);
+        votingToken.transfer(proposals[_proposalId].submitter, proposals[_proposalId].votes);
 
         proposals[_proposalId].isVerified = true;
     }
