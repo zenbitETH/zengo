@@ -6,7 +6,7 @@ import { IBundler, Bundler } from '@biconomy/bundler'
 import { BiconomySmartAccount, BiconomySmartAccountConfig, DEFAULT_ENTRYPOINT_ADDRESS } from "@biconomy/account"
 import { ChainId } from "@biconomy/core-types"
 import { IPaymaster, BiconomyPaymaster, IHybridPaymaster,SponsorUserOperationDto, PaymasterMode } from '@biconomy/paymaster'
-
+import { Wallet, providers, ethers } from 'ethers';
 
 
 export default function GasStation() {
@@ -27,10 +27,8 @@ export default function GasStation() {
     // biconomy part
 
 
-const provider = new providers.JsonRpcProvider("https://rpc.ankr.com/optimism_goerli_testnet")
+const provider = new providers.JsonRpcProvider("https://rpc.ankr.com/optimism_testnet")
 const wallet = new Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY || "", provider);
-
-console.log("pk", process.env.NEXT_PUBLIC_PRIVATE_KEY)
 
 const bundler: IBundler = new Bundler({
   bundlerUrl: 'https://bundler.biconomy.io/api/v2/420/abc',     
@@ -178,15 +176,16 @@ const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
       }
 
     const claimViaPaymaster = async () => {
+        await setIsModal2Open(true)
         console.log("creating account")
 
         const smartAccount = await createAccount();
       
-        const incrementTx = new ethers.utils.Interface(["function claim()"]);
-          const data = incrementTx.encodeFunctionData("claim");
+        const incrementTx = new ethers.utils.Interface(["function claim(address)"]);
+          const data = incrementTx.encodeFunctionData("claim", [address]);
       
         const transaction = {
-          to: '0x2204a410Be3085CBA25b8A71017cB7870519D76D ', // smart contract 
+          to: '0x415B6E0d30d99313186D6a7A61b97F3B0cFada99', // smart contract 
           data: data,
           // value: ethers.utils.parseEther('0.01'),
         }
@@ -213,6 +212,7 @@ const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
       
         console.log("transaction detail below")
         console.log(transactionDetail)
+        await setIsModal2Open(false)
     }
 
     return (
