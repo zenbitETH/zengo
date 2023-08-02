@@ -220,7 +220,7 @@ const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
             <div className="grid 2xl:grid-cols-2 gap-3 px-3 xl:px-32 py-20 h-full text-white font-bau">
                 <div className="bg-black/20 rounded-dd h-full p-3 grid items-center">
                     <div className="text-3xl">1. Obtén el POAP que certifica tu participación:</div>
-                    <div className="md:mx-16 mx-3 grid border rounded-dd p-3 animate-pulse" /*animate-none after POAP is claimed*/>
+                    <div className={hasPoap ? "md:mx-16 mx-3 grid border rounded-dd p-3": "md:mx-16 mx-3 grid border rounded-dd p-3 animate-pulse" } /*animate-none after POAP is claimed*/>
                         <div>
                             <div className='font-exo  p-3 gap-3 grid'>
                                 <div className='text-2xl font-bau'>Ceremonia de Moderadores</div>
@@ -236,7 +236,7 @@ const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
                             </div>
                         </div>    
                     </div>
-                    <div className="homeBT mt-5 w-fit mx-auto" onClick={claimPoap}/* hidden after POAP is claimed*/>Obtener POAP</div>
+                    <div className={hasPoap ? "hidden" : "homeBT mt-5 w-fit mx-auto"} onClick={claimPoap}/* hidden after POAP is claimed*/>Obtener POAP</div>
                     {isModalOpen && (
                     <div className="modal-background">
                         <div className="modal bg-white/30 ">
@@ -266,7 +266,7 @@ const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
                     <div className="text-6xl animate-pulse font-exo"> No cuentas con el POAP</div>
                         
                     </div>
-                    <button className="poapBT mt-10 w-fit mx-auto border-white/50 text-white/50 "/*cursor-pointer,text-white & border-white after POAP is claimed */ disabled={!hasPoap} onClick={() => claimViaPaymaster()} >Obtener Gas</button>
+                    <button className={hasPoap ? "poapBT mt-10 w-fit mx-auto border-white/50 text-white/50": "hidden"}/*cursor-pointer,text-white & border-white after POAP is claimed */ disabled={!hasPoap} onClick={() => claimViaPaymaster()} >Obtener Gas</button>
                     {isModal2Open && (
                     <div className="modal-background">
                         <div className="modal bg-white/30 ">
