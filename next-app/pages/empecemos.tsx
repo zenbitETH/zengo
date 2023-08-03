@@ -15,6 +15,7 @@ export default function GasStation() {
     const [secretWord, setSecretWord] = useState("");
     const [hasPoap, setHasPoap] = useState(false);
     const { address } = useAccount();
+    const [walletAddress, setWalletaddress] = useState("");
 
     const eventId = process.env.NEXT_PUBLIC_POAP_EVENT_ID
     const poap_api_key = process.env.NEXT_PUBLIC_POAP_API_KEY
@@ -48,6 +49,9 @@ const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
 }
 
     useEffect(() => {
+      if(address){
+        setWalletaddress(address)
+      }
             const options = {
                 method: 'GET',
                 headers: {
@@ -55,7 +59,7 @@ const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
                   'x-api-key': `${poap_api_key}`
                 }
               };
-              fetch(`https://api.poap.tech/actions/scan/${address}/${eventId}`, options)
+              fetch(`https://api.poap.tech/actions/scan/${walletAddress}/${eventId}`, options)
                 .then(response => response.json())
                 .then(response => {
                     response.statusCode === 404 ? setHasPoap(false) : setHasPoap(true)
