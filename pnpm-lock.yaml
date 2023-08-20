@@ -54,8 +54,8 @@ importers:
         specifier: 3.2.34
         version: 3.2.34(@ethersproject/abstract-provider@5.7.0)(@ethersproject/abstract-signer@5.7.0)(@ethersproject/bignumber@5.7.0)(@ethersproject/properties@5.7.0)(ethers@5.7.2)(localforage@1.10.0)(next@13.0.0)(react@18.2.0)(typescript@5.1.6)
       '@thirdweb-dev/chains':
-        specifier: 0.1.45
-        version: 0.1.45
+        specifier: 0.1.44
+        version: 0.1.44
       '@thirdweb-dev/react':
         specifier: ^3.14.34
         version: 3.14.34(@ethersproject/abstract-provider@5.7.0)(@ethersproject/abstract-signer@5.7.0)(@ethersproject/bignumber@5.7.0)(@ethersproject/properties@5.7.0)(@thirdweb-dev/sdk@3.10.53)(@types/react@18.2.0)(ethers@5.7.2)(localforage@1.10.0)(next@13.0.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
@@ -2914,6 +2914,10 @@ packages:
       - typescript
       - utf-8-validate
       - zksync-web3
+    dev: false
+
+  /@thirdweb-dev/chains@0.1.44:
+    resolution: {integrity: sha512-pXICysAeBLiBFHK68gn3lkufsZhjsvdy26rZazHamxvNN4J9rXBWc4wvVgvE/YgZimYEoVtPc7RhbrsjjM5qFQ==}
     dev: false
 
   /@thirdweb-dev/chains@0.1.45:

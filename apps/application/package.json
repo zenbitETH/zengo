@@ -23,7 +23,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@react-google-maps/api": "^2.19.2",
     "@thirdweb-dev/auth": "3.2.34",
-    "@thirdweb-dev/chains": "0.1.45",
+    "@thirdweb-dev/chains": "0.1.44",
     "@thirdweb-dev/react": "^3.14.34",
     "@thirdweb-dev/sdk": "^3.10.53",
     "@thirdweb-dev/wallets": "^1.1.17",
