@@ -1,12 +1,15 @@
+import { useNewProposalState } from "@/contexts/NewProposalContext";
 import { useLoadScript, GoogleMap, MarkerF } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
 
-const Map: React.FC<any> = ({
-  searchLocation = { lat: 20.587834, lng: -100.389245 },
-}) => {
+const Map: React.FC = () => {
+  const {
+    location: { gMapsLocationObject },
+  } = useNewProposalState();
+
   const libraries = useMemo(() => ["places"], []);
 
-  const mapCenter = useMemo(() => searchLocation, [searchLocation]);
+  const mapCenter = useMemo(() => gMapsLocationObject, [gMapsLocationObject]);
 
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({

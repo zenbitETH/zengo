@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React /* , { useEffect, useState } */ from "react";
 import Link from "next/link";
 import Layout from "@/components/Layout";
-import {
-  MediaRenderer,
-  useContract,
-  useContractRead,
-  useStorage,
-} from "@thirdweb-dev/react";
+// import {
+//   MediaRenderer,
+//   useContract,
+//   useContractRead,
+//   useStorage,
+// } from "@thirdweb-dev/react";
 
 export default function daoProposals() {
-  const [proposalIpfsUrl, setProposalIpfsUrl] = useState("");
-  const [dataIpfsDownloaded, setDataIpfsDownloaded] = useState<any>(null); // [
-  const { contract } = useContract(
-    "0xc1fcf7a7879A0b33a6EB84AeEBB10f30F5e533a2"
-  );
-  const { data, isLoading } = useContractRead(contract, "proposals", ["0"]);
+  // const [proposalIpfsUrl, setProposalIpfsUrl] = useState("");
+  // const [dataIpfsDownloaded, setDataIpfsDownloaded] = useState<any>(null); // [
+  // const { contract } = useContract(
+  //   "0xc1fcf7a7879A0b33a6EB84AeEBB10f30F5e533a2"
+  // );
+  // const { data, isLoading } = useContractRead(contract, "proposals", ["0"]);
 
-  const downloadFromIpfs = async () => {
-    const file = await fetch(
-      "https://312a375fe5a190a748d40e21aff95e99.ipfscdn.io/ipfs/bafybeihtgs3fwu25lgdwshp6ujnk2b2bmw6mdo6q53uo3tvecupzvg3ugy/"
-    );
-    const ipfsResponse = await file.json();
-    console.log({ ipfsResponse });
-  };
+  // const downloadFromIpfs = async () => {
+  //   const file = await fetch(
+  //     "https://312a375fe5a190a748d40e21aff95e99.ipfscdn.io/ipfs/bafybeihtgs3fwu25lgdwshp6ujnk2b2bmw6mdo6q53uo3tvecupzvg3ugy/"
+  //   );
+  //   const ipfsResponse = await file.json();
+  //   console.log({ ipfsResponse });
+  // };
 
-  useEffect(() => {
-    if (data) {
-      setProposalIpfsUrl(data.description);
-      downloadFromIpfs();
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     setProposalIpfsUrl(data.description);
+  //     downloadFromIpfs();
+  //   }
+  // }, [data]);
 
   return (
     <Layout>
@@ -101,7 +101,7 @@ export default function daoProposals() {
                 </div>
               </div>
             </div>
-            {proposalIpfsUrl ? <MediaRenderer src={proposalIpfsUrl} /> : null}
+            {/* {proposalIpfsUrl ? <MediaRenderer src={proposalIpfsUrl} /> : null} */}
             {/* <MediaRenderer src="ipfs://QmVkNdKUKBK2o8SgjYSjLQ17sDo7NoXSjwNc8PSUzFF4i6" /> */}
           </div>
           <div className="sortProposals">
