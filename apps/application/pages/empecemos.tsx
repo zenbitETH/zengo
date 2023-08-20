@@ -257,7 +257,7 @@ export default function GasStation() {
                 <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center ">
                   <div className="">
                     <Image
-                      src={"assets/poaptest.png"}
+                      src={"/assets/poaptest.png"}
                       height={250}
                       width={250}
                       alt="onboarding POAP"
@@ -319,7 +319,7 @@ export default function GasStation() {
                 <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center px-5">
                   <div className="">
                     <Image
-                      src={"assets/poaptest.png"}
+                      src={"/assets/poaptest.png"}
                       height={250}
                       width={250}
                       alt="onboarding POAP"
@@ -352,7 +352,7 @@ export default function GasStation() {
                           <div className="grid ">
                             <div>
                               <Image
-                                src={"assets/poaptest.png"}
+                                src={"/assets/poaptest.png"}
                                 height={250}
                                 width={250}
                                 alt="onboarding POAP"

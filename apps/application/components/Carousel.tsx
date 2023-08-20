@@ -44,7 +44,6 @@ const Carousel: React.FC = () => {
           <iframe
             className="w-full h-full rounded-dd"
             src="https://www.youtube.com/embed/G7e5jdp9mhc"
-            frameBorder="0"
             allow="autoplay; encrypted-media"
             allowFullScreen
             title="YouTube video player"
@@ -106,7 +105,7 @@ const Carousel: React.FC = () => {
               </div>
               <div className="pt-3">
                 <Image
-                  src={"assets/car1.png"}
+                  src={"/assets/car1.png"}
                   height={120}
                   width={512}
                   alt="Usuarios zengo"
@@ -125,7 +124,7 @@ const Carousel: React.FC = () => {
               </div>
               <div className="">
                 <Image
-                  src={"assets/car2.png"}
+                  src={"/assets/car2.png"}
                   height={120}
                   width={512}
                   alt="Usuarios zengo"
@@ -143,7 +142,7 @@ const Carousel: React.FC = () => {
             </div>
             <div className="">
               <Image
-                src={"assets/car3.png"}
+                src={"/assets/car3.png"}
                 height={220}
                 width={522}
                 alt="Usuarios zengo"

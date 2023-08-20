@@ -1,6 +1,5 @@
 import Map from "@/components/Map";
 import Image from "next/image";
-import file from "assets/file2.jpg";
 import Link from "next/link";
 import Layout from "@/components/Layout";
 
@@ -50,7 +49,7 @@ export default function proposalDetail() {
               </div>
               <div className="h-full bg-gray-300/60 rounded-med grid items-center text-sm">
                 <Image
-                  src={file}
+                  src={"/assets/file2.jpg"}
                   width={1920}
                   height={1080}
                   alt="Carousel Button"

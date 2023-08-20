@@ -7,7 +7,7 @@ export default function Navbar() {
       <div className="navbar text-center">
         <Link href="/newProposal" className="imageBG">
           <Image
-            src={"assets/Proposal.svg"}
+            src={"/assets/Proposal.svg"}
             width={45}
             height={45}
             className=" cursor-pointer"
@@ -16,7 +16,7 @@ export default function Navbar() {
         </Link>
         <Link href="/daoProposals" className="imageBG">
           <Image
-            src={"assets/Dashboard.svg"}
+            src={"/assets/Dashboard.svg"}
             width={45}
             height={45}
             className=" cursor-pointer"
@@ -25,7 +25,7 @@ export default function Navbar() {
         </Link>
         <Link href="/fondeoPlural" className="imageBG">
           <Image
-            src={"assets/Leaderboard.svg"}
+            src={"/assets/Leaderboard.svg"}
             width={45}
             height={45}
             className=" cursor-pointer"
@@ -34,7 +34,7 @@ export default function Navbar() {
         </Link>
         <Link href="/seguimiento" className="imageBG">
           <Image
-            src={"assets/Profile.svg"}
+            src={"/assets/Profile.svg"}
             width={45}
             height={45}
             className=" cursor-pointer"
