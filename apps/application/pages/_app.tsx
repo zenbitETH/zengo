@@ -1,14 +1,16 @@
 import "../styles/globals.css";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import type { AppProps } from "next/app";
-import { OptimismGoerli } from "@thirdweb-dev/chains";
 import { NewProposalContextProvider } from "@/contexts/NewProposalContext";
+import { CHAIN } from "@/const/chains";
+import Layout from "@/components/Layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider
       // Set active chain for app
-      activeChain={OptimismGoerli}
+      activeChain={CHAIN}
+      supportedChains={[CHAIN]}
       // Auth (SIWE) configuration
       // authConfig={{
       //   domain: process.env.NEXT_PUBLIC_AUTH_DOMAIN || "evmkit.com", // Your website domain
@@ -17,7 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENTID}
     >
       <NewProposalContextProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </NewProposalContextProvider>
     </ThirdwebProvider>
   );
