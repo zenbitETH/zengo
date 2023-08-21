@@ -1,0 +1,40 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "artifacts/**",
+        "cache/**",
+        "typechain-types/**"
+      ]
+    },
+    "lint": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "generate": {},
+    "add-component": {},
+    "contracts:node": {},
+    "contracts:build": {
+      "dependsOn": ["^build"],
+      "outputs": ["artifacts/**", "cache/**", "typechain-types/**"]
+    },
+    "contracts:deploy": {},
+    "run-node": {}
+  },
+  "globalEnv": [
+    "NEXT_PUBLIC_GOOGLE_MAPS_KEY",
+    "NEXT_PUBLIC_POAP_EVENT_ID",
+    "NEXT_PUBLIC_POAP_EDIT_CODE",
+    "NEXT_PUBLIC_POAP_API_KEY",
+    "NEXT_PUBLIC_POAP_AUTH_TOKEN",
+    "NEXT_PUBLIC_PRIVATE_KEY",
+    "NEXT_PUBLIC_THIRDWEB_CLIENTID",
+    "THIRDWEB_SECRET_KEY"
+  ]
+}
