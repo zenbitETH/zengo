@@ -16,7 +16,6 @@ import {
   PaymasterMode,
 } from "@biconomy/paymaster";
 import { Wallet, providers, ethers } from "ethers";
-import Layout from "@/components/Layout";
 import { useAddress } from "@thirdweb-dev/react";
 
 export default function GasStation() {
@@ -242,142 +241,132 @@ export default function GasStation() {
   };
 
   return (
-    <Layout>
-      <div className="from-cit to-mod bg-gradient-to-t h-screen grid items-center text-center mx-auto">
-        <div className="grid gap-3 px-3 py-20 h-full text-white font-bau">
-          <div className="rounded-dd  grid items-center">
-            <div
-              className={
-                hasPoap
-                  ? "bg-black/20 h-fit mx-auto p-3 max-w-4xl grid items center rounded-dd"
-                  : "bg-black/20 h-fit mx-auto p-3 max-w-4xl grid items center rounded-dd animate-pulse"
-              }
-            >
-              {hasPoap ? (
-                <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center ">
-                  <div className="">
-                    <Image
-                      src={"/assets/poaptest.png"}
-                      height={250}
-                      width={250}
-                      alt="onboarding POAP"
-                      className="rounded-full"
-                    />
+    <div className="from-cit to-mod bg-gradient-to-t h-screen grid items-center text-center mx-auto">
+      <div className="grid gap-3 px-3 py-20 h-full text-white font-bau">
+        <div className="rounded-dd  grid items-center">
+          <div
+            className={
+              hasPoap
+                ? "bg-black/20 h-fit mx-auto p-3 max-w-4xl grid items center rounded-dd"
+                : "bg-black/20 h-fit mx-auto p-3 max-w-4xl grid items center rounded-dd animate-pulse"
+            }
+          >
+            {hasPoap ? (
+              <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center ">
+                <div className="">
+                  <Image
+                    src={"/assets/poaptest.png"}
+                    height={250}
+                    width={250}
+                    alt="onboarding POAP"
+                    className="rounded-full"
+                  />
+                </div>
+                <div className="xl:col-span-3 grid gap-3">
+                  <div className="text-2xl font-bau">
+                    Participaste en la Ceremonia de Moderadores
                   </div>
-                  <div className="xl:col-span-3 grid gap-3">
-                    <div className="text-2xl font-bau">
-                      Participaste en la Ceremonia de Moderadores
-                    </div>
-                    <div className="text-sm xl:text-lg font-bau">
-                      Agosto, 2023 /
-                      <span className="cursor-pointer hover:text-cit">
-                        {" "}
-                        <Link href="https://app.poap.xyz/token/6741694">
-                          Ver POAP
-                        </Link>
-                      </span>
-                    </div>
-                    <div className="xl:text-lg text-justify xl:px-10">
-                      Este POAP es certifica tu registro durante la ceremonia de
-                      moderadores y te otorga ⛽ gas para interactuar en zengo.
-                    </div>
+                  <div className="text-sm xl:text-lg font-bau">
+                    Agosto, 2023 /
+                    <span className="cursor-pointer hover:text-cit">
+                      {" "}
+                      <Link href="https://app.poap.xyz/token/6741694">
+                        Ver POAP
+                      </Link>
+                    </span>
                   </div>
+                  <div className="xl:text-lg text-justify xl:px-10">
+                    Este POAP es certifica tu registro durante la ceremonia de
+                    moderadores y te otorga ⛽ gas para interactuar en zengo.
+                  </div>
+                </div>
 
-                  <div className="xl:col-span-4">
-                    <button
-                      className="homeBT mt-10 w-fit mx-auto"
-                      onClick={() => claimViaPaymaster()}
-                    >
-                      Obtener ⛽ 0.005 ETH
-                    </button>
-                    {isModal2Open && (
-                      <div className="modal-background">
-                        <div className="modal bg-white/30 ">
-                          <button
-                            className="closeBT"
-                            onClick={handleCloseModal2}
+                <div className="xl:col-span-4">
+                  <button
+                    className="homeBT mt-10 w-fit mx-auto"
+                    onClick={() => claimViaPaymaster()}
+                  >
+                    Obtener ⛽ 0.005 ETH
+                  </button>
+                  {isModal2Open && (
+                    <div className="modal-background">
+                      <div className="modal bg-white/30 ">
+                        <button className="closeBT" onClick={handleCloseModal2}>
+                          x
+                        </button>
+                        <div className="grid gap-6 p-10">
+                          <div className="text-2xl font-bau">
+                            Tu ETH va en camino
+                          </div>
+                          <span className="text-8xl animate-pulse">🔥</span>
+                          <div
+                            className="text-xl animate-pulse" /*animate-none and "Tu dirección 0x123abc recibio 0.001 ETH para el gas de tus interacciones en Zengo" after gas is claimed*/
                           >
-                            x
-                          </button>
-                          <div className="grid gap-6 p-10">
-                            <div className="text-2xl font-bau">
-                              Tu ETH va en camino
-                            </div>
-                            <span className="text-8xl animate-pulse">🔥</span>
-                            <div
-                              className="text-xl animate-pulse" /*animate-none and "Tu dirección 0x123abc recibio 0.001 ETH para el gas de tus interacciones en Zengo" after gas is claimed*/
-                            >
-                              cargando...
-                            </div>
+                            cargando...
                           </div>
                         </div>
                       </div>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center px-5">
-                  <div className="">
-                    <Image
-                      src={"/assets/poaptest.png"}
-                      height={250}
-                      width={250}
-                      alt="onboarding POAP"
-                      className="rounded-full"
-                    />
-                  </div>
-                  <div className="xl:col-span-3 grid gap-3 text-2xl text-justify">
-                    Participa en la ceremonia de moderadores para obtener tu
-                    certificado de asistencia (POAP) y obtener gas ⛽ para usar
-                    zengo: presupuesto descentralizado.
-                  </div>
-                  <div className="grid items-center xl:col-span-4">
-                    <div
-                      className={
-                        hasPoap ? "hidden" : "homeBT mt-5 w-fit mx-auto"
-                      }
-                      onClick={claimPoap}
-                    >
-                      Obtener POAP
                     </div>
-                    {isModalOpen && (
-                      <div className="modal-background">
-                        <div className="modal bg-white/30 ">
-                          <button
-                            className="closeBT"
-                            onClick={handleCloseModal}
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center px-5">
+                <div className="">
+                  <Image
+                    src={"/assets/poaptest.png"}
+                    height={250}
+                    width={250}
+                    alt="onboarding POAP"
+                    className="rounded-full"
+                  />
+                </div>
+                <div className="xl:col-span-3 grid gap-3 text-2xl text-justify">
+                  Participa en la ceremonia de moderadores para obtener tu
+                  certificado de asistencia (POAP) y obtener gas ⛽ para usar
+                  zengo: presupuesto descentralizado.
+                </div>
+                <div className="grid items-center xl:col-span-4">
+                  <div
+                    className={hasPoap ? "hidden" : "homeBT mt-5 w-fit mx-auto"}
+                    onClick={claimPoap}
+                  >
+                    Obtener POAP
+                  </div>
+                  {isModalOpen && (
+                    <div className="modal-background">
+                      <div className="modal bg-white/30 ">
+                        <button className="closeBT" onClick={handleCloseModal}>
+                          x
+                        </button>
+                        <div className="grid ">
+                          <div>
+                            <Image
+                              src={"/assets/poaptest.png"}
+                              height={250}
+                              width={250}
+                              alt="onboarding POAP"
+                              className="rounded-full animate-pulse" /*animate-none after POAP is claimed*/
+                            />
+                          </div>
+                          <div className="text-2xl font-bau">
+                            Tu poap va en camino
+                          </div>
+                          <div
+                            className="text-xl animate-pulse" /*animate-none and "Tu dirección 0x123abc recibio el POAP que certifica <br/>tu asistencia al evento de intrroducción a Zengo" after POAP is claimed*/
                           >
-                            x
-                          </button>
-                          <div className="grid ">
-                            <div>
-                              <Image
-                                src={"/assets/poaptest.png"}
-                                height={250}
-                                width={250}
-                                alt="onboarding POAP"
-                                className="rounded-full animate-pulse" /*animate-none after POAP is claimed*/
-                              />
-                            </div>
-                            <div className="text-2xl font-bau">
-                              Tu poap va en camino
-                            </div>
-                            <div
-                              className="text-xl animate-pulse" /*animate-none and "Tu dirección 0x123abc recibio el POAP que certifica <br/>tu asistencia al evento de intrroducción a Zengo" after POAP is claimed*/
-                            >
-                              cargando...
-                            </div>
+                            cargando...
                           </div>
                         </div>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }

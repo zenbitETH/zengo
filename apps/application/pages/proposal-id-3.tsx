@@ -1,120 +1,118 @@
 import Map from "@/components/Map";
 import Image from "next/image";
-import Layout from "@/components/Layout";
 
 export default function proposalDetail() {
   return (
-    <Layout>
-      <div className="from-cit to-mod bg-gradient-to-t h-full xl:h-screen grid items-center text-center mx-auto pt-20 xl:pt-0">
-        <div className="detailCard">
-          <div className="bg-white/50 rounded-med h-full grid grid-rows-3 items-center gap-5 relative row-span-6">
-            <div className="font-exo text-lg absolute top-0 flex justify-between w-full p-3 bg-cit rounded-med text-bgd">
-              <div className="italic font-bold"> Propuesta #1</div>
-              <div>
-                <span className="text-sm -mb-2">
-                  Hecha el
-                  <span className="font-bold"> 02/06/2023 </span>
-                  por
-                </span>
-                <span className="font-bold text-sm"> 0x04...5cC9</span>
-              </div>
+    <div className="from-cit to-mod bg-gradient-to-t h-full xl:h-screen grid items-center text-center mx-auto pt-20 xl:pt-0">
+      <div className="detailCard">
+        <div className="bg-white/50 rounded-med h-full grid grid-rows-3 items-center gap-5 relative row-span-6">
+          <div className="font-exo text-lg absolute top-0 flex justify-between w-full p-3 bg-cit rounded-med text-bgd">
+            <div className="italic font-bold"> Propuesta #1</div>
+            <div>
+              <span className="text-sm -mb-2">
+                Hecha el
+                <span className="font-bold"> 02/06/2023 </span>
+                por
+              </span>
+              <span className="font-bold text-sm"> 0x04...5cC9</span>
             </div>
-            <div className="text-left font-bau pt-16 px-5">
-              <div className="text-2xl font-bold justify">
-                Limpiar el parque Santa Mónica
-              </div>
-              <div className="italic">
-                {" "}
-                <span className="not-italic text-xl">👷</span>Solicitud de
-                mantenimiento
-              </div>
-              <div className="text-justify pt-3 font-exo text-lg">
-                Se solicita limpieza en el parque Santa Mónica, se añaden fotos
-                del estado actual
-              </div>
+          </div>
+          <div className="text-left font-bau pt-16 px-5">
+            <div className="text-2xl font-bold justify">
+              Limpiar el parque Santa Mónica
             </div>
+            <div className="italic">
+              {" "}
+              <span className="not-italic text-xl">👷</span>Solicitud de
+              mantenimiento
+            </div>
+            <div className="text-justify pt-3 font-exo text-lg">
+              Se solicita limpieza en el parque Santa Mónica, se añaden fotos
+              del estado actual
+            </div>
+          </div>
 
-            <div className="grid grid-cols-2 gap-3 mx-8 items-center  bg-black/50 rounded-med relative">
-              <div className="rounded-med h-full text-white">
-                <div className="text-left font-bau p-3">
-                  <div className="text-justify text-sm pt-3 font-exo font-bold">
-                    Evidencia del 02/06/2023
-                  </div>
+          <div className="grid grid-cols-2 gap-3 mx-8 items-center  bg-black/50 rounded-med relative">
+            <div className="rounded-med h-full text-white">
+              <div className="text-left font-bau p-3">
+                <div className="text-justify text-sm pt-3 font-exo font-bold">
+                  Evidencia del 02/06/2023
+                </div>
 
-                  <div className="text-justify text-sm pt-3 font-exo">
-                    Foto del parque
-                  </div>
+                <div className="text-justify text-sm pt-3 font-exo">
+                  Foto del parque
                 </div>
               </div>
-              <div className="h-full bg-gray-300/60 rounded-med grid items-center text-sm">
-                <Image
-                  src={"/assets/file2.jpg"}
-                  width={1920}
-                  height={1080}
-                  alt="Carousel Button"
-                  className="rounded-2xl"
-                />
-              </div>
             </div>
+            <div className="h-full bg-gray-300/60 rounded-med grid items-center text-sm">
+              <Image
+                src={"/assets/file2.jpg"}
+                width={1920}
+                height={1080}
+                alt="Carousel Button"
+                className="rounded-2xl"
+              />
+            </div>
+          </div>
 
-            <div id="map-parent" className="grid h-full relative">
-              <Map />
-              <div
-                className="
+          <div id="map-parent" className="grid h-full relative">
+            <Map />
+            <div
+              className="
                             absolute bottom-0 left-1/2 -translate-x-1/2 w-full 
                             text-center italic text-bgd
                             bg-cit backdrop-blur-md font-bold
                             p-1 rounded-b-med"
-              >
-                Queretaro, Mexico
-              </div>
+            >
+              Queretaro, Mexico
             </div>
           </div>
-          <div className=" bg-white/50 rounded-dd row-span-6">
-            <div className=" grid grid-rows-4  p-3 gap-3 h-full">
-              <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
-                <div className="bg-white rounded-dd ">
-                  <div className="text-left font-bau p-3">
-                    <div className="text-justify text-sm pt-3 font-exo font-bold">
-                      Solicitud municipal subida el 04/06/2023
-                    </div>
+        </div>
+        <div className=" bg-white/50 rounded-dd row-span-6">
+          <div className=" grid grid-rows-4  p-3 gap-3 h-full">
+            <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
+              <div className="bg-white rounded-dd ">
+                <div className="text-left font-bau p-3">
+                  <div className="text-justify text-sm pt-3 font-exo font-bold">
+                    Solicitud municipal subida el 04/06/2023
                   </div>
                 </div>
-                <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
-                  <Image
-                    src={"/assets/file.png"}
-                    width={1920}
-                    height={1080}
-                    alt="Carousel Button"
-                    className="rounded-dd"
-                  />
-                </div>
               </div>
-              <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
-                <div className="bg-white rounded-dd ">
-                  <div className="text-left font-bau p-3">
-                    <div className="text-justify text-sm pt-3 font-exo font-bold">
-                      Respuesta municipal subida el 10/06/2023
-                    </div>
+              <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
+                <Image
+                  src={"/assets/file.png"}
+                  width={1920}
+                  height={1080}
+                  alt="Carousel Button"
+                  className="rounded-dd"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3 items-center  bg-white rounded-dd relative">
+              <div className="bg-white rounded-dd ">
+                <div className="text-left font-bau p-3">
+                  <div className="text-justify text-sm pt-3 font-exo font-bold">
+                    Respuesta municipal subida el 10/06/2023
                   </div>
                 </div>
-                <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
-                  <Image
-                    src={"/assets/file.png"}
-                    width={1920}
-                    height={1080}
-                    alt="Carousel Button"
-                    className="rounded-dd"
-                  />
-                </div>
               </div>
-              <div className="newEvidence ">Subir solicitud estatal</div>
-              <div className="blockedEvidence2 ">
-                Una vez que tengas la respuesta estatal <br />
-                sube el archivo aquí
+              <div className="h-full bg-gray-300/60 rounded-dd grid items-center text-sm">
+                <Image
+                  src={"/assets/file.png"}
+                  width={1920}
+                  height={1080}
+                  alt="Carousel Button"
+                  className="rounded-dd"
+                />
               </div>
+            </div>
+            <div className="newEvidence ">Subir solicitud estatal</div>
+            <div className="blockedEvidence2 ">
+              Una vez que tengas la respuesta estatal <br />
+              sube el archivo aquí
+            </div>
 
-              {/* NEW PROPOSAL / BLOCKED EVIDENCE
+            {/* NEW PROPOSAL / BLOCKED EVIDENCE
                             <div className="blockedEvidence ">Moderators will review your proposal</div>
 
                             ON REVIEW / LOCAL REQUEST                            
@@ -163,24 +161,22 @@ export default function proposalDetail() {
                             </div>
                         </div>
                         */}
-            </div>
           </div>
-          <div className="grid grid-rows-2 gap-3 row-span-6 ">
-            <div className="stateCard row-span-2 ">
-              <div className="mx-auto grid gap-3">
-                <div className=" text-white text-3xl">
-                  Estado de la propuesta
-                </div>
-                <div className="text-7xl font-exo text-white">
-                  Por verificar
-                  <div className="text-2xl italic">
-                    En espera de gestión estatal
-                  </div>
+        </div>
+        <div className="grid grid-rows-2 gap-3 row-span-6 ">
+          <div className="stateCard row-span-2 ">
+            <div className="mx-auto grid gap-3">
+              <div className=" text-white text-3xl">Estado de la propuesta</div>
+              <div className="text-7xl font-exo text-white">
+                Por verificar
+                <div className="text-2xl italic">
+                  En espera de gestión estatal
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* 
+          {/* 
                         NEW PROPOSAL STATE
                         <div className="stateCard row-span-2 ">
                             <div className="mx-auto grid gap-3">
@@ -220,7 +216,7 @@ export default function proposalDetail() {
                         </div>
                     */}
 
-            {/* SOLVED STATE
+          {/* SOLVED STATE
                         <div className="stateCard row-span-2 ">
                             <div className="mx-auto grid gap-3">
                                 <div className=" text-white text-3xl">Proposal State</div>
@@ -231,7 +227,7 @@ export default function proposalDetail() {
                         </div>
                     */}
 
-            {/* VOTING STATE
+          {/* VOTING STATE
                         <div className="stateCard row-span-2">
                             <div className="mx-auto grid gap-3">
                                 <div className=" text-white text-3xl">Proposal State</div>
@@ -246,9 +242,8 @@ export default function proposalDetail() {
                         </div>
                         
                     */}
-          </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }

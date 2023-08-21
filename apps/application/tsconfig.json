@@ -18,6 +18,7 @@
       "@/components/*": ["./components/*"],
       "@/lib/*": ["./lib/*"],
       "@/abi/*": ["./abi/*"],
+      "@/const/*": ["./const/*"],
       "@/contexts/*": ["./contexts/*"]
     }
   },
