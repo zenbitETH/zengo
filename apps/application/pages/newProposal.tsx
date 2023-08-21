@@ -125,7 +125,7 @@ const Form = () => {
             <button
               type="button"
               className="homeBT"
-              onClick={() => uploadToIpfs()}
+              // onClick={() => uploadToIpfs()} // TODO: commented for dummy version to prod
             >
               {ipfsLoading
                 ? "Uploading to IPFS..."

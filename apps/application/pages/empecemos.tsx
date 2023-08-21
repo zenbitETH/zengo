@@ -49,8 +49,7 @@ export default function GasStation() {
   });
 
   const paymaster = new BiconomyPaymaster({
-    paymasterUrl:
-      "https://paymaster.biconomy.io/api/v1/420/naL6CUCdQ.858103be-f118-4248-b53b-98b2f5326240", // you can get this value from biconomy dashboard. https://dashboard.biconomy.io
+    paymasterUrl: `https://paymaster.biconomy.io/api/v1/420/${process.env.NEXT_PUBLIC_BICONOMY_PAYMASTER_KEY}`, // you can get this value from biconomy dashboard. https://dashboard.biconomy.io
   });
 
   const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
@@ -205,7 +204,7 @@ export default function GasStation() {
     const data = incrementTx.encodeFunctionData("claim", [address]);
 
     const transaction = {
-      to: "0x415B6E0d30d99313186D6a7A61b97F3B0cFada99", // smart contract
+      to: "0x415B6E0d30d99313186D6a7A61b97F3B0cFada99", // smart contract account abstraction for gassless tx - faucet (SimpleFaucet contract)
       data: data,
       // value: ethers.utils.parseEther('0.01'),
     };
