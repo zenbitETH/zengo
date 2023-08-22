@@ -19,15 +19,7 @@ export default function Header() {
   return (
     <header className="header">
       {walletIsConnected ? null : (
-        <div className="fixed left-1/2 -translate-x-1/2 top-5 grid grid-cols-2 gap-5">
-          <div className="">
-            <Image
-              height={75}
-              width={160}
-              src={cit}
-              alt="Certamen de Innovación en transparencia 2023"
-            />
-          </div>
+        <div className="fixed left-1/2 -translate-x-1/2 top-7 grid gap-5">
           <div className="grid grid-cols-3 gap-10 items-center">
             <Link href="https://twitter.com/zenbitMX">
               <svg
