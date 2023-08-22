@@ -2,7 +2,8 @@ import { ThirdwebAuth } from "@thirdweb-dev/auth/next";
 import { PrivateKeyWallet } from "@thirdweb-dev/auth/evm";
 
 export const { ThirdwebAuthHandler, getUser } = ThirdwebAuth({
-  domain: process.env.THIRDWEB_AUTH_DOMAIN || "",
+  domain:
+    process.env.THIRDWEB_AUTH_DOMAIN || `https://${process.env.VERCEL_URL}`,
   wallet: new PrivateKeyWallet(process.env.THIRDWEB_AUTH_PRIVATE_KEY || ""),
   // NOTE: All these callbacks are optional! You can delete this section and
   // the Auth flow will still work.
