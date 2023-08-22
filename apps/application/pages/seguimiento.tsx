@@ -63,7 +63,7 @@ export default function daoProposals() {
                                         grid items-center 
                                         text-xl text-center 
                                         rounded-tl-gen
-                                        rounded-br-gen"
+                                        rounded-br-gen h-full"
                   >
                     Detalles
                   </span>
@@ -128,7 +128,7 @@ export default function daoProposals() {
                                         grid items-center 
                                         text-xl text-center 
                                         rounded-tl-gen
-                                        rounded-br-gen"
+                                        rounded-br-gen h-full"
                   >
                     Detalles
                   </span>
@@ -187,13 +187,13 @@ export default function daoProposals() {
                 <Link href="/proposal-id-2">
                   <span
                     className="
-                                        bg-gray-300 hover:bg-gray-500 
-                                        hover:text-white 
-                                        cursor-pointer 
-                                        grid items-center 
-                                        text-xl text-center 
-                                        rounded-tl-gen
-                                        rounded-br-gen"
+                    bg-gray-300 hover:bg-gray-500 
+                    hover:text-white 
+                    cursor-pointer 
+                    grid items-center 
+                    text-xl text-center 
+                    rounded-tl-gen
+                    rounded-br-gen h-full"
                   >
                     Detalles
                   </span>

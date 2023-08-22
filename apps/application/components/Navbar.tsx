@@ -10,7 +10,7 @@ export default function Navbar() {
             src={"/assets/Proposal.svg"}
             width={45}
             height={45}
-            className=" cursor-pointer"
+            className="mx-auto cursor-pointer"
             alt="New proposal"
           />
         </Link>
@@ -19,7 +19,7 @@ export default function Navbar() {
             src={"/assets/Dashboard.svg"}
             width={45}
             height={45}
-            className=" cursor-pointer"
+            className="mx-auto cursor-pointer"
             alt="All proposals"
           />
         </Link>
@@ -28,7 +28,7 @@ export default function Navbar() {
             src={"/assets/Leaderboard.svg"}
             width={45}
             height={45}
-            className=" cursor-pointer"
+            className="mx-auto cursor-pointer"
             alt="Profile"
           />
         </Link>
@@ -37,7 +37,7 @@ export default function Navbar() {
             src={"/assets/Profile.svg"}
             width={45}
             height={45}
-            className=" cursor-pointer"
+            className="mx-auto cursor-pointer"
             alt="Profile"
           />
         </Link>
