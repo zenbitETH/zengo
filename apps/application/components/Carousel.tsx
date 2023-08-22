@@ -104,12 +104,13 @@ const Carousel: React.FC = () => {
                 cuales contribuye en distintas etapas de los ciclos de
                 gobernanza y cuenta con funciones específicas.
               </div>
-              <div className="pt-3">
+              <div className="pt-3 ">
                 <Image
                   src={"/assets/car1.png"}
                   height={120}
                   width={512}
                   alt="Usuarios zengo"
+                  className="mx-auto"
                 ></Image>
               </div>
             </div>
@@ -123,12 +124,13 @@ const Carousel: React.FC = () => {
                 público y privado colaboran en las cuatro etapas que componen
                 cada ciclo.
               </div>
-              <div className="">
+              <div className="grid items-center pt-10">
                 <Image
                   src={"/assets/car2.png"}
                   height={120}
                   width={512}
                   alt="Usuarios zengo"
+                  className="mx-auto"
                 ></Image>
               </div>
             </div>
@@ -147,6 +149,7 @@ const Carousel: React.FC = () => {
                 height={220}
                 width={522}
                 alt="Usuarios zengo"
+                className="mx-auto"
               ></Image>
             </div>
           </div>
@@ -236,10 +239,11 @@ const Carousel: React.FC = () => {
             </div>
             <div className="pt-16">
               <Image
-                src={"assets/car2.png"}
+                src={"/assets/car2.png"}
                 height={150}
                 width={640}
                 alt="Usuarios zengo"
+                className="m-auto"
               ></Image>
             </div>
           </div>
@@ -250,26 +254,29 @@ const Carousel: React.FC = () => {
             <div className="grid md:grid-cols-3">
               <div>
                 <Image
-                  src={"assets/car4.png"}
+                  src={"/assets/car4.png"}
                   height={235}
                   width={303}
                   alt="Usuarios zengo"
+                  className="m-auto"
                 ></Image>
               </div>
               <div>
                 <Image
-                  src={"assets/car5.png"}
+                  src={"/assets/car5.png"}
                   height={317}
                   width={690}
                   alt="Usuarios zengo"
+                  className="m-auto"
                 ></Image>
               </div>
               <div>
                 <Image
-                  src={"assets/car6.png"}
+                  src={"/assets/car6.png"}
                   height={235}
                   width={349}
                   alt="Usuarios zengo"
+                  className="m-auto"
                 ></Image>
               </div>
             </div>
@@ -280,10 +287,11 @@ const Carousel: React.FC = () => {
         <div className="mx-3 md:mx-96 py-24 gap-5 h-full grid items-center text-white font-exo overflow-y-auto hide-scrollbar">
           <div>
             <Image
-              src={"assets/car7.png"}
+              src={"/assets/car7.png"}
               height={194}
               width={697}
               alt="Usuarios zengo"
+              className="m-auto"
             ></Image>
           </div>
           <div className="md:text-2xl text-justify h-full">
