@@ -69,7 +69,13 @@ export default function Header() {
         </div>
       )}
       <div className="wrap">
-        <ConnectWallet />
+        <ConnectWallet
+          className="homeBT"
+          btnTitle="Acceder"
+          detailsBtn={() => {
+            return <button className="homeBT"> Cuenta </button>;
+          }}
+        />
       </div>
     </header>
   );
