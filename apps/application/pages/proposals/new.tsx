@@ -13,8 +13,9 @@ import {
 } from "@thirdweb-dev/react";
 import { useNewProposalState } from "@/contexts/NewProposalContext";
 import { contractAddress_zengoDao } from "@/const/contracts";
+import { getUser } from "../api/auth/[...thirdweb]";
 
-const Form = () => {
+const NewProposalPage = () => {
   const { location, evidence, proposalInfo, clearFormState } =
     useNewProposalState();
 
@@ -159,4 +160,24 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default NewProposalPage;
+
+export const getServerSideProps = async (context: any) => {
+  const user = await getUser(context.req);
+
+  console.log({ user });
+
+  if (!user) {
+    console.log("asdasdas");
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

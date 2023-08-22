@@ -17,6 +17,7 @@ import {
 } from "@biconomy/paymaster";
 import { Wallet, providers, ethers } from "ethers";
 import { useAddress } from "@thirdweb-dev/react";
+import { getUser } from "./api/auth/[...thirdweb]";
 
 export default function GasStation() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -204,7 +205,7 @@ export default function GasStation() {
     const data = incrementTx.encodeFunctionData("claim", [address]);
 
     const transaction = {
-      to: "0x415B6E0d30d99313186D6a7A61b97F3B0cFada99", // smart contract account abstraction for gassless tx - faucet (SimpleFaucet contract)
+      to: "", // smart contract account abstraction for gassless tx - faucet (SimpleFaucet contract)
       data: data,
       // value: ethers.utils.parseEther('0.01'),
     };
@@ -369,3 +370,23 @@ export default function GasStation() {
     </div>
   );
 }
+
+export const getServerSideProps = async (context: any) => {
+  const user = await getUser(context.req);
+
+  console.log({ user });
+
+  if (!user) {
+    console.log("asdasdas");
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

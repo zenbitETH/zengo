@@ -11,11 +11,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       // Set active chain for app
       activeChain={CHAIN}
       supportedChains={[CHAIN]}
-      // Auth (SIWE) configuration
-      // authConfig={{
-      //   domain: process.env.NEXT_PUBLIC_AUTH_DOMAIN || "evmkit.com", // Your website domain
-      //   authUrl: "/api/auth", // API Route (default is - pages/api/auth/[...thirdweb].ts)
-      // }}
+      authConfig={{
+        domain:
+          process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN ||
+          `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`,
+        authUrl: "/api/auth",
+      }}
       clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENTID}
     >
       <NewProposalContextProvider>

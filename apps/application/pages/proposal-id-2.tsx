@@ -1,6 +1,7 @@
 import Map from "@/components/Map";
 import Image from "next/image";
 import Link from "next/link";
+import { getUser } from "./api/auth/[...thirdweb]";
 
 export default function proposalDetail() {
   return (
@@ -223,3 +224,22 @@ export default function proposalDetail() {
     </div>
   );
 }
+export const getServerSideProps = async (context: any) => {
+  const user = await getUser(context.req);
+
+  console.log({ user });
+
+  if (!user) {
+    console.log("asdasdas");
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
