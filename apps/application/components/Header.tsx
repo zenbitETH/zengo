@@ -1,12 +1,21 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
-import Image from "next/image";
+import {
+  ConnectWallet,
+  useConnectionStatus,
+  useLogin,
+  useNetworkMismatch,
+  useSwitchChain,
+  useUser,
+} from "@thirdweb-dev/react";
 import Link from "next/link";
-import cit from "../public/assets/cit.png";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAddress } from "@thirdweb-dev/react";
+import { CHAIN } from "@/const/chains";
 
 export default function Header() {
+  const isMismatched = useNetworkMismatch();
+  const switchChain = useSwitchChain();
+
   const [walletIsConnected, setWalletIsConnected] = useState(false);
   const address = useAddress();
 
@@ -15,6 +24,23 @@ export default function Header() {
       setWalletIsConnected(true);
     }
   }, [address]);
+
+  const { login } = useLogin();
+  const { user, isLoggedIn } = useUser();
+  const connectionStatus = useConnectionStatus();
+
+  // login right after connection
+  const loginAttempted = useRef(false);
+
+  useEffect(() => {
+    if (loginAttempted.current) {
+      return;
+    }
+    if (connectionStatus === "connected" && !isLoggedIn) {
+      loginAttempted.current = true;
+      login();
+    }
+  }, [connectionStatus, isLoggedIn, login]);
 
   return (
     <header className="header">
@@ -61,13 +87,22 @@ export default function Header() {
         </div>
       )}
       <div className="wrap">
-        <ConnectWallet
-          className="homeBT"
-          btnTitle="Acceder"
-          detailsBtn={() => {
-            return <button className="homeBT"> Cuenta </button>;
-          }}
-        />
+        {!isMismatched ? (
+          <ConnectWallet
+            className="homeBT"
+            btnTitle="Acceder"
+            detailsBtn={() => {
+              return <button className="homeBT"> Cuenta </button>;
+            }}
+            auth={{
+              loginOptional: false,
+            }}
+          />
+        ) : (
+          <button onClick={() => switchChain(CHAIN.chainId)} className="homeBT">
+            <span>{`Switch to ${CHAIN.name}`}</span>
+          </button>
+        )}
       </div>
     </header>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { getUser } from "./api/auth/[...thirdweb]";
 
 export default function daoProposals() {
   return (
@@ -273,3 +274,23 @@ export default function daoProposals() {
     </div>
   );
 }
+
+export const getServerSideProps = async (context: any) => {
+  const user = await getUser(context.req);
+
+  console.log({ user });
+
+  if (!user) {
+    console.log("asdasdas");
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

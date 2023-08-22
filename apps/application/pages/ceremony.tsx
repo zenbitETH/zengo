@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getUser } from "./api/auth/[...thirdweb]";
 
 export default function Ceremony() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -183,3 +184,23 @@ export default function Ceremony() {
     </div>
   );
 }
+
+export const getServerSideProps = async (context: any) => {
+  const user = await getUser(context.req);
+
+  console.log({ user });
+
+  if (!user) {
+    console.log("asdasdas");
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
