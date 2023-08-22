@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { getUser } from "./api/auth/[...thirdweb]";
 
 export default function daoProposals() {
   return (
@@ -49,7 +50,7 @@ export default function daoProposals() {
                                         cursor-pointer 
                                         grid items-center 
                                         text-xl text-center 
-                                        rounded-br-gen"
+                                        rounded-br-gen h-full"
                   >
                     Votar
                   </span>
@@ -100,7 +101,7 @@ export default function daoProposals() {
                                         cursor-pointer 
                                         grid items-center 
                                         text-xl text-center 
-                                        rounded-br-gen"
+                                        rounded-br-gen h-full"
                   >
                     Votar
                   </div>
@@ -146,12 +147,12 @@ export default function daoProposals() {
                 <Link href="/proposal-id-2">
                   <div
                     className="
-                                        bg-gray-300 hover:bg-gray-500 
-                                        hover:text-white 
-                                        cursor-pointer 
-                                        grid items-center 
-                                        text-xl text-center 
-                                        rounded-br-gen"
+                    bg-gray-300 hover:bg-gray-500 
+                    hover:text-white 
+                    cursor-pointer 
+                    grid items-center 
+                    text-xl text-center 
+                    rounded-br-gen h-full"
                   >
                     Votar
                   </div>
@@ -202,7 +203,7 @@ export default function daoProposals() {
                                         cursor-pointer 
                                         grid items-center 
                                         text-xl text-center 
-                                        rounded-br-gen"
+                                        rounded-br-gen h-full"
                   >
                     Votar
                   </div>
@@ -253,7 +254,7 @@ export default function daoProposals() {
                                         cursor-pointer 
                                         grid items-center 
                                         text-xl text-center 
-                                        rounded-br-gen"
+                                        rounded-br-gen h-full"
                   >
                     Votar
                   </div>
@@ -283,3 +284,23 @@ export default function daoProposals() {
     </div>
   );
 }
+
+export const getServerSideProps = async (context: any) => {
+  const user = await getUser(context.req);
+
+  console.log({ user });
+
+  if (!user) {
+    console.log("asdasdas");
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

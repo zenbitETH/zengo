@@ -1,5 +1,6 @@
 import React /* , { useEffect, useState } */ from "react";
 import Link from "next/link";
+import { getUser } from "./api/auth/[...thirdweb]";
 // import { contractAddress_zengoDao } from "@/const/contracts";
 // import {
 //   MediaRenderer,
@@ -55,17 +56,17 @@ export default function daoProposals() {
               </div>
               <div
                 className="
-                                col-span-2                                 
-                                border-gray-500/50 
-                                rounded-gen grid grid-rows-3"
+                col-span-2                                 
+                border-gray-500/50 
+                rounded-gen grid grid-rows-3"
               >
                 <div
                   className="
-                                    grid 
-                                    items-center text-center 
-                                    font-bold text-xl 
-                                    rounded-tr-gen rounded-bl-gen 
-                                    bg-cit"
+                  grid 
+                  items-center text-center 
+                  font-bold text-xl 
+                  rounded-tr-gen rounded-bl-gen 
+                  bg-cit"
                 >
                   Verificación
                 </div>
@@ -86,13 +87,13 @@ export default function daoProposals() {
                 <Link href="/proposal-id-2">
                   <span
                     className="
-                                        bg-gray-300 hover:bg-gray-500 
-                                        hover:text-white 
-                                        cursor-pointer 
-                                        grid items-center 
-                                        text-xl text-center 
-                                        rounded-tl-gen
-                                        rounded-br-gen"
+                    bg-gray-300 hover:bg-gray-500 
+                    hover:text-white 
+                    cursor-pointer 
+                    grid items-center 
+                    text-xl text-center 
+                    rounded-tl-gen
+                    rounded-br-gen h-full"
                   >
                     Detalles
                   </span>
@@ -112,3 +113,23 @@ export default function daoProposals() {
     </div>
   );
 }
+
+export const getServerSideProps = async (context: any) => {
+  const user = await getUser(context.req);
+
+  console.log({ user });
+
+  if (!user) {
+    console.log("asdasdas");
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
