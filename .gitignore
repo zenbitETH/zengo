@@ -5,6 +5,9 @@ node_modules/
 .pnp
 .pnp.js
 
+# locks
+pnpm-lock.yaml
+
 # testing
 coverage
 
