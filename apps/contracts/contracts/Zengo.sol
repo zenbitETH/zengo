@@ -101,6 +101,11 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
         proposalCount++;
     }
 
+    // returns the proposal struct 
+    function getProposalByID(uint256 _proposalId) external view returns (Proposal memory){
+        return proposals[_proposalId];
+    }
+
     function vote(uint256 _proposalId) external onlyModerator {
         require(
             !hasVoted[_proposalId][msg.sender],
