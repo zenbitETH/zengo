@@ -16,12 +16,18 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
     address public deployer;
 
     struct Proposal {
-        uint256 id;
+        uint256 proposalId;
+        uint256 latitude;
+        uint256 longitude;
+        uint256 votes;
+        uint256 state;
         string title;
         string description;
+        string proposalType;
+        string streetAddress;
+        string evidence;
         address submitter;
         bool isVerified;
-        uint256 votes;
     }
 
     mapping(uint256 => Proposal) public proposals;
@@ -77,7 +83,12 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
 
     function submitProposal(
         string calldata _title,
-        string calldata _description
+        string calldata _description,
+        uint256 _latitude,
+        uint256 _longitude,
+        string _proposalType,
+        string _streetAddress,
+        string _evidence
     ) external {
         require(
             !hasVoted[proposalCount][msg.sender],
@@ -90,11 +101,16 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
 
         Proposal memory newProposal = Proposal({
             id: proposalCount,
+            latitude: _latitude,
+            longitude: _longitude,
             title: _title,
+            proposalType: _proposalType,
             description: _description,
             submitter: msg.sender,
+            streetAddress: _streetAddress,
             isVerified: false,
-            votes: 0
+            votes: 0,
+            state: 0
         });
 
         proposals[proposalCount] = newProposal;
