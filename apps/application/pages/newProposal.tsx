@@ -12,8 +12,8 @@ const NewProposalPage = () => {
   const {
     submitProposalForm,
     metadataUploadIsLoading,
-    submitProposalIsLoading,
-    submitProposalIsSuccess,
+    submitProposalFormIsLoading,
+    submitProposalSuccess,
   } = useNewProposalState();
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -77,14 +77,14 @@ const NewProposalPage = () => {
             >
               {metadataUploadIsLoading
                 ? "Uploading to IPFS..."
-                : submitProposalIsLoading
+                : submitProposalFormIsLoading
                 ? "Submitting transaction..."
                 : "Registrar propuesta"}
             </button>
           )}
         </div>
 
-        {submitProposalIsSuccess && (
+        {submitProposalSuccess && (
           <div className=" modal-background">
             <div className="modal bg-cit/60 h-96 grid items-center ">
               <div>

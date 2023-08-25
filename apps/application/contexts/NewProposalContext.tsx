@@ -19,8 +19,8 @@ interface INewProposalContext {
   uploadEvidenceToIpfs: (fileToUpload: File) => void;
   submitProposalForm: () => void;
   metadataUploadIsLoading: boolean;
-  submitProposalIsLoading: boolean;
-  submitProposalIsSuccess: boolean;
+  submitProposalFormIsLoading: boolean;
+  submitProposalSuccess: boolean;
 }
 
 export const NewProposalContext = createContext<INewProposalContext>({
@@ -45,8 +45,8 @@ export const NewProposalContext = createContext<INewProposalContext>({
   uploadEvidenceToIpfs: () => {},
   submitProposalForm: () => {},
   metadataUploadIsLoading: false,
-  submitProposalIsLoading: false,
-  submitProposalIsSuccess: false,
+  submitProposalFormIsLoading: false,
+  submitProposalSuccess: false,
 });
 
 interface IProps {
@@ -55,6 +55,7 @@ interface IProps {
 
 export function NewProposalContextProvider({ children }: IProps) {
   const [metadataUploadIsLoading, setMetadataUploadIsLoading] = useState(false);
+  const [submitProposalSuccess, setSubmitProposalSuccess] = useState(false);
   const { mutateAsync: upload } = useStorageUpload();
 
   const [evidence, setEvidence] = useState<IEvidence>({
@@ -89,6 +90,7 @@ export function NewProposalContextProvider({ children }: IProps) {
       type: "",
       description: "",
     });
+    setSubmitProposalSuccess(false);
   };
 
   const uploadEvidenceToIpfs = async (fileToUpload: File) => {
@@ -138,6 +140,7 @@ export function NewProposalContextProvider({ children }: IProps) {
         args: [proposalInfo.title, path], // TODO: args will change when contract function changes to receive all the proposal fields
       });
       console.info("contract call successs", { data });
+      setSubmitProposalSuccess(true);
       clearFormState();
     } catch (err) {
       console.error("contract call failure", { err }); // TODO: show toaster with error ?
@@ -168,8 +171,8 @@ export function NewProposalContextProvider({ children }: IProps) {
     uploadEvidenceToIpfs,
     submitProposalForm,
     metadataUploadIsLoading,
-    submitProposalIsLoading,
-    submitProposalIsSuccess,
+    submitProposalFormIsLoading: submitProposalIsLoading,
+    submitProposalSuccess,
   };
 
   return (
