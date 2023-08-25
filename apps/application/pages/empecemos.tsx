@@ -374,10 +374,7 @@ export default function GasStation() {
 export const getServerSideProps = async (context: any) => {
   const user = await getUser(context.req);
 
-  console.log({ user });
-
   if (!user) {
-    console.log("asdasdas");
     return {
       redirect: {
         destination: "/",

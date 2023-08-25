@@ -25,6 +25,7 @@
       "outputs": ["artifacts/**", "cache/**", "typechain-types/**"]
     },
     "contracts:deploy": {},
+    "deploy": {},
     "run-node": {}
   },
   "globalEnv": [

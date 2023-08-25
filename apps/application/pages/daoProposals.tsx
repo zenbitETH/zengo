@@ -1,21 +1,21 @@
 import React /* , { useEffect, useState } */ from "react";
 import Link from "next/link";
 import { getUser } from "./api/auth/[...thirdweb]";
-// import { contractAddress_zengoDao } from "@/const/contracts";
-// import {
-//   MediaRenderer,
-//   useContract,
-//   useContractRead,
-//   useStorage,
-// } from "@thirdweb-dev/react";
+import { contractAddress_zengoDao } from "@/const/contracts";
+import {
+  MediaRenderer,
+  useContract,
+  useContractRead,
+  useStorage,
+} from "@thirdweb-dev/react";
 
 export default function daoProposals() {
   // const [proposalIpfsUrl, setProposalIpfsUrl] = useState("");
   // const [dataIpfsDownloaded, setDataIpfsDownloaded] = useState<any>(null); // [
-  // const { contract } = useContract(
-  // contractAddress_zengoDao
-  // );
-  // const { data, isLoading } = useContractRead(contract, "proposals", ["0"]);
+  const { contract } = useContract(contractAddress_zengoDao);
+  const { data, isLoading } = useContractRead(contract, "proposals", ["0"]);
+
+  console.log({ data, isLoading });
 
   // const downloadFromIpfs = async () => {
   //   const file = await fetch(
