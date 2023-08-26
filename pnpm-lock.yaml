@@ -54,8 +54,8 @@ importers:
         specifier: 3.2.34
         version: 3.2.34(@ethersproject/abstract-provider@5.7.0)(@ethersproject/abstract-signer@5.7.0)(@ethersproject/bignumber@5.7.0)(@ethersproject/properties@5.7.0)(ethers@5.7.2)(localforage@1.10.0)(next@13.0.0)(react@18.2.0)(typescript@5.1.6)
       '@thirdweb-dev/chains':
-        specifier: 0.1.44
-        version: 0.1.44
+        specifier: 0.1.47
+        version: 0.1.47
       '@thirdweb-dev/react':
         specifier: ^3.14.34
         version: 3.14.34(@ethersproject/abstract-provider@5.7.0)(@ethersproject/abstract-signer@5.7.0)(@ethersproject/bignumber@5.7.0)(@ethersproject/properties@5.7.0)(@thirdweb-dev/sdk@3.10.54)(@types/react@18.2.0)(ethers@5.7.2)(localforage@1.10.0)(next@13.0.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
@@ -103,8 +103,8 @@ importers:
         version: 1.0.6(tailwindcss@3.3.3)
     devDependencies:
       '@tailwindcss/forms':
-        specifier: ^0.5.4
-        version: 0.5.4(tailwindcss@3.3.3)
+        specifier: ^0.5.5
+        version: 0.5.5(tailwindcss@3.3.3)
       '@types/node':
         specifier: ^20.5.4
         version: 20.5.4
@@ -2831,8 +2831,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@tailwindcss/forms@0.5.4(tailwindcss@3.3.3):
-    resolution: {integrity: sha512-YAm12D3R7/9Mh4jFbYSMnsd6jG++8KxogWgqs7hbdo/86aWjjlIEvL7+QYdVELmAI0InXTpZqFIg5e7aDVWI2Q==}
+  /@tailwindcss/forms@0.5.5(tailwindcss@3.3.3):
+    resolution: {integrity: sha512-03sXK1DcPt44GZ0Yg6AcAfQln89IKdbE79g2OwoKqBm1ukaadLO2AH3EiB3mXHeQnxa3tzm7eE0x7INXSjbuug==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
@@ -2919,16 +2919,16 @@ packages:
       - zksync-web3
     dev: false
 
-  /@thirdweb-dev/chains@0.1.44:
-    resolution: {integrity: sha512-pXICysAeBLiBFHK68gn3lkufsZhjsvdy26rZazHamxvNN4J9rXBWc4wvVgvE/YgZimYEoVtPc7RhbrsjjM5qFQ==}
-    dev: false
-
   /@thirdweb-dev/chains@0.1.45:
     resolution: {integrity: sha512-DLxjHGkHTGHw6fseB/bu3HFsuXWDHSWs5EowKxFpk61rDOLj9gr/iyoSGFejkeoKriiY4Sfzb+p6OyivMQG5gQ==}
     dev: false
 
   /@thirdweb-dev/chains@0.1.46:
     resolution: {integrity: sha512-AVDLJZ6ttFY8jPzQTKe3mRMnCAQcUzK6eX5vjs9A5CqUCdq7mBmuMM4x3fRs/80FR4vRdEaEYkdRv6HCjCHxGw==}
+    dev: false
+
+  /@thirdweb-dev/chains@0.1.47:
+    resolution: {integrity: sha512-9LQOurJf+20BJ6upnlFPsNFdDHj/Cup2IhX5jPY/hNzq109+TbEoafd/bpoFvcEsKx53IGdLjno2tra2o9fi0g==}
     dev: false
 
   /@thirdweb-dev/contracts-js@1.3.11(ethers@5.7.2):
