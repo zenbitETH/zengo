@@ -20,24 +20,28 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
 
     // Modify the Design to facilitate current implementation
     struct Proposal {
+        uint8 votingIterationCount;
         uint256 proposalId;
         string title;
         string proposalDescription;
         string proposalType;
         address proposer;
-        Evidence proposerEvidence;
+        Evidence proposalEvidence;
         Vote[] votingIterations;
+        VerificationState verificationState;
         // requires funding
         bool isEligibleForFunding;
         bool isVerified;
     }
 
     struct Vote {
+        uint8 votingIteration;
         uint256 proposalId;
         uint256 totalVotes;
-        mapping (address => bool) vote; 
+        bool inProgress;
+        mapping(address => VerficationState) vote;
+        mapping(address => bool) hasVoted;
         Evidence[] evidences;
-        string[] options; // should this be enums?
     }
     struct Evidence {
         string evidenceDescription;
@@ -130,8 +134,13 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
             proposer: msg.sender,
             isEligibleForFunding: false,
             isVerified: false,
-            Evidence: newEvidence
+            votingIterationCount: 0,
+            // Check if this works
+            verificationState: VerificationState(0),
+            proposalEvidence: newEvidence
         });
+
+        intializeVotingIteration(proposalCount);
 
         emit ProposalSubmitted(newProposal, newEvidence);
 
@@ -139,8 +148,10 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
         proposalCount++;
     }
 
-    // returns the proposal struct 
-    function getProposalByID(uint256 _proposalId) external view returns (Proposal memory){
+    // returns the proposal struct
+    function getProposalByID(
+        uint256 _proposalId
+    ) external view returns (Proposal memory) {
         return proposals[_proposalId];
     }
 
@@ -148,8 +159,8 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
         address calldata _voter,
         uint256 calldata _points
     ) external onlyModerator {
-            votingPoints[_voters] = _points;
-        }
+        votingPoints[_voters] = _points;
+    }
 
     function setVotingPoints(uint256 _points) external onlyOwner {
         for (uint256 i = 0; moderatorList.length; i++) {
@@ -167,12 +178,64 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
         return msg.sender == deployer;
     }
 
-
     ////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////
     // TODO: from here on
+
+    function voteToClassifyProposal(
+        uint8 _vote,
+        uint8 _votingIteration,
+        uint256 _proposalId
+    ) external onlyModerator {
+        require(
+            _vote <= uint8(VerificationState.ApproveForFunding),
+            "Out of Range / Invalid vote option"
+        );
+
+        Vote memory votingIteration = proposals[_proposalId].votingIterations[
+            _votingIteration
+        ];
+
+        require(
+            !votingIteration.hasVoted[msg.sender],
+            "You have already voted for this Voting Iteration of this proposal"
+        );
+        votingIteration.vote[msg.sender] = VerificationState(_vote);
+        votingIteration.hasVoted[msg.sender] = true;
+    }
+
+    function concludeVotingIteration(uint8 _votingIteration, uint256 _proposalId) onlyModerator {
+        require(proposals[_proposalId].votingIterations[_votingIteration].inProgress, "Voting Iteration doesn't exist or had already concluded");
+        
+        Vote memory votingIteration = proposals[_proposalId].votingIterations[_votingIteration];
+        //TODO: add stateTransition and Voting Logic
+    }
+
+    function intializeVotingIteration(uint256 _proposalId) internal {
+        Vote[] memory newVotingIteration = Vote({
+            votingIteration: 0,
+            proposalId: _proposalId,
+            totalVotes: 0,
+            inProgress: true
+        });
+        proposals[_proposalId].votingIterations.push(newVotingIteration);
+        proposals[_proposalId].votingIterationCount++;
+    }
+
+    function addVotingIteration(uint256 _proposalId) external onlyModerator {
+        uint8 currentVoteIteration = proposals[_proposalId]
+            .votingIterationCount;
+        Vote[] memory newVotingIteration = Vote({
+            votingIteration: currentVoteIteration,
+            proposalId: _proposalId,
+            totalVotes: 0,
+            inProgress: true
+        });
+        proposals[_proposalId].votingIterations.push(newVotingIteration);
+        proposals[_proposalId].votingIterationCount++;
+    }
 
     function vote(uint256 _proposalId) external onlyModerator {
         require(
