@@ -3,17 +3,20 @@ pragma solidity ^0.8.17;
 
 import "@thirdweb-dev/contracts/extension/PermissionsEnumerable.sol";
 import "@thirdweb-dev/contracts/extension/ContractMetadata.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./Constants.sol";
 
-interface ERC20Token {
-    function transfer(address to, uint256 value) external returns (bool);
-}
-
-contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
+contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
+    IERC20 public token;
     address public owner;
     uint256 public registrationDuration;
     uint256 public pluralVotingPoints;
     address public votingTokenAddress; // Address of the ERC20 voting token
     address public deployer;
+
+    event ModeratorAdded(address indexed newModerator);
+    event ModeratorRemoved(address indexed removedModerator);
+    event ProposalSubmitted(Proposal newProposal, Evidence newEvidence);
 
     // Modify the Design to facilitate current implementation
     struct Proposal {
@@ -69,12 +72,12 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
     constructor(
         uint256 _registrationDuration,
         uint256 _pluralVotingPoints,
-        address _votingTokenAddress
+        address _tokenAddress
     ) {
         owner = msg.sender;
         registrationDuration = _registrationDuration;
         pluralVotingPoints = _pluralVotingPoints;
-        votingTokenAddress = _votingTokenAddress; // Set the address of the ERC20 voting token
+        token = IERC20(_tokenAddress);
         moderators[msg.sender] = true;
         moderatorList.push(msg.sender);
     }
@@ -82,6 +85,7 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
     function addModerator(address _moderator) external onlyOwner {
         moderators[_moderator] = true;
         moderatorList.push(_moderator);
+        emit ModeratorAdded(_moderator);
     }
 
     function removeModerator(address _moderator) external onlyOwner {
@@ -93,6 +97,7 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
                 break;
             }
         }
+        emit ModeratorRemoved(_moderator);
     }
 
     function submitProposal(
@@ -128,6 +133,8 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
             Evidence: newEvidence
         });
 
+        emit ProposalSubmitted(newProposal, newEvidence);
+
         proposals[proposalCount] = newProposal;
         proposalCount++;
     }
@@ -136,6 +143,36 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
     function getProposalByID(uint256 _proposalId) external view returns (Proposal memory){
         return proposals[_proposalId];
     }
+
+    function setIndividualVotingPoints(
+        address calldata _voter,
+        uint256 calldata _points
+    ) external onlyModerator {
+            votingPoints[_voters] = _points;
+        }
+
+    function setVotingPoints(uint256 _points) external onlyOwner {
+        for (uint256 i = 0; moderatorList.length; i++) {
+            moderators[moderatorList[i]] = _points;
+        }
+    }
+
+    function _canSetContractURI()
+        internal
+        view
+        virtual
+        override
+        returns (bool)
+    {
+        return msg.sender == deployer;
+    }
+
+
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    // TODO: from here on
 
     function vote(uint256 _proposalId) external onlyModerator {
         require(
@@ -167,26 +204,5 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
         );
 
         proposals[_proposalId].isVerified = true;
-    }
-
-    function setVotingPoints(
-        address[] calldata _voters,
-        uint256[] calldata _points
-    ) external onlyModerator {
-        require(_voters.length == _points.length, "Arrays length mismatch");
-
-        for (uint256 i = 0; i < _voters.length; i++) {
-            votingPoints[_voters[i]] = _points[i];
-        }
-    }
-
-    function _canSetContractURI()
-        internal
-        view
-        virtual
-        override
-        returns (bool)
-    {
-        return msg.sender == deployer;
     }
 }
