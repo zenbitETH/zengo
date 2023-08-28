@@ -207,45 +207,73 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
         );
         votingIteration.vote[msg.sender] = VerificationState(_vote);
         votingIteration.hasVoted[msg.sender] = true;
-        votingIteration.voteCount[VerificationState(_vote)]++; 
+        votingIteration.voteCount[VerificationState(_vote)]++;
     }
 
-    function concludeVotingIteration(uint8 _votingIteration, uint256 _proposalId) external onlyModerator {
-        require(proposals[_proposalId].votingIterations[_votingIteration].inProgress, "Voting Iteration doesn't exist or has already concluded");
-        
+    function concludeVotingIteration(
+        uint8 _votingIteration,
+        uint256 _proposalId
+    ) external onlyModerator {
+        require(
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .inProgress,
+            "Voting Iteration doesn't exist or has already concluded"
+        );
+
         // Load the votingIteration from the proposal
-        Vote memory votingIteration = proposals[_proposalId].votingIterations[_votingIteration];
+        Vote memory votingIteration = proposals[_proposalId].votingIterations[
+            _votingIteration
+        ];
         //TODO: add stateTransition and Voting Logic
 
         uint8 result = 0;
         for (uint8 i = 0; i < 6; i++) {
-            if (uint8(votingIteration.voteCount[VerificationState(i)]) > result) {
+            if (
+                uint8(votingIteration.voteCount[VerificationState(i)]) > result
+            ) {
                 result = votingIteration.voteCount[VerificationState(i)];
             }
         }
         if (result == 1 || result == 2 || result == 3) {
-            proposals[_proposalId].votingIterations[_votingIteration].inProgress = true;
-            proposals[_proposalId].votingIterations[_votingIteration].resultState = VerificationState(result);
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .inProgress = true;
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .resultState = VerificationState(result);
             // TODO: emit Event that proposal is now respective
             // verification state that can require further
             // voting iterations
         } else if (result == 4) {
-            proposals[_proposalId].votingIterations[_votingIteration].inProgress = false;
-            proposals[_proposalId].votingIterations[_votingIteration].resultState = VerificationState(result);
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .inProgress = false;
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .resultState = VerificationState(result);
             proposals[_proposalId].isEligibleForFunding = false;
             proposals[_proposalId].isVerified = true;
             // TODO: emit Event that proposal is completed and
             // doesn't require any funding
         } else if (result == 5) {
-            proposals[_proposalId].votingIterations[_votingIteration].inProgress = false;
-            proposals[_proposalId].votingIterations[_votingIteration].resultState = VerificationState(result);
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .inProgress = false;
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .resultState = VerificationState(result);
             proposals[_proposalId].isEligibleForFunding = false;
             proposals[_proposalId].isVerified = false;
             // TODO: emit Event that proposal is rejected or spam and
             // is ineligible for funding
         } else if (result == 6) {
-            proposals[_proposalId].votingIterations[_votingIteration].inProgress = false;
-            proposals[_proposalId].votingIterations[_votingIteration].resultState = VerificationState(result);
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .inProgress = false;
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .resultState = VerificationState(result);
             proposals[_proposalId].isEligibleForFunding = true;
             proposals[_proposalId].isVerified = true;
             // TODO: emit Event that proposal is approved for funding
