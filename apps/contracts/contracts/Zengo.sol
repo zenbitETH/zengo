@@ -112,6 +112,9 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
         emit ModeratorRemoved(_moderator);
     }
 
+
+    // TODO: constructing a constructor like this
+    // doesn't work figure out how to write it
     function submitProposal(
         string calldata _title,
         string calldata _proposalDescription,
