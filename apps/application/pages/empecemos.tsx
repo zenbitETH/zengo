@@ -81,6 +81,7 @@ export default function GasStation() {
       })
       .catch((err) => console.error(err));
     console.log(hasPoap);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address, hasPoap]);
 
   const handleOpenModal = () => {
@@ -179,7 +180,7 @@ export default function GasStation() {
       .then((response) => response.json())
       .then((response) => console.log(response))
       .catch((err) => console.error(err));
-    await setIsModalOpen(false);
+    setIsModalOpen(false);
   };
 
   const createAccount = async () => {
