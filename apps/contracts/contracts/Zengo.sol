@@ -15,13 +15,33 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
     address public votingTokenAddress; // Address of the ERC20 voting token
     address public deployer;
 
+    // Modify the Design to facilitate current implementation
     struct Proposal {
-        uint256 id;
+        uint256 proposalId;
         string title;
-        string description;
-        address submitter;
+        string proposalDescription;
+        string proposalType;
+        address proposer;
+        Evidence proposerEvidence;
+        Vote[] votingIterations;
+        // requires funding
+        bool isEligibleForFunding;
         bool isVerified;
-        uint256 votes;
+    }
+
+    struct Vote {
+        uint256 proposalId;
+        uint256 totalVotes;
+        mapping (address => bool) vote; 
+        Evidence[] evidences;
+        string[] options; // should this be enums?
+    }
+    struct Evidence {
+        string evidenceDescription;
+        string streetAddress;
+        string evidenceUri;
+        uint256 latitude;
+        uint256 longitude;
     }
 
     mapping(uint256 => Proposal) public proposals;
@@ -31,7 +51,7 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
     address[] public moderatorList;
 
     mapping(address => uint256) public votingPoints;
-    mapping(uint256 => mapping(address => bool)) public hasVoted;
+    // mapping(uint256 => mapping(address => bool)) public hasVoted;
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the owner can call this function");
@@ -77,24 +97,35 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata {
 
     function submitProposal(
         string calldata _title,
-        string calldata _description
+        string calldata _proposalDescription,
+        string calldata _evidenceDescription,
+        uint256 _latitude,
+        uint256 _longitude,
+        string _proposalType,
+        string _streetAddress
     ) external {
-        require(
-            !hasVoted[proposalCount][msg.sender],
-            "You have already submitted a proposal"
-        );
-        require(
-            votingPoints[msg.sender] > 0,
-            "You need voting points to submit a proposal"
-        );
+        // require(
+        //     votingPoints[msg.sender] > 0,
+        //     "You need voting points to submit a proposal"
+        // );
+
+        Evidence memory newEvidence = Evidence({
+            evidenceDescription: _evidenceDescription,
+            streetAddress: _streetAddress,
+            evidenceUri: _evidenceUri,
+            latitude: _latitude,
+            longitude: _longitude
+        });
 
         Proposal memory newProposal = Proposal({
-            id: proposalCount,
+            proposalId: proposalCount,
             title: _title,
-            description: _description,
-            submitter: msg.sender,
+            proposalType: _proposalType,
+            proposalDescription: _proposalDescription,
+            proposer: msg.sender,
+            isEligibleForFunding: false,
             isVerified: false,
-            votes: 0
+            Evidence: newEvidence
         });
 
         proposals[proposalCount] = newProposal;
