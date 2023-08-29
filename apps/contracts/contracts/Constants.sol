@@ -21,6 +21,8 @@ contract Constants {
 
     uint256 public constant GOVERNANCE_CYCLE = 0;
 
+    uint256 public constant THRESHOLD_VOTE_LIMIT = 51;
+
     uint256 public constant GOVERNANCE_CYCLE_LENGTH = 2595000;
 
 }

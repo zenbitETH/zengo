@@ -16,6 +16,7 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
 
     event ModeratorAdded(address indexed newModerator);
     event ModeratorRemoved(address indexed removedModerator);
+    // nested mapping cannot be emitted in events
     event ProposalSubmitted(Proposal newProposal, Evidence newEvidence);
 
     // Modify the Design to facilitate current implementation
@@ -211,12 +212,68 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
         votingIteration.vote[msg.sender] = VerificationState(_vote);
         votingIteration.hasVoted[msg.sender] = true;
         votingIteration.voteCount[VerificationState(_vote)]++;
+        // TODO: trigger concludeVotingIteration when one of the
+        // consensusIteration reaches the threshold votesPercents
+        if ((votingIteration.voteCount[VerificationState(_vote)] * 100) > moderatorList.length * 51) {
+            autoTriggerVoteResult(_votingIteration, _proposalId, VerificationState(_vote));
+        }
     }
 
+    function autoTriggerVoteResult(uint8 _votingIteration, uint256 _proposalId, VerificationState _resultState) internal {
+        if (_resultState == 1 || _resultState == 2 || _resultState == 3) {
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .inProgress = true;
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .resultState = _resultState;
+            // TODO: emit Event that proposal is now respective
+            // verification state that can require further
+            // voting iterations
+            // TODO: trigger addVoteIteration with respective
+            // Result State
+        } else if (_resultState == 4) {
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .inProgress = false;
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .resultState = _resultState;
+            proposals[_proposalId].isEligibleForFunding = false;
+            proposals[_proposalId].isVerified = true;
+            // TODO: emit Event that proposal is completed and
+            // doesn't require any funding
+        } else if (_resultState == 5) {
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .inProgress = false;
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .resultState = _resultState;
+            proposals[_proposalId].isEligibleForFunding = false;
+            proposals[_proposalId].isVerified = false;
+            // TODO: emit Event that proposal is rejected or spam and
+            // is ineligible for funding
+        } else if (_resultState == 6) {
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .inProgress = false;
+            proposals[_proposalId]
+                .votingIterations[_votingIteration]
+                .resultState = _resultState;
+            proposals[_proposalId].isEligibleForFunding = true;
+            proposals[_proposalId].isVerified = true;
+            // TODO: emit Event that proposal is approved for funding
+        }
+    }
+
+    // Should this be callable by moderator?
     function concludeVotingIteration(
         uint8 _votingIteration,
         uint256 _proposalId
     ) external onlyModerator {
+        // TODO: check global State
+        // TODO: check zero Votes 
         require(
             proposals[_proposalId]
                 .votingIterations[_votingIteration]
@@ -228,7 +285,8 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
         Vote memory votingIteration = proposals[_proposalId].votingIterations[
             _votingIteration
         ];
-        //TODO: add stateTransition and Voting Logic
+        //  TODO: add stateTransition and Voting Logic
+        //  Done
 
         uint8 result = 0;
         for (uint8 i = 0; i < 6; i++) {
@@ -248,6 +306,8 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
             // TODO: emit Event that proposal is now respective
             // verification state that can require further
             // voting iterations
+            // TODO: trigger addVoteIteration with respective
+            // Result State
         } else if (result == 4) {
             proposals[_proposalId]
                 .votingIterations[_votingIteration]
