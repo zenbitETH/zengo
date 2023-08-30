@@ -1,88 +1,76 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IBundler, Bundler } from "@biconomy/bundler";
-import {
-  BiconomySmartAccount,
-  BiconomySmartAccountConfig,
-  DEFAULT_ENTRYPOINT_ADDRESS,
-} from "@biconomy/account";
-import { ChainId } from "@biconomy/core-types";
-import {
-  IPaymaster,
-  BiconomyPaymaster,
-  IHybridPaymaster,
-  SponsorUserOperationDto,
-  PaymasterMode,
-} from "@biconomy/paymaster";
-import { Wallet, providers, ethers } from "ethers";
+// import { IBundler, Bundler } from "@biconomy/bundler";
+// import {
+//   BiconomySmartAccount,
+//   BiconomySmartAccountConfig,
+//   DEFAULT_ENTRYPOINT_ADDRESS,
+// } from "@biconomy/account";
+// import { ChainId } from "@biconomy/core-types";
+// import {
+//   IPaymaster,
+//   BiconomyPaymaster,
+//   IHybridPaymaster,
+//   SponsorUserOperationDto,
+//   PaymasterMode,
+// } from "@biconomy/paymaster";
+// import { Wallet, providers, ethers } from "ethers";
 import { useAddress } from "@thirdweb-dev/react";
 import { getUser } from "./api/auth/[...thirdweb]";
+import { useEventPoap } from "@/hooks/useEventPoap";
 
 export default function GasStation() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModal2Open, setIsModal2Open] = useState(false);
-  const [secretWord, setSecretWord] = useState("");
-  const [hasPoap, setHasPoap] = useState(false);
   const address = useAddress();
   const [walletAddress, setWalletaddress] = useState("");
 
-  const eventId = process.env.NEXT_PUBLIC_POAP_EVENT_ID;
+  const { claimPoap, poapScan, addressHasPoap } = useEventPoap();
+
+  const eventIdModerators = process.env.NEXT_PUBLIC_POAP_EVENT_ID as string;
   const poap_api_key = process.env.NEXT_PUBLIC_POAP_API_KEY;
   const accessToken = process.env.NEXT_PUBLIC_POAP_AUTH_TOKEN;
   const secretCode = process.env.NEXT_PUBLIC_POAP_EDIT_CODE;
-  // console.log("poapkey", eventId, poap_api_key, accessToken, secretCode)
 
   // biconomy part
 
-  const provider = new providers.JsonRpcProvider(
-    "https://rpc.ankr.com/optimism_testnet"
-  );
-  const wallet = new Wallet(
-    process.env.NEXT_PUBLIC_PRIVATE_KEY || "",
-    provider
-  );
+  // const provider = new providers.JsonRpcProvider(
+  //   "https://rpc.ankr.com/optimism_testnet"
+  // );
+  // const wallet = new Wallet(
+  //   process.env.NEXT_PUBLIC_PRIVATE_KEY || "",
+  //   provider
+  // );
 
-  const bundler: IBundler = new Bundler({
-    bundlerUrl: "https://bundler.biconomy.io/api/v2/420/abc",
-    chainId: ChainId.OPTIMISM_GOERLI_TESTNET,
-    entryPointAddress: DEFAULT_ENTRYPOINT_ADDRESS,
-  });
+  // const bundler: IBundler = new Bundler({
+  //   bundlerUrl: "https://bundler.biconomy.io/api/v2/420/abc",
+  //   chainId: ChainId.OPTIMISM_GOERLI_TESTNET,
+  //   entryPointAddress: DEFAULT_ENTRYPOINT_ADDRESS,
+  // });
 
-  const paymaster = new BiconomyPaymaster({
-    paymasterUrl: `https://paymaster.biconomy.io/api/v1/420/${process.env.NEXT_PUBLIC_BICONOMY_PAYMASTER_KEY}`, // you can get this value from biconomy dashboard. https://dashboard.biconomy.io
-  });
+  // const paymaster = new BiconomyPaymaster({
+  //   paymasterUrl: `https://paymaster.biconomy.io/api/v1/420/${process.env.NEXT_PUBLIC_BICONOMY_PAYMASTER_KEY}`, // you can get this value from biconomy dashboard. https://dashboard.biconomy.io
+  // });
 
-  const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
-    signer: wallet,
-    chainId: ChainId.OPTIMISM_GOERLI_TESTNET,
-    bundler: bundler,
-    paymaster: paymaster,
-  };
+  // const biconomySmartAccountConfig: BiconomySmartAccountConfig = {
+  //   signer: wallet,
+  //   chainId: ChainId.OPTIMISM_GOERLI_TESTNET,
+  //   bundler: bundler,
+  //   paymaster: paymaster,
+  // };
 
   useEffect(() => {
     if (address) {
       setWalletaddress(address);
     }
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        "x-api-key": `${poap_api_key}`,
-      },
-    };
-    fetch(
-      `https://api.poap.tech/actions/scan/${walletAddress}/${eventId}`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        response.statusCode === 404 ? setHasPoap(false) : setHasPoap(true);
-      })
-      .catch((err) => console.error(err));
-    console.log(hasPoap);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address, hasPoap]);
+  }, [address]);
+
+  useEffect(() => {
+    if (walletAddress !== "") {
+      poapScan(walletAddress, eventIdModerators);
+    }
+  }, [walletAddress]);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -92,154 +80,155 @@ export default function GasStation() {
     setIsModalOpen(false);
   };
 
-  const handleOpenModal2 = () => {
-    console.log("can claim");
-    setIsModal2Open(true);
-  };
-
   const handleCloseModal2 = () => {
     setIsModal2Open(false);
   };
 
-  const claimPoap = async () => {
-    setIsModalOpen(true);
-    // step 1: getting qr hashes
-    const options = {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        authorization: `Bearer ${accessToken}`,
-        "x-api-key": `${poap_api_key}`,
-      },
-      body: JSON.stringify({ secret_code: `${secretCode}` }),
-    };
-
-    let qr_hashes: any;
-    await fetch(`https://api.poap.tech/event/${eventId}/qr-codes`, options)
-      .then((response) => response.json())
-      // .then(response => console.log(response))
-      .then((response) => {
-        qr_hashes = response;
-      })
-      .catch((err) => console.error(err));
-
-    console.log("qr hashes are :", qr_hashes);
-    let claimable_qr: any;
-    // step 2: define which qr_hash is claimable
-    for (let i = 0; i < qr_hashes.length; i++) {
-      //  console.log(qr_hashes[i]); // prints all element one by one
-      if (qr_hashes[i].claimed == false) {
-        claimable_qr = qr_hashes[i].qr_hash;
-        break;
-      }
-    }
-    console.log("claimable_qr is: ", claimable_qr);
-
-    //step 3: call the get claim_qr function to get the secret
-    const options2 = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        authorization: `Bearer ${accessToken}`,
-        "x-api-key": `${poap_api_key}`,
-      },
-    };
-
-    let qr_secret: any;
-    await fetch(
-      `https://api.poap.tech/actions/claim-qr?qr_hash=${claimable_qr}`,
-      options2
-    )
-      .then((response) => response.json())
-      // .then(response => console.log(response))
-      .then((response) => {
-        qr_secret = response;
-      })
-      .catch((err) => console.error(err));
-
-    console.log("secret code is: ", qr_secret.secret);
-
-    //step4: claim poap step
-    const options3 = {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        authorization: `Bearer ${accessToken}`,
-        "x-api-key": `${poap_api_key}`,
-      },
-      body: JSON.stringify({
-        address: address,
-        qr_hash: claimable_qr,
-        secret: qr_secret.secret,
-      }),
-    };
-    console.log(options3);
-    await fetch("https://api.poap.tech/actions/claim-qr", options3)
-      .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((err) => console.error(err));
-    setIsModalOpen(false);
+  const handleClaimPoap = async () => {
+    setIsModal2Open(true);
+    claimPoap(walletAddress);
+    setIsModal2Open(false);
   };
 
-  const createAccount = async () => {
-    let biconomySmartAccount = new BiconomySmartAccount(
-      biconomySmartAccountConfig
-    );
-    biconomySmartAccount = await biconomySmartAccount.init();
-    console.log("owner: ", biconomySmartAccount.owner);
-    console.log(
-      "address: ",
-      await biconomySmartAccount.getSmartAccountAddress()
-    );
-    return biconomySmartAccount;
-  };
+  // const claimPoap = async () => {
+  //   setIsModalOpen(true);
+  //   // step 1: getting qr hashes
+  //   const options = {
+  //     method: "POST",
+  //     headers: {
+  //       accept: "application/json",
+  //       "content-type": "application/json",
+  //       authorization: `Bearer ${accessToken}`,
+  //       "x-api-key": `${poap_api_key}`,
+  //     },
+  //     body: JSON.stringify({ secret_code: `${secretCode}` }),
+  //   };
 
-  const claimViaPaymaster = async () => {
-    await setIsModal2Open(true);
-    console.log("creating account");
+  //   let qr_hashes: any;
+  //   await fetch(`https://api.poap.tech/event/${eventId}/qr-codes`, options)
+  //     .then((response) => response.json())
+  //     // .then(response => console.log(response))
+  //     .then((response) => {
+  //       qr_hashes = response;
+  //     })
+  //     .catch((err) => console.error(err));
 
-    const smartAccount = await createAccount();
+  //   console.log("qr hashes are :", qr_hashes);
+  //   let claimable_qr: any;
+  //   // step 2: define which qr_hash is claimable
+  //   for (let i = 0; i < qr_hashes.length; i++) {
+  //     //  console.log(qr_hashes[i]); // prints all element one by one
+  //     if (qr_hashes[i].claimed == false) {
+  //       claimable_qr = qr_hashes[i].qr_hash;
+  //       break;
+  //     }
+  //   }
+  //   console.log("claimable_qr is: ", claimable_qr);
 
-    const incrementTx = new ethers.utils.Interface(["function claim(address)"]);
-    const data = incrementTx.encodeFunctionData("claim", [address]);
+  //   //step 3: call the get claim_qr function to get the secret
+  //   const options2 = {
+  //     method: "GET",
+  //     headers: {
+  //       accept: "application/json",
+  //       authorization: `Bearer ${accessToken}`,
+  //       "x-api-key": `${poap_api_key}`,
+  //     },
+  //   };
 
-    const transaction = {
-      to: "", // smart contract account abstraction for gassless tx - faucet (SimpleFaucet contract)
-      data: data,
-      // value: ethers.utils.parseEther('0.01'),
-    };
+  //   let qr_secret: any;
+  //   await fetch(
+  //     `https://api.poap.tech/actions/claim-qr?qr_hash=${claimable_qr}`,
+  //     options2
+  //   )
+  //     .then((response) => response.json())
+  //     // .then(response => console.log(response))
+  //     .then((response) => {
+  //       qr_secret = response;
+  //     })
+  //     .catch((err) => console.error(err));
 
-    const partialUserOp = await smartAccount.buildUserOp([transaction]);
+  //   console.log("secret code is: ", qr_secret.secret);
 
-    const biconomyPaymaster =
-      smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
+  //   //step4: claim poap step
+  //   const options3 = {
+  //     method: "POST",
+  //     headers: {
+  //       accept: "application/json",
+  //       "content-type": "application/json",
+  //       authorization: `Bearer ${accessToken}`,
+  //       "x-api-key": `${poap_api_key}`,
+  //     },
+  //     body: JSON.stringify({
+  //       address: address,
+  //       qr_hash: claimable_qr,
+  //       secret: qr_secret.secret,
+  //     }),
+  //   };
+  //   console.log(options3);
+  //   await fetch("https://api.poap.tech/actions/claim-qr", options3)
+  //     .then((response) => response.json())
+  //     .then((response) => console.log(response))
+  //     .catch((err) => console.error(err));
+  //   setIsModalOpen(false);
+  // };
 
-    let paymasterServiceData: SponsorUserOperationDto = {
-      mode: PaymasterMode.SPONSORED,
-      // optional params...
-    };
+  // const createAccount = async () => {
+  //   let biconomySmartAccount = new BiconomySmartAccount(
+  //     biconomySmartAccountConfig
+  //   );
+  //   biconomySmartAccount = await biconomySmartAccount.init();
+  //   console.log("owner: ", biconomySmartAccount.owner);
+  //   console.log(
+  //     "address: ",
+  //     await biconomySmartAccount.getSmartAccountAddress()
+  //   );
+  //   return biconomySmartAccount;
+  // };
 
-    console.log(partialUserOp);
+  // const claimViaPaymaster = async () => {
+  //   setIsModal2Open(true);
+  //   console.log("creating account");
 
-    const paymasterAndDataResponse =
-      await biconomyPaymaster.getPaymasterAndData(
-        partialUserOp,
-        paymasterServiceData
-      );
-    partialUserOp.paymasterAndData = paymasterAndDataResponse.paymasterAndData;
+  //   const smartAccount = await createAccount();
 
-    const userOpResponse = await smartAccount.sendUserOp(partialUserOp);
+  //   const incrementTx = new ethers.utils.Interface(["function claim(address)"]);
+  //   const data = incrementTx.encodeFunctionData("claim", [address]);
 
-    console.log(userOpResponse);
+  //   const transaction = {
+  //     to: "", // smart contract account abstraction for gassless tx - faucet (SimpleFaucet contract)
+  //     data: data,
+  //     // value: ethers.utils.parseEther('0.01'),
+  //   };
 
-    const transactionDetail = await userOpResponse.wait();
+  //   const partialUserOp = await smartAccount.buildUserOp([transaction]);
 
-    console.log("transaction detail below");
-    console.log(transactionDetail);
-    await setIsModal2Open(false);
-  };
+  //   const biconomyPaymaster =
+  //     smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
+
+  //   let paymasterServiceData: SponsorUserOperationDto = {
+  //     mode: PaymasterMode.SPONSORED,
+  //     // optional params...
+  //   };
+
+  //   console.log(partialUserOp);
+
+  //   const paymasterAndDataResponse =
+  //     await biconomyPaymaster.getPaymasterAndData(
+  //       partialUserOp,
+  //       paymasterServiceData
+  //     );
+  //   partialUserOp.paymasterAndData = paymasterAndDataResponse.paymasterAndData;
+
+  //   const userOpResponse = await smartAccount.sendUserOp(partialUserOp);
+
+  //   console.log(userOpResponse);
+
+  //   const transactionDetail = await userOpResponse.wait();
+
+  //   console.log("transaction detail below");
+  //   console.log(transactionDetail);
+  //   setIsModal2Open(false);
+  // };
 
   return (
     <div className="from-cit to-mod bg-gradient-to-t h-screen grid items-center text-center mx-auto">
@@ -247,12 +236,12 @@ export default function GasStation() {
         <div className="rounded-dd  grid items-center">
           <div
             className={
-              hasPoap
+              addressHasPoap
                 ? "bg-black/20 h-fit mx-auto p-3 max-w-4xl grid items center rounded-dd"
                 : "bg-black/20 h-fit mx-auto p-3 max-w-4xl grid items center rounded-dd animate-pulse"
             }
           >
-            {hasPoap ? (
+            {addressHasPoap ? (
               <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center ">
                 <div className="">
                   <Image
@@ -285,7 +274,7 @@ export default function GasStation() {
                 <div className="xl:col-span-4">
                   <button
                     className="homeBT mt-10 w-fit mx-auto"
-                    onClick={() => claimViaPaymaster()}
+                    // onClick={() => claimViaPaymaster()}
                   >
                     Obtener ⛽ 0.005 ETH
                   </button>
@@ -328,12 +317,14 @@ export default function GasStation() {
                   zengo: presupuesto descentralizado.
                 </div>
                 <div className="grid items-center xl:col-span-4">
-                  <div
-                    className={hasPoap ? "hidden" : "homeBT mt-5 w-fit mx-auto"}
-                    onClick={claimPoap}
+                  <button
+                    className={
+                      addressHasPoap ? "hidden" : "homeBT mt-5 w-fit mx-auto"
+                    }
+                    onClick={handleClaimPoap}
                   >
                     Obtener POAP
-                  </div>
+                  </button>
                   {isModalOpen && (
                     <div className="modal-background">
                       <div className="modal bg-white/30 ">
