@@ -7,8 +7,9 @@ const Home: NextPage = () => {
   const { walletIsConnected } = useGlobalCycleStageState();
   return (
     <div className="from-cit to-mod bg-gradient-to-t h-screen">
-      {!walletIsConnected ? <Carousel /> : null}
-      {walletIsConnected ? (
+      {!walletIsConnected ? (
+        <Carousel />
+      ) : (
         <div className=" grid items-center h-screen text-white font-bau text-center">
           <div className=" mx-auto grid xl:grid-cols-3 gap-3 ">
             <div className="text-5xl animate-pulse xl:col-span-3 pb-3">
@@ -39,7 +40,7 @@ const Home: NextPage = () => {
             </Link>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
