@@ -11,14 +11,14 @@ let packageJsonOriginalContents;
 
 async function runThirdwebGenerate() {
   try {
+    // Read the existing package.json content
+    const originalPackageJsonContent = readFileSync(packageJsonPath, "utf8");
+    packageJsonOriginalContents = JSON.parse(originalPackageJsonContent);
     if (process.env.VERCEL === 1 || process.env.VERCEL === "1") {
       console.log("Skipping thirdweb generate because we are on Vercel.");
       return;
     }
     console.log("VERCEL: ", process.env.VERCEL);
-    // Read the existing package.json content
-    const originalPackageJsonContent = readFileSync(packageJsonPath, "utf8");
-    packageJsonOriginalContents = JSON.parse(originalPackageJsonContent);
 
     console.log("Running thirdweb generate...");
     const cmd = `npx --yes thirdweb@latest generate --key "${process.env.THIRDWEB_SECRET_KEY}"`;

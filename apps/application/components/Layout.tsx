@@ -4,20 +4,14 @@ import Navbar from "./Navbar";
 
 import { useState, useEffect } from "react";
 import { useAddress } from "@thirdweb-dev/react";
+import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const Layout = (props: Props) => {
-  const [walletIsConnected, setWalletIsConnected] = useState(false);
-  const address = useAddress();
-
-  useEffect(() => {
-    if (address) {
-      setWalletIsConnected(true);
-    }
-  }, [address]);
+  const { walletIsConnected } = useGlobalCycleStageState();
 
   return (
     <>

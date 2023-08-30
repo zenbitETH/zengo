@@ -19,7 +19,8 @@
       "@/lib/*": ["./lib/*"],
       "@/abi/*": ["./abi/*"],
       "@/const/*": ["./const/*"],
-      "@/contexts/*": ["./contexts/*"]
+      "@/contexts/*": ["./contexts/*"],
+      "@/hooks/*": ["./hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

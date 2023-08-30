@@ -27,6 +27,7 @@ export default function Form3() {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     // When file is dropped, we upload it to IPFS
     uploadEvidenceToIpfs(acceptedFiles[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({

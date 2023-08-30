@@ -9,13 +9,11 @@ import { IS_DEV_ENV } from "./chains";
 
 // For example, below, we have a Greeter smart contract that has two addresses defined.
 // Then, we use the IS_DEV_ENV variable to determine which address to use in the current environment.
-// const greeter_dev = "0x2E74A1664dA1066FFa4aF8b85856cb474D189029";
-// const greeter_prod = "";
 
 const simpletFaucet_dev = "0x321BF7f2b41149F11D95CC370f8FDC4096d3F6Ca";
-const simpletFaucet_prod = ""; // "0x415B6E0d30d99313186D6a7A61b97F3B0cFada99";
+const simpletFaucet_prod = "";
 
-const zengoDao_dev = "0xc1fcf7a7879A0b33a6EB84AeEBB10f30F5e533a2";
+const zengoDao_dev = "0x5Aa4A41D13b2442f69C6f75B1760C71f30912648";
 const zengoDao_prod = "";
 
 // Below, we force the typescript type to be of the dev address type.
