@@ -214,7 +214,7 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
         votingIteration.voteCount[VerificationState(_vote)]++;
         // TODO: trigger concludeVotingIteration when one of the
         // consensusIteration reaches the threshold votesPercents
-        if ((votingIteration.voteCount[VerificationState(_vote)] * 100) > moderatorList.length * 51) {
+        if ((votingIteration.voteCount[VerificationState(_vote)] * 100) > moderatorList.length * THRESHOLD_VOTE_LIMIT) {
             autoTriggerVoteResult(_votingIteration, _proposalId, VerificationState(_vote));
         }
     }
