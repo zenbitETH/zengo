@@ -46,12 +46,6 @@ contract ZengoDAO is PermissionsEnumerable, ContractMetadata, Constants {
         Evidence[] evidences;
     }
 
-    // struct VoteResults {
-    //     uint8 votingIteration;
-    //     uint256 proposalId;
-    //     uint256 totalVotes;
-    //     VerificationState resultState;
-    // }
     struct Evidence {
         string evidenceDescription;
         string streetAddress;
