@@ -70,6 +70,7 @@ export default function GasStation() {
     if (walletAddress !== "") {
       poapScan(walletAddress, eventIdModerators);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletAddress]);
 
   const handleOpenModal = () => {
