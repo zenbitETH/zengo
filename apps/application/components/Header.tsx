@@ -8,22 +8,14 @@ import {
 } from "@thirdweb-dev/react";
 import Link from "next/link";
 
-import { useState, useEffect, useRef } from "react";
-import { useAddress } from "@thirdweb-dev/react";
+import { useEffect, useRef } from "react";
 import { CHAIN } from "@/const/chains";
+import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
 
 export default function Header() {
   const isMismatched = useNetworkMismatch();
   const switchChain = useSwitchChain();
-
-  const [walletIsConnected, setWalletIsConnected] = useState(false);
-  const address = useAddress();
-
-  useEffect(() => {
-    if (address) {
-      setWalletIsConnected(true);
-    }
-  }, [address]);
+  const { walletIsConnected } = useGlobalCycleStageState();
 
   const { login } = useLogin();
   const { user, isLoggedIn } = useUser();

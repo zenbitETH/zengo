@@ -17,3 +17,8 @@ export interface ILocation {
   };
   locationText: string;
 }
+
+export interface IScanResponse {
+  message: string;
+  scan: boolean;
+}
