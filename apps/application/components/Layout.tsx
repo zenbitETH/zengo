@@ -15,7 +15,7 @@ const Layout = (props: Props) => {
 
   return (
     <>
-      {walletIsConnected ? <Navbar /> : null}
+      {/*walletIsConnected ? <Navbar /> : null*/}
       <Header />
       <main>{props.children}</main>
     </>
