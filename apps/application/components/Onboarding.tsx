@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAddress } from "@thirdweb-dev/react";
-import { getUser } from "./api/auth/[...thirdweb]";
+import { getUser } from "../pages/api/auth/[...thirdweb]";
 import { useEventPoap } from "@/hooks/useEventPoap";
 import { ScanModal } from "@/components/ScanModal";
 import { useScanModal } from "@/hooks/useScanModal";
@@ -158,6 +158,24 @@ export default function Onboarding() {
           </div>
         </div>
       )}
+      {walletAddress ? <ScanModal visible={visible} toggle={toggle} /> : null}
     </div>
   );
 }
+
+export const getServerSideProps = async (context: any) => {
+  const user = await getUser(context.req);
+
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
