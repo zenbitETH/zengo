@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-// import "@thirdweb-dev/contracts/extension/PermissionsEnumerable.sol";
-// import "@thirdweb-dev/contracts/extension/ContractMetadata.sol";
+import "@thirdweb-dev/contracts/extension/PermissionsEnumerable.sol";
+import "@thirdweb-dev/contracts/extension/ContractMetadata.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./Constants.sol";
 import "./lib/Structs.sol";
 import "./storage/ZengoStorage.sol";
 
-contract ZengoDAO is Constants, ZengoStorage {
+contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMetadata {
     IERC20 public token;
 
     event ModeratorAdded(address indexed newModerator);
@@ -133,15 +133,15 @@ contract ZengoDAO is Constants, ZengoStorage {
         }
     }
 
-    // function _canSetContractURI()
-    //     internal
-    //     view
-    //     virtual
-    //     override
-    //     returns (bool)
-    // {
-    //     return msg.sender == deployer;
-    // }
+    function _canSetContractURI()
+        internal
+        view
+        virtual
+        override
+        returns (bool)
+    {
+        return msg.sender == deployer;
+    }
 
     function voteToClassifyProposal(
         uint8 _vote,
