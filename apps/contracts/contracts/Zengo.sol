@@ -4,13 +4,14 @@ pragma solidity ^0.8.17;
 import "@thirdweb-dev/contracts/extension/PermissionsEnumerable.sol";
 import "@thirdweb-dev/contracts/extension/ContractMetadata.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./interfaces/IStates.sol";
 import "./Constants.sol";
 import "./lib/Structs.sol";
 import "./storage/ZengoStorage.sol";
 
 contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMetadata {
     IERC20 public token;
-
+    IStates public GlobalStates;
     event ModeratorAdded(address indexed newModerator);
     event ModeratorRemoved(address indexed removedModerator);
     // nested mapping cannot be emitted in events
@@ -35,9 +36,12 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
     constructor(
         uint256 _registrationDuration,
         uint256 _pluralVotingPoints,
-        address _tokenAddress
+        address _tokenAddress,
+        address _globalStatesContract
     ) {
         owner = msg.sender;
+        GlobalStates = IStates(_globalStatesContract);
+
         registrationDuration = _registrationDuration;
         pluralVotingPoints = _pluralVotingPoints;
         token = IERC20(_tokenAddress);
