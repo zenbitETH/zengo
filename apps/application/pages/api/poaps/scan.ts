@@ -1,12 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { IScanResponse } from "@/interfaces/index";
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<boolean>
+  res: NextApiResponse<IScanResponse>
 ) {
   let addressHasPoap = false;
 
-  if (req.query.address) {
+  if (req.query.address && req.query.eventId) {
     const options = {
       method: "GET",
       headers: {
@@ -15,25 +16,24 @@ export default function handler(
       },
     };
 
-    fetch(
+    const scanFetchResponse = await fetch(
       `https://api.poap.tech/actions/scan/${req.query.address}/${req.query.eventId}`,
       options
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        console.log({ response });
-        if (response.statusCode === 404) {
-          console.log("this address doesn't have the poap");
-          addressHasPoap = false;
-        } else {
-          console.log("this address OWNS the poap scanned");
-          addressHasPoap = true;
-        }
-      })
-      .catch((err) => console.error(err));
-    // Get data from your database
-    res.status(200).json(addressHasPoap);
+    );
+
+    const scanFetchResult = await scanFetchResponse.json();
+
+    if (!scanFetchResult.event) {
+      addressHasPoap = false;
+    } else {
+      addressHasPoap = true;
+    }
+
+    res.status(200).json({
+      message: "Wallet address scanned successfully",
+      scan: addressHasPoap,
+    });
   } else {
-    res.status(200).json(false);
+    res.status(200).json({ message: "No params needed provided", scan: false });
   }
 }
