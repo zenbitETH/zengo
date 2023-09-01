@@ -1,34 +1,40 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-contract Constants {
-    enum State {
-        Verification,
-        Voting,
-        Funding,
-        RewardsDistribution
+import "./Constants.sol";
+
+contract GStates is Constants {
+
+    uint256 public startTime;
+    State state;
+
+    constructor () payable {
+        startTime = block.timestamp;
     }
 
-    // Each state by days
-    // [42, 15, 2, 1]
-    uint8 [] STATE_LENGTHS = [42, 57, 59, 60];
+    function getState () public view returns (State) {
+       
+        uint256 _governanceCycle = calculateCurrentGovernanceCycle();
 
-    enum VerificationState {
-        ProposalRegistered,
-        MunicipalVerification,
-        StateVerification,
-        FederalVerification,
-        SolvedNoFundingRequired,
-        RejectProposal,
-        ApproveForFunding
+        uint256 day = (block.timestamp - startTime - (_governanceCycle * GOVERNANCE_CYCLE_LENGTH)) / 86400;
+
+        if (day < STATE_LENGTHS[0]) {
+            return State(0);
+        } else if (day >= STATE_LENGTHS[0] && day < STATE_LENGTHS[1]) {
+            return State(1);
+        } else if (day >= STATE_LENGTHS[1] && day < STATE_LENGTHS[2]) {
+            return State(2);
+        } else {
+            return State(3);
+        }
+
     }
 
-    uint256 public GOVERNANCE_CYCLE = 0;
+    function getGovernanceCycle() public view returns (uint256) {
+        return calculateCurrentGovernanceCycle();
+    }
 
-    uint256 public constant THRESHOLD_VOTE_LIMIT = 51;
-
-    // Length of a full governance cycle in seconds
-    // 60 days = 60 * 24 * 60 * 60
-    uint256 public constant GOVERNANCE_CYCLE_LENGTH = 5184000;
-
+    function calculateCurrentGovernanceCycle() internal view returns (uint256) {
+        return ((block.timestamp - startTime) / GOVERNANCE_CYCLE_LENGTH);
+    }
 }
