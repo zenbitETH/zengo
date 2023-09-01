@@ -17,7 +17,7 @@
 
 .modal-background {
   @apply fixed top-0 w-full h-full grid items-center left-1/2 -translate-x-1/2 
-  bg-bgd/50 z-10 backdrop-blur-md;
+  bg-bgd/50 z-10 backdrop-blur-xl;
 }
 
 .modal {
@@ -47,11 +47,12 @@
 }
 
 .homeBT {
-  @apply text-white
+  @apply text-bgd
   hover:shadow-lg
   cursor-pointer
-  hover:bg-white/50
-  hover:text-bgd;
+  border-bgd
+  hover:bg-bgd/50
+  hover:text-white;
 }
 
 .modBT {
@@ -75,7 +76,7 @@
 }
 
 .closeBT {
-  @apply w-10 h-10 border rounded-full absolute top-5 right-5 grid items-center text-white hover:bg-white/50 hover:text-bgd;
+  @apply w-10 h-10 border-black border rounded-full absolute top-5 right-5 grid items-center text-black hover:bg-black/50 hover:text-white;
 }
 
 .newBT {

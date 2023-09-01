@@ -20,7 +20,8 @@
       "@/abi/*": ["./abi/*"],
       "@/const/*": ["./const/*"],
       "@/contexts/*": ["./contexts/*"],
-      "@/hooks/*": ["./hooks/*"]
+      "@/hooks/*": ["./hooks/*"],
+      "@/interfaces/*": ["./interfaces/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
