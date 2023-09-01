@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.9.3",
-    "@thirdweb-dev/contracts": "^3"
+    "@thirdweb-dev/contracts": "^3.0.0"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",
