@@ -85,6 +85,13 @@ contract ZengoDAO is Constants, ZengoStorage {
         // });
 
         Structs.Proposal storage newProposal = proposals[proposalCount];
+        // Structs.Proposal storage newProposal = 
+
+        Structs.Evidence memory newEvidence = Structs.Evidence(_evidenceDescription, _streetAddress, _evidenceUri, _latitude, _longitude);
+
+        // proposals[proposalCount] = Structs.Proposal(0, proposalCount, _title, _proposalDescription, _proposalType, msg.sender, newEvidence, [], Structs.VerificationState(0), false, false);
+
+        
         newProposal.proposalId = proposalCount;
         newProposal.title = _title;
         newProposal.proposalType = _proposalType;
@@ -93,14 +100,8 @@ contract ZengoDAO is Constants, ZengoStorage {
         newProposal.isEligibleForFunding = false;
         newProposal.isVerified = false;
         newProposal.votingIterationCount = 0;
-        // Check if this works
         newProposal.verificationState = Structs.VerificationState(0);
-        // newProposal.proposalEvidence = newEvidence;
-        newProposal.proposalEvidence.evidenceDescription = _evidenceDescription;
-        newProposal.proposalEvidence.streetAddress = _streetAddress;
-        newProposal.proposalEvidence.evidenceUri = _evidenceUri;
-        newProposal.proposalEvidence.longitude = _longitude;
-        newProposal.proposalEvidence.latitude = _latitude;
+        newProposal.proposalEvidence = newEvidence;
 
         intializeVotingIteration(proposalCount);
 
