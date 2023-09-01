@@ -24,7 +24,7 @@ export function OnboardingCitizens() {
 
   const { claimPoap, poapScan, addressHasPoap } = useEventPoap();
 
-  const eventIdUsed = process.env.NEXT_PUBLIC_POAP_CITIZENS_EVENT_ID as string;
+  const eventIdUsed = process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID as string;
 
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
