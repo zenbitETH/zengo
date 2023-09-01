@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { NewProposalContextProvider } from "@/contexts/NewProposalContext";
 import { CHAIN } from "@/const/chains";
 import Layout from "@/components/Layout";
+import { GlobalCycleStageContextProvider } from "@/contexts/GlobalStageCycleContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,11 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       }}
       clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENTID}
     >
-      <NewProposalContextProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </NewProposalContextProvider>
+      <GlobalCycleStageContextProvider>
+        <NewProposalContextProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </NewProposalContextProvider>
+      </GlobalCycleStageContextProvider>
     </ThirdwebProvider>
   );
 }

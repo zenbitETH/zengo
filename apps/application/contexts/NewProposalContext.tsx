@@ -1,7 +1,12 @@
 import { createContext, useContext } from "react";
 import { type ReactNode, useState } from "react";
 import { IEvidence, ILocation, IProposalInfo } from "../interfaces";
-import { useStorageUpload } from "@thirdweb-dev/react";
+import {
+  useContract,
+  useContractWrite,
+  useStorageUpload,
+} from "@thirdweb-dev/react";
+import { contractAddress_zengoDao } from "@/const/contracts";
 
 interface INewProposalContext {
   evidence: IEvidence;
@@ -12,6 +17,10 @@ interface INewProposalContext {
   setProposalInfo: (proposal: IProposalInfo) => void;
   clearFormState: () => void;
   uploadEvidenceToIpfs: (fileToUpload: File) => void;
+  submitProposalForm: () => void;
+  metadataUploadIsLoading: boolean;
+  submitProposalFormIsLoading: boolean;
+  submitProposalSuccess: boolean;
 }
 
 export const NewProposalContext = createContext<INewProposalContext>({
@@ -34,6 +43,10 @@ export const NewProposalContext = createContext<INewProposalContext>({
   setProposalInfo: () => {},
   clearFormState: () => {},
   uploadEvidenceToIpfs: () => {},
+  submitProposalForm: () => {},
+  metadataUploadIsLoading: false,
+  submitProposalFormIsLoading: false,
+  submitProposalSuccess: false,
 });
 
 interface IProps {
@@ -41,6 +54,8 @@ interface IProps {
 }
 
 export function NewProposalContextProvider({ children }: IProps) {
+  const [metadataUploadIsLoading, setMetadataUploadIsLoading] = useState(false);
+  const [submitProposalSuccess, setSubmitProposalSuccess] = useState(false);
   const { mutateAsync: upload } = useStorageUpload();
 
   const [evidence, setEvidence] = useState<IEvidence>({
@@ -75,6 +90,7 @@ export function NewProposalContextProvider({ children }: IProps) {
       type: "",
       description: "",
     });
+    setSubmitProposalSuccess(false);
   };
 
   const uploadEvidenceToIpfs = async (fileToUpload: File) => {
@@ -88,6 +104,62 @@ export function NewProposalContextProvider({ children }: IProps) {
     });
   };
 
+  const { contract: contractZengoDao /*, isLoading, error */ } = useContract(
+    contractAddress_zengoDao
+  );
+
+  const {
+    mutateAsync: submitProposalFn,
+    isLoading: submitProposalIsLoading,
+    isSuccess: submitProposalIsSuccess,
+  } = useContractWrite(contractZengoDao, "submitProposal");
+
+  const uploadProposalMetadataToIpfs = async () => {
+    setMetadataUploadIsLoading(true);
+
+    const newProposal = {
+      ...proposalInfo,
+      location,
+      evidence,
+    };
+
+    const uploadUrl = await upload({
+      data: [newProposal],
+      options: { uploadWithGatewayUrl: false, uploadWithoutDirectory: true },
+    });
+    console.log({ uploadUrl });
+    setMetadataUploadIsLoading(false);
+    if (uploadUrl) {
+      return uploadUrl[0];
+    }
+  };
+
+  const callSubmitProposalFn = async (path: string) => {
+    try {
+      const data = await submitProposalFn({
+        args: [proposalInfo.title, path], // TODO: args will change when contract function changes to receive all the proposal fields
+      });
+      console.info("contract call successs", { data });
+      setSubmitProposalSuccess(true);
+      clearFormState();
+    } catch (err) {
+      console.error("contract call failure", { err }); // TODO: show toaster with error ?
+    }
+  };
+
+  const submitProposalForm = async () => {
+    try {
+      const metadataPath = await uploadProposalMetadataToIpfs();
+
+      if (metadataPath) {
+        await callSubmitProposalFn(metadataPath);
+        clearFormState();
+      }
+    } catch (err) {
+      console.error("contract call failure", { err }); // TODO: show toaster with error ?
+    }
+  };
+
   const state = {
     evidence,
     setEvidence,
@@ -97,6 +169,10 @@ export function NewProposalContextProvider({ children }: IProps) {
     setProposalInfo,
     clearFormState,
     uploadEvidenceToIpfs,
+    submitProposalForm,
+    metadataUploadIsLoading,
+    submitProposalFormIsLoading: submitProposalIsLoading,
+    submitProposalSuccess,
   };
 
   return (
@@ -107,8 +183,6 @@ export function NewProposalContextProvider({ children }: IProps) {
 }
 
 NewProposalContext.displayName = "ZengoNewProposalContext";
-
-// export const useNewProposalContext = () => useContext(NewProposalContext);
 
 export function useNewProposalState() {
   const context = useContext(NewProposalContext);

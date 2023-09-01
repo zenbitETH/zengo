@@ -1,19 +1,10 @@
 import type { NextPage } from "next";
 import Carousel from "@/components/Carousel";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useAddress } from "@thirdweb-dev/react";
+import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
 
 const Home: NextPage = () => {
-  const [walletIsConnected, setWalletIsConnected] = useState(false);
-  const address = useAddress();
-
-  useEffect(() => {
-    if (address) {
-      setWalletIsConnected(true);
-    }
-  }, [address]);
-
+  const { walletIsConnected } = useGlobalCycleStageState();
   return (
     <div className="from-cit to-mod bg-gradient-to-t h-screen">
       {!walletIsConnected ? <Carousel /> : null}
