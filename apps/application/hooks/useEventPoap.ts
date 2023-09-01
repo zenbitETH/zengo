@@ -13,6 +13,7 @@ export function useEventPoap() {
     if (claimApiData.claimed) {
       console.log("claimed true");
       setAddressHasPoap(true);
+      poapScan(address, eventId);
     }
   };
 

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useAddress } from "@thirdweb-dev/react";
-import { getUser } from "../pages/api/auth/[...thirdweb]";
 import { useEventPoap } from "@/hooks/useEventPoap";
 import { ScanModal } from "@/components/ScanModal";
 import { useScanModal } from "@/hooks/useScanModal";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Onboarding() {
+export function OnboardingCitizens() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -25,7 +24,7 @@ export default function Onboarding() {
 
   const { claimPoap, poapScan, addressHasPoap } = useEventPoap();
 
-  const eventIdUsed = process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID as string; // process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID as string; // TODO: to be changed based on the onboarding type (for citizens/for moderators)
+  const eventIdUsed = process.env.NEXT_PUBLIC_POAP_CITIZENS_EVENT_ID as string;
 
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -115,12 +114,14 @@ export default function Onboarding() {
                   </div>
 
                   <div className="xl:col-span-4">
-                    <button
-                      className="homeBT mt-10 w-fit mx-auto"
-                      // onClick={() => claimViaPaymaster()}
-                    >
-                      Crear propuesta
-                    </button>
+                    <Link href="/ceremony">
+                      <button
+                        className="homeBT mt-10 w-fit mx-auto"
+                        // onClick={() => claimViaPaymaster()}
+                      >
+                        Crear propuesta
+                      </button>
+                    </Link>
                   </div>
                 </div>
               ) : (
@@ -162,20 +163,3 @@ export default function Onboarding() {
     </div>
   );
 }
-
-export const getServerSideProps = async (context: any) => {
-  const user = await getUser(context.req);
-
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-};
