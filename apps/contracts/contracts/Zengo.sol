@@ -66,12 +66,12 @@ contract ZengoDAO is Constants, ZengoStorage {
     // TODO: constructing a constructor like this
     // doesn't work figure out how to write it
     function submitProposal(
-        string calldata _title,
-        string calldata _proposalDescription,
-        string calldata _evidenceDescription,
-        string calldata _evidenceUri,
-        string calldata _proposalType,
-        string calldata _streetAddress,
+        string memory _title,
+        string memory _proposalDescription,
+        string memory _evidenceDescription,
+        string memory _evidenceUri,
+        string memory _proposalType,
+        string memory _streetAddress,
         uint256 _latitude,
         uint256 _longitude
     ) external {
