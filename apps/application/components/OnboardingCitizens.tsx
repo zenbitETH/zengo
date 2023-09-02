@@ -94,14 +94,14 @@ export function OnboardingCitizens() {
                     </div>
                     <div className="text-sm xl:text-lg font-bau">
                       Septiembre, 2023 /
-                      <span className="cursor-pointer hover:text-cit">
+                      <span className="cursor-pointer hover:text-mod">
                         {" "}
                         <Link href="https://app.poap.xyz/token/6741694">
                           Ver POAP
                         </Link>
                       </span>
                     </div>
-                    <div className="xl:text-lg text-justify xl:px-10 bg-mod/70 px-5 py-3 text-white">
+                    <div className="xl:text-lg text-justify xl:px-10 bg-cit/70 px-5 py-3 text-white">
                       <ul className="grid gap-3">
                         <li>
                           <span className="text-2xl">🎖️</span>Este POAP
@@ -118,7 +118,7 @@ export function OnboardingCitizens() {
                   </div>
 
                   <div className="xl:col-span-4">
-                    <Link href="/ceremony">
+                    <Link href="/newProposal">
                       <button
                         className="homeBT mt-10 w-fit mx-auto hover:bg-cit/70 hover:border-white"
                         // onClick={() => claimViaPaymaster()}
@@ -161,7 +161,7 @@ export function OnboardingCitizens() {
                       className={
                         addressHasPoap
                           ? "hidden"
-                          : "homeBT mt-5 w-fit mx-auto hover:bg-mod/70 hover:border-white"
+                          : "homeBT mt-5 w-fit mx-auto hover:bg-cit/70 hover:border-white"
                       }
                       onClick={handleClaimPoap}
                     >

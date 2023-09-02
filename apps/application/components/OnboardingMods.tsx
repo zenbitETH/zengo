@@ -97,7 +97,7 @@ export function OnboardingMods() {
                     </div>
                     <div className="text-sm xl:text-lg font-bau">
                       Septiembre, 2023 /
-                      <span className="cursor-pointer hover:text-cit">
+                      <span className="cursor-pointer hover:text-mod">
                         {" "}
                         <Link href="https://app.poap.xyz/token/6741694">
                           Ver POAP
