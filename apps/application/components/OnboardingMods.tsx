@@ -79,6 +79,9 @@ export function OnboardingMods() {
             <div className="POAPcard">
               {addressHasPoap ? (
                 <div className="POAPmargin">
+                  <button className="closeBT" onClick={handleCloseModal}>
+                    x
+                  </button>
                   <div className="">
                     <Image
                       src={"/assets/POAPMod.png"}
@@ -90,8 +93,7 @@ export function OnboardingMods() {
                   </div>
                   <div className="xl:col-span-3 grid gap-3">
                     <div className="text-2xl font-bau">
-                      Participaste en el evento de introducción para moderadores
-                      Zengo
+                      ¡Ahora tienes el POAP de moderadores!
                     </div>
                     <div className="text-sm xl:text-lg font-bau">
                       Septiembre, 2023 /
@@ -102,16 +104,30 @@ export function OnboardingMods() {
                         </Link>
                       </span>
                     </div>
-                    <div className="xl:text-lg text-justify xl:px-10">.</div>
+                    <div className="xl:text-lg text-justify xl:px-10 bg-mod/70 px-5 py-3 text-white">
+                      <ul className="grid gap-3">
+                        <li>
+                          <span className="text-2xl">🎖️</span> Participaste en
+                          el evento de introducción y ahora puedes registrarte
+                          como moderador.
+                        </li>
+                        <li>
+                          <span className="text-2xl">⛽</span>
+                          El POAP te otorga gas para las interacciones que
+                          realices en Zengo a lo largo de este ciclo de
+                          gobernanza.
+                        </li>
+                      </ul>
+                    </div>
                   </div>
 
                   <div className="xl:col-span-4">
                     <Link href="/ceremony">
                       <button
-                        className="homeBT mt-10 w-fit mx-auto"
+                        className="homeBT mt-10 w-fit mx-auto hover:bg-mod/70 hover:border-white"
                         // onClick={() => claimViaPaymaster()}
                       >
-                        Registrarse como Moderador
+                        Registrarse como Moderador(a)
                       </button>
                     </Link>
                   </div>
