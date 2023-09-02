@@ -88,7 +88,7 @@ export function OnboardingCitizens() {
                       className="rounded-full mx-auto"
                     />
                   </div>
-                  <div className="xl:col-span-3 grid gap-3">
+                  <div className=" grid gap-3">
                     <div className="text-2xl font-bau">
                       ¡Ahora tienes el POAP de moderadores!
                     </div>
@@ -117,7 +117,7 @@ export function OnboardingCitizens() {
                     </div>
                   </div>
 
-                  <div className="xl:col-span-4">
+                  <div className="">
                     <Link href="/newProposal">
                       <button
                         className="homeBT mt-10 w-fit mx-auto hover:bg-cit/70 hover:border-white"
