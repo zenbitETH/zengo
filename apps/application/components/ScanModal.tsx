@@ -12,7 +12,7 @@ export const ScanModal: React.FC<ScanModalProps> = ({ visible, toggle }) =>
     ? ReactDOM.createPortal(
         <div className="modal">
           <div className="modal-background">
-            <div className="modal bg-bgd/50 animate-pulse text-white">
+            <div className="modal animate-pulse text-white">
               <div className="grid ">
                 <div className="mb-10">
                   <Image
