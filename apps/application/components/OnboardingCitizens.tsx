@@ -75,16 +75,10 @@ export function OnboardingCitizens() {
       </div>
       {isModalOpen && (
         <div className="modal-background ">
-          <div className="rounded-dd  grid items-center">
-            <div
-              className={
-                addressHasPoap
-                  ? "bg-white/50 h-fit mx-auto p-3 max-w-4xl grid items center rounded-dd"
-                  : "bg-white/50 h-fit mx-auto p-3 max-w-4xl grid items center rounded-dd animate-pulse"
-              }
-            >
+          <div className="rounded-dd grid items-center mx-auto">
+            <div className="POAPcard">
               {addressHasPoap ? (
-                <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center relative">
+                <div className="POAPmargin">
                   <div className="">
                     <Image
                       src={"/assets/poaptest.png"}
@@ -125,7 +119,7 @@ export function OnboardingCitizens() {
                   </div>
                 </div>
               ) : (
-                <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center px-5 relative">
+                <div className="POAPmargin">
                   <button className="closeBT" onClick={handleCloseModal}>
                     x
                   </button>
