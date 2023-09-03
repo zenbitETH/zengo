@@ -18,11 +18,11 @@ contract GStates is Constants {
 
         uint256 day = (block.timestamp - startTime - (_governanceCycle * GOVERNANCE_CYCLE_LENGTH)) / 86400;
 
-        if (day < STATE_LENGTHS[0]) {
+        if (day < STATE_COMPLETION_LENGTHS[0]) {
             return State(0);
-        } else if (day >= STATE_LENGTHS[0] && day < STATE_LENGTHS[1]) {
+        } else if (day >= STATE_COMPLETION_LENGTHS[0] && day < STATE_COMPLETION_LENGTHS[1]) {
             return State(1);
-        } else if (day >= STATE_LENGTHS[1] && day < STATE_LENGTHS[2]) {
+        } else if (day >= STATE_COMPLETION_LENGTHS[1] && day < STATE_COMPLETION_LENGTHS[2]) {
             return State(2);
         } else {
             return State(3);

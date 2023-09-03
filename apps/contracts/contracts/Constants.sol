@@ -9,9 +9,11 @@ contract Constants {
         RewardsDistribution
     }
 
-    // Each state by days
-    // [42, 15, 2, 1]
-    uint8 [] STATE_LENGTHS = [42, 57, 59, 60];
+    // This array represents the end of each state
+    // For example: Verification ends at the start of 42nd day
+    // Thus stateLength are [42, 15, 2, 1]
+    // Thereby making the Governance Cycle 42+15+2+1=60 days long
+    uint8 [] STATE_COMPLETION_LENGTHS = [42, 57, 59, 60];
 
     enum VerificationState {
         ProposalRegistered,
