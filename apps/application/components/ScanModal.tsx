@@ -12,18 +12,18 @@ export const ScanModal: React.FC<ScanModalProps> = ({ visible, toggle }) =>
     ? ReactDOM.createPortal(
         <div className="modal">
           <div className="modal-background">
-            <div className="modal bg-white/30 ">
+            <div className="modal animate-pulse text-white">
               <div className="grid ">
                 <div className="mb-10">
                   <Image
-                    src={"/assets/zengo.svg"}
+                    src={"/assets/zenload.png"}
                     height={250}
                     width={250}
                     alt="onboarding POAP"
-                    className="rounded-full animate-pulse"
+                    className="rounded-full animate-spin"
                   />
                 </div>
-                <div className="text-xl animate-pulse">Cargando...</div>
+                <div className="text-2xl text-center">Cargando...</div>
               </div>
             </div>
           </div>
