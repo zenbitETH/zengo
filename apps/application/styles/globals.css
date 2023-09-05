@@ -35,7 +35,7 @@
 }
 
 .header {
-  @apply fixed top-0 w-full px-5 sm:px-24 py-3 rounded z-20 /*backdrop-blur-md*/font-bau;
+  @apply top-0 w-full px-5 sm:px-24 py-3 rounded z-20 /*backdrop-blur-md*/font-bau relative;
 }
 
 /* Buttons */
@@ -115,7 +115,7 @@
 }
 
 .carBT {
-  @apply fixed bottom-0 transform
+  @apply fixed align-middle transform
  -translate-y-1/2 border
   hover:bg-white/50 text-2xl m-auto h-12 w-12 px-2
   rounded-full shadow-md items-center grid text-center

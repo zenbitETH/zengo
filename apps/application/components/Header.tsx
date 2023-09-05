@@ -1,14 +1,10 @@
 import {
   ConnectWallet,
-  useConnectionStatus,
-  useLogin,
   useNetworkMismatch,
   useSwitchChain,
-  useUser,
 } from "@thirdweb-dev/react";
 import Link from "next/link";
 
-import { useEffect, useRef } from "react";
 import { CHAIN } from "@/const/chains";
 import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
 
@@ -16,23 +12,6 @@ export default function Header() {
   const isMismatched = useNetworkMismatch();
   const switchChain = useSwitchChain();
   const { walletIsConnected } = useGlobalCycleStageState();
-
-  const { login } = useLogin();
-  const { user, isLoggedIn } = useUser();
-  const connectionStatus = useConnectionStatus();
-
-  // login right after connection
-  const loginAttempted = useRef(false);
-
-  useEffect(() => {
-    if (loginAttempted.current) {
-      return;
-    }
-    if (connectionStatus === "connected" && !isLoggedIn) {
-      loginAttempted.current = true;
-      login();
-    }
-  }, [connectionStatus, isLoggedIn, login]);
 
   return (
     <header className="header">
@@ -87,7 +66,7 @@ export default function Header() {
               return <button className="homeBT"> Cuenta </button>;
             }}
             auth={{
-              loginOptional: false,
+              loginOptional: true,
             }}
           />
         ) : (

@@ -1,13 +1,17 @@
 import type { NextPage } from "next";
-import Carousel from "@/components/Carousel";
-import { OnboardingMods } from "@/components/OnboardingMods";
-import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
+import Link from "next/link";
 
 const Home: NextPage = () => {
-  const { walletIsConnected } = useGlobalCycleStageState();
   return (
-    <div className="from-cit to-mod bg-gradient-to-t h-screen">
-      {!walletIsConnected ? <Carousel /> : <OnboardingMods />}
+    <div className="flex items-center justify-center pt-[25%]">
+      <Link href="/onboarding">
+        <button type="button" className="homeBT">
+          Iniciar Onboarding
+        </button>
+      </Link>
+      <button type="button" className="homeBT">
+        Testing: Unirse al stream
+      </button>
     </div>
   );
 };

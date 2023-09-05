@@ -14,11 +14,11 @@ const Layout = (props: Props) => {
   const { walletIsConnected } = useGlobalCycleStageState();
 
   return (
-    <>
+    <div className="from-cit to-mod bg-gradient-to-t h-screen">
       {/*walletIsConnected ? <Navbar /> : null*/}
       <Header />
       <main>{props.children}</main>
-    </>
+    </div>
   );
 };
 

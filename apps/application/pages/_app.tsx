@@ -12,12 +12,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       // Set active chain for app
       activeChain={CHAIN}
       supportedChains={[CHAIN]}
-      authConfig={{
-        domain:
-          process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN ||
-          `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`,
-        authUrl: "/api/auth",
-      }}
+      // authConfig={{
+      //   domain:
+      //     process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN ||
+      //     `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`,
+      //   authUrl: "/api/auth",
+      // }}
       clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENTID}
     >
       <GlobalCycleStageContextProvider>

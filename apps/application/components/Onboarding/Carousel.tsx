@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Section {
   id: number;
@@ -38,7 +39,7 @@ const Carousel: React.FC = () => {
   };
 
   return (
-    <div className="overflow-hidden text-center h-screen grid items-center xl:mx-28 relative">
+    <div className="overflow-hidden text-center  grid items-center xl:mx-28 relative">
       {activeSection.id === 1 && (
         // <div className="md:mx-20 gap-3 font-bau md:h-[30rem] h-[16rem] md:h-[40rem] grid items-center py-5 px-3"> // DEV_NOTE: original line
         <div className="md:mx-20 gap-3 font-bau h-[16rem] md:h-[40rem] grid items-center py-5 px-3">
@@ -52,8 +53,8 @@ const Carousel: React.FC = () => {
         </div>
       )}
       {activeSection.id === 2 && (
-        <div className="mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar">
-          <div className="bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1">
+        <div className="mx-3 py-14 gap-5 grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar">
+          <div className="bg-black/20 rounded-dd  p-5 col-span-2 md:col-span-1">
             <div className="text-3xl font-bau text-left mb-3">
               Descripción General
             </div>
@@ -212,8 +213,8 @@ const Carousel: React.FC = () => {
         </div>
       )}
       {activeSection.id === 4 && (
-        <div className="mx-3 py-24 gap-5 h-full grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar">
-          <div className="bg-black/20 rounded-dd h-full p-5 col-span-2 md:col-span-1  grid">
+        <div className="mx-3 py-14 gap-5  grid items-center grid-cols-2 text-white font-exo overflow-y-auto hide-scrollbar">
+          <div className="bg-black/20 rounded-dd  p-5 col-span-2 md:col-span-1  grid">
             <div className="text-3xl font-bau text-left mb-2">Modelo Zengo</div>
             <div className="text-sm md:text-base text-justify mb-2 h-full">
               Zengo cuenta con un modelo que combina diversas tecnologías para
@@ -333,17 +334,24 @@ const Carousel: React.FC = () => {
           <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />{" "}
         </svg>
       </button>
-      <button className="carBT right-3" onClick={goToNext}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 16 16"
-        >
-          {" "}
-          <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />{" "}
-        </svg>
-      </button>
+      {activeSection.id !== 5 ? (
+        <button className="carBT right-3" onClick={goToNext}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 16 16"
+          >
+            {" "}
+            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />{" "}
+          </svg>
+        </button>
+      ) : null}
+      {activeSection.id === 5 ? (
+        <Link href="/onboarding/install">
+          <button className="homeBT">Siguiente paso: Instalar metamask</button>
+        </Link>
+      ) : null}
     </div>
   );
 };
