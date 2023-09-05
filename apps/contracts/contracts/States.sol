@@ -6,10 +6,14 @@ import "./Constants.sol";
 contract GStates is Constants {
 
     uint256 public startTime;
-    State state;
 
     constructor () payable {
         startTime = block.timestamp;
+    }
+
+    modifier checkState(uint8 _state) {
+        require(State(_state) == getState(), "incorrect state");
+        _;
     }
 
     function getState () public view returns (State) {
@@ -24,8 +28,10 @@ contract GStates is Constants {
             return State(1);
         } else if (day >= STATE_COMPLETION_LENGTHS[1] && day < STATE_COMPLETION_LENGTHS[2]) {
             return State(2);
-        } else {
+        } else if (day >= STATE_COMPLETION_LENGTHS[2] && day < STATE_COMPLETION_LENGTHS[3]) {
             return State(3);
+        } else {
+            return State(4);
         }
 
     }

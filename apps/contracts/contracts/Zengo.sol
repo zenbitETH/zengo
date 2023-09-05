@@ -4,14 +4,13 @@ pragma solidity ^0.8.17;
 import "@thirdweb-dev/contracts/extension/PermissionsEnumerable.sol";
 import "@thirdweb-dev/contracts/extension/ContractMetadata.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "./interfaces/IStates.sol";
+import "./States.sol";
 import "./Constants.sol";
 import "./lib/Structs.sol";
 import "./storage/ZengoStorage.sol";
 
-contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMetadata {
+contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, ContractMetadata {
     IERC20 public token;
-    IStates public GlobalStates;
     event ModeratorAdded(address indexed newModerator);
     event ModeratorRemoved(address indexed removedModerator);
     // nested mapping cannot be emitted in events
@@ -36,11 +35,9 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
     constructor(
         uint256 _registrationDuration,
         uint256 _pluralVotingPoints,
-        address _tokenAddress,
-        address _globalStatesContract
+        address _tokenAddress
     ) {
-        owner = msg.sender;
-        GlobalStates = IStates(_globalStatesContract);
+        owner = msg.sender;   
 
         registrationDuration = _registrationDuration;
         pluralVotingPoints = _pluralVotingPoints;
@@ -49,7 +46,7 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
         moderatorList.push(msg.sender);
     }
 
-    function addModerator(address _moderator) external onlyOwner {
+    function addModerator(address _moderator) external onlyOwner checkState(0) {
         moderators[_moderator] = true;
         moderatorList.push(_moderator);
         emit ModeratorAdded(_moderator);
@@ -78,7 +75,7 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
         string memory _streetAddress,
         uint256 _latitude,
         uint256 _longitude
-    ) external {
+    ) external checkState(1){
         // require(
         //     votingPoints[msg.sender] > 0,
         //     "You need voting points to submit a proposal"
@@ -151,7 +148,7 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
         uint8 _vote,
         uint8 _votingIteration,
         uint256 _proposalId
-    ) external onlyModerator {
+    ) external onlyModerator checkState(1){
         require(
             _vote <= uint8(Structs.VerificationState.ApproveForFunding),
             "Out of Range / Invalid vote option"
@@ -238,7 +235,7 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
     function concludeVotingIteration(
         uint8 _votingIteration,
         uint256 _proposalId
-    ) external onlyModerator {
+    ) external onlyModerator checkState(1){
         // TODO: check global State
         // TODO: check zero Votes
         require(
@@ -323,7 +320,7 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
         proposals[_proposalId].votingIterationCount++;
     }
 
-    function addVotingIteration(uint256 _proposalId) external onlyModerator {
+    function addVotingIteration(uint256 _proposalId) public onlyModerator checkState(1) {
         uint8 currentVoteIteration = proposals[_proposalId]
             .votingIterationCount;
 
