@@ -17,6 +17,12 @@ library Structs {
         bool isVerified;
     }
 
+    struct Moderator {
+        ModeratorType moderatorType;
+        string position;
+        string organization;
+    }
+
     struct Vote {
         uint8 votingIteration;
         uint256 proposalId;
@@ -45,5 +51,13 @@ library Structs {
         SolvedNoFundingRequired,
         RejectProposal,
         ApproveForFunding
+    }
+
+    enum ModeratorType {
+        CivilOrganization,
+        PrivateSector,
+        Academy,
+        Government,
+        OpenForAll
     }
 }

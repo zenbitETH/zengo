@@ -49,6 +49,14 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
         moderatorList.push(msg.sender);
     }
 
+    function addModeratorInfo(address _moderatorAddress, uint8 _moderatorType, string memory _position, string memory _organization) external {
+        require(moderators[msg.sender] || msg.sender == owner, "Can't update moderatorInfo");
+
+        moderatorStruct[_moderatorAddress].moderatorType = Structs.ModeratorType(_moderatorType);
+        moderatorStruct[_moderatorAddress].position = _position;
+        moderatorStruct[_moderatorAddress].organization = _organization;
+    }
+
     function addModerator(address _moderator) external onlyOwner {
         moderators[_moderator] = true;
         moderatorList.push(_moderator);
@@ -69,6 +77,7 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
 
     // TODO: constructing a constructor like this
     // doesn't work figure out how to write it
+    // Done
     function submitProposal(
         string memory _title,
         string memory _proposalDescription,
@@ -170,6 +179,7 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
         votingIteration.voteCount[Structs.VerificationState(_vote)]++;
         // TODO: trigger concludeVotingIteration when one of the
         // consensusIteration reaches the threshold votesPercents
+        // update addModerator flag here
         if (
             (votingIteration.voteCount[Structs.VerificationState(_vote)] * 100) >
             moderatorList.length * THRESHOLD_VOTE_LIMIT
