@@ -48,11 +48,19 @@
 
 .homeBT {
   @apply text-bgd
-  hover:shadow-lg
+  hover:shadow-xl
   cursor-pointer
   border-bgd
   hover:bg-bgd/50
   hover:text-white;
+}
+
+.POAPcard {
+  @apply bg-white/50 h-fit mx-3 max-w-xl grid items-center rounded-dd;
+}
+
+.POAPmargin {
+  @apply font-exo gap-3 py-3 grid items-center w-full relative;
 }
 
 .modBT {
