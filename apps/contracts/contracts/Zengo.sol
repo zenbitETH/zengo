@@ -49,7 +49,7 @@ contract ZengoDAO is Constants, ZengoStorage, PermissionsEnumerable, ContractMet
         moderatorList.push(msg.sender);
     }
 
-    function addModeratorInfo(address _moderatorAddress, uint8 _moderatorType, string _position, string _organization) external {
+    function addModeratorInfo(address _moderatorAddress, uint8 _moderatorType, string memory _position, string memory _organization) external {
         require(moderators[msg.sender] || msg.sender == owner, "Can't update moderatorInfo");
 
         moderatorStruct[_moderatorAddress].moderatorType = Structs.ModeratorType(_moderatorType);
