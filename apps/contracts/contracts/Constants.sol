@@ -9,10 +9,28 @@ contract Constants {
         RewardsDistribution
     }
 
-    uint256 public constant GOVERNANCE_CYCLE = 0;
+    // This array represents the end of each state
+    // For example: Verification ends at the start of 42nd day
+    // Thus stateLength are [42, 15, 2, 1]
+    // Thereby making the Governance Cycle 42+15+2+1=60 days long
+    uint8 [] STATE_COMPLETION_LENGTHS = [42, 57, 59, 60];
+
+    enum VerificationState {
+        ProposalRegistered,
+        MunicipalVerification,
+        StateVerification,
+        FederalVerification,
+        SolvedNoFundingRequired,
+        RejectProposal,
+        ApproveForFunding
+    }
+
+    uint256 public GOVERNANCE_CYCLE = 0;
 
     uint256 public constant THRESHOLD_VOTE_LIMIT = 51;
 
-    uint256 public constant GOVERNANCE_CYCLE_LENGTH = 2595000;
+    // Length of a full governance cycle in seconds
+    // 60 days = 60 * 24 * 60 * 60
+    uint256 public constant GOVERNANCE_CYCLE_LENGTH = 5184000;
 
 }
