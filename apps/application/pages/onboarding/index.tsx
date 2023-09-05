@@ -1,4 +1,5 @@
 import Carousel from "@/components/Onboarding/Carousel";
+import { ConnectWallet } from "@thirdweb-dev/react";
 // import InstallWalletPage from "@/components/Onboarding/InstallWallet";
 import React, { useState } from "react";
 
@@ -63,6 +64,18 @@ const OnboardingPage = () => {
   return (
     <div className="relative h-full ">
       <Carousel />
+      <center>
+        <ConnectWallet
+          className="homeBT"
+          btnTitle="Acceder"
+          detailsBtn={() => {
+            return <button className="homeBT"> Cuenta </button>;
+          }}
+          auth={{
+            loginOptional: true,
+          }}
+        />
+      </center>
     </div>
   );
 };

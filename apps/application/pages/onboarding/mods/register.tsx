@@ -1,10 +1,17 @@
+import { useRouter } from "next/router";
 import React from "react";
 
 const RegisterModeratorRolePage = () => {
+  const router = useRouter();
+
+  const handleRegisterClick = () => {
+    router.push("/modsceremony");
+  };
+
   return (
     <div className="text-center xl:h-screen h-full grid items-center py-20 relative">
       <div className="modal bg-mod/70 ">
-        <form className="grid gap-6 text-left">
+        <div className="grid gap-6 text-left">
           <label className="formLabel" htmlFor="tipo-de-moderador">
             Registro moderadores Zengo
           </label>
@@ -45,10 +52,14 @@ const RegisterModeratorRolePage = () => {
             />
           </div>
 
-          <button className="homeBT mx-auto mt-5" type="submit">
+          <button
+            className="homeBT mx-auto mt-5"
+            type="button"
+            onClick={handleRegisterClick}
+          >
             Registrarse
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

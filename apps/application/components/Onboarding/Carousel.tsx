@@ -347,11 +347,6 @@ const Carousel: React.FC = () => {
           </svg>
         </button>
       ) : null}
-      {activeSection.id === 5 ? (
-        <Link href="/onboarding/install">
-          <button className="homeBT">Siguiente paso: Instalar metamask</button>
-        </Link>
-      ) : null}
     </div>
   );
 };

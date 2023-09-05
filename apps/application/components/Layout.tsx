@@ -2,8 +2,6 @@ import React from "react";
 import Header from "./Header";
 import Navbar from "./Navbar";
 
-import { useState, useEffect } from "react";
-import { useAddress } from "@thirdweb-dev/react";
 import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
 
 type Props = {
@@ -17,7 +15,7 @@ const Layout = (props: Props) => {
     <div className="from-cit to-mod bg-gradient-to-t h-screen">
       {/*walletIsConnected ? <Navbar /> : null*/}
       <Header />
-      <main>{props.children}</main>
+      <main className="h-[calc(100vh-6rem)]">{props.children}</main>
     </div>
   );
 };
