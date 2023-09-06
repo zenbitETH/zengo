@@ -19,4 +19,13 @@ contract ZengoStorage {
     mapping(address => Structs.Moderator) moderatorStruct;
 
     mapping(address => uint256) public votingPoints;
+
+    function getModeratorInfo(address _moderator) public view returns (Structs.Moderator memory) {
+        require(moderators[_moderator], "Given address is not a Moderator");
+        return moderatorStruct[_moderator];
+    }
+
+    function getModeratorsList() public view returns (address[] memory) {
+        return moderatorList;
+    }
 }

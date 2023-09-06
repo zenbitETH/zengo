@@ -76,10 +76,6 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         emit ModeratorRemoved(_moderator);
     }
 
-    function getModeratorInfo(address _moderator) public view returns (Structs.Moderator) {
-        require(moderators[_moderator], "Given address is not a Moderator");
-        return moderatorStruct[_moderator];
-    }
 
     // TODO: constructing a constructor like this
     // doesn't work figure out how to write it
