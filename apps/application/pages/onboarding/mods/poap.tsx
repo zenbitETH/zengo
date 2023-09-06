@@ -3,12 +3,16 @@ import Image from "next/image";
 import { useAddress } from "@thirdweb-dev/react";
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import Link from "next/link";
+import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 
 const eventIdUsed = process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID as string;
 
-const PoapModeratorsPage = () => {
+const PoapModeratorsPage = ({
+  eventInfo,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const address = useAddress();
-  const { claimPoap, poapScan, addressHasPoap } = useOnboardingContextState();
+  const { claimPoap, poapScan, addressHasPoap, poapTokenId } =
+    useOnboardingContextState();
 
   useEffect(() => {
     if (address) {
@@ -31,7 +35,7 @@ const PoapModeratorsPage = () => {
               <div className="POAPmargin">
                 <div className="">
                   <Image
-                    src={"/assets/POAPMod.png"}
+                    src={eventInfo.image_url}
                     height={250}
                     width={250}
                     alt="onboarding POAP"
@@ -66,7 +70,7 @@ const PoapModeratorsPage = () => {
               <div className="POAPmargin">
                 <div className="">
                   <Image
-                    src={"/assets/POAPMod.png"}
+                    src={eventInfo.image_url}
                     height={250}
                     width={250}
                     alt="onboarding POAP"
@@ -80,10 +84,14 @@ const PoapModeratorsPage = () => {
                   <div className="text-sm xl:text-lg font-bau">
                     Septiembre, 2023 /
                     <span className="cursor-pointer hover:text-mod">
-                      {" "}
-                      <Link href="https://app.poap.xyz/token/6741694">
-                        Ver POAP
-                      </Link>
+                      {poapTokenId ? (
+                        <a
+                          href={`https://app.poap.xyz/token/${poapTokenId}`}
+                          target="_blank"
+                        >
+                          Ver POAP
+                        </a>
+                      ) : null}
                     </span>
                   </div>
                   <div className="xl:text-lg text-justify xl:px-10 bg-mod/70 px-5 py-3 text-white">
@@ -114,6 +122,28 @@ const PoapModeratorsPage = () => {
       </div>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps<{
+  eventInfo: any;
+}> = async () => {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "x-api-key": `${process.env.POAP_API_KEY}`,
+    },
+  };
+
+  const eventInfoResponse = await fetch(
+    `https://api.poap.tech/events/id/148610`,
+    options
+  );
+
+  const eventInfoResult = await eventInfoResponse.json();
+  return {
+    props: { eventInfo: eventInfoResult },
+  };
 };
 
 export default PoapModeratorsPage;

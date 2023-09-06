@@ -27,6 +27,7 @@ interface IOnboardingContext {
     moderatorAddress: Address,
     points: number
   ) => void;
+  poapTokenId: string;
 }
 
 export const OnboardingContext = createContext<IOnboardingContext>({
@@ -42,6 +43,7 @@ export const OnboardingContext = createContext<IOnboardingContext>({
     moderatorAddress: Address,
     points: number
   ) => {},
+  poapTokenId: "",
 });
 
 interface IProps {
@@ -59,6 +61,7 @@ export function OnboardingContextProvider({ children }: IProps) {
   const [cycleState, setCycleState] = useState<number | null>(null);
   const [walletIsConnected, setWalletIsConnected] = useState(false);
   const [addressHasPoap, setAddressHasPoap] = useState<boolean>(false);
+  const [poapTokenId, setPoapTokenId] = useState<string>("");
 
   const address = useAddress();
 
@@ -88,6 +91,7 @@ export function OnboardingContextProvider({ children }: IProps) {
     );
     const data = await response.json();
     setAddressHasPoap(data.scan);
+    setPoapTokenId(data.tokenId);
   };
 
   const { contract: zengoDaoContract } = useContract(contractAddress_zengoDao);
@@ -180,6 +184,7 @@ export function OnboardingContextProvider({ children }: IProps) {
     addModeratorInfoCall,
     removeModeratorCall,
     setIndividualVotingPointsCall,
+    poapTokenId,
   };
 
   return (

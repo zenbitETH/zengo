@@ -21,4 +21,5 @@ export interface ILocation {
 export interface IScanResponse {
   message: string;
   scan: boolean;
+  tokenId: string;
 }
