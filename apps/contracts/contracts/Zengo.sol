@@ -33,13 +33,11 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     }
 
     constructor(
-        uint256 _registrationDuration,
         uint256 _pluralVotingPoints,
         address _tokenAddress
     ) {
         owner = msg.sender;   
 
-        registrationDuration = _registrationDuration;
         pluralVotingPoints = _pluralVotingPoints;
         token = IERC20(_tokenAddress);
         moderators[msg.sender] = true;
