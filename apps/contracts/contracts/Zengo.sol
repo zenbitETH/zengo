@@ -46,15 +46,22 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         moderatorList.push(msg.sender);
     }
 
-    function updateModeratorInfo(address _moderatorAddress, uint8 _moderatorType, string memory _position, string memory _organization) external {
-        require(moderators[msg.sender] || msg.sender == owner, "Can't update moderatorInfo");
-
+    function updateModeratorInfo(address _moderatorAddress, uint8 _moderatorType, string memory _position, string memory _organization) external onlyOwner {
+        moderatorStruct[_moderatorAddress].moderatorType = Structs.ModeratorType(_moderatorType);
+        moderatorStruct[_moderatorAddress].position = _position;
+        moderatorStruct[_moderatorAddress].organization = _organization;
+    }
+    
+    function addModerator(address _moderatorAddress, uint8 _moderatorType, string memory _position, string memory _organization) external onlyOwner checkState(0){
+        require(moderators[_moderatorAddress] == false, "Address is already a Moderator");
+        moderators[_moderatorAddress] = true;
+        moderatorList.push(_moderatorAddress);
         moderatorStruct[_moderatorAddress].moderatorType = Structs.ModeratorType(_moderatorType);
         moderatorStruct[_moderatorAddress].position = _position;
         moderatorStruct[_moderatorAddress].organization = _organization;
     }
 
-    function addModerator(address[] memory _moderators) external onlyOwner checkState(0) {
+    function addModerators(address[] memory _moderators) external onlyOwner checkState(0) {
         for (uint i = 0; i < _moderators.length; i++) {
             if (moderators[_moderators[i]] == false) {
                 moderatorList.push(_moderators[i]);
