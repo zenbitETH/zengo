@@ -104,8 +104,12 @@
 }
 
 .modGrid {
-  @apply grid gap-3 font-exo relative h-full text-sm  text-center place-content-start md:grid-cols-2 grid-cols-1 xl:grid-cols-1 xl:text-lg
+  @apply grid gap-3 font-exo relative h-full text-sm  text-center place-content-start md:grid-cols-2 grid-cols-1 xl:text-lg
   px-3;
+}
+
+.modCategory {
+  @apply rounded-dd pt-3 text-white bg-black/20 relative;
 }
 
 .modInfo {
