@@ -11,7 +11,7 @@ import "./storage/ZengoStorage.sol";
 
 contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, ContractMetadata {
     IERC20 public token;
-    event ModeratorAdded(address[] indexed newModerator);
+    event ModeratorsAdded(address[] indexed newModerators);
     event ModeratorRemoved(address indexed removedModerator);
     // nested mapping cannot be emitted in events
     // event ProposalSubmitted(Proposal newProposal, Evidence newEvidence);
@@ -54,14 +54,14 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         moderatorStruct[_moderatorAddress].organization = _organization;
     }
 
-    function addModerator(address[] memory _moderator) external onlyOwner checkState(0) {
-        for (uint i = 0; i < _moderator.length; i++) {
-            if (moderators[_moderator[i]] == false) {
-                moderatorList.push(_moderator[i]);
-                moderators[_moderator[i]] = true;
+    function addModerator(address[] memory _moderators) external onlyOwner checkState(0) {
+        for (uint i = 0; i < _moderators.length; i++) {
+            if (moderators[_moderators[i]] == false) {
+                moderatorList.push(_moderators[i]);
+                moderators[_moderators[i]] = true;
             }
         }
-        emit ModeratorAdded(_moderator);
+        emit ModeratorsAdded(_moderators);
     }
 
     function removeModerator(address _moderator) external onlyOwner {
