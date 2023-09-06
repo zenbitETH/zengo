@@ -16,6 +16,7 @@ contract ZengoStorage {
 
     mapping(address => bool) public moderators;
     address[] public moderatorList;
+    mapping(address => Structs.Moderator) moderatorStruct;
 
     mapping(address => uint256) public votingPoints;
 }
