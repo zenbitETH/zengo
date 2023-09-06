@@ -2,14 +2,14 @@ import React from "react";
 import Header from "./Header";
 import Navbar from "./Navbar";
 
-import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const Layout = (props: Props) => {
-  const { walletIsConnected } = useGlobalCycleStageState();
+  const { walletIsConnected } = useOnboardingContextState();
 
   return (
     <div className="from-cit to-mod bg-gradient-to-t h-screen">

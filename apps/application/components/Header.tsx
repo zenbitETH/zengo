@@ -6,12 +6,12 @@ import {
 import Link from "next/link";
 
 import { CHAIN } from "@/const/chains";
-import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 
 export default function Header() {
   const isMismatched = useNetworkMismatch();
   const switchChain = useSwitchChain();
-  const { walletIsConnected } = useGlobalCycleStageState();
+  const { walletIsConnected } = useOnboardingContextState();
 
   return (
     <header className="header">

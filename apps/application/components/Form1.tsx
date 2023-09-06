@@ -1,8 +1,8 @@
-import { useNewProposalState } from "@/contexts/NewProposalContext";
+import { useProposalsContextState } from "@/contexts/ProposalsContext";
 import * as React from "react";
 
 export default function Form1() {
-  const { proposalInfo, setProposalInfo } = useNewProposalState();
+  const { proposalInfo, setProposalInfo } = useProposalsContextState();
 
   const handleTitleChange = (
     event: React.FormEvent<HTMLInputElement>

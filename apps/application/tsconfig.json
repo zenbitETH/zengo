@@ -21,7 +21,8 @@
       "@/const/*": ["./const/*"],
       "@/contexts/*": ["./contexts/*"],
       "@/hooks/*": ["./hooks/*"],
-      "@/interfaces/*": ["./interfaces/*"]
+      "@/interfaces/*": ["./interfaces/*"],
+      "@/*": ["./*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

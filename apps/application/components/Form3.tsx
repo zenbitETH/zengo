@@ -1,9 +1,10 @@
-import { useNewProposalState } from "@/contexts/NewProposalContext";
+import { useProposalsContextState } from "@/contexts/ProposalsContext";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
 export default function Form3() {
-  const { evidence, setEvidence, uploadEvidenceToIpfs } = useNewProposalState();
+  const { evidence, setEvidence, uploadEvidenceToIpfs } =
+    useProposalsContextState();
 
   const handleDateChange = (event: React.FormEvent<HTMLInputElement>): void => {
     const updatedEvidenceDate = {

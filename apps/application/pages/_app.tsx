@@ -1,10 +1,10 @@
 import "../styles/globals.css";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import type { AppProps } from "next/app";
-import { NewProposalContextProvider } from "@/contexts/NewProposalContext";
+import { ProposalsContextProvider } from "@/contexts/ProposalsContext";
 import { CHAIN } from "@/const/chains";
 import Layout from "@/components/Layout";
-import { GlobalCycleStageContextProvider } from "@/contexts/GlobalStageCycleContext";
+import { OnboardingContextProvider } from "@/contexts/OnboardingContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -20,13 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       // }}
       clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENTID}
     >
-      <GlobalCycleStageContextProvider>
-        <NewProposalContextProvider>
+      <OnboardingContextProvider>
+        <ProposalsContextProvider>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        </NewProposalContextProvider>
-      </GlobalCycleStageContextProvider>
+        </ProposalsContextProvider>
+      </OnboardingContextProvider>
     </ThirdwebProvider>
   );
 }

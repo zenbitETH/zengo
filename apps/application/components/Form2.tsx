@@ -1,9 +1,9 @@
 import Map from "./Map";
 import Autocomplete from "react-google-autocomplete";
-import { useNewProposalState } from "@/contexts/NewProposalContext";
+import { useProposalsContextState } from "@/contexts/ProposalsContext";
 
 export default function Form2() {
-  const { location, setLocation } = useNewProposalState();
+  const { location, setLocation } = useProposalsContextState();
 
   const handlePlaceSelected = (place: google.maps.places.PlaceResult) => {
     if (place.geometry?.location) {

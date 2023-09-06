@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { useAddress } from "@thirdweb-dev/react";
-import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import Link from "next/link";
 
 const eventIdUsed = process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID as string;
 
 const PoapModeratorsPage = () => {
   const address = useAddress();
-  const { claimPoap, poapScan, addressHasPoap } = useGlobalCycleStageState();
+  const { claimPoap, poapScan, addressHasPoap } = useOnboardingContextState();
 
   useEffect(() => {
     if (address) {

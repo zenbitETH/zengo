@@ -1,9 +1,9 @@
-import { useNewProposalState } from "@/contexts/NewProposalContext";
+import { useProposalsContextState } from "@/contexts/ProposalsContext";
 import Map from "./Map";
 import { MediaRenderer } from "@thirdweb-dev/react";
 
 export default function Form4() {
-  const { proposalInfo, evidence } = useNewProposalState();
+  const { proposalInfo, evidence } = useProposalsContextState();
 
   return (
     <div className="px-3 gap-3 text-white">
