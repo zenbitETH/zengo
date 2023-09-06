@@ -36,5 +36,6 @@ contract ZengoStorage {
             moderatorsStructArray[i].position = moderatorStruct[moderatorList[i]].position;
             moderatorsStructArray[i].organization = moderatorStruct[moderatorList[i]].organization;
         }
+        return moderatorsStructArray;
     }
 }
