@@ -16,9 +16,6 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     // nested mapping cannot be emitted in events
     // event ProposalSubmitted(Proposal newProposal, Evidence newEvidence);
 
-
-    // mapping(uint256 => mapping(address => bool)) public hasVoted;
-
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the owner can call this function");
         _;
@@ -173,22 +170,21 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
             "Out of Range / Invalid vote option"
         );
 
-        Structs.Vote storage votingIteration = voteIterations[_proposalId][
-            _votingIteration
-        ];
-
         require(
-            !votingIteration.hasVoted[msg.sender],
+            !hasVoted[_proposalId][_votingIteration][msg.sender],
             "You have already voted for this Voting Iteration of this proposal"
         );
-        votingIteration.vote[msg.sender] = Structs.VerificationState(_vote);
-        votingIteration.hasVoted[msg.sender] = true;
-        votingIteration.voteCount[Structs.VerificationState(_vote)]++;
+        vote[_proposalId][_votingIteration][msg.sender] = Structs.VerificationState(_vote);
+        // votingIteration.vote[msg.sender] = Structs.VerificationState(_vote);
+        hasVoted[_proposalId][_votingIteration][msg.sender] = true;
+        // votingIteration.hasVoted[msg.sender] = true;
+        voteCount[_proposalId][_votingIteration][Structs.VerificationState(_vote)]++;
+        // votingIteration.voteCount[Structs.VerificationState(_vote)]++;
         // TODO: trigger concludeVotingIteration when one of the
         // consensusIteration reaches the threshold votesPercent
         // update addModerator flag here
         if (
-            (votingIteration.voteCount[Structs.VerificationState(_vote)] * 100) >
+            (voteCount[_proposalId][_votingIteration][Structs.VerificationState(_vote)] * 100) >
             moderatorList.length * THRESHOLD_VOTE_LIMIT
         ) {
             autoTriggerVoteResult(
@@ -247,17 +243,14 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
             "Voting Iteration doesn't exist or has already concluded"
         );
 
-        // Load the votingIteration from the proposal
-        Structs.Vote storage votingIteration = voteIterations[_proposalId][
-            _votingIteration
-        ];
-
         uint8 result = 0;
+        uint256 maxCount = 0;
+        // Have to handle Edge case when there are equal number of Votes
         for (uint8 i = 0; i < 6; i++) {
             if (
-                uint8(votingIteration.voteCount[Structs.VerificationState(i)]) > result
+                voteCount[_proposalId][_votingIteration][Structs.VerificationState(i)] > maxCount
             ) {
-                result = uint8(votingIteration.voteCount[Structs.VerificationState(i)]);
+                result = i;
             }
         }
         if (result == 1 || result == 2 || result == 3) {

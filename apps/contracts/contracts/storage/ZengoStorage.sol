@@ -22,6 +22,9 @@ contract ZengoStorage {
     mapping(address => uint256) public votingPoints;
     mapping(uint256 => Structs.Vote[]) public voteIterations;
     mapping(uint256 => mapping (uint8 => Structs.Evidence[])) public Evidence;
+    mapping(uint256 => mapping (uint8 => mapping (address => Structs.VerificationState))) public vote;
+    mapping(uint256 => mapping (uint8 => mapping (address => bool))) public hasVoted;
+    mapping(uint256 => mapping (uint8 => mapping (Structs.VerificationState => uint256))) public voteCount;
     mapping(uint256 => Structs.Evidence) public proposalEvidence;
 
     function getModeratorInfo(address _moderator) public view returns (Structs.Moderator memory) {
@@ -43,8 +46,8 @@ contract ZengoStorage {
         return moderatorsStructArray;
     }
 
-    // function getProposals() public view returns (Structs.ProposalReturn[] memory) {
-    //     Structs.ProposalReturn[] memory proposalsArray = new Structs.ProposalReturn[](proposalCount+1);
+    // function getProposals() public view returns (Structs.Proposal[] memory, Structs.Vote[] memory, Structs.Evidence[] memory) {
+    //     Structs.Proposal[] memory proposalsArray = new Structs.Proposal[](proposalCount+1);
 
     //     for (uint256 i = 0; i < proposalCount + 1; i++) {
     //         proposalsArray[i].votingIterationCount = proposals[i].votingIterationCount;
