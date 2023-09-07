@@ -35,24 +35,25 @@
 }
 
 .header {
-  @apply top-0 w-full px-5 sm:px-24 py-3 rounded z-20 /*backdrop-blur-md*/font-bau relative;
+  @apply top-0 w-full px-5 sm:px-24 py-3 rounded z-20 backdrop-blur-md font-bau fixed;
 }
 
 /* Buttons */
 
 .homeBT,
 .poapBT {
-  @apply rounded-dd border  xl:px-5 px-3 py-3  
-  text-sm xl:text-2xl font-bau !important;
+  @apply rounded-dd xl:px-5 px-3 py-3  
+  xl:text-2xl font-bau !important;
 }
 
 .homeBT {
-  @apply text-bgd
+  @apply bg-bgd/50
+  text-white
   hover:shadow-xl
   cursor-pointer
-  border-bgd
-  hover:bg-bgd/50
-  hover:text-white;
+  hover:bg-white/80
+  hover:text-bgd
+  !important;
 }
 
 .POAPcard {
@@ -96,7 +97,7 @@
 }
 
 .navbar {
-  @apply grid grid-cols-5
+  @apply grid
   bg-black/20 items-center xl:rounded-r-gen
   fixed bottom-0 xl:grid-cols-1 xl:left-0 align-middle	
   w-full xl:w-20 xl:h-[80%] xl:grid-rows-4 grid-cols-4
@@ -128,10 +129,11 @@
 
 .carBT {
   @apply fixed align-middle transform
- -translate-y-1/2 border
-  hover:bg-white/50 text-2xl m-auto h-12 w-12 px-2
+ -translate-y-1/2 animate-pulse
+  hover:bg-white/50 text-2xl m-auto h-12 w-12 xl:h-14 xl:w-14 px-2 xl:px-3
   rounded-full shadow-md items-center grid text-center
-  fill-white/50 hover:fill-bgd backdrop-blur-lg;
+  bg-bgd/50 hover:animate-none
+  fill-white/70 hover:fill-bgd backdrop-blur-lg;
 }
 
 .card0,

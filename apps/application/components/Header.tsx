@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <header className="header">
       {walletIsConnected ? null : (
-        <div className="fixed left-1/2 -translate-x-1/2 top-7 grid gap-5">
+        <div className="fixed xl:left-1/2 xl:-translate-x-1/2 top-7 grid gap-5">
           <div className="grid grid-cols-3 gap-10 items-center">
             <Link href="https://twitter.com/zenbitMX">
               <svg
