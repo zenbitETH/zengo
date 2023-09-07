@@ -20,14 +20,15 @@ interface IOnboardingContext {
   claimPoap: (address: string, eventId: string) => void;
   poapScan: (address: string, eventId: string) => void;
   addressHasPoap: boolean;
-  addModeratorCall: (moderatorAddress: Address) => void;
-  addModeratorInfoCall: (props: IAddModeratorInfoCallProps) => void;
+  addModeratorCall: (props: IAddModeratorCallProps) => void;
   removeModeratorCall: (moderatorAddress: Address) => void;
   setIndividualVotingPointsCall: (
     moderatorAddress: Address,
     points: number
   ) => void;
   poapTokenId: string;
+  allModeratorsList: any[];
+  userIsModerator: boolean;
 }
 
 export const OnboardingContext = createContext<IOnboardingContext>({
@@ -36,21 +37,22 @@ export const OnboardingContext = createContext<IOnboardingContext>({
   claimPoap: (address: string, eventId: string) => {},
   poapScan: (address: string, eventId: string) => {},
   addressHasPoap: false,
-  addModeratorCall: (moderatorAddress: Address) => {},
-  addModeratorInfoCall: (props: IAddModeratorInfoCallProps) => {},
+  addModeratorCall: (props: IAddModeratorCallProps) => {},
   removeModeratorCall: (moderatorAddress: Address) => {},
   setIndividualVotingPointsCall: (
     moderatorAddress: Address,
     points: number
   ) => {},
   poapTokenId: "",
+  allModeratorsList: [],
+  userIsModerator: false,
 });
 
 interface IProps {
   children: ReactNode;
 }
 
-interface IAddModeratorInfoCallProps {
+interface IAddModeratorCallProps {
   modAddress: Address;
   modType: string;
   modPosition: string;
@@ -62,6 +64,8 @@ export function OnboardingContextProvider({ children }: IProps) {
   const [walletIsConnected, setWalletIsConnected] = useState(false);
   const [addressHasPoap, setAddressHasPoap] = useState<boolean>(false);
   const [poapTokenId, setPoapTokenId] = useState<string>("");
+  const [allModeratorsList, setAllModeratorsList] = useState<any[]>([]);
+  const [userIsModerator, setUserIsModerator] = useState<boolean>(false);
 
   const address = useAddress();
 
@@ -112,28 +116,14 @@ export function OnboardingContextProvider({ children }: IProps) {
   const { mutateAsync: addModerator, isLoading: addModeratorIsLoading } =
     useContractWrite(zengoDaoContract, "addModerator");
 
-  const addModeratorCall = async (moderatorAddress: Address) => {
-    try {
-      const data = await addModerator({ args: [moderatorAddress] });
-      console.info("contract call successs", data);
-    } catch (err) {
-      console.error("contract call failure", err);
-    }
-  };
-
-  const {
-    mutateAsync: addModeratorInfo,
-    isLoading: addModeratorInfoIsLoading,
-  } = useContractWrite(zengoDaoContract, "addModeratorInfo");
-
-  const addModeratorInfoCall = async ({
+  const addModeratorCall = async ({
     modAddress,
     modType,
     modPosition,
     modOrganization,
-  }: IAddModeratorInfoCallProps) => {
+  }: IAddModeratorCallProps) => {
     try {
-      const data = await addModeratorInfo({
+      const data = await addModerator({
         args: [modAddress, modType, modPosition, modOrganization],
       });
       console.info("contract call successs", data);
@@ -173,6 +163,51 @@ export function OnboardingContextProvider({ children }: IProps) {
     }
   };
 
+  const {
+    data: getModeratorsData,
+    isLoading: getModeratorsIsLoading,
+    isSuccess: getModeratorsIsSuccess,
+  } = useContractRead(zengoDaoContract, "getModerators");
+
+  useEffect(() => {
+    if (getModeratorsData) {
+      const moderatorsFormatedData = getModeratorsData.map((moderator: any) => {
+        const modTypeTxt =
+          moderator.moderatorType === 0
+            ? "Organizaciones Civiles"
+            : moderator.moderatorType === 1
+            ? "Sector Privado"
+            : moderator.moderatorType === 2
+            ? "Academia"
+            : moderator.moderatorType === 3
+            ? "Gobierno"
+            : moderator.moderatorType === 4
+            ? "Moderador abierto"
+            : "No definido";
+        return {
+          address: moderator.address || "0xAddress",
+          modType: moderator.moderatorType,
+          modPosition: moderator.position,
+          modOrganization: moderator.organization,
+          modTypeTxt,
+        };
+      });
+      setAllModeratorsList(moderatorsFormatedData);
+    }
+  }, [getModeratorsIsSuccess]);
+
+  const {
+    data: addressIsModeratorData,
+    isLoading: addressIsModeratorIsLoading,
+    isSuccess: addressIsModeratorIsSuccess,
+  } = useContractRead(zengoDaoContract, "moderators", [address]);
+
+  useEffect(() => {
+    if (addressIsModeratorData) {
+      setUserIsModerator(addressIsModeratorData);
+    }
+  }, [addressIsModeratorIsSuccess]);
+
   // return context state
   const state = {
     cycleState,
@@ -181,10 +216,11 @@ export function OnboardingContextProvider({ children }: IProps) {
     poapScan,
     addressHasPoap,
     addModeratorCall,
-    addModeratorInfoCall,
     removeModeratorCall,
     setIndividualVotingPointsCall,
     poapTokenId,
+    allModeratorsList,
+    userIsModerator,
   };
 
   return (

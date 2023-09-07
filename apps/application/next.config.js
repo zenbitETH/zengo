@@ -4,6 +4,7 @@ const nextConfig = {
   basePath: "",
   images: {
     domains: ["assets.poap.xyz"],
+    hostname: "https://assets.poap.xyz",
   },
 };
 

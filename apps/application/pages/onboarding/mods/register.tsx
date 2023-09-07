@@ -1,12 +1,42 @@
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
+import { useAddress } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const RegisterModeratorRolePage = () => {
+  const [moderatorType, setModeratorType] = useState<string>("0");
+  const [moderatorPosition, setModeratorPosition] = useState<string>("");
+  const [moderatorOrganization, setModeratorOrganization] =
+    useState<string>("");
+
+  const address = useAddress();
+
+  const { addModeratorCall, userIsModerator } = useOnboardingContextState();
+
   const router = useRouter();
 
   const handleRegisterClick = () => {
-    router.push("/modsceremony");
+    if (
+      address !== undefined &&
+      moderatorPosition !== "" &&
+      moderatorOrganization !== ""
+    ) {
+      addModeratorCall({
+        modAddress: address,
+        modType: moderatorType,
+        modPosition: moderatorPosition,
+        modOrganization: moderatorOrganization,
+      });
+    } else {
+      alert("Por favor llena todos los campos ");
+    }
   };
+
+  //  useEffect(() => {
+  if (userIsModerator) {
+    return router.push("/modsceremony");
+  }
+  //  }, [userIsModerator]);
 
   return (
     <div className="text-center xl:h-screen h-full grid items-center py-20 relative">
@@ -23,21 +53,28 @@ const RegisterModeratorRolePage = () => {
               className="drop"
               id="tipo-de-moderador"
               name="tipo-de-moderador"
+              value={moderatorType}
+              onChange={(e) => setModeratorType(e.target.value)}
             >
-              <option value="organizaciones-civiles">
-                Organizaciones Civiles
-              </option>
-              <option value="sector-privado">Sector Privado</option>
-              <option value="academia">Academia</option>
-              <option value="gobierno">Gobierno</option>
-              <option value="moderador-abierto">Moderador abierto</option>
+              <option value="0">Organizaciones Civiles</option>
+              <option value="1">Sector Privado</option>
+              <option value="2">Academia</option>
+              <option value="3">Gobierno</option>
+              <option value="4">Moderador abierto</option>
             </select>
           </div>
           <div>
             <label className="formLabel" htmlFor="puesto">
               Puesto:
             </label>
-            <input className="input" type="text" id="puesto" name="puesto" />
+            <input
+              className="input"
+              type="text"
+              id="puesto"
+              name="puesto"
+              value={moderatorPosition}
+              onChange={(e) => setModeratorPosition(e.target.value)}
+            />
           </div>
 
           <div>
@@ -49,6 +86,8 @@ const RegisterModeratorRolePage = () => {
               type="text"
               id="organizacion"
               name="organizacion"
+              value={moderatorOrganization}
+              onChange={(e) => setModeratorOrganization(e.target.value)}
             />
           </div>
 

@@ -39,7 +39,8 @@ const PoapModeratorsPage = ({
                     height={250}
                     width={250}
                     alt="onboarding POAP"
-                    className="rounded-full mx-auto animate-pulse"
+                    className="rounded-full mx-auto animate-pulse w-auto h-auto"
+                    priority={true}
                   />
                 </div>
                 <div className=" xl:text-xl text-justify bg-mod/70 py-3 px-5 w-full text-white">
@@ -136,7 +137,7 @@ export const getServerSideProps: GetServerSideProps<{
   };
 
   const eventInfoResponse = await fetch(
-    `https://api.poap.tech/events/id/148610`,
+    `https://api.poap.tech/events/id/${eventIdUsed}`,
     options
   );
 

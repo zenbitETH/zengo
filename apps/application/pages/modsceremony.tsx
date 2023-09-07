@@ -1,6 +1,9 @@
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import React from "react";
 
 export default function Ceremony() {
+  const { allModeratorsList } = useOnboardingContextState();
+  console.log({ allModeratorsList });
   return (
     <div className="bg-mod text-center h-full items-center relative">
       <div className="grid xl:grid-cols-2	">
