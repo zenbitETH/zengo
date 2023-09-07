@@ -27,11 +27,7 @@ library Structs {
         uint256 proposalId;
         uint256 totalVotes;
         bool inProgress;
-        mapping(address => VerificationState) vote;
-        mapping(address => bool) hasVoted;
-        mapping(VerificationState => uint256) voteCount;
         VerificationState resultState;
-        // Evidence[] evidences;
     }
 
     struct Evidence {
