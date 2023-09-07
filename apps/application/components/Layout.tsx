@@ -15,7 +15,7 @@ const Layout = (props: Props) => {
     <div className="from-cit to-mod bg-gradient-to-t h-screen">
       {/*walletIsConnected ? <Navbar /> : null*/}
       <Header />
-      <main className="h-[calc(100vh-6rem)]">{props.children}</main>
+      <main className="h-[calc(100vh-5rem)]">{props.children}</main>
     </div>
   );
 };
