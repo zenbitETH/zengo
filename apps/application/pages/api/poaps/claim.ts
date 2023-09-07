@@ -14,7 +14,7 @@ export default async function handler(
       "x-api-key": `${process.env.POAP_API_KEY}`,
     },
     body: JSON.stringify({
-      secret_code: `${process.env.POAP_CITIZEN_EDIT_CODE}`, // This will change on type of onboarding: citizens/moderators
+      secret_code: `${process.env.POAP_MODERATOR_EDIT_CODE}`, // This will change on type of onboarding: citizens/moderators
     }),
   };
 
