@@ -4,9 +4,12 @@ import {
   useSwitchChain,
 } from "@thirdweb-dev/react";
 import Link from "next/link";
+import Image from "next/image";
 
 import { CHAIN } from "@/const/chains";
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
+
+import logo from "../public/assets/zengo.svg";
 
 export default function Header() {
   const isMismatched = useNetworkMismatch();
@@ -59,16 +62,25 @@ export default function Header() {
       )}
       <div className="wrap">
         {!isMismatched ? (
-          <ConnectWallet
-            className="homeBT"
-            btnTitle="Acceder"
-            detailsBtn={() => {
-              return <button className="homeBT"> Cuenta </button>;
-            }}
-            auth={{
-              loginOptional: true,
-            }}
-          />
+          <div className="flex w-full justify-between">
+            <div className="grid items-center">
+              <Image
+                src={logo}
+                alt="zengo presupuesto descentralizado"
+                width={200}
+              />
+            </div>
+            <ConnectWallet
+              className="homeBT"
+              btnTitle="Acceder"
+              detailsBtn={() => {
+                return <button className="homeBT"> Cuenta </button>;
+              }}
+              auth={{
+                loginOptional: true,
+              }}
+            />
+          </div>
         ) : (
           <button onClick={() => switchChain(CHAIN.chainId)} className="homeBT">
             <span>{`Switch to ${CHAIN.name}`}</span>
