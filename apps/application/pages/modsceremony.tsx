@@ -2,8 +2,8 @@ import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import React from "react";
 
 export default function Ceremony() {
-  const { allModeratorsList } = useOnboardingContextState();
-  console.log({ allModeratorsList });
+  const { moderatorsByType } = useOnboardingContextState();
+
   return (
     <div className="bg-mod text-center h-full items-center relative">
       <div className="grid xl:grid-cols-2	">
@@ -20,35 +20,92 @@ export default function Ceremony() {
               <div
                 /*this set 1 column for mobile, 2 columns for desktop on the same category moderators*/ className="modGrid"
               >
-                <div /*Replicate this for each Mod*/ className="modInfo">
-                  <div className="">1 </div>
-                  <div className="col-span-11">
-                    <div className="font-bau text-lg ">
-                      {" "}
-                      Director de comunicación social
-                    </div>
-                    <div className="text-sm">
-                      Instituto Nacional De Transparencia
+                {moderatorsByType.civil.map((mod, idx) => (
+                  <div className="modInfo" key={idx}>
+                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-8">
+                      <div className="font-bau text-lg text-center">
+                        {mod.modPosition}
+                      </div>
+                      <div className="text-sm text-center">
+                        {mod.modOrganization}
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
             <div className="modCategory">
               <div className="text-xl pb-3">Sector Privado</div>
-              <div className="modGrid"></div>
+              <div className="modGrid">
+                {moderatorsByType.private.map((mod, idx) => (
+                  <div className="modInfo" key={idx}>
+                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-8">
+                      <div className="font-bau text-lg text-center">
+                        {mod.modPosition}
+                      </div>
+                      <div className="text-sm text-center">
+                        {mod.modOrganization}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="modCategory">
               <div className="text-xl pb-3">Academia</div>
-              <div className="modGrid"></div>
+              <div className="modGrid">
+                {moderatorsByType.academy.map((mod, idx) => (
+                  <div className="modInfo" key={idx}>
+                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-8">
+                      <div className="font-bau text-lg text-center">
+                        {mod.modPosition}
+                      </div>
+                      <div className="text-sm text-center">
+                        {mod.modOrganization}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="modCategory">
               <div className="text-xl pb-3">Gobierno</div>
-              <div className="modGrid"></div>
+              <div className="modGrid">
+                {moderatorsByType.government.map((mod, idx) => (
+                  <div className="modInfo" key={idx}>
+                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-8">
+                      <div className="font-bau text-lg text-center">
+                        {mod.modPosition}
+                      </div>
+                      <div className="text-sm text-center">
+                        {mod.modOrganization}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="modCategory">
               <div className="text-xl pb-3">Moderador Abierto</div>
-              <div className="modGrid"></div>
+              <div className="modGrid">
+                {moderatorsByType.open.map((mod, idx) => (
+                  <div className="modInfo" key={idx}>
+                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-8">
+                      <div className="font-bau text-lg text-center">
+                        {mod.modPosition}
+                      </div>
+                      <div className="text-sm text-center">
+                        {mod.modOrganization}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

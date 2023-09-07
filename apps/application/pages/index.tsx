@@ -1,17 +1,29 @@
+import Carousel from "@/components/Carousel";
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import type { NextPage } from "next";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
+  const [stateReady, setStateReady] = useState<boolean>(false);
+  const { walletIsConnected } = useOnboardingContextState();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (walletIsConnected) {
+      router.push("/onboarding/mods");
+    }
+    setStateReady(true);
+  }, [walletIsConnected]);
+
+  // useEffect(() => {
+  //   setStateReady(true);
+  // }, []);
+
   return (
-    <div className="flex items-center justify-center pt-[25%]">
-      <Link href="/onboarding">
-        <button type="button" className="homeBT">
-          Iniciar Onboarding
-        </button>
-      </Link>
-      <button type="button" className="homeBT">
-        Testing: Unirse al stream
-      </button>
+    <div className="from-cit to-mod bg-gradient-to-t h-screen">
+      {stateReady ? <Carousel /> : null}
     </div>
   );
 };

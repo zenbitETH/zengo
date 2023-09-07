@@ -34,7 +34,7 @@ const RegisterModeratorRolePage = () => {
 
   //  useEffect(() => {
   if (userIsModerator) {
-    return router.push("/modsceremony");
+    router.push("/modsceremony");
   }
   //  }, [userIsModerator]);
 

@@ -23,3 +23,19 @@ export interface IScanResponse {
   scan: boolean;
   tokenId: string;
 }
+
+export interface IModeratorsByType {
+  civil: ModeratorInfo[];
+  private: ModeratorInfo[];
+  academy: ModeratorInfo[];
+  government: ModeratorInfo[];
+  open: ModeratorInfo[];
+}
+
+export interface ModeratorInfo {
+  address: string;
+  modType: number;
+  modPosition: string;
+  modOrganization: string;
+  modTypeTxt: string;
+}
