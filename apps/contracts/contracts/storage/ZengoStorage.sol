@@ -8,6 +8,7 @@ contract ZengoStorage {
     uint256 public pluralVotingPoints;
     uint256 public proposalCount = 0;
     uint256 public voteIterationsCount = 0;
+    uint256 public evidences = 0;
 
     address public owner;
     address public votingTokenAddress; // Address of the ERC20 voting token
@@ -50,10 +51,12 @@ contract ZengoStorage {
         return moderatorsStructArray;
     }
 
-    function getAllProposals() public view returns (Structs.Proposal[] memory, Structs.Vote[] memory) {
+    function getAllItems() public view returns (Structs.Proposal[] memory, Structs.Vote[] memory, Structs.Evidence[] memory) {
         Structs.Proposal[] memory proposalsArray = new Structs.Proposal[](proposalCount+1);
-        Structs.Vote[] memory voteIterationsArray = new Structs.Vote[](voteIterationsCount);
+        Structs.Vote[] memory voteIterationsArray = new Structs.Vote[](voteIterationsCount+1);
+        Structs.Evidence[] memory evidencesArray = new Structs.Evidence[](evidences+1);
         uint count = 0;
+        uint eCount = 0;
 
         for (uint256 i = 0; i < proposalCount + 1; i++) {
             proposalsArray[i].votingIterationCount = proposals[i].votingIterationCount;
@@ -72,14 +75,22 @@ contract ZengoStorage {
                 voteIterationsArray[count].inProgress = voteIterations[i][j].inProgress;
                 voteIterationsArray[count].resultState = voteIterations[i][j].resultState;
                 count++;
+                for (uint256 k = 0; k < voteIterations[i][j].evidenceCount; k++) {
+                    evidencesArray[eCount].evidenceDescription = Evidence[i][uint8(j)][k].evidenceDescription;
+                    evidencesArray[eCount].evidenceUri = Evidence[i][uint8(j)][k].evidenceUri;
+                    evidencesArray[eCount].streetAddress = Evidence[i][uint8(j)][k].streetAddress;
+                    evidencesArray[eCount].latitude = Evidence[i][uint8(j)][k].latitude;
+                    evidencesArray[eCount].longitude = Evidence[i][uint8(j)][k].longitude;
+                    eCount++;
+                }
             }
         }
-        return (proposalsArray, voteIterationsArray);
+        return (proposalsArray, voteIterationsArray, evidencesArray);
     }
 
-    function getAllVoteIterations() public view returns (Structs.Vote[] memory) {
+    // function getAllVoteIterations() public view returns (Structs.Vote[] memory) {
         
-    }
+    // }
     
     // function getProposalById(uint256 _proposalId) public view returns (Structs.ProposalReturn memory) {
     //     Structs.ProposalReturn memory proposal;

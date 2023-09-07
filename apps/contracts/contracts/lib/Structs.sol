@@ -21,6 +21,7 @@ library Structs {
 
     struct Vote {
         uint8 votingIteration;
+        uint8 evidenceCount;
         uint256 proposalId;
         uint256 totalVotes;
         bool inProgress;

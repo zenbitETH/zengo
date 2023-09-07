@@ -292,6 +292,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         voteIterations[_proposalId][0].votingIteration = 0;
         voteIterations[_proposalId][0].proposalId = _proposalId;
         voteIterations[_proposalId][0].totalVotes = 0;
+        voteIterations[_proposalId][0].evidenceCount = 0;
         voteIterations[_proposalId][0].inProgress = true;
 
         proposals[_proposalId].votingIterationCount++;
@@ -307,6 +308,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
 
         voteIterations[_proposalId][currentVoteIteration].votingIteration = currentVoteIteration;
         voteIterations[_proposalId][currentVoteIteration].proposalId = _proposalId;
+        voteIterations[_proposalId][currentVoteIteration].evidenceCount = 0;
         voteIterations[_proposalId][currentVoteIteration].totalVotes = 0;
         voteIterations[_proposalId][currentVoteIteration].inProgress = true;
 
@@ -318,12 +320,14 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     function addEvidence(uint256 _proposalId, uint8 _votingIteration, uint256 _latitude, uint256 _longitude, string memory _evidenceDescription, string memory _streetAddress, string memory _evidenceUri) public onlyProposer(_proposalId) {
         
         uint256 currentEvidenceIndex = Evidence[_proposalId][_votingIteration].length;
+        voteIterations[_proposalId][_votingIteration].evidenceCount++;
         Evidence[_proposalId][_votingIteration].push();
         Evidence[_proposalId][_votingIteration][currentEvidenceIndex].evidenceDescription = _evidenceDescription;
         Evidence[_proposalId][_votingIteration][currentEvidenceIndex].streetAddress = _streetAddress;
         Evidence[_proposalId][_votingIteration][currentEvidenceIndex].evidenceUri = _evidenceUri;
         Evidence[_proposalId][_votingIteration][currentEvidenceIndex].latitude = _latitude;
         Evidence[_proposalId][_votingIteration][currentEvidenceIndex].longitude = _longitude;
+        evidences++;
         // TODO: emit Evidence added event
     }
 
