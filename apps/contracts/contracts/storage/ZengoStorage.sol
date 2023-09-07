@@ -12,6 +12,7 @@ contract ZengoStorage {
     address public deployer;
     
     mapping(uint256 => Structs.Proposal) public proposals;
+    mapping(address => uint256) public proposers;
     uint256 public proposalCount;
 
     mapping(address => bool) public moderators;
@@ -19,6 +20,9 @@ contract ZengoStorage {
     mapping(address => Structs.Moderator) public moderatorStruct;
 
     mapping(address => uint256) public votingPoints;
+    mapping(uint256 => Structs.Vote[]) public voteIterations;
+    mapping(uint256 => mapping (uint8 => Structs.Evidence[])) public Evidence;
+    mapping(uint256 => Structs.Evidence) public proposalEvidence;
 
     function getModeratorInfo(address _moderator) public view returns (Structs.Moderator memory) {
         require(moderators[_moderator], "Given address is not a Moderator");
@@ -38,4 +42,39 @@ contract ZengoStorage {
         }
         return moderatorsStructArray;
     }
+
+    // function getProposals() public view returns (Structs.ProposalReturn[] memory) {
+    //     Structs.ProposalReturn[] memory proposalsArray = new Structs.ProposalReturn[](proposalCount+1);
+
+    //     for (uint256 i = 0; i < proposalCount + 1; i++) {
+    //         proposalsArray[i].votingIterationCount = proposals[i].votingIterationCount;
+    //         proposalsArray[i].proposalId = proposals[i].proposalId;
+    //         proposalsArray[i].title = proposals[i].title;
+    //         proposalsArray[i].proposalDescription = proposals[i].proposalDescription;
+    //         proposalsArray[i].proposalType = proposals[i].proposalType;
+    //         proposalsArray[i].proposer = proposals[i].proposer;
+    //         proposalsArray[i].isEligibleForFunding = proposals[i].isEligibleForFunding;
+    //         proposalsArray[i].isVerified = proposals[i].isVerified;
+    //         proposalsArray[i].verificationState = proposals[i].verificationState;
+    //     }
+    //     return proposalsArray;
+    // }
+    
+    // function getProposalById(uint256 _proposalId) public view returns (Structs.ProposalReturn memory) {
+    //     Structs.ProposalReturn memory proposal;
+    //     // Structs.Vote[] memory voteIterations;
+
+    //     proposal.votingIterationCount = proposals[_proposalId].votingIterationCount;
+    //     proposal.proposalId = proposals[_proposalId].proposalId;
+    //     proposal.title = proposals[_proposalId].title;
+    //     proposal.proposalDescription = proposals[_proposalId].proposalDescription;
+    //     proposal.proposalType = proposals[_proposalId].proposalType;
+    //     proposal.proposer = proposals[_proposalId].proposer;
+    //     proposal.isEligibleForFunding = proposals[_proposalId].isEligibleForFunding;
+    //     proposal.isVerified = proposals[_proposalId].isVerified;
+    //     proposal.verificationState = proposals[_proposalId].verificationState;
+        
+    //     return proposal;
+    // }
+
 }
