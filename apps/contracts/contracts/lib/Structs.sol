@@ -9,10 +9,7 @@ library Structs {
         string proposalDescription;
         string proposalType;
         address proposer;
-        // Evidence proposalEvidence;
-        // Vote[] votingIterations;
         VerificationState verificationState;
-        // requires funding
         bool isEligibleForFunding;
         bool isVerified;
     }

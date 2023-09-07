@@ -295,6 +295,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         voteIterations[_proposalId][0].inProgress = true;
 
         proposals[_proposalId].votingIterationCount++;
+        voteIterationsCount++;
     }
 
     function addVotingIteration(uint256 _proposalId) public onlyModerator checkState(1) {
@@ -310,6 +311,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         voteIterations[_proposalId][currentVoteIteration].inProgress = true;
 
         proposals[_proposalId].votingIterationCount++;
+        voteIterationsCount++;
     }
 
     //  TODO: Add function to add Evidence to Voting Iteration
