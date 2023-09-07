@@ -11,7 +11,7 @@ import "./storage/ZengoStorage.sol";
 
 contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, ContractMetadata {
     IERC20 public token;
-    event ModeratorAdded(address indexed newModerator);
+    event ModeratorsAdded(address[] indexed newModerators);
     event ModeratorRemoved(address indexed removedModerator);
     // nested mapping cannot be emitted in events
     // event ProposalSubmitted(Proposal newProposal, Evidence newEvidence);
@@ -33,31 +33,40 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     }
 
     constructor(
-        uint256 _registrationDuration,
         uint256 _pluralVotingPoints,
         address _tokenAddress
     ) {
         owner = msg.sender;   
 
-        registrationDuration = _registrationDuration;
         pluralVotingPoints = _pluralVotingPoints;
         token = IERC20(_tokenAddress);
         moderators[msg.sender] = true;
         moderatorList.push(msg.sender);
     }
 
-    function addModeratorInfo(address _moderatorAddress, uint8 _moderatorType, string memory _position, string memory _organization) external {
-        require(moderators[msg.sender] || msg.sender == owner, "Can't update moderatorInfo");
-
+    function updateModeratorInfo(address _moderatorAddress, uint8 _moderatorType, string memory _position, string memory _organization) external onlyOwner {
+        moderatorStruct[_moderatorAddress].moderatorType = Structs.ModeratorType(_moderatorType);
+        moderatorStruct[_moderatorAddress].position = _position;
+        moderatorStruct[_moderatorAddress].organization = _organization;
+    }
+    
+    function addModerator(address _moderatorAddress, uint8 _moderatorType, string memory _position, string memory _organization) external onlyOwner checkState(0){
+        require(moderators[_moderatorAddress] == false, "Address is already a Moderator");
+        moderators[_moderatorAddress] = true;
+        moderatorList.push(_moderatorAddress);
         moderatorStruct[_moderatorAddress].moderatorType = Structs.ModeratorType(_moderatorType);
         moderatorStruct[_moderatorAddress].position = _position;
         moderatorStruct[_moderatorAddress].organization = _organization;
     }
 
-    function addModerator(address _moderator) external onlyOwner checkState(0) {
-        moderators[_moderator] = true;
-        moderatorList.push(_moderator);
-        emit ModeratorAdded(_moderator);
+    function addModerators(address[] memory _moderators) external onlyOwner checkState(0) {
+        for (uint i = 0; i < _moderators.length; i++) {
+            if (moderators[_moderators[i]] == false) {
+                moderatorList.push(_moderators[i]);
+                moderators[_moderators[i]] = true;
+            }
+        }
+        emit ModeratorsAdded(_moderators);
     }
 
     function removeModerator(address _moderator) external onlyOwner {
@@ -71,6 +80,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         }
         emit ModeratorRemoved(_moderator);
     }
+
 
     // TODO: constructing a constructor like this
     // doesn't work figure out how to write it
