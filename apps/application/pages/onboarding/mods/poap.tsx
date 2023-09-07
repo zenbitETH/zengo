@@ -27,9 +27,9 @@ const PoapModeratorsPage = ({
   };
 
   return (
-    <div className="overflow-hidden text-center h-screen grid items-center relative px-32">
-      <div className="font-exo p-3 gap-3 grid xl:grid-cols-4 items-center px-5 relative">
-        <div className="grid items-center xl:col-span-4">
+    <div className="bg-bgd/30 overflow-hidden text-center h-screen grid items-center relative">
+      <div className="font-exo p-3 gap-3 grid items-center mx-auto relative">
+        <div className="POAPcard">
           {!addressHasPoap ? (
             <>
               <div className="POAPmargin">
@@ -60,7 +60,7 @@ const PoapModeratorsPage = ({
               </div>
 
               <button
-                className={"homeBT mt-5 w-fit mx-auto"}
+                className={"homeBT my-5 w-fit mx-auto"}
                 onClick={handleClaimPoap}
               >
                 Obtener POAP
@@ -84,7 +84,7 @@ const PoapModeratorsPage = ({
                   </div>
                   <div className="text-sm xl:text-lg font-bau">
                     Septiembre, 2023 /
-                    <span className="cursor-pointer hover:text-mod">
+                    <span className="cursor-pointer text-mod animate-pulse hover:animate-none hover:text-mod pl-1">
                       {poapTokenId ? (
                         <a
                           href={`https://app.poap.xyz/token/${poapTokenId}`}
@@ -113,8 +113,8 @@ const PoapModeratorsPage = ({
                 </div>
               </div>
               <Link href="/onboarding/mods/register">
-                <button className="homeBT mt-5 w-fit mx-auto">
-                  Listo! Solicitar mi rango de moderador
+                <button className="homeBT my-5 w-fit mx-auto">
+                  Registrarse como Moderador
                 </button>
               </Link>
             </>

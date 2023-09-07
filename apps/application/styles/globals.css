@@ -57,11 +57,11 @@
 }
 
 .POAPcard {
-  @apply bg-white/50 h-fit mx-3 max-w-xl grid items-center rounded-dd;
+  @apply bg-white/50 h-fit max-w-2xl grid items-center rounded-dd;
 }
 
 .POAPmargin {
-  @apply font-exo gap-3 py-3 grid items-center w-full relative;
+  @apply font-exo gap-3 py-3 grid items-center w-full relative mx-auto;
 }
 
 .modBT {
