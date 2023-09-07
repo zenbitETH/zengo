@@ -63,13 +63,15 @@ export default function Header() {
       <div className="wrap">
         {!isMismatched ? (
           <div className="flex w-full justify-between">
-            <div className="grid items-center">
-              <Image
-                src={logo}
-                alt="zengo presupuesto descentralizado"
-                width={200}
-              />
-            </div>
+            <Link href="/">
+              <div className="grid items-center">
+                <Image
+                  src={logo}
+                  alt="zengo presupuesto descentralizado"
+                  width={200}
+                />
+              </div>
+            </Link>
             <ConnectWallet
               className="homeBT"
               btnTitle="Acceder"
