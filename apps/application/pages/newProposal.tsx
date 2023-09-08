@@ -5,7 +5,7 @@ import Form2 from "@/components/Form2";
 import Form3 from "@/components/Form3";
 import Form4 from "@/components/Form4";
 import ProgressBar from "@/components/ProgressBar";
-import { useNewProposalState } from "@/contexts/NewProposalContext";
+import { useProposalsContextState } from "@/contexts/ProposalsContext";
 import { getUser } from "./api/auth/[...thirdweb]";
 
 const NewProposalPage = () => {
@@ -14,7 +14,7 @@ const NewProposalPage = () => {
     metadataUploadIsLoading,
     submitProposalFormIsLoading,
     submitProposalSuccess,
-  } = useNewProposalState();
+  } = useProposalsContextState();
 
   const [currentStep, setCurrentStep] = useState(1);
 

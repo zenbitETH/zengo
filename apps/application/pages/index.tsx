@@ -1,13 +1,29 @@
-import type { NextPage } from "next";
 import Carousel from "@/components/Carousel";
-import { OnboardingMods } from "@/components/OnboardingMods";
-import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
-  const { walletIsConnected } = useGlobalCycleStageState();
+  const [stateReady, setStateReady] = useState<boolean>(false);
+  const { walletIsConnected } = useOnboardingContextState();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (walletIsConnected) {
+      router.push("/onboarding/mods");
+    }
+    setStateReady(true);
+  }, [walletIsConnected]);
+
+  // useEffect(() => {
+  //   setStateReady(true);
+  // }, []);
+
   return (
     <div className="from-cit to-mod bg-gradient-to-t h-screen">
-      {!walletIsConnected ? <Carousel /> : <OnboardingMods />}
+      {stateReady ? <Carousel /> : null}
     </div>
   );
 };

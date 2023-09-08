@@ -1,43 +1,25 @@
 import {
   ConnectWallet,
-  useConnectionStatus,
-  useLogin,
   useNetworkMismatch,
   useSwitchChain,
-  useUser,
 } from "@thirdweb-dev/react";
 import Link from "next/link";
+import Image from "next/image";
 
-import { useEffect, useRef } from "react";
 import { CHAIN } from "@/const/chains";
-import { useGlobalCycleStageState } from "@/contexts/GlobalStageCycleContext";
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
+
+import logo from "../public/assets/zengo.svg";
 
 export default function Header() {
   const isMismatched = useNetworkMismatch();
   const switchChain = useSwitchChain();
-  const { walletIsConnected } = useGlobalCycleStageState();
-
-  const { login } = useLogin();
-  const { user, isLoggedIn } = useUser();
-  const connectionStatus = useConnectionStatus();
-
-  // login right after connection
-  const loginAttempted = useRef(false);
-
-  useEffect(() => {
-    if (loginAttempted.current) {
-      return;
-    }
-    if (connectionStatus === "connected" && !isLoggedIn) {
-      loginAttempted.current = true;
-      login();
-    }
-  }, [connectionStatus, isLoggedIn, login]);
+  const { walletIsConnected } = useOnboardingContextState();
 
   return (
     <header className="header">
       {walletIsConnected ? null : (
-        <div className="fixed left-1/2 -translate-x-1/2 top-7 grid gap-5">
+        <div className="fixed xl:left-1/2 xl:-translate-x-1/2 top-7 grid gap-5">
           <div className="grid grid-cols-3 gap-10 items-center">
             <Link href="https://twitter.com/zenbitMX">
               <svg
@@ -80,16 +62,27 @@ export default function Header() {
       )}
       <div className="wrap">
         {!isMismatched ? (
-          <ConnectWallet
-            className="homeBT"
-            btnTitle="Acceder"
-            detailsBtn={() => {
-              return <button className="homeBT"> Cuenta </button>;
-            }}
-            auth={{
-              loginOptional: false,
-            }}
-          />
+          <div className="flex w-full justify-between">
+            <Link href="/">
+              <div className="grid items-center">
+                <Image
+                  src={logo}
+                  alt="zengo presupuesto descentralizado"
+                  width={200}
+                />
+              </div>
+            </Link>
+            <ConnectWallet
+              className="homeBT"
+              btnTitle="Acceder"
+              detailsBtn={() => {
+                return <button className="homeBT"> Cuenta </button>;
+              }}
+              auth={{
+                loginOptional: true,
+              }}
+            />
+          </div>
         ) : (
           <button onClick={() => switchChain(CHAIN.chainId)} className="homeBT">
             <span>{`Switch to ${CHAIN.name}`}</span>

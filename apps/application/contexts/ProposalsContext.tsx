@@ -8,7 +8,7 @@ import {
 } from "@thirdweb-dev/react";
 import { contractAddress_zengoDao } from "@/const/contracts";
 
-interface INewProposalContext {
+interface IProposalsContext {
   evidence: IEvidence;
   setEvidence: (evidence: IEvidence) => void;
   location: ILocation;
@@ -21,9 +21,30 @@ interface INewProposalContext {
   metadataUploadIsLoading: boolean;
   submitProposalFormIsLoading: boolean;
   submitProposalSuccess: boolean;
+  addVotingIterationCall: (proposalId: string) => void;
+  concludeVotingIterationCall: (
+    votingIterationId: string,
+    proposalId: string
+  ) => void;
+  voteToClassifyProposalCall: (
+    vote: number,
+    votingIteration: number,
+    proposalId: number
+  ) => void;
 }
 
-export const NewProposalContext = createContext<INewProposalContext>({
+interface ISubmitProposalProps {
+  title: string;
+  proposalDescription: string;
+  evidenceDescription: string;
+  evidenceUri: string;
+  proposalType: string;
+  streetAddress: string;
+  latitude: number;
+  longitude: number;
+}
+
+export const ProposalsContext = createContext<IProposalsContext>({
   evidence: {
     date: "",
     description: "",
@@ -47,13 +68,23 @@ export const NewProposalContext = createContext<INewProposalContext>({
   metadataUploadIsLoading: false,
   submitProposalFormIsLoading: false,
   submitProposalSuccess: false,
+  addVotingIterationCall: (proposalId: string) => {},
+  concludeVotingIterationCall: (
+    votingIterationId: string,
+    proposalId: string
+  ) => {},
+  voteToClassifyProposalCall: (
+    vote: number,
+    votingIteration: number,
+    proposalId: number
+  ) => {},
 });
 
 interface IProps {
   children: ReactNode;
 }
 
-export function NewProposalContextProvider({ children }: IProps) {
+export function ProposalsContextProvider({ children }: IProps) {
   const [metadataUploadIsLoading, setMetadataUploadIsLoading] = useState(false);
   const [submitProposalSuccess, setSubmitProposalSuccess] = useState(false);
   const { mutateAsync: upload } = useStorageUpload();
@@ -108,12 +139,6 @@ export function NewProposalContextProvider({ children }: IProps) {
     contractAddress_zengoDao
   );
 
-  const {
-    mutateAsync: submitProposalFn,
-    isLoading: submitProposalIsLoading,
-    isSuccess: submitProposalIsSuccess,
-  } = useContractWrite(contractZengoDao, "submitProposal");
-
   const uploadProposalMetadataToIpfs = async () => {
     setMetadataUploadIsLoading(true);
 
@@ -134,16 +159,37 @@ export function NewProposalContextProvider({ children }: IProps) {
     }
   };
 
-  const callSubmitProposalFn = async (path: string) => {
+  const { mutateAsync: submitProposal, isLoading: submitProposalIsLoading } =
+    useContractWrite(contractZengoDao, "submitProposal");
+
+  const submitProposalCall = async ({
+    title,
+    proposalDescription,
+    evidenceDescription,
+    evidenceUri,
+    proposalType,
+    streetAddress,
+    latitude,
+    longitude,
+  }: ISubmitProposalProps) => {
     try {
-      const data = await submitProposalFn({
-        args: [proposalInfo.title, path], // TODO: args will change when contract function changes to receive all the proposal fields
+      const data = await submitProposal({
+        args: [
+          title,
+          proposalDescription,
+          evidenceDescription,
+          evidenceUri,
+          proposalType,
+          streetAddress,
+          latitude,
+          longitude,
+        ],
       });
-      console.info("contract call successs", { data });
+      console.info("contract call successs", data);
       setSubmitProposalSuccess(true);
       clearFormState();
     } catch (err) {
-      console.error("contract call failure", { err }); // TODO: show toaster with error ?
+      console.error("contract call failure", err);
     }
   };
 
@@ -152,11 +198,73 @@ export function NewProposalContextProvider({ children }: IProps) {
       const metadataPath = await uploadProposalMetadataToIpfs();
 
       if (metadataPath) {
-        await callSubmitProposalFn(metadataPath);
+        await submitProposalCall({
+          title: proposalInfo.title,
+          proposalDescription: proposalInfo.description,
+          proposalType: proposalInfo.type,
+          evidenceDescription: evidence.description,
+          evidenceUri: metadataPath,
+          streetAddress: location.locationText,
+          latitude: location.gMapsLocationObject.lat,
+          longitude: location.gMapsLocationObject.lng,
+        });
         clearFormState();
       }
     } catch (err) {
       console.error("contract call failure", { err }); // TODO: show toaster with error ?
+    }
+  };
+
+  const {
+    mutateAsync: addVotingIteration,
+    isLoading: addVotingIterationIsLoading,
+  } = useContractWrite(contractZengoDao, "addVotingIteration");
+
+  const addVotingIterationCall = async (proposalId: string) => {
+    try {
+      const data = await addVotingIteration({ args: [proposalId] });
+      console.info("contract call successs", data);
+    } catch (err) {
+      console.error("contract call failure", err);
+    }
+  };
+
+  const {
+    mutateAsync: concludeVotingIteration,
+    isLoading: concludeVotingIterationIsLoading,
+  } = useContractWrite(contractZengoDao, "concludeVotingIteration");
+
+  const concludeVotingIterationCall = async (
+    votingIterationId: string,
+    proposalId: string
+  ) => {
+    try {
+      const data = await concludeVotingIteration({
+        args: [votingIterationId, proposalId],
+      });
+      console.info("contract call successs", data);
+    } catch (err) {
+      console.error("contract call failure", err);
+    }
+  };
+
+  const {
+    mutateAsync: voteToClassifyProposal,
+    isLoading: voteToClassifyProposalIsLoading,
+  } = useContractWrite(contractZengoDao, "voteToClassifyProposal");
+
+  const voteToClassifyProposalCall = async (
+    vote: number,
+    votingIteration: number,
+    proposalId: number
+  ) => {
+    try {
+      const data = await voteToClassifyProposal({
+        args: [vote, votingIteration, proposalId],
+      });
+      console.info("contract call successs", data);
+    } catch (err) {
+      console.error("contract call failure", err);
     }
   };
 
@@ -173,22 +281,25 @@ export function NewProposalContextProvider({ children }: IProps) {
     metadataUploadIsLoading,
     submitProposalFormIsLoading: submitProposalIsLoading,
     submitProposalSuccess,
+    addVotingIterationCall,
+    concludeVotingIterationCall,
+    voteToClassifyProposalCall,
   };
 
   return (
-    <NewProposalContext.Provider value={state}>
+    <ProposalsContext.Provider value={state}>
       {children}
-    </NewProposalContext.Provider>
+    </ProposalsContext.Provider>
   );
 }
 
-NewProposalContext.displayName = "ZengoNewProposalContext";
+ProposalsContext.displayName = "ProposalsContext";
 
-export function useNewProposalState() {
-  const context = useContext(NewProposalContext);
+export function useProposalsContextState() {
+  const context = useContext(ProposalsContext);
   if (!context) {
     throw new Error(
-      "useNewProposalState must be used within the NewProposalContextProvider"
+      "useProposalsContextState must be used within the ProposalsContextProvider"
     );
   }
   return context;

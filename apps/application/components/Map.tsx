@@ -1,11 +1,11 @@
-import { useNewProposalState } from "@/contexts/NewProposalContext";
+import { useProposalsContextState } from "@/contexts/ProposalsContext";
 import { useLoadScript, GoogleMap, MarkerF } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
 
 const Map: React.FC = () => {
   const {
     location: { gMapsLocationObject },
-  } = useNewProposalState();
+  } = useProposalsContextState();
 
   const libraries = useMemo(() => ["places"], []);
 

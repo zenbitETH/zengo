@@ -38,12 +38,12 @@ const Carousel: React.FC = () => {
   };
 
   return (
-    <div className="overflow-hidden text-center h-screen grid items-center xl:mx-28 relative">
+    <div className="overflow-hidden text-center h-full grid items-center xl:mx-28 relative">
       {activeSection.id === 1 && (
         // <div className="md:mx-20 gap-3 font-bau md:h-[30rem] h-[16rem] md:h-[40rem] grid items-center py-5 px-3"> // DEV_NOTE: original line
-        <div className="md:mx-20 gap-3 font-bau h-[16rem] md:h-[40rem] grid items-center py-5 px-3">
+        <div className="mx-auto gap-3 font-bau  grid items-center py-5 px-3">
           <iframe
-            className="w-full h-full rounded-dd"
+            className="h-[16rem] md:h-[720px] xl:w-[1280px] rounded-dd"
             src="https://www.youtube.com/embed/G7e5jdp9mhc"
             allow="autoplay; encrypted-media"
             allowFullScreen
@@ -322,28 +322,35 @@ const Carousel: React.FC = () => {
           </div>
         </div>
       )}
-      <button className="carBT left-3" onClick={goToPrevious}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 16 16"
+      {activeSection.id !== 1 ? (
+        <button
+          className="carBT bottom-3 md:top-0 left-3 "
+          onClick={goToPrevious}
         >
-          {" "}
-          <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />{" "}
-        </svg>
-      </button>
-      <button className="carBT right-3" onClick={goToNext}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 16 16"
-        >
-          {" "}
-          <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />{" "}
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 16 16"
+          >
+            {" "}
+            <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />{" "}
+          </svg>
+        </button>
+      ) : null}
+      {activeSection.id !== 5 ? (
+        <button className="carBT bottom-3 md:top-0 right-3" onClick={goToNext}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 16 16"
+          >
+            {" "}
+            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />{" "}
+          </svg>
+        </button>
+      ) : null}
     </div>
   );
 };

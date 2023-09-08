@@ -15,7 +15,7 @@ contract ZengoStorage {
     address public deployer;
 
     address[] public moderatorList;
-    
+
     mapping(uint256 => Structs.Proposal) public proposals;
     mapping(address => uint256) public proposers;
 
@@ -41,7 +41,7 @@ contract ZengoStorage {
         return moderatorList;
     }
 
-    function getModerators() public view returns (Structs.Moderator[] memory) {
+    ffunction getModerators() public view returns (Structs.Moderator[] memory) {
         Structs.Moderator[] memory moderatorsStructArray = new Structs.Moderator[](moderatorList.length);
         for (uint256 i = 0; i < moderatorList.length; i++) {
             moderatorsStructArray[i].moderatorType = moderatorStruct[moderatorList[i]].moderatorType;
