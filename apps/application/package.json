@@ -25,7 +25,7 @@
     "@thirdweb-dev/auth": "3.2.34",
     "@thirdweb-dev/chains": "0.1.47",
     "@thirdweb-dev/react": "^3.14.34",
-    "@thirdweb-dev/sdk": "^3.10.54",
+    "@thirdweb-dev/sdk": "^3.10.59",
     "@thirdweb-dev/wallets": "^1.1.17",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
