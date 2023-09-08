@@ -11,7 +11,7 @@ contract ZengoStorage {
     uint256 public evidences = 0;
 
     address public owner;
-    address public votingTokenAddress; // Address of the ERC20 voting token
+    address public rewardTokenAddress; // Address of the ERC20 voting token
     address public deployer;
 
     address[] public moderatorList;
@@ -26,7 +26,7 @@ contract ZengoStorage {
     mapping(uint256 => Structs.Vote[]) public voteIterations;
 
     mapping(uint256 => Structs.Evidence) public proposalEvidence;
-    mapping(uint256 => mapping (uint8 => Structs.Evidence[])) public Evidence;
+    mapping(uint256 => mapping (uint8 => Structs.Evidence[])) public votingIterationEvidence;
 
     mapping(uint256 => mapping (uint8 => mapping (address => Structs.VerificationState))) public vote;
     mapping(uint256 => mapping (uint8 => mapping (address => bool))) public hasVoted;
@@ -51,7 +51,7 @@ contract ZengoStorage {
         return moderatorsStructArray;
     }
 
-    function getAllItems() public view returns (Structs.Proposal[] memory, Structs.Vote[] memory, Structs.Evidence[] memory) {
+    function getAllProposals() public view returns (Structs.Proposal[] memory, Structs.Vote[] memory, Structs.Evidence[] memory) {
         Structs.Proposal[] memory proposalsArray = new Structs.Proposal[](proposalCount+1);
         Structs.Vote[] memory voteIterationsArray = new Structs.Vote[](voteIterationsCount+1);
         Structs.Evidence[] memory evidencesArray = new Structs.Evidence[](evidences+1);
@@ -76,11 +76,11 @@ contract ZengoStorage {
                 voteIterationsArray[count].resultState = voteIterations[i][j].resultState;
                 count++;
                 for (uint256 k = 0; k < voteIterations[i][j].evidenceCount; k++) {
-                    evidencesArray[eCount].evidenceDescription = Evidence[i][uint8(j)][k].evidenceDescription;
-                    evidencesArray[eCount].evidenceUri = Evidence[i][uint8(j)][k].evidenceUri;
-                    evidencesArray[eCount].streetAddress = Evidence[i][uint8(j)][k].streetAddress;
-                    evidencesArray[eCount].latitude = Evidence[i][uint8(j)][k].latitude;
-                    evidencesArray[eCount].longitude = Evidence[i][uint8(j)][k].longitude;
+                    evidencesArray[eCount].evidenceDescription = votingIterationEvidence[i][uint8(j)][k].evidenceDescription;
+                    evidencesArray[eCount].evidenceUri = votingIterationEvidence[i][uint8(j)][k].evidenceUri;
+                    evidencesArray[eCount].streetAddress = votingIterationEvidence[i][uint8(j)][k].streetAddress;
+                    evidencesArray[eCount].latitude = votingIterationEvidence[i][uint8(j)][k].latitude;
+                    evidencesArray[eCount].longitude = votingIterationEvidence[i][uint8(j)][k].longitude;
                     eCount++;
                 }
             }

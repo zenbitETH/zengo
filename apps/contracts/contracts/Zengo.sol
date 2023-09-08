@@ -321,12 +321,12 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         
         uint256 currentEvidenceIndex = Evidence[_proposalId][_votingIteration].length;
         voteIterations[_proposalId][_votingIteration].evidenceCount++;
-        Evidence[_proposalId][_votingIteration].push();
-        Evidence[_proposalId][_votingIteration][currentEvidenceIndex].evidenceDescription = _evidenceDescription;
-        Evidence[_proposalId][_votingIteration][currentEvidenceIndex].streetAddress = _streetAddress;
-        Evidence[_proposalId][_votingIteration][currentEvidenceIndex].evidenceUri = _evidenceUri;
-        Evidence[_proposalId][_votingIteration][currentEvidenceIndex].latitude = _latitude;
-        Evidence[_proposalId][_votingIteration][currentEvidenceIndex].longitude = _longitude;
+        votingIterationEvidence[_proposalId][_votingIteration].push();
+        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].evidenceDescription = _evidenceDescription;
+        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].streetAddress = _streetAddress;
+        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].evidenceUri = _evidenceUri;
+        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].latitude = _latitude;
+        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].longitude = _longitude;
         evidences++;
         // TODO: emit Evidence added event
     }
