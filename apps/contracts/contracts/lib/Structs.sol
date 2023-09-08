@@ -9,14 +9,10 @@ library Structs {
         string proposalDescription;
         string proposalType;
         address proposer;
-        Evidence proposalEvidence;
-        Vote[] votingIterations;
         VerificationState verificationState;
-        // requires funding
         bool isEligibleForFunding;
         bool isVerified;
     }
-
     struct Moderator {
         ModeratorType moderatorType;
         string position;
@@ -25,14 +21,11 @@ library Structs {
 
     struct Vote {
         uint8 votingIteration;
+        uint8 evidenceCount;
         uint256 proposalId;
         uint256 totalVotes;
         bool inProgress;
-        mapping(address => VerificationState) vote;
-        mapping(address => bool) hasVoted;
-        mapping(VerificationState => uint256) voteCount;
         VerificationState resultState;
-        Evidence[] evidences;
     }
 
     struct Evidence {
