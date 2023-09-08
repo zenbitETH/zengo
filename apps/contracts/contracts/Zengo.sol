@@ -319,7 +319,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     //  TODO: Add function to add Evidence to Voting Iteration
     function addEvidence(uint256 _proposalId, uint8 _votingIteration, uint256 _latitude, uint256 _longitude, string memory _evidenceDescription, string memory _streetAddress, string memory _evidenceUri) public onlyProposer(_proposalId) {
         
-        uint256 currentEvidenceIndex = Evidence[_proposalId][_votingIteration].length;
+        uint256 currentEvidenceIndex = votingIterationEvidence[_proposalId][_votingIteration].length;
         voteIterations[_proposalId][_votingIteration].evidenceCount++;
         votingIterationEvidence[_proposalId][_votingIteration].push();
         votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].evidenceDescription = _evidenceDescription;
