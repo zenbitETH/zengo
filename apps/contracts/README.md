@@ -1,29 +1,29 @@
 # Contracts
 
-The smart contracts component to EVM Kit.
+The smart contracts package for ZengoDAO
 
 ## Development
 
 1. Install dependencies
 
 ```bash
-yarn
+pnpm install
 ```
 
 2. Build your smart contracts
 
 ```bash
-yarn build
+pnpm build
 ```
 
 3. Test your smart contracts
 
 ```bash
-yarn test
+pnpm test
 ```
 
 3. Deploy your smart contracts
 
 ```bash
-yarn deploy
+pnpm deploy
 ```
