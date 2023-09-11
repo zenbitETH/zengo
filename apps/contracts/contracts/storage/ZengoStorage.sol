@@ -25,19 +25,13 @@ contract ZengoStorage {
     mapping(uint256 => Structs.Vote[]) public voteIterations;
 
     mapping(uint256 => Structs.Evidence) public proposalEvidence;
-    mapping(uint256 => mapping(uint8 => Structs.Evidence[]))
-        public votingIterationEvidence;
+    mapping(uint256 => mapping(uint8 => Structs.Evidence[])) public votingIterationEvidence;
 
-    mapping(uint256 => mapping(uint8 => mapping(address => Structs.VerificationState)))
-        public vote;
-    mapping(uint256 => mapping(uint8 => mapping(address => bool)))
-        public hasVoted;
-    mapping(uint256 => mapping(uint8 => mapping(Structs.VerificationState => uint256)))
-        public voteCount;
+    mapping(uint256 => mapping(uint8 => mapping(address => Structs.VerificationState))) public vote;
+    mapping(uint256 => mapping(uint8 => mapping(address => bool))) public hasVoted;
+    mapping(uint256 => mapping(uint8 => mapping(Structs.VerificationState => uint256))) public voteCount;
 
-    function getModeratorInfo(
-        address _moderator
-    ) public view returns (Structs.Moderator memory) {
+    function getModeratorInfo(address _moderator) public view returns (Structs.Moderator memory) {
         require(moderators[_moderator], "Given address is not a Moderator");
         return moderatorStruct[_moderator];
     }
@@ -47,20 +41,13 @@ contract ZengoStorage {
     }
 
     function getModerators() public view returns (Structs.Moderator[] memory) {
-        Structs.Moderator[]
-            memory moderatorsStructArray = new Structs.Moderator[](
+        Structs.Moderator[] memory moderatorsStructArray = new Structs.Moderator[](
                 moderatorList.length
             );
         for (uint256 i = 0; i < moderatorList.length; i++) {
-            moderatorsStructArray[i].moderatorType = moderatorStruct[
-                moderatorList[i]
-            ].moderatorType;
-            moderatorsStructArray[i].position = moderatorStruct[
-                moderatorList[i]
-            ].position;
-            moderatorsStructArray[i].organization = moderatorStruct[
-                moderatorList[i]
-            ].organization;
+            moderatorsStructArray[i].moderatorType = moderatorStruct[moderatorList[i]].moderatorType;
+            moderatorsStructArray[i].position = moderatorStruct[moderatorList[i]].position;
+            moderatorsStructArray[i].organization = moderatorStruct[moderatorList[i]].organization;
         }
         return moderatorsStructArray;
     }
@@ -68,11 +55,7 @@ contract ZengoStorage {
     function getAllProposals()
         public
         view
-        returns (
-            Structs.Proposal[] memory,
-            Structs.Vote[] memory,
-            Structs.Evidence[] memory
-        )
+        returns (Structs.Proposal[] memory, Structs.Vote[] memory, Structs.Evidence[] memory)
     {
         Structs.Proposal[] memory proposalsArray = new Structs.Proposal[](
             proposalCount + 1
@@ -83,57 +66,33 @@ contract ZengoStorage {
         Structs.Evidence[] memory evidencesArray = new Structs.Evidence[](
             evidences + 1
         );
-        uint count = 0;
-        uint eCount = 0;
+        uint256 count = 0;
+        uint256 eCount = 0;
 
         for (uint256 i = 0; i < proposalCount + 1; i++) {
-            proposalsArray[i].votingIterationCount = proposals[i]
-                .votingIterationCount;
+            proposalsArray[i].votingIterationCount = proposals[i].votingIterationCount;
             proposalsArray[i].proposalId = proposals[i].proposalId;
             proposalsArray[i].title = proposals[i].title;
-            proposalsArray[i].proposalDescription = proposals[i]
-                .proposalDescription;
+            proposalsArray[i].proposalDescription = proposals[i].proposalDescription;
             proposalsArray[i].proposalType = proposals[i].proposalType;
             proposalsArray[i].proposer = proposals[i].proposer;
-            proposalsArray[i].isEligibleForFunding = proposals[i]
-                .isEligibleForFunding;
+            proposalsArray[i].isEligibleForFunding = proposals[i].isEligibleForFunding;
             proposalsArray[i].isVerified = proposals[i].isVerified;
-            proposalsArray[i].verificationState = proposals[i]
-                .verificationState;
+            proposalsArray[i].verificationState = proposals[i].verificationState;
             for (uint256 j = 0; j < proposals[i].votingIterationCount; j++) {
-                voteIterationsArray[count].votingIteration = voteIterations[i][
-                    j
-                ].votingIteration;
-                voteIterationsArray[count].proposalId = voteIterations[i][j]
-                    .proposalId;
-                voteIterationsArray[count].totalVotes = voteIterations[i][j]
-                    .totalVotes;
-                voteIterationsArray[count].inProgress = voteIterations[i][j]
-                    .inProgress;
-                voteIterationsArray[count].resultState = voteIterations[i][j]
-                    .resultState;
+                voteIterationsArray[count].votingIteration = voteIterations[i][j].votingIteration;
+                voteIterationsArray[count].proposalId = voteIterations[i][j].proposalId;
+                voteIterationsArray[count].totalVotes = voteIterations[i][j].totalVotes;
+                voteIterationsArray[count].inProgress = voteIterations[i][j].inProgress;
+                voteIterationsArray[count].resultState = voteIterations[i][j].resultState;
                 count++;
-                for (
-                    uint256 k = 0;
-                    k < voteIterations[i][j].evidenceCount;
-                    k++
-                ) {
-                    evidencesArray[eCount]
-                        .evidenceDescription = votingIterationEvidence[i][
-                        uint8(j)
-                    ][k].evidenceDescription;
-                    evidencesArray[eCount]
-                        .evidenceUri = votingIterationEvidence[i][uint8(j)][k]
-                        .evidenceUri;
-                    evidencesArray[eCount]
-                        .streetAddress = votingIterationEvidence[i][uint8(j)][k]
-                        .streetAddress;
-                    evidencesArray[eCount].latitude = votingIterationEvidence[
-                        i
-                    ][uint8(j)][k].latitude;
-                    evidencesArray[eCount].longitude = votingIterationEvidence[
-                        i
-                    ][uint8(j)][k].longitude;
+                for (uint256 k = 0; k < voteIterations[i][j].evidenceCount; k++) {
+                    evidencesArray[eCount].evidenceDescription =
+                        votingIterationEvidence[i][uint8(j)][k].evidenceDescription;
+                    evidencesArray[eCount].evidenceUri = votingIterationEvidence[i][uint8(j)][k].evidenceUri;
+                    evidencesArray[eCount].streetAddress = votingIterationEvidence[i][uint8(j)][k].streetAddress;
+                    evidencesArray[eCount].latitude = votingIterationEvidence[i][uint8(j)][k].latitude;
+                    evidencesArray[eCount].longitude = votingIterationEvidence[i][uint8(j)][k].longitude;
                     eCount++;
                 }
             }
