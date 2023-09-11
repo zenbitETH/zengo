@@ -54,53 +54,56 @@ contract ZengoStorage {
         return moderatorsStructArray;
     }
 
-    // function getAllProposals()
-    //     public
-    //     view
-    //     returns (Structs.Proposal[] memory, Structs.Vote[] memory, Structs.Evidence[] memory)
-    // {
-    //     Structs.Proposal[] memory proposalsArray = new Structs.Proposal[](
-    //         proposalCount + 1
-    //     );
-    //     Structs.Vote[] memory voteIterationsArray = new Structs.Vote[](
-    //         voteIterationsCount + 1
-    //     );
-    //     Structs.Evidence[] memory evidencesArray = new Structs.Evidence[](
-    //         evidences + 1
-    //     );
-    //     uint256 count = 0;
-    //     uint256 eCount = 0;
+    function getAllProposals()
+        public
+        view
+        returns (Structs.Proposal[] memory, Structs.Vote[] memory, Structs.Evidence[] memory)
+    {
+        Structs.Proposal[] memory proposalsArray = new Structs.Proposal[](
+            proposalCount + 1
+        );
+        Structs.Vote[] memory voteIterationsArray = new Structs.Vote[](
+            voteIterationsCount + 1
+        );
+        Structs.Evidence[] memory evidencesArray = new Structs.Evidence[](
+            evidences + 1
+        );
+        uint256 count = 0;
+        uint256 eCount = 0;
 
-    //     for (uint256 i = 0; i < proposalCount + 1; i++) {
-    //         proposalsArray[i].votingIterationCount = proposals[i].votingIterationCount;
-    //         proposalsArray[i].proposalId = proposals[i].proposalId;
-    //         proposalsArray[i].title = proposals[i].title;
-    //         proposalsArray[i].proposalDescription = proposals[i].proposalDescription;
-    //         proposalsArray[i].proposalType = proposals[i].proposalType;
-    //         proposalsArray[i].proposer = proposals[i].proposer;
-    //         proposalsArray[i].isEligibleForFunding = proposals[i].isEligibleForFunding;
-    //         proposalsArray[i].isVerified = proposals[i].isVerified;
-    //         proposalsArray[i].verificationState = proposals[i].verificationState;
-    //         for (uint256 j = 0; j < proposals[i].votingIterationCount; j++) {
-    //             voteIterationsArray[count].votingIteration = voteIterations[i][j].votingIteration;
-    //             voteIterationsArray[count].proposalId = voteIterations[i][j].proposalId;
-    //             voteIterationsArray[count].totalVotes = voteIterations[i][j].totalVotes;
-    //             voteIterationsArray[count].inProgress = voteIterations[i][j].inProgress;
-    //             voteIterationsArray[count].resultState = voteIterations[i][j].resultState;
-    //             count++;
-    //             for (uint256 k = 0; k < voteIterations[i][j].evidenceCount; k++) {
-    //                 evidencesArray[eCount].evidenceDescription =
-    //                     votingIterationEvidence[i][uint8(j)][k].evidenceDescription;
-    //                 evidencesArray[eCount].evidenceUri = votingIterationEvidence[i][uint8(j)][k].evidenceUri;
-    //                 evidencesArray[eCount].streetAddress = votingIterationEvidence[i][uint8(j)][k].streetAddress;
-    //                 evidencesArray[eCount].latitude = votingIterationEvidence[i][uint8(j)][k].latitude;
-    //                 evidencesArray[eCount].longitude = votingIterationEvidence[i][uint8(j)][k].longitude;
-    //                 eCount++;
-    //             }
-    //         }
-    //     }
-    //     return (proposalsArray, voteIterationsArray, evidencesArray);
-    // }
+        for (uint256 i = 0; i < proposalCount + 1; i++) {
+            proposalsArray[i].votingIterationCount = proposals[GOVERNANCE_CYCLE][i].votingIterationCount;
+            proposalsArray[i].proposalId = proposals[GOVERNANCE_CYCLE][i].proposalId;
+            proposalsArray[i].title = proposals[GOVERNANCE_CYCLE][i].title;
+            proposalsArray[i].proposalDescription = proposals[GOVERNANCE_CYCLE][i].proposalDescription;
+            proposalsArray[i].proposalType = proposals[GOVERNANCE_CYCLE][i].proposalType;
+            proposalsArray[i].proposer = proposals[GOVERNANCE_CYCLE][i].proposer;
+            proposalsArray[i].isEligibleForFunding = proposals[GOVERNANCE_CYCLE][i].isEligibleForFunding;
+            proposalsArray[i].isVerified = proposals[GOVERNANCE_CYCLE][i].isVerified;
+            proposalsArray[i].verificationState = proposals[GOVERNANCE_CYCLE][i].verificationState;
+            for (uint256 j = 0; j < proposals[GOVERNANCE_CYCLE][i].votingIterationCount; j++) {
+                voteIterationsArray[count].votingIteration = voteIterations[GOVERNANCE_CYCLE][i][j].votingIteration;
+                voteIterationsArray[count].proposalId = voteIterations[GOVERNANCE_CYCLE][i][j].proposalId;
+                voteIterationsArray[count].totalVotes = voteIterations[GOVERNANCE_CYCLE][i][j].totalVotes;
+                voteIterationsArray[count].inProgress = voteIterations[GOVERNANCE_CYCLE][i][j].inProgress;
+                voteIterationsArray[count].resultState = voteIterations[GOVERNANCE_CYCLE][i][j].resultState;
+                count++;
+                for (uint256 k = 0; k < voteIterations[GOVERNANCE_CYCLE][i][j].evidenceCount; k++) {
+                    evidencesArray[eCount].evidenceDescription =
+                        votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].evidenceDescription;
+                    evidencesArray[eCount].evidenceUri =
+                        votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].evidenceUri;
+                    evidencesArray[eCount].streetAddress =
+                        votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].streetAddress;
+                    evidencesArray[eCount].latitude = votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].latitude;
+                    evidencesArray[eCount].longitude =
+                        votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].longitude;
+                    eCount++;
+                }
+            }
+        }
+        return (proposalsArray, voteIterationsArray, evidencesArray);
+    }
 
     // function getAllVoteIterations() public view returns (Structs.Vote[] memory) {
 
