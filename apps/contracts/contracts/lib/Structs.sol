@@ -13,6 +13,7 @@ library Structs {
         bool isEligibleForFunding;
         bool isVerified;
     }
+
     struct Moderator {
         ModeratorType moderatorType;
         string position;
