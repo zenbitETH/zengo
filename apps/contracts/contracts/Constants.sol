@@ -14,7 +14,7 @@ contract Constants {
     // For example: Verification ends at the start of 42nd day
     // Thus stateLength are [1, 41, 15, 2, 1]
     // Thereby making the Governance Cycle 1+41+15+2+1=60 days long
-    uint8[] STATE_COMPLETION_LENGTHS = [20, 42, 57, 59, 60];
+    uint8[] STATE_COMPLETION_LENGTHS = [1, 42, 57, 59, 60];
 
     enum VerificationState {
         ProposalRegistered,
@@ -25,8 +25,6 @@ contract Constants {
         RejectProposal,
         ApproveForFunding
     }
-
-    uint256 public GOVERNANCE_CYCLE = 0;
 
     uint256 public constant THRESHOLD_VOTE_LIMIT = 51;
 

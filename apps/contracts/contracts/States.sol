@@ -4,10 +4,9 @@ pragma solidity ^0.8.17;
 import "./Constants.sol";
 
 contract GStates is Constants {
-
     uint256 public startTime;
 
-    constructor () payable {
+    constructor() payable {
         startTime = block.timestamp;
     }
 
@@ -16,8 +15,7 @@ contract GStates is Constants {
         _;
     }
 
-    function getState () public view returns (State) {
-       
+    function getState() public view returns (State) {
         uint256 _governanceCycle = calculateCurrentGovernanceCycle();
 
         uint256 day = (block.timestamp - startTime - (_governanceCycle * GOVERNANCE_CYCLE_LENGTH)) / 86400;
@@ -33,7 +31,6 @@ contract GStates is Constants {
         } else {
             return State(4);
         }
-
     }
 
     function getGovernanceCycle() public view returns (uint256) {
