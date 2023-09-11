@@ -34,14 +34,18 @@ const PoapModeratorsPage = ({
             <>
               <div className="POAPmargin">
                 <div className="">
-                  <Image
-                    src={eventInfo.image_url}
-                    height={250}
-                    width={250}
-                    alt="onboarding POAP"
-                    className="rounded-full mx-auto animate-pulse w-auto h-auto"
-                    priority={true}
-                  />
+                  {eventInfo?.image_url ? (
+                    <Image
+                      src={eventInfo.image_url}
+                      height={250}
+                      width={250}
+                      alt="onboarding POAP"
+                      className="rounded-full mx-auto animate-pulse w-auto h-auto"
+                      priority={true}
+                    />
+                  ) : (
+                    <div>asd NO NOT NOT NOT asdasdsa</div>
+                  )}
                 </div>
                 <div className=" xl:text-xl text-justify bg-mod/70 py-3 px-5 w-full text-white">
                   <ul className="grid gap-3">
@@ -128,6 +132,7 @@ const PoapModeratorsPage = ({
 export const getServerSideProps: GetServerSideProps<{
   eventInfo: any;
 }> = async () => {
+  console.log("ssr starts here ------------------------------");
   const options = {
     method: "GET",
     headers: {
@@ -141,7 +146,17 @@ export const getServerSideProps: GetServerSideProps<{
     options
   );
 
+  console.log({ options });
+
   const eventInfoResult = await eventInfoResponse.json();
+  console.log("eventInfoResult here ------------------------------ ", {
+    eventInfoResponse,
+    eventInfoResult,
+  });
+
+  console.log("ssr return here ------------------------------", {
+    eventInfoResult,
+  });
   return {
     props: { eventInfo: eventInfoResult },
   };
