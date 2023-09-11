@@ -139,12 +139,11 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     function setIndividualVotingPoints(
         address _voter,
         uint256 _points
-    ) external onlyModerator {
+    ) external onlyOwner {
         votingPoints[_voter] = _points;
     }
 
-    // function setVotingPoints(uint256 _points) external onlyOwner {
-    function setVotingPoints(uint256 _points) external onlyModerator {
+    function setVotingPoints(uint256 _points) external onlyOwner {
         for (uint256 i = 0; i < moderatorList.length; i++) {
             votingPoints[moderatorList[i]] = _points;
         }
