@@ -26,8 +26,6 @@ contract Constants {
         ApproveForFunding
     }
 
-    uint256 public GOVERNANCE_CYCLE = 0;
-
     uint256 public constant THRESHOLD_VOTE_LIMIT = 51;
 
     // Length of a full governance cycle in seconds

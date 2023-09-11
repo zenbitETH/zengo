@@ -28,7 +28,10 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     }
 
     modifier onlyProposer(uint256 _proposalId) {
-        require(proposals[_proposalId].proposer == msg.sender, "Only proposer of this proposal can call this function");
+        require(
+            proposals[GOVERNANCE_CYCLE][_proposalId].proposer == msg.sender,
+            "Only proposer of this proposal can call this function"
+        );
         _;
     }
 
@@ -110,7 +113,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
 
         // });
 
-        Structs.Proposal storage newProposal = proposals[proposalCount];
+        Structs.Proposal storage newProposal = proposals[GOVERNANCE_CYCLE][proposalCount];
         // Structs.Proposal storage newProposal =
 
         Structs.Evidence memory newEvidence =
@@ -127,7 +130,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         newProposal.isVerified = false;
         newProposal.votingIterationCount = 0;
         newProposal.verificationState = Structs.VerificationState(0);
-        proposalEvidence[proposalCount] = newEvidence;
+        proposalEvidence[GOVERNANCE_CYCLE][proposalCount] = newEvidence;
 
         intializeVotingIteration(proposalCount);
 
@@ -138,12 +141,12 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     }
 
     function setIndividualVotingPoints(address _voter, uint256 _points) external onlyOwner {
-        votingPoints[_voter] = _points;
+        votingPoints[GOVERNANCE_CYCLE][_voter] = _points;
     }
 
     function setVotingPoints(uint256 _points) external onlyOwner {
         for (uint256 i = 0; i < moderatorList.length; i++) {
-            votingPoints[moderatorList[i]] = _points;
+            votingPoints[GOVERNANCE_CYCLE][moderatorList[i]] = _points;
         }
     }
 
@@ -159,20 +162,20 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         require(_vote <= uint8(Structs.VerificationState.ApproveForFunding), "Out of Range / Invalid vote option");
 
         require(
-            !hasVoted[_proposalId][_votingIteration][msg.sender],
+            !hasVoted[GOVERNANCE_CYCLE][_proposalId][_votingIteration][msg.sender],
             "You have already voted for this Voting Iteration of this proposal"
         );
-        vote[_proposalId][_votingIteration][msg.sender] = Structs.VerificationState(_vote);
+        vote[GOVERNANCE_CYCLE][_proposalId][_votingIteration][msg.sender] = Structs.VerificationState(_vote);
         // votingIteration.vote[msg.sender] = Structs.VerificationState(_vote);
-        hasVoted[_proposalId][_votingIteration][msg.sender] = true;
+        hasVoted[GOVERNANCE_CYCLE][_proposalId][_votingIteration][msg.sender] = true;
         // votingIteration.hasVoted[msg.sender] = true;
-        voteCount[_proposalId][_votingIteration][Structs.VerificationState(_vote)]++;
+        voteCount[GOVERNANCE_CYCLE][_proposalId][_votingIteration][Structs.VerificationState(_vote)]++;
         // votingIteration.voteCount[Structs.VerificationState(_vote)]++;
         // TODO: trigger concludeVotingIteration when one of the
         // consensusIteration reaches the threshold votesPercent
         // update addModerator flag here
         if (
-            (voteCount[_proposalId][_votingIteration][Structs.VerificationState(_vote)] * 100)
+            (voteCount[GOVERNANCE_CYCLE][_proposalId][_votingIteration][Structs.VerificationState(_vote)] * 100)
                 > moderatorList.length * THRESHOLD_VOTE_LIMIT
         ) {
             autoTriggerVoteResult(_votingIteration, _proposalId, Structs.VerificationState(_vote));
@@ -186,32 +189,32 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
             _resultState == Structs.VerificationState(1) || _resultState == Structs.VerificationState(2)
                 || _resultState == Structs.VerificationState(3)
         ) {
-            voteIterations[_proposalId][_votingIteration].inProgress = true;
-            voteIterations[_proposalId][_votingIteration].resultState = _resultState;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress = true;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].resultState = _resultState;
             // TODO: emit Event that proposal is now respective
             // verification state that can require further
             // voting iterations
             // TODO: trigger addVoteIteration with respective
             // Result State
         } else if (_resultState == Structs.VerificationState(4)) {
-            voteIterations[_proposalId][_votingIteration].inProgress = false;
-            voteIterations[_proposalId][_votingIteration].resultState = _resultState;
-            proposals[_proposalId].isEligibleForFunding = false;
-            proposals[_proposalId].isVerified = true;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress = false;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].resultState = _resultState;
+            proposals[GOVERNANCE_CYCLE][_proposalId].isEligibleForFunding = false;
+            proposals[GOVERNANCE_CYCLE][_proposalId].isVerified = true;
             // TODO: emit Event that proposal is completed and
             // doesn't require any funding
         } else if (_resultState == Structs.VerificationState(5)) {
-            voteIterations[_proposalId][_votingIteration].inProgress = false;
-            voteIterations[_proposalId][_votingIteration].resultState = _resultState;
-            proposals[_proposalId].isEligibleForFunding = false;
-            proposals[_proposalId].isVerified = false;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress = false;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].resultState = _resultState;
+            proposals[GOVERNANCE_CYCLE][_proposalId].isEligibleForFunding = false;
+            proposals[GOVERNANCE_CYCLE][_proposalId].isVerified = false;
             // TODO: emit Event that proposal is rejected or spam and
             // is ineligible for funding
         } else if (_resultState == Structs.VerificationState(6)) {
-            voteIterations[_proposalId][_votingIteration].inProgress = false;
-            voteIterations[_proposalId][_votingIteration].resultState = _resultState;
-            proposals[_proposalId].isEligibleForFunding = true;
-            proposals[_proposalId].isVerified = true;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress = false;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].resultState = _resultState;
+            proposals[GOVERNANCE_CYCLE][_proposalId].isEligibleForFunding = true;
+            proposals[GOVERNANCE_CYCLE][_proposalId].isVerified = true;
             // TODO: emit Event that proposal is approved for funding
         }
     }
@@ -225,7 +228,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         // TODO: check global State
         // TODO: check zero Votes
         require(
-            voteIterations[_proposalId][_votingIteration].inProgress,
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress,
             "Voting Iteration doesn't exist or has already concluded"
         );
 
@@ -233,68 +236,72 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         uint256 maxCount = 0;
         // Have to handle Edge case when there are equal number of Votes
         for (uint8 i = 0; i < 6; i++) {
-            if (voteCount[_proposalId][_votingIteration][Structs.VerificationState(i)] > maxCount) {
+            if (voteCount[GOVERNANCE_CYCLE][_proposalId][_votingIteration][Structs.VerificationState(i)] > maxCount) {
                 result = i;
             }
         }
         if (result == 1 || result == 2 || result == 3) {
-            voteIterations[_proposalId][_votingIteration].inProgress = true;
-            voteIterations[_proposalId][_votingIteration].resultState = Structs.VerificationState(result);
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress = true;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].resultState =
+                Structs.VerificationState(result);
             // TODO: emit Event that proposal is now respective
             // verification state that can require further
             // voting iterations
             // TODO: trigger addVoteIteration with respective
             // Result State
         } else if (result == 4) {
-            voteIterations[_proposalId][_votingIteration].inProgress = false;
-            voteIterations[_proposalId][_votingIteration].resultState = Structs.VerificationState(result);
-            proposals[_proposalId].isEligibleForFunding = false;
-            proposals[_proposalId].isVerified = true;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress = false;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].resultState =
+                Structs.VerificationState(result);
+            proposals[GOVERNANCE_CYCLE][_proposalId].isEligibleForFunding = false;
+            proposals[GOVERNANCE_CYCLE][_proposalId].isVerified = true;
             // TODO: emit Event that proposal is completed and
             // doesn't require any funding
         } else if (result == 5) {
-            voteIterations[_proposalId][_votingIteration].inProgress = false;
-            voteIterations[_proposalId][_votingIteration].resultState = Structs.VerificationState(result);
-            proposals[_proposalId].isEligibleForFunding = false;
-            proposals[_proposalId].isVerified = false;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress = false;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].resultState =
+                Structs.VerificationState(result);
+            proposals[GOVERNANCE_CYCLE][_proposalId].isEligibleForFunding = false;
+            proposals[GOVERNANCE_CYCLE][_proposalId].isVerified = false;
             // TODO: emit Event that proposal is rejected or spam and
             // is ineligible for funding
         } else if (result == 6) {
-            voteIterations[_proposalId][_votingIteration].inProgress = false;
-            voteIterations[_proposalId][_votingIteration].resultState = Structs.VerificationState(result);
-            proposals[_proposalId].isEligibleForFunding = true;
-            proposals[_proposalId].isVerified = true;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress = false;
+            voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].resultState =
+                Structs.VerificationState(result);
+            proposals[GOVERNANCE_CYCLE][_proposalId].isEligibleForFunding = true;
+            proposals[GOVERNANCE_CYCLE][_proposalId].isVerified = true;
             // TODO: emit Event that proposal is approved for funding
         }
     }
 
     function intializeVotingIteration(uint256 _proposalId) internal {
         // uint256 memory length = proposals[_proposalId].votingIterations.length;
-        voteIterations[_proposalId].push();
+        voteIterations[GOVERNANCE_CYCLE][_proposalId].push();
 
-        voteIterations[_proposalId][0].votingIteration = 0;
-        voteIterations[_proposalId][0].proposalId = _proposalId;
-        voteIterations[_proposalId][0].totalVotes = 0;
-        voteIterations[_proposalId][0].evidenceCount = 0;
-        voteIterations[_proposalId][0].inProgress = true;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][0].votingIteration = 0;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][0].proposalId = _proposalId;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][0].totalVotes = 0;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][0].evidenceCount = 0;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][0].inProgress = true;
 
-        proposals[_proposalId].votingIterationCount++;
+        proposals[GOVERNANCE_CYCLE][_proposalId].votingIterationCount++;
         voteIterationsCount++;
     }
 
     function addVotingIteration(uint256 _proposalId) public onlyModerator checkState(1) {
-        uint8 currentVoteIteration = proposals[_proposalId].votingIterationCount;
+        uint8 currentVoteIteration = proposals[GOVERNANCE_CYCLE][_proposalId].votingIterationCount;
 
         // uint256 memory length = proposals[_proposalId].votingIterations.length;
-        voteIterations[_proposalId].push();
+        voteIterations[GOVERNANCE_CYCLE][_proposalId].push();
 
-        voteIterations[_proposalId][currentVoteIteration].votingIteration = currentVoteIteration;
-        voteIterations[_proposalId][currentVoteIteration].proposalId = _proposalId;
-        voteIterations[_proposalId][currentVoteIteration].evidenceCount = 0;
-        voteIterations[_proposalId][currentVoteIteration].totalVotes = 0;
-        voteIterations[_proposalId][currentVoteIteration].inProgress = true;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][currentVoteIteration].votingIteration = currentVoteIteration;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][currentVoteIteration].proposalId = _proposalId;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][currentVoteIteration].evidenceCount = 0;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][currentVoteIteration].totalVotes = 0;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][currentVoteIteration].inProgress = true;
 
-        proposals[_proposalId].votingIterationCount++;
+        proposals[GOVERNANCE_CYCLE][_proposalId].votingIterationCount++;
         voteIterationsCount++;
     }
 
@@ -308,15 +315,19 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         string memory _streetAddress,
         string memory _evidenceUri
     ) public onlyProposer(_proposalId) {
-        uint256 currentEvidenceIndex = votingIterationEvidence[_proposalId][_votingIteration].length;
-        voteIterations[_proposalId][_votingIteration].evidenceCount++;
-        votingIterationEvidence[_proposalId][_votingIteration].push();
-        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].evidenceDescription =
-            _evidenceDescription;
-        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].streetAddress = _streetAddress;
-        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].evidenceUri = _evidenceUri;
-        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].latitude = _latitude;
-        votingIterationEvidence[_proposalId][_votingIteration][currentEvidenceIndex].longitude = _longitude;
+        uint256 currentEvidenceIndex = votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration].length;
+        voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].evidenceCount++;
+        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration].push();
+        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex]
+            .evidenceDescription = _evidenceDescription;
+        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].streetAddress =
+            _streetAddress;
+        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].evidenceUri =
+            _evidenceUri;
+        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].latitude =
+            _latitude;
+        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].longitude =
+            _longitude;
         evidences++;
         // TODO: emit Evidence added event
     }
