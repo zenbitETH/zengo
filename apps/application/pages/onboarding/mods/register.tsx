@@ -9,20 +9,19 @@ const RegisterModeratorRolePage = () => {
   const [moderatorOrganization, setModeratorOrganization] =
     useState<string>("");
 
-  const address = useAddress();
-
-  const { addModeratorCall, userIsModerator } = useOnboardingContextState();
+  const { addModeratorCall, userIsModerator, connectedWallet } =
+    useOnboardingContextState();
 
   const router = useRouter();
 
   const handleRegisterClick = () => {
     if (
-      address !== undefined &&
+      connectedWallet !== undefined &&
       moderatorPosition !== "" &&
       moderatorOrganization !== ""
     ) {
       addModeratorCall({
-        modAddress: address,
+        modAddress: connectedWallet,
         modType: moderatorType,
         modPosition: moderatorPosition,
         modOrganization: moderatorOrganization,

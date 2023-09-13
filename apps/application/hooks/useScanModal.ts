@@ -1,9 +1,14 @@
 import { useState } from "react";
 
-export const useScanModal = (startingVisibility: boolean) => {
-  const [visible, setVisible] = useState(startingVisibility);
-  function toggle() {
-    setVisible(!visible);
+export const useScanModal = () => {
+  const [visible, setVisible] = useState(false);
+
+  function closeModal() {
+    setVisible(false);
   }
-  return { toggle, visible };
+
+  function showModal() {
+    setVisible(true);
+  }
+  return { closeModal, showModal, visible };
 };

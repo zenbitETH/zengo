@@ -4,7 +4,7 @@ import Image from "next/image";
 
 type ScanModalProps = {
   visible: boolean;
-  toggle: () => void;
+  toggle?: () => void;
 };
 
 export const ScanModal: React.FC<ScanModalProps> = ({ visible, toggle }) =>

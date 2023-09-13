@@ -24,7 +24,7 @@ export default async function handler(
     res.status(200).json({
       message: "Wallet address scanned successfully",
       scan: Boolean(scanFetchResult.tokenId),
-      tokenId: scanFetchResult.tokenId,
+      tokenId: scanFetchResult.tokenId || "",
     });
   } else {
     res
