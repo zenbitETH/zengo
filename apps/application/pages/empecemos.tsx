@@ -4,12 +4,8 @@ import Link from "next/link";
 import { useAddress } from "@thirdweb-dev/react";
 import { getUser } from "./api/auth/[...thirdweb]";
 import { useEventPoap } from "@/hooks/useEventPoap";
-import { ScanModal } from "@/components/ScanModal";
-import { useScanModal } from "@/hooks/useScanModal";
 
 export default function GasStation() {
-  const { toggle, visible } = useScanModal(true);
-
   const address = useAddress();
   const [walletAddress, setWalletaddress] = useState("");
 
@@ -31,8 +27,6 @@ export default function GasStation() {
       await poapScan(walletAddress, eventIdUsed);
 
       await sleep(1000);
-
-      toggle(); // after finishing the scan, toggle to hide the scan modal
     };
     if (walletAddress !== "") {
       firstScan();
@@ -127,7 +121,6 @@ export default function GasStation() {
           </div>
         </div>
       </div>
-      {walletAddress ? <ScanModal visible={visible} toggle={toggle} /> : null}
     </div>
   );
 }
