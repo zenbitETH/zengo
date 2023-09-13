@@ -21,13 +21,13 @@ export default async function handler(
 
     const scanFetchResult = await scanFetchResponse.json();
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Wallet address scanned successfully",
       scan: Boolean(scanFetchResult.tokenId),
       tokenId: scanFetchResult.tokenId || "",
     });
   } else {
-    res
+    return res
       .status(200)
       .json({ message: "No params needed provided", scan: false, tokenId: "" });
   }

@@ -1,5 +1,4 @@
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
-import { useAddress } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -9,10 +8,36 @@ const RegisterModeratorRolePage = () => {
   const [moderatorOrganization, setModeratorOrganization] =
     useState<string>("");
 
-  const { addModeratorCall, userIsModerator, connectedWallet } =
+  const { setUserIsModerator, userIsModerator, connectedWallet } =
     useOnboardingContextState();
 
   const router = useRouter();
+
+  const postAddModerator = async (
+    modAddress: string,
+    modType: string,
+    modPosition: string,
+    modOrganization: string
+  ) => {
+    const response = await fetch("/api/modregistration", {
+      method: "POST",
+      body: JSON.stringify({
+        modAddress,
+        modType,
+        modPosition,
+        modOrganization,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseData = await response.json();
+    console.log({ responseData });
+    if (responseData.receipt.status === 1) {
+      setUserIsModerator(true);
+      router.push("/modsceremony");
+    }
+  };
 
   const handleRegisterClick = () => {
     if (
@@ -20,12 +45,18 @@ const RegisterModeratorRolePage = () => {
       moderatorPosition !== "" &&
       moderatorOrganization !== ""
     ) {
-      addModeratorCall({
-        modAddress: connectedWallet,
-        modType: moderatorType,
-        modPosition: moderatorPosition,
-        modOrganization: moderatorOrganization,
-      });
+      // addModeratorCall({
+      //   modAddress: connectedWallet,
+      //   modType: moderatorType,
+      //   modPosition: moderatorPosition,
+      //   modOrganization: moderatorOrganization,
+      // });
+      postAddModerator(
+        connectedWallet,
+        moderatorType,
+        moderatorPosition,
+        moderatorOrganization
+      );
     } else {
       alert("Por favor llena todos los campos ");
     }
