@@ -1,6 +1,5 @@
 import React /* , { useEffect, useState } */ from "react";
 import Link from "next/link";
-import { getUser } from "../api/auth/[...thirdweb]";
 // import { contractAddress_zengoDao } from "@/const/contracts";
 // import {
 //   MediaRenderer,
@@ -113,23 +112,3 @@ export default function daoProposals() {
     </div>
   );
 }
-
-export const getServerSideProps = async (context: any) => {
-  const user = await getUser(context.req);
-
-  console.log({ user });
-
-  if (!user) {
-    console.log("asdasdas");
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-};

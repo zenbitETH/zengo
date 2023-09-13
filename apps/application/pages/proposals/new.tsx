@@ -6,7 +6,6 @@ import Form3 from "@/components/Form3";
 import Form4 from "@/components/Form4";
 import ProgressBar from "@/components/ProgressBar";
 import { useProposalsContextState } from "@/contexts/ProposalsContext";
-import { getUser } from "../api/auth/[...thirdweb]";
 
 const NewProposalPage = () => {
   const {
@@ -105,20 +104,3 @@ const NewProposalPage = () => {
 };
 
 export default NewProposalPage;
-
-export const getServerSideProps = async (context: any) => {
-  const user = await getUser(context.req);
-
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-};

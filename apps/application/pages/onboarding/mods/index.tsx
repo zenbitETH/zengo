@@ -1,7 +1,10 @@
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import Link from "next/link";
 import React from "react";
 
 const ModeratorsVideoPage = () => {
+  const { addressHasPoap } = useOnboardingContextState();
+
   return (
     <div className="overflow-hidden text-center h-screen grid items-center relative">
       <div className=" m-auto gap-3 pt-20 font-bau h-full grid items-center px-3 relative">
@@ -13,11 +16,19 @@ const ModeratorsVideoPage = () => {
           title="YouTube video player"
         />
 
-        <Link href="/onboarding/mods/poap">
-          <button className="homeBT fixed bottom-5 left-1/2 -translate-x-1/2">
-            Certificar participación
-          </button>
-        </Link>
+        {!addressHasPoap ? (
+          <Link href="/onboarding/mods/poap">
+            <button className="homeBT fixed bottom-5 left-1/2 -translate-x-1/2">
+              Certificar participación
+            </button>
+          </Link>
+        ) : (
+          <Link href="/modsceremony">
+            <button className="homeBT fixed bottom-5 left-1/2 -translate-x-1/2">
+              Continuar al panel de moderadores
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -120,9 +120,10 @@ export function OnboardingContextProvider({ children }: IProps) {
       // if (process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID) {
       //   poapScan(address, process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID);
       // }
-      // if (process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID) {
-      //   poapScan(address, process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID);
-      // }
+      // TODO: improve this conditional to something like: if current_onboarding is the moderators one, do
+      if (process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID) {
+        poapScan(address, process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID);
+      }
     }
   }, [address]);
 
