@@ -34,6 +34,7 @@ export interface IModeratorsByType {
 
 export interface ModeratorInfo {
   address: string;
+  shortAddress: string;
   modType: number;
   modPosition: string;
   modOrganization: string;

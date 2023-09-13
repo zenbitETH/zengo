@@ -5,7 +5,7 @@ export default function Ceremony() {
   const { moderatorsByType } = useOnboardingContextState();
 
   return (
-    <div className="bg-mod text-center h-full items-center relative">
+    <div className="bg-mod text-center h-full items-center relative top-20">
       <div className="grid xl:grid-cols-2	">
         <div className="bg-cyan-900 mx-3 md:mx-24">asd</div>
         <div>
@@ -22,7 +22,9 @@ export default function Ceremony() {
               >
                 {moderatorsByType.civil.map((mod, idx) => (
                   <div className="modInfo" key={idx}>
-                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-4 text-center">
+                      {mod.shortAddress}
+                    </div>
                     <div className="col-span-8">
                       <div className="font-bau text-lg text-center">
                         {mod.modPosition}
@@ -40,7 +42,9 @@ export default function Ceremony() {
               <div className="modGrid">
                 {moderatorsByType.private.map((mod, idx) => (
                   <div className="modInfo" key={idx}>
-                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-4 text-center">
+                      {mod.shortAddress}
+                    </div>
                     <div className="col-span-8">
                       <div className="font-bau text-lg text-center">
                         {mod.modPosition}
@@ -58,7 +62,9 @@ export default function Ceremony() {
               <div className="modGrid">
                 {moderatorsByType.academy.map((mod, idx) => (
                   <div className="modInfo" key={idx}>
-                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-4 text-center">
+                      {mod.shortAddress}
+                    </div>
                     <div className="col-span-8">
                       <div className="font-bau text-lg text-center">
                         {mod.modPosition}
@@ -76,7 +82,9 @@ export default function Ceremony() {
               <div className="modGrid">
                 {moderatorsByType.government.map((mod, idx) => (
                   <div className="modInfo" key={idx}>
-                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-4 text-center">
+                      {mod.shortAddress}
+                    </div>
                     <div className="col-span-8">
                       <div className="font-bau text-lg text-center">
                         {mod.modPosition}
@@ -94,7 +102,9 @@ export default function Ceremony() {
               <div className="modGrid">
                 {moderatorsByType.open.map((mod, idx) => (
                   <div className="modInfo" key={idx}>
-                    <div className="col-span-4 text-center">{mod.address}</div>
+                    <div className="col-span-4 text-center">
+                      {mod.shortAddress}
+                    </div>
                     <div className="col-span-8">
                       <div className="font-bau text-lg text-center">
                         {mod.modPosition}

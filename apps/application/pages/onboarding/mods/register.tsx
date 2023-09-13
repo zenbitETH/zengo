@@ -37,9 +37,11 @@ const RegisterModeratorRolePage = () => {
       setUserIsModerator(true);
       setVisible(false);
       router.push("/modsceremony");
+      return;
     } else {
       console.log("Error: status !== 1");
       setVisible(false);
+      return;
     }
   };
 

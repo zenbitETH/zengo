@@ -16,6 +16,7 @@ import {
   useEffect,
 } from "react";
 import { IModeratorsByType } from "../interfaces";
+import { shortenAddress } from "@/lib/utils";
 
 interface IOnboardingContext {
   cycleState: number | null;
@@ -223,15 +224,21 @@ export function OnboardingContextProvider({ children }: IProps) {
   };
 
   const {
+    data: getModeratorsListData,
+    isLoading: getModeratorsListIsLoading,
+    isSuccess: getModeratorsListIsSuccess,
+  } = useContractRead(zengoDaoContract, "getModeratorsList");
+
+  const {
     data: getModeratorsData,
     isLoading: getModeratorsIsLoading,
     isSuccess: getModeratorsIsSuccess,
   } = useContractRead(zengoDaoContract, "getModerators");
 
   useEffect(() => {
-    if (getModeratorsData) {
+    if (getModeratorsData && getModeratorsListData) {
       const moderatorsFormatedData: any[] = getModeratorsData.map(
-        (moderator: any) => {
+        (moderator: any, idx: number) => {
           const modTypeTxt =
             moderator.moderatorType === 0
               ? "Organizaciones Civiles"
@@ -245,7 +252,9 @@ export function OnboardingContextProvider({ children }: IProps) {
               ? "Moderador abierto"
               : "No definido";
           return {
-            address: moderator.address || "0xAddress",
+            address: getModeratorsListData[idx] || "0xAddress",
+            shortAddress:
+              shortenAddress(getModeratorsListData[idx]) || "0xAddr",
             modType: moderator.moderatorType,
             modPosition: moderator.position,
             modOrganization: moderator.organization,
