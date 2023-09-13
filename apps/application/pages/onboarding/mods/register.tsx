@@ -8,7 +8,7 @@ const RegisterModeratorRolePage = () => {
   const [moderatorOrganization, setModeratorOrganization] =
     useState<string>("");
 
-  const { setUserIsModerator, userIsModerator, connectedWallet } =
+  const { setUserIsModerator, userIsModerator, connectedWallet, setVisible } =
     useOnboardingContextState();
 
   const router = useRouter();
@@ -35,11 +35,16 @@ const RegisterModeratorRolePage = () => {
     console.log({ responseData });
     if (responseData.receipt.status === 1) {
       setUserIsModerator(true);
+      setVisible(false);
       router.push("/modsceremony");
+    } else {
+      console.log("Error: status !== 1");
+      setVisible(false);
     }
   };
 
   const handleRegisterClick = () => {
+    setVisible(true);
     if (
       connectedWallet !== undefined &&
       moderatorPosition !== "" &&
@@ -59,6 +64,7 @@ const RegisterModeratorRolePage = () => {
       );
     } else {
       alert("Por favor llena todos los campos ");
+      setVisible(false);
     }
   };
 

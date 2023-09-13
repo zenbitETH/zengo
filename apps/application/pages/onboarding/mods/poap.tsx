@@ -3,31 +3,24 @@ import Image from "next/image";
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import Link from "next/link";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import { ScanModal } from "@/components/ScanModal";
-import { useScanModal } from "@/hooks/useScanModal";
 
 const eventIdUsed = process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID as string;
 
 const PoapModeratorsPage = ({
   eventInfo,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { visible, showModal, closeModal } = useScanModal();
   const { claimPoap, poapScan, addressHasPoap, poapTokenId, connectedWallet } =
     useOnboardingContextState();
 
   useEffect(() => {
     if (connectedWallet !== "" && addressHasPoap === false) {
-      // showModal();
       poapScan(connectedWallet, eventIdUsed);
-      // closeModal();
     }
   }, []);
 
   const handleClaimPoap = async () => {
     if (connectedWallet !== "" && addressHasPoap === false) {
-      // showModal();
       claimPoap(connectedWallet, eventIdUsed);
-      // closeModal();
     }
   };
 
@@ -130,7 +123,6 @@ const PoapModeratorsPage = ({
           </div>
         </div>
       </div>
-      <ScanModal visible={visible} />
     </>
   );
 };

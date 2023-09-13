@@ -35,6 +35,8 @@ interface IOnboardingContext {
   setUserIsModerator: (value: boolean) => void;
   moderatorsByType: IModeratorsByType;
   connectedWallet: string;
+  setVisible: (show: boolean | null) => void;
+  visible: boolean | null;
 }
 
 export const OnboardingContext = createContext<IOnboardingContext | undefined>(
@@ -92,6 +94,8 @@ export function OnboardingContextProvider({ children }: IProps) {
     open: [],
   });
 
+  const [visible, setVisible] = useState<boolean | null>(null);
+
   const router = useRouter();
   const connectionStatus = useConnectionStatus();
 
@@ -122,18 +126,21 @@ export function OnboardingContextProvider({ children }: IProps) {
   }, [address]);
 
   const claimPoap = async (address: string, eventId: string) => {
+    setVisible(true);
     const claimApiResponse = await fetch(
       `/api/poaps/claim?address=${address}&eventId=${eventId}`
     );
 
     const claimApiData = await claimApiResponse.json();
-    console.log({ claimApiData });
+
     if (claimApiData.claimed) {
       console.log("claimed true");
       setAddressHasPoap(true);
       await poapScan(address, eventId);
+      setVisible(false);
+    } else {
+      setVisible(false);
     }
-    return;
   };
 
   const poapScan = async (address: string, eventId: string) => {
@@ -303,6 +310,8 @@ export function OnboardingContextProvider({ children }: IProps) {
     setUserIsModerator,
     moderatorsByType,
     connectedWallet,
+    visible,
+    setVisible,
   };
 
   return (
