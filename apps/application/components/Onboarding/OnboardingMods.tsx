@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAddress } from "@thirdweb-dev/react";
 import { useEventPoap } from "@/hooks/useEventPoap";
-import { ScanModal } from "@/components/ScanModal";
-import { useScanModal } from "@/hooks/useScanModal";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,8 +14,6 @@ export function OnboardingMods() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
-  const { toggle, visible } = useScanModal(true);
 
   const address = useAddress();
   const [walletAddress, setWalletaddress] = useState("");
@@ -40,8 +36,6 @@ export function OnboardingMods() {
       await poapScan(walletAddress, eventIdUsed);
 
       await sleep(1000);
-
-      toggle(); // after finishing the scan, toggle to hide the scan modal
     };
     if (walletAddress !== "") {
       firstScan();
@@ -178,7 +172,6 @@ export function OnboardingMods() {
           </div>
         </div>
       )}
-      {walletAddress ? <ScanModal visible={visible} toggle={toggle} /> : null}
     </div>
   );
 }
