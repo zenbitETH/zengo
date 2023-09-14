@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   const [stateReady, setStateReady] = useState<boolean>(false);
   const { walletIsConnected } = useOnboardingContextState();
 
@@ -22,10 +22,10 @@ const Home: NextPage = () => {
   // }, []);
 
   return (
-    <div className="from-cit to-mod bg-gradient-to-t h-screen">
+    <div className="from-cit to-mod bg-gradient-to-t h-full">
       {stateReady ? <Carousel /> : null}
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

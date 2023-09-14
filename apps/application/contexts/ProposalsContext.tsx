@@ -16,7 +16,7 @@ interface IProposalsContext {
   proposalInfo: IProposalInfo;
   setProposalInfo: (proposal: IProposalInfo) => void;
   clearFormState: () => void;
-  uploadEvidenceToIpfs: (fileToUpload: File) => void;
+  uploadEvidenceToIpfs: (fileToUpload: File) => Promise<string>;
   submitProposalForm: () => void;
   metadataUploadIsLoading: boolean;
   submitProposalFormIsLoading: boolean;
@@ -44,41 +44,44 @@ interface ISubmitProposalProps {
   longitude: number;
 }
 
-export const ProposalsContext = createContext<IProposalsContext>({
-  evidence: {
-    date: "",
-    description: "",
-    ipfsUrl: "",
-  },
-  setEvidence: () => {},
-  location: {
-    locationText: "",
-    gMapsLocationObject: { lat: 20.587834, lng: -100.389245 },
-  },
-  setLocation: () => {},
-  proposalInfo: {
-    title: "",
-    type: "",
-    description: "",
-  },
-  setProposalInfo: () => {},
-  clearFormState: () => {},
-  uploadEvidenceToIpfs: () => {},
-  submitProposalForm: () => {},
-  metadataUploadIsLoading: false,
-  submitProposalFormIsLoading: false,
-  submitProposalSuccess: false,
-  addVotingIterationCall: (proposalId: string) => {},
-  concludeVotingIterationCall: (
-    votingIterationId: string,
-    proposalId: string
-  ) => {},
-  voteToClassifyProposalCall: (
-    vote: number,
-    votingIteration: number,
-    proposalId: number
-  ) => {},
-});
+export const ProposalsContext = createContext<IProposalsContext | undefined>(
+  undefined
+  // {
+  // evidence: {
+  //   date: "",
+  //   description: "",
+  //   ipfsUrl: "",
+  // },
+  // setEvidence: () => {},
+  // location: {
+  //   locationText: "",
+  //   gMapsLocationObject: { lat: 20.587834, lng: -100.389245 },
+  // },
+  // setLocation: () => {},
+  // proposalInfo: {
+  //   title: "",
+  //   type: "",
+  //   description: "",
+  // },
+  // setProposalInfo: () => {},
+  // clearFormState: () => {},
+  // uploadEvidenceToIpfs: (fileToUpload: File) => Promise.resolve(""),
+  // submitProposalForm: () => {},
+  // metadataUploadIsLoading: false,
+  // submitProposalFormIsLoading: false,
+  // submitProposalSuccess: false,
+  // addVotingIterationCall: (proposalId: string) => {},
+  // concludeVotingIterationCall: (
+  //   votingIterationId: string,
+  //   proposalId: string
+  // ) => {},
+  // voteToClassifyProposalCall: (
+  //   vote: number,
+  //   votingIteration: number,
+  //   proposalId: number
+  // ) => {},
+  // }
+);
 
 interface IProps {
   children: ReactNode;
@@ -124,15 +127,17 @@ export function ProposalsContextProvider({ children }: IProps) {
     setSubmitProposalSuccess(false);
   };
 
-  const uploadEvidenceToIpfs = async (fileToUpload: File) => {
+  const uploadEvidenceToIpfs = async (fileToUpload: File): Promise<string> => {
     const uploadUrl = await upload({
       data: [fileToUpload],
       options: { uploadWithGatewayUrl: false, uploadWithoutDirectory: true },
     });
-    setEvidence({
-      ...evidence,
-      ipfsUrl: uploadUrl[0],
-    });
+
+    if (!uploadUrl) {
+      return "";
+    }
+
+    return uploadUrl[0];
   };
 
   const { contract: contractZengoDao /*, isLoading, error */ } = useContract(

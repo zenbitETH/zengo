@@ -2,14 +2,14 @@ import ZengoLayout from "@/components/ZengoLayout";
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import React from "react";
 
-export default function Ceremony() {
+export default function ModsCeremonyPage() {
   const { moderatorsByType } = useOnboardingContextState();
 
   return (
     <ZengoLayout>
-      <div className="bg-mod text-center h-full items-center relative top-20">
+      <div className="bg-mod text-center h-full items-center relative pt-10">
         <div className="grid xl:grid-cols-2	">
-          <div className="bg-cyan-900 mx-3 md:mx-24">asd</div>
+          <div className="bg-cyan-900 mx-3 md:mx-24">STREAM</div>
           <div>
             <h1 className="relative left-1/2 -translate-x-1/2 text-2xl font-bau text-white">
               Moderadores

@@ -6,8 +6,8 @@ const ModeratorsVideoPage = () => {
   const { addressHasPoap } = useOnboardingContextState();
 
   return (
-    <div className="overflow-hidden text-center h-screen grid items-center relative">
-      <div className=" m-auto gap-3 pt-20 font-bau h-full grid items-center px-3 relative">
+    <div className="overflow-hidden text-center h-full grid items-center relative">
+      <div className=" m-auto gap-3 pt-5 font-bau h-full grid items-center px-3 relative">
         <iframe
           className="xl:w-[1280px] xl:h-[720px]  rounded-2xl"
           src="https://www.youtube.com/embed/Mwr3eJgp4_M"

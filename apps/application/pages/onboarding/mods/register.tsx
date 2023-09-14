@@ -77,7 +77,7 @@ const RegisterModeratorRolePage = () => {
   //  }, [userIsModerator]);
 
   return (
-    <div className="from-mod to-mod/60 bg-gradient-to-b text-center xl:h-screen h-full grid items-center py-20 relative">
+    <div className="from-mod to-mod/60 bg-gradient-to-b text-center xl:h-full h-full grid items-center py-20 relative">
       <div className="modal bg-bgd/40 ">
         <div className="grid gap-6 text-left">
           <label className="formLabel" htmlFor="tipo-de-moderador">

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { getUser } from "./api/auth/[...thirdweb]";
 
-export default function daoProposals() {
+export default function FundingResultsPage() {
   return (
     <div className="h-screen from-cit to-mod bg-gradient-to-t grid items-center ">
       <div className="card0">

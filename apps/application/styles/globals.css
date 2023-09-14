@@ -35,7 +35,7 @@
 }
 
 .header {
-  @apply top-0 w-full px-5 sm:px-24 py-3 rounded z-20 backdrop-blur-md font-bau fixed;
+  @apply top-0 w-full px-5 sm:px-24 py-3 rounded z-20 backdrop-blur-md font-bau; /* fixed; */
 }
 
 /* Buttons */

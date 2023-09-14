@@ -9,7 +9,7 @@ import {
   useStorage,
 } from "@thirdweb-dev/react";
 
-export default function DaoProposalsPage() {
+export default function DaoProposals() {
   // const [proposalIpfsUrl, setProposalIpfsUrl] = useState("");
   // const [dataIpfsDownloaded, setDataIpfsDownloaded] = useState<any>(null); // [
   const { contract } = useContract(contractAddress_zengoDao);

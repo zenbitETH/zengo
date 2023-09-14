@@ -26,7 +26,7 @@ const PoapModeratorsPage = ({
 
   return (
     <>
-      <div className="bg-bgd/30 overflow-hidden text-center h-screen grid items-center relative">
+      <div className="bg-bgd/30 overflow-hidden text-center h-full grid items-center relative">
         <div className="font-exo p-3 gap-3 grid items-center mx-auto relative">
           <div className="POAPcard">
             {!addressHasPoap ? (
