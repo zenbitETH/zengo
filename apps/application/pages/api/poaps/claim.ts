@@ -28,8 +28,12 @@ export default async function handler(
 
     console.log("qrHashes are :", { qrHashes });
 
+    if (!qrHashes) {
+      return res.status(200).json(false);
+    }
+
     const claimableQeHashes = qrHashes
-      .map((qrHash: any) => {
+      ?.map((qrHash: any) => {
         if (qrHash.claimed === false) {
           return qrHash.qr_hash;
         }
@@ -59,6 +63,10 @@ export default async function handler(
 
       console.log("qrHashSecret secret code is: ", qrHashSecret.secret);
 
+      if (!qrHashSecret) {
+        return res.status(200).json(false);
+      }
+
       //step4: claim poap step
       const claimForAddressPOSTOptions = {
         method: "POST",
@@ -81,12 +89,13 @@ export default async function handler(
       );
       const claimForAddress = await claimForAddressResponse.json();
       console.log({ claimForAddress });
-      res.status(200).json({ claimForAddress });
+
+      return res.status(200).json({ claimForAddress });
     } else {
-      res.status(200).json(false);
+      return res.status(200).json(false);
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error });
+    return res.status(500).json({ error });
   }
 }

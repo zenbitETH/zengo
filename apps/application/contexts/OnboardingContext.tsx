@@ -23,7 +23,7 @@ interface IOnboardingContext {
   claimPoap: (address: string, eventId: string) => void;
   poapScan: (address: string, eventId: string) => void;
   addressHasPoap: boolean;
-  addModeratorCall: (props: IAddModeratorCallProps) => void;
+  // addModeratorCall: (props: IAddModeratorCallProps) => void;
   removeModeratorCall: (moderatorAddress: Address) => void;
   setIndividualVotingPointsCall: (
     moderatorAddress: Address,
@@ -32,32 +32,40 @@ interface IOnboardingContext {
   poapTokenId: string;
   allModeratorsList: any[];
   userIsModerator: boolean;
+  setUserIsModerator: (value: boolean) => void;
   moderatorsByType: IModeratorsByType;
+  connectedWallet: string;
+  setVisible: (show: boolean | null) => void;
+  visible: boolean | null;
 }
 
-export const OnboardingContext = createContext<IOnboardingContext>({
-  cycleState: null,
-  walletIsConnected: false,
-  claimPoap: (address: string, eventId: string) => {},
-  poapScan: (address: string, eventId: string) => {},
-  addressHasPoap: false,
-  addModeratorCall: (props: IAddModeratorCallProps) => {},
-  removeModeratorCall: (moderatorAddress: Address) => {},
-  setIndividualVotingPointsCall: (
-    moderatorAddress: Address,
-    points: number
-  ) => {},
-  poapTokenId: "",
-  allModeratorsList: [],
-  userIsModerator: false,
-  moderatorsByType: {
-    civil: [],
-    private: [],
-    academy: [],
-    government: [],
-    open: [],
-  },
-});
+export const OnboardingContext = createContext<IOnboardingContext | undefined>(
+  undefined
+  // {
+  // cycleState: null,
+  // walletIsConnected: false,
+  // claimPoap: (address: string, eventId: string) => {},
+  // poapScan: (address: string, eventId: string) => {},
+  // addressHasPoap: false,
+  // addModeratorCall: (props: IAddModeratorCallProps) => {},
+  // removeModeratorCall: (moderatorAddress: Address) => {},
+  // setIndividualVotingPointsCall: (
+  //   moderatorAddress: Address,
+  //   points: number
+  // ) => {},
+  // poapTokenId: "",
+  // allModeratorsList: [],
+  // userIsModerator: false,
+  // moderatorsByType: {
+  //   civil: [],
+  //   private: [],
+  //   academy: [],
+  //   government: [],
+  //   open: [],
+  // },
+  // connectedWallet: "",
+  // }
+);
 
 interface IProps {
   children: ReactNode;
@@ -73,6 +81,7 @@ interface IAddModeratorCallProps {
 export function OnboardingContextProvider({ children }: IProps) {
   const [cycleState, setCycleState] = useState<number | null>(null);
   const [walletIsConnected, setWalletIsConnected] = useState(false);
+  const [connectedWallet, setConnectedWallet] = useState<string>("");
   const [addressHasPoap, setAddressHasPoap] = useState<boolean>(false);
   const [poapTokenId, setPoapTokenId] = useState<string>("");
   const [allModeratorsList, setAllModeratorsList] = useState<any[]>([]);
@@ -85,12 +94,15 @@ export function OnboardingContextProvider({ children }: IProps) {
     open: [],
   });
 
+  const [visible, setVisible] = useState<boolean | null>(null);
+
   const router = useRouter();
   const connectionStatus = useConnectionStatus();
 
   useEffect(() => {
     if (connectionStatus === "disconnected") {
       setWalletIsConnected(false);
+      setConnectedWallet("");
       setAddressHasPoap(false);
       setPoapTokenId("");
       setUserIsModerator(false);
@@ -103,16 +115,18 @@ export function OnboardingContextProvider({ children }: IProps) {
   useEffect(() => {
     if (address) {
       setWalletIsConnected(true);
-      if (process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID) {
-        poapScan(address, process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID);
-      }
-      if (process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID) {
-        poapScan(address, process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID);
-      }
+      setConnectedWallet(address);
+      // if (process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID) {
+      //   poapScan(address, process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID);
+      // }
+      // if (process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID) {
+      //   poapScan(address, process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID);
+      // }
     }
   }, [address]);
 
   const claimPoap = async (address: string, eventId: string) => {
+    setVisible(true);
     const claimApiResponse = await fetch(
       `/api/poaps/claim?address=${address}&eventId=${eventId}`
     );
@@ -122,7 +136,10 @@ export function OnboardingContextProvider({ children }: IProps) {
     if (claimApiData.claimed) {
       console.log("claimed true");
       setAddressHasPoap(true);
-      poapScan(address, eventId);
+      await poapScan(address, eventId);
+      setVisible(false);
+    } else {
+      setVisible(false);
     }
   };
 
@@ -131,8 +148,13 @@ export function OnboardingContextProvider({ children }: IProps) {
       `/api/poaps/scan?address=${address}&eventId=${eventId}`
     );
     const data = await response.json();
-    setAddressHasPoap(data.scan);
-    setPoapTokenId(data.tokenId);
+
+    if (data.tokenId !== "") {
+      console.log("tokendid true ", { scan: data.scan });
+      setAddressHasPoap(data.scan);
+      setPoapTokenId(data.tokenId);
+    }
+    return;
   };
 
   const { contract: zengoDaoContract } = useContract(contractAddress_zengoDao);
@@ -280,13 +302,16 @@ export function OnboardingContextProvider({ children }: IProps) {
     claimPoap,
     poapScan,
     addressHasPoap,
-    addModeratorCall,
     removeModeratorCall,
     setIndividualVotingPointsCall,
     poapTokenId,
     allModeratorsList,
     userIsModerator,
+    setUserIsModerator,
     moderatorsByType,
+    connectedWallet,
+    visible,
+    setVisible,
   };
 
   return (

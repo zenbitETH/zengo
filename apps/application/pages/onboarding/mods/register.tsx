@@ -1,5 +1,4 @@
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
-import { useAddress } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -9,26 +8,63 @@ const RegisterModeratorRolePage = () => {
   const [moderatorOrganization, setModeratorOrganization] =
     useState<string>("");
 
-  const address = useAddress();
-
-  const { addModeratorCall, userIsModerator } = useOnboardingContextState();
+  const { setUserIsModerator, userIsModerator, connectedWallet, setVisible } =
+    useOnboardingContextState();
 
   const router = useRouter();
 
+  const postAddModerator = async (
+    modAddress: string,
+    modType: string,
+    modPosition: string,
+    modOrganization: string
+  ) => {
+    const response = await fetch("/api/modregistration", {
+      method: "POST",
+      body: JSON.stringify({
+        modAddress,
+        modType,
+        modPosition,
+        modOrganization,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseData = await response.json();
+    console.log({ responseData });
+    if (responseData.receipt.status === 1) {
+      setUserIsModerator(true);
+      setVisible(false);
+      router.push("/modsceremony");
+    } else {
+      console.log("Error: status !== 1");
+      setVisible(false);
+    }
+  };
+
   const handleRegisterClick = () => {
+    setVisible(true);
     if (
-      address !== undefined &&
+      connectedWallet !== undefined &&
       moderatorPosition !== "" &&
       moderatorOrganization !== ""
     ) {
-      addModeratorCall({
-        modAddress: address,
-        modType: moderatorType,
-        modPosition: moderatorPosition,
-        modOrganization: moderatorOrganization,
-      });
+      // addModeratorCall({
+      //   modAddress: connectedWallet,
+      //   modType: moderatorType,
+      //   modPosition: moderatorPosition,
+      //   modOrganization: moderatorOrganization,
+      // });
+      postAddModerator(
+        connectedWallet,
+        moderatorType,
+        moderatorPosition,
+        moderatorOrganization
+      );
     } else {
       alert("Por favor llena todos los campos ");
+      setVisible(false);
     }
   };
 

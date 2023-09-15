@@ -22,7 +22,7 @@
 
 .modal {
   @apply p-6
-  mx-auto rounded-dd font-exo
+  mx-auto rounded-dd font-exo z-40
   relative;
 }
 

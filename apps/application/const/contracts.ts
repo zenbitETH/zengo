@@ -10,8 +10,8 @@ import { IS_DEV_ENV } from "./chains";
 // For example, below, we have a Greeter smart contract that has two addresses defined.
 // Then, we use the IS_DEV_ENV variable to determine which address to use in the current environment.
 
-const zengoDao_dev = "0x6a8FBf08bB51204f92d2f6D33bBda641A73DCF40";
-const zengoDao_prod = "";
+const zengoDao_dev = process.env.NEXT_PUBLIC_ZENGODAO_ADDRESS_DEV || "";
+const zengoDao_prod = process.env.NEXT_PUBLIC_ZENGODAO_ADDRESS_PROD || "";
 
 // Below, we force the typescript type to be of the dev address type.
 // This is to ensure thirdweb generate knows what the ABI is when using useContract

@@ -21,12 +21,12 @@ export default async function handler(
 
     const eventInfoResult = await eventInfoResponse.json();
     console.log({ eventInfoResult });
-    res.status(200).json({
+    return res.status(200).json({
       message: "Event info fetched successfully",
       eventInfo: eventInfoResult,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Error fetching event info",
       error,
     });

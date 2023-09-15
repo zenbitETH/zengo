@@ -4,7 +4,12 @@ const nextConfig = {
   basePath: "",
   images: {
     domains: ["assets.poap.xyz"],
-    hostname: "https://assets.poap.xyz",
+    remotePatterns: [
+      {
+        hostname: "assets.poap.xyz",
+        protocol: "https",
+      },
+    ],
   },
 };
 

@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Image from "next/image";
+import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 
 type ScanModalProps = {
   visible: boolean;
-  toggle: () => void;
+  toggle?: () => void;
 };
 
-export const ScanModal: React.FC<ScanModalProps> = ({ visible, toggle }) =>
-  visible
+export const ScanModal: React.FC = () => {
+  const { visible } = useOnboardingContextState();
+  return visible
     ? ReactDOM.createPortal(
         <div className="modal">
           <div className="modal-background">
@@ -31,3 +33,4 @@ export const ScanModal: React.FC<ScanModalProps> = ({ visible, toggle }) =>
         document.body
       )
     : null;
+};
