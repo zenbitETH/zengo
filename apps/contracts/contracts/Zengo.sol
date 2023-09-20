@@ -102,7 +102,8 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         string memory _proposalType,
         string memory _streetAddress,
         uint256 _latitude,
-        uint256 _longitude
+        uint256 _longitude,
+        uint256 _timestamp
     ) external checkState(1) {
         // require(
         //     votingPoints[msg.sender] > 0,
@@ -116,8 +117,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         Structs.Proposal storage newProposal = proposals[GOVERNANCE_CYCLE][proposalCount];
         // Structs.Proposal storage newProposal =
 
-        Structs.Evidence memory newEvidence =
-            Structs.Evidence(_evidenceDescription, _streetAddress, _evidenceUri, _latitude, _longitude);
+        Structs.Evidence memory newEvidence = Structs.Evidence(_timestamp, _evidenceDescription, _evidenceUri);
 
         // proposals[proposalCount] = Structs.Proposal(0, proposalCount, _title, _proposalDescription, _proposalType, msg.sender, newEvidence, [], Structs.VerificationState(0), false, false);
 
