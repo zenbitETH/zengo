@@ -93,11 +93,8 @@ contract ZengoStorage {
                         votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].evidenceDescription;
                     evidencesArray[eCount].evidenceUri =
                         votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].evidenceUri;
-                    evidencesArray[eCount].streetAddress =
-                        votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].streetAddress;
-                    evidencesArray[eCount].latitude = votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].latitude;
-                    evidencesArray[eCount].longitude =
-                        votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].longitude;
+                    evidencesArray[eCount].evidenceTimestamp =
+                        votingIterationEvidence[GOVERNANCE_CYCLE][i][uint8(j)][k].evidenceTimestamp;
                     eCount++;
                 }
             }

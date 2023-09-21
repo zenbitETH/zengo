@@ -100,10 +100,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         string memory _evidenceDescription,
         string memory _evidenceUri,
         string memory _proposalType,
-        string memory _streetAddress,
-        uint256 _latitude,
-        uint256 _longitude,
-        uint256 _timestamp
+        uint256 _proposalEvidenceTimestamp
     ) external checkState(1) {
         // require(
         //     votingPoints[msg.sender] > 0,
@@ -117,7 +114,8 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         Structs.Proposal storage newProposal = proposals[GOVERNANCE_CYCLE][proposalCount];
         // Structs.Proposal storage newProposal =
 
-        Structs.Evidence memory newEvidence = Structs.Evidence(_timestamp, _evidenceDescription, _evidenceUri);
+        Structs.Evidence memory newEvidence =
+            Structs.Evidence(_proposalEvidenceTimestamp, _evidenceDescription, _evidenceUri);
 
         // proposals[proposalCount] = Structs.Proposal(0, proposalCount, _title, _proposalDescription, _proposalType, msg.sender, newEvidence, [], Structs.VerificationState(0), false, false);
 
@@ -305,7 +303,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     //  TODO: Add function to add Evidence to Voting Iteration
     function addEvidence(
         uint256 _proposalId,
-        uint256 _timestamp,
+        uint256 _evidenceTimestamp,
         uint8 _votingIteration,
         string memory _evidenceDescription,
         string memory _evidenceUri
@@ -315,7 +313,8 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration].push();
         votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex]
             .evidenceDescription = _evidenceDescription;
-        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].time = _timestamp;
+        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].evidenceTimestamp
+        = _evidenceTimestamp;
         votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].evidenceUri =
             _evidenceUri;
         evidences++;

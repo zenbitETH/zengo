@@ -30,7 +30,7 @@ library Structs {
     }
 
     struct Evidence {
-        uint256 time;
+        uint256 evidenceTimestamp;
         string evidenceDescription;
         string evidenceUri;
     }
