@@ -100,9 +100,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         string memory _evidenceDescription,
         string memory _evidenceUri,
         string memory _proposalType,
-        string memory _streetAddress,
-        uint256 _latitude,
-        uint256 _longitude
+        uint256 _proposalEvidenceTimestamp
     ) external checkState(1) {
         // require(
         //     votingPoints[msg.sender] > 0,
@@ -117,7 +115,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         // Structs.Proposal storage newProposal =
 
         Structs.Evidence memory newEvidence =
-            Structs.Evidence(_evidenceDescription, _streetAddress, _evidenceUri, _latitude, _longitude);
+            Structs.Evidence(_proposalEvidenceTimestamp, _evidenceDescription, _evidenceUri);
 
         // proposals[proposalCount] = Structs.Proposal(0, proposalCount, _title, _proposalDescription, _proposalType, msg.sender, newEvidence, [], Structs.VerificationState(0), false, false);
 
@@ -225,7 +223,6 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         onlyModerator
         checkState(1)
     {
-        // TODO: check global State
         // TODO: check zero Votes
         require(
             voteIterations[GOVERNANCE_CYCLE][_proposalId][_votingIteration].inProgress,
@@ -276,7 +273,6 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     }
 
     function intializeVotingIteration(uint256 _proposalId) internal {
-        // uint256 memory length = proposals[_proposalId].votingIterations.length;
         voteIterations[GOVERNANCE_CYCLE][_proposalId].push();
 
         voteIterations[GOVERNANCE_CYCLE][_proposalId][0].votingIteration = 0;
@@ -292,7 +288,6 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     function addVotingIteration(uint256 _proposalId) public onlyModerator checkState(1) {
         uint8 currentVoteIteration = proposals[GOVERNANCE_CYCLE][_proposalId].votingIterationCount;
 
-        // uint256 memory length = proposals[_proposalId].votingIterations.length;
         voteIterations[GOVERNANCE_CYCLE][_proposalId].push();
 
         voteIterations[GOVERNANCE_CYCLE][_proposalId][currentVoteIteration].votingIteration = currentVoteIteration;
@@ -308,11 +303,9 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
     //  TODO: Add function to add Evidence to Voting Iteration
     function addEvidence(
         uint256 _proposalId,
+        uint256 _evidenceTimestamp,
         uint8 _votingIteration,
-        uint256 _latitude,
-        uint256 _longitude,
         string memory _evidenceDescription,
-        string memory _streetAddress,
         string memory _evidenceUri
     ) public onlyProposer(_proposalId) {
         uint256 currentEvidenceIndex = votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration].length;
@@ -320,14 +313,10 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration].push();
         votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex]
             .evidenceDescription = _evidenceDescription;
-        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].streetAddress =
-            _streetAddress;
+        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].evidenceTimestamp
+        = _evidenceTimestamp;
         votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].evidenceUri =
             _evidenceUri;
-        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].latitude =
-            _latitude;
-        votingIterationEvidence[GOVERNANCE_CYCLE][_proposalId][_votingIteration][currentEvidenceIndex].longitude =
-            _longitude;
         evidences++;
         // TODO: emit Evidence added event
     }
