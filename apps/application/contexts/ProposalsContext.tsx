@@ -31,6 +31,8 @@ interface IProposalsContext {
     votingIteration: number,
     proposalId: number
   ) => void;
+  addEvidenceCall: (props: IAddEvidenceCallProps) => void;
+  uploadFileToIpfs: (fileToUpload: File) => Promise<string>;
 }
 
 interface ISubmitProposalProps {
@@ -39,46 +41,60 @@ interface ISubmitProposalProps {
   evidenceDescription: string;
   evidenceUri: string;
   proposalType: string;
+  proposalEvidenceTimestamp: number;
   streetAddress: string;
   latitude: number;
   longitude: number;
 }
 
-export const ProposalsContext = createContext<IProposalsContext>({
-  evidence: {
-    date: "",
-    description: "",
-    ipfsUrl: "",
-  },
-  setEvidence: () => {},
-  location: {
-    locationText: "",
-    gMapsLocationObject: { lat: 20.587834, lng: -100.389245 },
-  },
-  setLocation: () => {},
-  proposalInfo: {
-    title: "",
-    type: "",
-    description: "",
-  },
-  setProposalInfo: () => {},
-  clearFormState: () => {},
-  uploadEvidenceToIpfs: () => {},
-  submitProposalForm: () => {},
-  metadataUploadIsLoading: false,
-  submitProposalFormIsLoading: false,
-  submitProposalSuccess: false,
-  addVotingIterationCall: (proposalId: string) => {},
-  concludeVotingIterationCall: (
-    votingIterationId: string,
-    proposalId: string
-  ) => {},
-  voteToClassifyProposalCall: (
-    vote: number,
-    votingIteration: number,
-    proposalId: number
-  ) => {},
-});
+interface IAddEvidenceCallProps {
+  proposalId: number;
+  evidenceTimestamp: number;
+  votingIteration: number;
+  evidenceDescription: string;
+  evidenceUri: string;
+}
+
+export const ProposalsContext = createContext<IProposalsContext | undefined>(
+  undefined
+  //   {
+  //   evidence: {
+  //     date: "",
+  //     description: "",
+  //     ipfsUrl: "",
+  //   },
+  //   setEvidence: () => {},
+  //   location: {
+  //     locationText: "",
+  //     gMapsLocationObject: { lat: 20.587834, lng: -100.389245 },
+  //   },
+  //   setLocation: () => {},
+  //   proposalInfo: {
+  //     title: "",
+  //     type: "",
+  //     description: "",
+  //   },
+  //   setProposalInfo: () => {},
+  //   clearFormState: () => {},
+  //   uploadEvidenceToIpfs: () => {},
+  //   submitProposalForm: () => {},
+  //   metadataUploadIsLoading: false,
+  //   submitProposalFormIsLoading: false,
+  //   submitProposalSuccess: false,
+  //   addVotingIterationCall: (proposalId: string) => {},
+  //   concludeVotingIterationCall: (
+  //     votingIterationId: string,
+  //     proposalId: string
+  //   ) => {},
+  //   voteToClassifyProposalCall: (
+  //     vote: number,
+  //     votingIteration: number,
+  //     proposalId: number
+  //   ) => {},
+  //   addEvidenceCall: (props: IAddEvidenceCallProps) => {},
+  //   uploadFileToIpfs: (fileToUpload: File) => Promise.resolve(""),
+  // }
+);
 
 interface IProps {
   children: ReactNode;
@@ -92,7 +108,7 @@ export function ProposalsContextProvider({ children }: IProps) {
   const [evidence, setEvidence] = useState<IEvidence>({
     date: "",
     description: "",
-    ipfsUrl: "",
+    ipfsUri: "",
   });
 
   const [location, setLocation] = useState<ILocation>({
@@ -110,7 +126,7 @@ export function ProposalsContextProvider({ children }: IProps) {
     setEvidence({
       date: "",
       description: "",
-      ipfsUrl: "",
+      ipfsUri: "",
     });
     setLocation({
       locationText: "",
@@ -124,6 +140,14 @@ export function ProposalsContextProvider({ children }: IProps) {
     setSubmitProposalSuccess(false);
   };
 
+  const uploadFileToIpfs = async (fileToUpload: File): Promise<string> => {
+    const uploadUrl = await upload({
+      data: [fileToUpload],
+      options: { uploadWithGatewayUrl: false, uploadWithoutDirectory: true },
+    });
+    return uploadUrl[0];
+  };
+
   const uploadEvidenceToIpfs = async (fileToUpload: File) => {
     const uploadUrl = await upload({
       data: [fileToUpload],
@@ -131,7 +155,7 @@ export function ProposalsContextProvider({ children }: IProps) {
     });
     setEvidence({
       ...evidence,
-      ipfsUrl: uploadUrl[0],
+      ipfsUri: uploadUrl[0],
     });
   };
 
@@ -168,6 +192,7 @@ export function ProposalsContextProvider({ children }: IProps) {
     evidenceDescription,
     evidenceUri,
     proposalType,
+    proposalEvidenceTimestamp,
     streetAddress,
     latitude,
     longitude,
@@ -180,6 +205,7 @@ export function ProposalsContextProvider({ children }: IProps) {
           evidenceDescription,
           evidenceUri,
           proposalType,
+          proposalEvidenceTimestamp,
           streetAddress,
           latitude,
           longitude,
@@ -198,20 +224,27 @@ export function ProposalsContextProvider({ children }: IProps) {
       const metadataPath = await uploadProposalMetadataToIpfs();
 
       if (metadataPath) {
+        // parse proposal evidence date to timestamp
+        const evidenceDate = new Date(evidence.date);
+        const evidenceTimestamp = evidenceDate.getTime();
+
         await submitProposalCall({
           title: proposalInfo.title,
           proposalDescription: proposalInfo.description,
           proposalType: proposalInfo.type,
           evidenceDescription: evidence.description,
           evidenceUri: metadataPath,
+          proposalEvidenceTimestamp: evidenceTimestamp,
           streetAddress: location.locationText,
           latitude: location.gMapsLocationObject.lat,
           longitude: location.gMapsLocationObject.lng,
         });
         clearFormState();
+      } else {
+        console.error("Proposal metadata upload failure");
       }
     } catch (err) {
-      console.error("contract call failure", { err }); // TODO: show toaster with error ?
+      console.error("contract call failure", { err });
     }
   };
 
@@ -223,6 +256,32 @@ export function ProposalsContextProvider({ children }: IProps) {
   const addVotingIterationCall = async (proposalId: string) => {
     try {
       const data = await addVotingIteration({ args: [proposalId] });
+      console.info("contract call successs", data);
+    } catch (err) {
+      console.error("contract call failure", err);
+    }
+  };
+
+  const { mutateAsync: addEvidence, isLoading: addEvidenceIsLoading } =
+    useContractWrite(contractZengoDao, "addEvidence");
+
+  const addEvidenceCall = async ({
+    proposalId,
+    evidenceTimestamp,
+    votingIteration,
+    evidenceDescription,
+    evidenceUri,
+  }: IAddEvidenceCallProps) => {
+    try {
+      const data = await addEvidence({
+        args: [
+          proposalId,
+          evidenceTimestamp,
+          votingIteration,
+          evidenceDescription,
+          evidenceUri,
+        ],
+      });
       console.info("contract call successs", data);
     } catch (err) {
       console.error("contract call failure", err);
@@ -284,6 +343,8 @@ export function ProposalsContextProvider({ children }: IProps) {
     addVotingIterationCall,
     concludeVotingIterationCall,
     voteToClassifyProposalCall,
+    addEvidenceCall,
+    uploadFileToIpfs,
   };
 
   return (

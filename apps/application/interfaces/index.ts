@@ -1,7 +1,7 @@
 export interface IEvidence {
   date: string;
   description: string;
-  ipfsUrl: string;
+  ipfsUri: string;
 }
 
 export interface IProposalInfo {
