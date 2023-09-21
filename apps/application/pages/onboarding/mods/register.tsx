@@ -1,6 +1,8 @@
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+// import { GetServerSideProps } from "next";
+// import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 
 const RegisterModeratorRolePage = () => {
   const [moderatorType, setModeratorType] = useState<string>("0");
@@ -32,7 +34,9 @@ const RegisterModeratorRolePage = () => {
       },
     });
     const responseData = await response.json();
+
     console.log({ responseData });
+
     if (responseData.receipt.status === 1) {
       setUserIsModerator(true);
       setVisible(false);
@@ -141,5 +145,25 @@ const RegisterModeratorRolePage = () => {
     </div>
   );
 };
+
+// DEV_NOTE: Maybe check the user has poap to be able to navigate to this page
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+
+// const sdk = new ThirdwebSDK("goerli", {
+//   clientId: "YOUR_CLIENT_ID", // Use client id if using on the client side, get it from dashboard settings
+//   secretKey: "YOUR_SECRET_KEY", // Use secret key if using on the server, get it from dashboard settings
+// });
+//   const address = await sdk.wallet.getAddress();
+
+//   const res = await fetch(
+//     `/api/poaps/scan?address=${address}&eventId=${eventId}`
+//   );
+//   const repo = await res.json();
+
+//   return {
+//     props: {},
+//   };
+// };
 
 export default RegisterModeratorRolePage;

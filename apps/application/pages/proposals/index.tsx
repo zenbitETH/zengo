@@ -34,10 +34,10 @@ export default function DaoProposalsPage() {
 
   return (
     <ZengoLayout>
-      <div className="min-h-screen h-full from-cit to-mod bg-gradient-to-t grid items-center py-20 ">
+      <div className="h-full from-cit to-mod bg-gradient-to-t grid items-center py-20 ">
         <div className="card0">
           <div className="propDashboard">
-            <Link href="/newProposal">
+            <Link href="/proposals/new">
               <span className="newProp">+ Añadir propuesta</span>
             </Link>
             <div className="propCard relative">

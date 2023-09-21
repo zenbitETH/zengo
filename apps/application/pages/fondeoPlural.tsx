@@ -5,7 +5,7 @@ import ZengoLayout from "@/components/ZengoLayout";
 export default function PluralFundingPage() {
   return (
     <ZengoLayout>
-      <div className="h-screen from-cit to-mod bg-gradient-to-t grid items-center ">
+      <div className="h-full from-cit to-mod bg-gradient-to-t grid items-center ">
         <div className="card0">
           <div className="propDashboard">
             <div className="propCard relative">

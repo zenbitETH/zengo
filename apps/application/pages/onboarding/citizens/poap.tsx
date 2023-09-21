@@ -4,9 +4,9 @@ import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import Link from "next/link";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 
-const eventIdUsed = process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID as string;
+const eventIdUsed = process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID as string;
 
-const PoapModeratorsPage = ({
+const PoapCitizensPage = ({
   eventInfo,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {
@@ -65,14 +65,14 @@ const PoapModeratorsPage = ({
                   <div className=" xl:text-xl text-justify bg-mod/70 py-3 px-5 w-full text-white">
                     <ul className="grid gap-3">
                       <li>
-                        <span className="text-2xl">🎖️</span> Este POAP certifica
+                        <span className="text-2xl">🎖️</span>Este POAP certifica
                         tu participación en el evento de introducción para
-                        Moderadores de Zengo.
+                        ciudadanos
                       </li>
                       <li>
                         <span className="text-2xl">⛽</span>
-                        Además te permite participar en este ciclo de gobernanza
-                        sin gas.
+                        El POAP te permite crear tu primer propuesta de
+                        gobernanza sin gas.
                       </li>
                     </ul>
                   </div>
@@ -99,7 +99,7 @@ const PoapModeratorsPage = ({
                   </div>
                   <div className="grid gap-3">
                     <div className="text-2xl font-bau">
-                      ¡Ahora tienes el POAP de moderadores!
+                      ¡Ahora tienes el POAP de ciudadanos!
                     </div>
                     <div className="text-sm xl:text-lg font-bau">
                       Septiembre, 2023 /
@@ -118,8 +118,8 @@ const PoapModeratorsPage = ({
                       <ul className="grid gap-3">
                         <li>
                           <span className="text-2xl">🎖️</span> Participaste en
-                          el evento de introducción y ahora puedes registrarte
-                          como moderador.
+                          el evento de introducción y ahora puedes crear tus
+                          propuestas.
                         </li>
                         <li>
                           <span className="text-2xl">⛽</span>
@@ -131,9 +131,9 @@ const PoapModeratorsPage = ({
                     </div>
                   </div>
                 </div>
-                <Link href="/onboarding/mods/register">
+                <Link href="/proposals/new">
                   <button className="homeBT my-5 w-fit mx-auto">
-                    Registrarse como Moderador
+                    Registrar Propuesta
                   </button>
                 </Link>
               </>
@@ -168,4 +168,4 @@ export const getServerSideProps: GetServerSideProps<{
   };
 };
 
-export default PoapModeratorsPage;
+export default PoapCitizensPage;

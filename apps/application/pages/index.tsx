@@ -12,7 +12,16 @@ const HomePage: NextPage = () => {
 
   useEffect(() => {
     if (walletIsConnected) {
-      router.push("/onboarding/mods");
+      if (process.env.NEXT_PUBLIC_ZENGO_ONBOARDING === "moderators") {
+        router.push("/onboarding/mods");
+      } else if (process.env.NEXT_PUBLIC_ZENGO_ONBOARDING === "citizens") {
+        router.push("/onboarding/citizens");
+      } else {
+        console.log(
+          "Zengo onboarding should be off. status: ",
+          process.env.NEXT_PUBLIC_ZENGO_ONBOARDING
+        );
+      }
     }
     setStateReady(true);
   }, [walletIsConnected]);
