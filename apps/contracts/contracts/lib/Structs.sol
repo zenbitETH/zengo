@@ -30,11 +30,9 @@ library Structs {
     }
 
     struct Evidence {
+        uint256 evidenceTimestamp;
         string evidenceDescription;
-        string streetAddress;
         string evidenceUri;
-        uint256 latitude;
-        uint256 longitude;
     }
 
     enum VerificationState {
