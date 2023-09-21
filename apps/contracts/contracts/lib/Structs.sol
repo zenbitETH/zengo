@@ -12,6 +12,9 @@ library Structs {
         VerificationState verificationState;
         bool isEligibleForFunding;
         bool isVerified;
+        string streetAddress;
+        uint256 latitude;
+        uint256 longitude;
     }
 
     struct Moderator {
