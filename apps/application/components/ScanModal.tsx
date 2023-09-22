@@ -3,11 +3,6 @@ import ReactDOM from "react-dom";
 import Image from "next/image";
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 
-type ScanModalProps = {
-  visible: boolean;
-  toggle?: () => void;
-};
-
 export const ScanModal: React.FC = () => {
   const { visible } = useOnboardingContextState();
   return visible

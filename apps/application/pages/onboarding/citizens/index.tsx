@@ -2,7 +2,7 @@ import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import Link from "next/link";
 import React from "react";
 
-const ModeratorsVideoPage = () => {
+const CitizensVideoPage = () => {
   const { addressHasPoap } = useOnboardingContextState();
 
   return (
@@ -17,15 +17,15 @@ const ModeratorsVideoPage = () => {
         />
 
         {!addressHasPoap ? (
-          <Link href="/onboarding/mods/poap">
+          <Link href="/onboarding/citizens/poap">
             <button className="homeBT fixed bottom-5 left-1/2 -translate-x-1/2">
               Certificar participación
             </button>
           </Link>
         ) : (
-          <Link href="/modsceremony">
+          <Link href="/proposals">
             <button className="homeBT fixed bottom-5 left-1/2 -translate-x-1/2">
-              Continuar al panel de moderadores
+              Continuar al panel de propuestas
             </button>
           </Link>
         )}
@@ -34,4 +34,4 @@ const ModeratorsVideoPage = () => {
   );
 };
 
-export default ModeratorsVideoPage;
+export default CitizensVideoPage;

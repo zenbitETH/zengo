@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { type ReactNode, useState } from "react";
-import { IEvidence, ILocation, IProposalInfo } from "../interfaces";
+import { IEvidence, ILocation, IProposalInfo } from "@/interfaces";
 import {
   useContract,
   useContractWrite,

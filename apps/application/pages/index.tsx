@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   const [stateReady, setStateReady] = useState<boolean>(false);
   const { walletIsConnected } = useOnboardingContextState();
 
@@ -12,7 +12,16 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (walletIsConnected) {
-      router.push("/onboarding/mods");
+      if (process.env.NEXT_PUBLIC_ZENGO_ONBOARDING === "moderators") {
+        router.push("/onboarding/mods");
+      } else if (process.env.NEXT_PUBLIC_ZENGO_ONBOARDING === "citizens") {
+        router.push("/onboarding/citizens");
+      } else {
+        console.log(
+          "Zengo onboarding should be off. status: ",
+          process.env.NEXT_PUBLIC_ZENGO_ONBOARDING
+        );
+      }
     }
     setStateReady(true);
   }, [walletIsConnected]);
@@ -22,10 +31,10 @@ const Home: NextPage = () => {
   // }, []);
 
   return (
-    <div className="from-cit to-mod bg-gradient-to-t h-screen">
+    <div className="from-cit to-mod bg-gradient-to-t h-full">
       {stateReady ? <Carousel /> : null}
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

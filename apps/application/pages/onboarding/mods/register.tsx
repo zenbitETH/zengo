@@ -1,6 +1,6 @@
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const RegisterModeratorRolePage = () => {
   const [moderatorType, setModeratorType] = useState<string>("0");
@@ -32,14 +32,18 @@ const RegisterModeratorRolePage = () => {
       },
     });
     const responseData = await response.json();
+
     console.log({ responseData });
+
     if (responseData.receipt.status === 1) {
       setUserIsModerator(true);
       setVisible(false);
       router.push("/modsceremony");
+      return;
     } else {
       console.log("Error: status !== 1");
       setVisible(false);
+      return;
     }
   };
 

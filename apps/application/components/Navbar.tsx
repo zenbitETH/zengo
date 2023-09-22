@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <nav className="-">
       <div className="navbar text-center">
-        <Link href="/newProposal" className="imageBG">
+        <Link href="/proposals/new" className="imageBG">
           <Image
             src={"/assets/Proposal.svg"}
             width={45}
@@ -14,7 +14,7 @@ export default function Navbar() {
             alt="New proposal"
           />
         </Link>
-        <Link href="/daoProposals" className="imageBG">
+        <Link href="/proposals" className="imageBG">
           <Image
             src={"/assets/Dashboard.svg"}
             width={45}

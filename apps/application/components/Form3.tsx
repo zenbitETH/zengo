@@ -25,9 +25,14 @@ export default function Form3() {
   };
 
   // react-dropzone
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
     // When file is dropped, we upload it to IPFS
-    uploadEvidenceToIpfs(acceptedFiles[0]);
+    const uploadUrl = await uploadEvidenceToIpfs(acceptedFiles[0]);
+    const updatedEvidenceIpfsUrl = {
+      ...evidence,
+      ipfsUrl: uploadUrl,
+    };
+    setEvidence(updatedEvidenceIpfsUrl);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

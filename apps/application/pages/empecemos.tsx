@@ -3,13 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAddress } from "@thirdweb-dev/react";
 import { getUser } from "./api/auth/[...thirdweb]";
-import { useEventPoap } from "@/hooks/useEventPoap";
+// import { useEventPoap } from "@/hooks/useEventPoap";
 
 export default function GasStation() {
   const address = useAddress();
   const [walletAddress, setWalletaddress] = useState("");
 
-  const { claimPoap, poapScan, addressHasPoap } = useEventPoap();
+  const addressHasPoap = false;
+
+  // const { claimPoap, poapScan, addressHasPoap } = useEventPoap();
 
   const eventIdUsed = process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID as string; // process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID as string; // TODO: to be changed based on the onboarding type (for citizens/for moderators)
 
@@ -24,7 +26,7 @@ export default function GasStation() {
 
   useEffect(() => {
     const firstScan = async () => {
-      await poapScan(walletAddress, eventIdUsed);
+      // await poapScan(walletAddress, eventIdUsed);
 
       await sleep(1000);
     };
@@ -36,7 +38,7 @@ export default function GasStation() {
 
   const handleClaimPoap = async () => {
     // setIsModal2Open(true);
-    claimPoap(walletAddress, eventIdUsed);
+    // claimPoap(walletAddress, eventIdUsed);
     // setIsModal2Open(false);
   };
 
