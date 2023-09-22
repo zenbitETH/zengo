@@ -24,7 +24,7 @@ const HomePage: NextPage = () => {
       }
     }
     setStateReady(true);
-  }, [walletIsConnected]);
+  }, [walletIsConnected, router]);
 
   // useEffect(() => {
   //   setStateReady(true);

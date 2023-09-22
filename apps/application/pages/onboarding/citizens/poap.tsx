@@ -25,6 +25,7 @@ const PoapCitizensPage = ({
       }
     };
     checkIfScan();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClaimPoap = async () => {
