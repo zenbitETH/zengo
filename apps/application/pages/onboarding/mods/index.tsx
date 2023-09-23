@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 const ModeratorsVideoPage = () => {
-  const { addressHasPoap } = useOnboardingContextState();
+  const { addressHasPoap, userIsModerator } = useOnboardingContextState();
 
   return (
     <div className="overflow-hidden text-center h-full grid items-center relative">
@@ -20,6 +20,12 @@ const ModeratorsVideoPage = () => {
           <Link href="/onboarding/mods/poap">
             <button className="homeBT fixed bottom-5 left-1/2 -translate-x-1/2">
               Certificar participación
+            </button>
+          </Link>
+        ) : !userIsModerator ? (
+          <Link href="/onboarding/mods/register">
+            <button className="homeBT fixed bottom-5 left-1/2 -translate-x-1/2">
+              Registrarse como Moderador
             </button>
           </Link>
         ) : (

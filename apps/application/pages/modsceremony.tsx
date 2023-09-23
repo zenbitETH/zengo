@@ -1,9 +1,40 @@
 import ZengoLayout from "@/components/ZengoLayout";
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
-import React from "react";
+import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import { useEffect, useState } from "react";
+import { CHAIN } from "@/const/chains";
+import { contractAddress_zengoDao } from "@/const/contracts";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+import { generateModeratorsLists } from "@/lib/generateModeratorsLists";
+import type { IModeratorsByType } from "@/interfaces";
 
-export default function ModsCeremonyPage() {
+const ModsCeremonyPage = ({
+  // moderatorsFormatedData,
+  modsByType,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { moderatorsByType } = useOnboardingContextState();
+
+  const [modsList, setModsList] = useState<IModeratorsByType>({
+    civil: [],
+    private: [],
+    academy: [],
+    government: [],
+    open: [],
+  });
+
+  useEffect(() => {
+    if (
+      moderatorsByType.civil.length > 0 ||
+      moderatorsByType.private.length > 0 ||
+      moderatorsByType.academy.length > 0 ||
+      moderatorsByType.government.length > 0 ||
+      moderatorsByType.open.length > 0
+    ) {
+      setModsList(moderatorsByType);
+    } else {
+      setModsList(modsByType);
+    }
+  }, [moderatorsByType]);
 
   return (
     <ZengoLayout>
@@ -22,7 +53,7 @@ export default function ModsCeremonyPage() {
                 <div
                   /*this set 1 column for mobile, 2 columns for desktop on the same category moderators*/ className="modGrid"
                 >
-                  {moderatorsByType.civil.map((mod, idx) => (
+                  {modsList.civil.map((mod, idx) => (
                     <div className="modInfo" key={idx}>
                       <div className="col-span-4 text-center">
                         {mod.shortAddress}
@@ -42,7 +73,7 @@ export default function ModsCeremonyPage() {
               <div className="modCategory">
                 <div className="text-xl pb-3">Sector Privado</div>
                 <div className="modGrid">
-                  {moderatorsByType.private.map((mod, idx) => (
+                  {modsList.private.map((mod, idx) => (
                     <div className="modInfo" key={idx}>
                       <div className="col-span-4 text-center">
                         {mod.shortAddress}
@@ -62,7 +93,7 @@ export default function ModsCeremonyPage() {
               <div className="modCategory">
                 <div className="text-xl pb-3">Academia</div>
                 <div className="modGrid">
-                  {moderatorsByType.academy.map((mod, idx) => (
+                  {modsList.academy.map((mod, idx) => (
                     <div className="modInfo" key={idx}>
                       <div className="col-span-4 text-center">
                         {mod.shortAddress}
@@ -82,7 +113,7 @@ export default function ModsCeremonyPage() {
               <div className="modCategory">
                 <div className="text-xl pb-3">Gobierno</div>
                 <div className="modGrid">
-                  {moderatorsByType.government.map((mod, idx) => (
+                  {modsList.government.map((mod, idx) => (
                     <div className="modInfo" key={idx}>
                       <div className="col-span-4 text-center">
                         {mod.shortAddress}
@@ -102,7 +133,7 @@ export default function ModsCeremonyPage() {
               <div className="modCategory">
                 <div className="text-xl pb-3">Moderador Abierto</div>
                 <div className="modGrid">
-                  {moderatorsByType.open.map((mod, idx) => (
+                  {modsList.open.map((mod, idx) => (
                     <div className="modInfo" key={idx}>
                       <div className="col-span-4 text-center">
                         {mod.shortAddress}
@@ -125,4 +156,63 @@ export default function ModsCeremonyPage() {
       </div>
     </ZengoLayout>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps<{
+  // moderatorsFormatedData: any[];
+  modsByType: IModeratorsByType;
+}> = async () => {
+  if (!process.env.NEXT_PUBLIC_THIRDWEB_CLIENTID) {
+    return {
+      props: {
+        /* moderatorsFormatedData: [], */ modsByType: {
+          civil: [],
+          private: [],
+          academy: [],
+          government: [],
+          open: [],
+        },
+      },
+    };
+  }
+
+  const sdk = ThirdwebSDK.fromPrivateKey(
+    process.env.THIRDWEB_AUTH_PRIVATE_KEY as string,
+    CHAIN,
+    {
+      clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENTID, // Use client id if using on the client side, get it from dashboard settings
+      secretKey: process.env.THIRDWEB_SECRET_KEY, // Use secret key if using on the server, get it from dashboard settings
+    }
+  );
+
+  const contract = await sdk.getContract(contractAddress_zengoDao);
+
+  if (contract === null) {
+    return {
+      props: {
+        /* moderatorsFormatedData: [], */ modsByType: {
+          civil: [],
+          private: [],
+          academy: [],
+          government: [],
+          open: [],
+        },
+      },
+    };
+  }
+
+  const getModeratorsData = await contract.call("getModerators");
+
+  const getModeratorsListData = await contract.call("getModeratorsList");
+
+  const { /* moderatorsFormatedData, */ modsByType } = generateModeratorsLists(
+    getModeratorsData,
+    getModeratorsListData
+  );
+
+  return {
+    props: { /* moderatorsFormatedData, */ modsByType },
+  };
+};
+
+export default ModsCeremonyPage;
