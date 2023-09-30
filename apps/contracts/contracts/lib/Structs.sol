@@ -6,8 +6,8 @@ library Structs {
         address proposer;
         uint8 votingIterationCount;
         uint256 proposalId;
-        uint256 latitude;
-        uint256 longitude;
+        int256 latitude;
+        int256 longitude;
         string title;
         string proposalDescription;
         string proposalType;
