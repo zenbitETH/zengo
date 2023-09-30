@@ -116,8 +116,8 @@ contract ZengoDAO is
         string memory _evidenceDescription,
         string memory _evidenceUri,
         string memory _proposalType,
-        uint256 _proposalEvidenceTimestamp,
         string memory _streetAddress,
+        uint256 _proposalEvidenceTimestamp,
         uint256 _latitude,
         uint256 _longitude
     ) external checkState(1) {
