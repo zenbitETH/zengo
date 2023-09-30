@@ -4,9 +4,8 @@ import {
   useConnectionStatus,
   useContract,
   useContractRead,
-  useContractWrite,
 } from "@thirdweb-dev/react";
-import { type Address, toEther } from "@thirdweb-dev/sdk";
+import { toEther } from "@thirdweb-dev/sdk";
 import { useRouter } from "next/router";
 import {
   createContext,
@@ -15,28 +14,36 @@ import {
   type ReactNode,
   useEffect,
 } from "react";
-import { IModeratorsByType } from "../interfaces";
+import {
+  type IClaimResponse,
+  type IModeratorsByType,
+  ZengoOnboardingOptions,
+} from "@/interfaces";
+import { generateModeratorsLists } from "@/lib/generateModeratorsLists";
 
 interface IOnboardingContext {
   cycleState: number | null;
   walletIsConnected: boolean;
-  claimPoap: (address: string, eventId: string) => void;
-  poapScan: (address: string, eventId: string) => void;
+  claimPoap: (address: string, eventId: string) => Promise<IClaimResponse>;
+  poapScan: (address: string, eventId: string) => Promise<void>;
   addressHasPoap: boolean;
+  setAddressHasPoap: (value: boolean) => void;
   // addModeratorCall: (props: IAddModeratorCallProps) => void;
-  removeModeratorCall: (moderatorAddress: Address) => void;
-  setIndividualVotingPointsCall: (
-    moderatorAddress: Address,
-    points: number
-  ) => void;
+  // removeModeratorCall: (moderatorAddress: Address) => void;
+  // setIndividualVotingPointsCall: (
+  //   moderatorAddress: Address,
+  //   points: number
+  // ) => void;
   poapTokenId: string;
-  allModeratorsList: any[];
+  // allModeratorsList: any[];
   userIsModerator: boolean;
   setUserIsModerator: (value: boolean) => void;
   moderatorsByType: IModeratorsByType;
   connectedWallet: string;
   setVisible: (show: boolean | null) => void;
   visible: boolean | null;
+  getModeratorsListRefetch: () => Promise<any>;
+  getModeratorsRefetch: () => Promise<any>;
 }
 
 export const OnboardingContext = createContext<IOnboardingContext | undefined>(
@@ -69,13 +76,6 @@ export const OnboardingContext = createContext<IOnboardingContext | undefined>(
 
 interface IProps {
   children: ReactNode;
-}
-
-interface IAddModeratorCallProps {
-  modAddress: Address;
-  modType: string;
-  modPosition: string;
-  modOrganization: string;
 }
 
 export function OnboardingContextProvider({ children }: IProps) {
@@ -116,34 +116,66 @@ export function OnboardingContextProvider({ children }: IProps) {
     if (address) {
       setWalletIsConnected(true);
       setConnectedWallet(address);
-      // if (process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID) {
-      //   poapScan(address, process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID);
-      // }
-      // if (process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID) {
-      //   poapScan(address, process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID);
-      // }
+      if (
+        process.env.NEXT_PUBLIC_ZENGO_ONBOARDING ===
+        ZengoOnboardingOptions.moderators
+      ) {
+        if (process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID) {
+          poapScan(address, process.env.NEXT_PUBLIC_POAP_MODERATOR_EVENT_ID);
+        }
+      } else if (
+        process.env.NEXT_PUBLIC_ZENGO_ONBOARDING ===
+        ZengoOnboardingOptions.citizens
+      ) {
+        if (process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID) {
+          poapScan(address, process.env.NEXT_PUBLIC_POAP_CITIZEN_EVENT_ID);
+        }
+      } else {
+        console.log(
+          "Zengo onboarding should be off. status: ",
+          process.env.NEXT_PUBLIC_ZENGO_ONBOARDING
+        );
+      }
     }
   }, [address]);
 
-  const claimPoap = async (address: string, eventId: string) => {
+  const claimPoap = async (
+    address: string,
+    eventId: string
+  ): Promise<IClaimResponse> => {
     setVisible(true);
-    const claimApiResponse = await fetch(
-      `/api/poaps/claim?address=${address}&eventId=${eventId}`
-    );
+    //step4: claim poap step
+    const claimPOSTOptions = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        address: address,
+        eventId: eventId,
+      }),
+    };
+
+    const claimApiResponse = await fetch(`/api/poaps/claim`, claimPOSTOptions);
 
     const claimApiData = await claimApiResponse.json();
 
     if (claimApiData.claimed) {
       console.log("claimed true");
       setAddressHasPoap(true);
-      await poapScan(address, eventId);
+      setPoapTokenId(claimApiData.tokenId);
+      // await poapScan(address, eventId); // now scanned on server side api route
       setVisible(false);
+      return claimApiData;
     } else {
+      console.log("claimed false");
       setVisible(false);
+      return claimApiData;
     }
   };
 
-  const poapScan = async (address: string, eventId: string) => {
+  const poapScan = async (address: string, eventId: string): Promise<void> => {
     const response = await fetch(
       `/api/poaps/scan?address=${address}&eventId=${eventId}`
     );
@@ -153,6 +185,8 @@ export function OnboardingContextProvider({ children }: IProps) {
       console.log("tokendid true ", { scan: data.scan });
       setAddressHasPoap(data.scan);
       setPoapTokenId(data.tokenId);
+    } else {
+      console.log("tokendid false ", { scan: data.scan });
     }
     return;
   };
@@ -172,116 +206,28 @@ export function OnboardingContextProvider({ children }: IProps) {
     }
   }, [getGovernanceCycleIsSuccess]);
 
-  const { mutateAsync: addModerator, isLoading: addModeratorIsLoading } =
-    useContractWrite(zengoDaoContract, "addModerator");
-
-  const addModeratorCall = async ({
-    modAddress,
-    modType,
-    modPosition,
-    modOrganization,
-  }: IAddModeratorCallProps) => {
-    try {
-      const data = await addModerator({
-        args: [modAddress, modType, modPosition, modOrganization],
-      });
-      console.info("contract call successs", data);
-    } catch (err) {
-      console.error("contract call failure", err);
-    }
-  };
-
-  const { mutateAsync: removeModerator, isLoading: removeModeratorIsLoading } =
-    useContractWrite(zengoDaoContract, "removeModerator");
-
-  const removeModeratorCall = async (moderatorAddress: Address) => {
-    try {
-      const data = await removeModerator({ args: [moderatorAddress] });
-      console.info("contract call successs", data);
-    } catch (err) {
-      console.error("contract call failure", err);
-    }
-  };
-
   const {
-    mutateAsync: setIndividualVotingPoints,
-    isLoading: setIndividualVotingPointsIsLoading,
-  } = useContractWrite(zengoDaoContract, "setIndividualVotingPoints");
-
-  const setIndividualVotingPointsCall = async (
-    moderatorAddress: Address,
-    points: number
-  ) => {
-    try {
-      const data = await setIndividualVotingPoints({
-        args: [moderatorAddress, points],
-      });
-      console.info("contract call successs", data);
-    } catch (err) {
-      console.error("contract call failure", err);
-    }
-  };
+    data: getModeratorsListData,
+    isLoading: getModeratorsListIsLoading,
+    isSuccess: getModeratorsListIsSuccess,
+    refetch: getModeratorsListRefetch,
+  } = useContractRead(zengoDaoContract, "getModeratorsList");
 
   const {
     data: getModeratorsData,
     isLoading: getModeratorsIsLoading,
     isSuccess: getModeratorsIsSuccess,
+    refetch: getModeratorsRefetch,
   } = useContractRead(zengoDaoContract, "getModerators");
 
   useEffect(() => {
-    if (getModeratorsData) {
-      const moderatorsFormatedData: any[] = getModeratorsData.map(
-        (moderator: any) => {
-          const modTypeTxt =
-            moderator.moderatorType === 0
-              ? "Organizaciones Civiles"
-              : moderator.moderatorType === 1
-              ? "Sector Privado"
-              : moderator.moderatorType === 2
-              ? "Academia"
-              : moderator.moderatorType === 3
-              ? "Gobierno"
-              : moderator.moderatorType === 4
-              ? "Moderador abierto"
-              : "No definido";
-          return {
-            address: moderator.address || "0xAddress",
-            modType: moderator.moderatorType,
-            modPosition: moderator.position,
-            modOrganization: moderator.organization,
-            modTypeTxt,
-          };
-        }
-      );
-      if (moderatorsFormatedData) {
-        setAllModeratorsList(moderatorsFormatedData);
-        const modsByType = moderatorsFormatedData.reduce(
-          (acc, mod) => {
-            if (mod.modType === 0) {
-              acc.civil.push(mod);
-            } else if (mod.modType === 1) {
-              acc.private.push(mod);
-            } else if (mod.modType === 2) {
-              acc.academy.push(mod);
-            } else if (mod.modType === 3) {
-              acc.government.push(mod);
-            } else if (mod.modType === 4) {
-              acc.open.push(mod);
-            }
-            return acc;
-          },
-          {
-            civil: [],
-            private: [],
-            academy: [],
-            government: [],
-            open: [],
-          }
-        );
-        setModeratorsByType(modsByType);
-      }
+    if (getModeratorsData && getModeratorsListData) {
+      const { /* moderatorsFormatedData, */ modsByType } =
+        generateModeratorsLists(getModeratorsData, getModeratorsListData);
+      // setAllModeratorsList(moderatorsFormatedData);
+      setModeratorsByType(modsByType);
     }
-  }, [getModeratorsIsSuccess]);
+  }, [getModeratorsIsSuccess, getModeratorsListIsSuccess]);
 
   const {
     data: addressIsModeratorData,
@@ -302,16 +248,17 @@ export function OnboardingContextProvider({ children }: IProps) {
     claimPoap,
     poapScan,
     addressHasPoap,
-    removeModeratorCall,
-    setIndividualVotingPointsCall,
+    setAddressHasPoap,
     poapTokenId,
-    allModeratorsList,
+    // allModeratorsList,
     userIsModerator,
     setUserIsModerator,
     moderatorsByType,
     connectedWallet,
     visible,
     setVisible,
+    getModeratorsListRefetch,
+    getModeratorsRefetch,
   };
 
   return (

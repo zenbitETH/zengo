@@ -3,15 +3,18 @@ pragma solidity ^0.8.17;
 
 library Structs {
     struct Proposal {
+        address proposer;
         uint8 votingIterationCount;
         uint256 proposalId;
+        uint256 latitude;
+        uint256 longitude;
         string title;
         string proposalDescription;
         string proposalType;
-        address proposer;
-        VerificationState verificationState;
+        string streetAddress;
         bool isEligibleForFunding;
         bool isVerified;
+        VerificationState verificationState;
     }
 
     struct Moderator {

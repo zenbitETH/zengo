@@ -41,7 +41,7 @@ export default function Form4() {
               className="rounded-med"
             /> */}
             {/* <MediaRenderer src="https://312a375fe5a190a748d40e21aff95e99.ipfscdn.io/ipfs/bafybeidr3w6y5fzqncerc6pgdfttu5lfmkvbbhpiuwvl4nnszhtwdo3pgi/" /> */}
-            <MediaRenderer src={evidence.ipfsUrl} />
+            <MediaRenderer src={evidence.ipfsUri} />
           </div>
         </div>
       </div>

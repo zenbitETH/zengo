@@ -1,7 +1,7 @@
 export interface IEvidence {
   date: string;
   description: string;
-  ipfsUrl: string;
+  ipfsUri: string;
 }
 
 export interface IProposalInfo {
@@ -24,6 +24,12 @@ export interface IScanResponse {
   tokenId: string;
 }
 
+export interface IClaimResponse {
+  claimed: boolean;
+  tokenId?: string;
+  error?: string;
+}
+
 export interface IModeratorsByType {
   civil: ModeratorInfo[];
   private: ModeratorInfo[];
@@ -34,8 +40,23 @@ export interface IModeratorsByType {
 
 export interface ModeratorInfo {
   address: string;
+  shortAddress: string;
   modType: number;
   modPosition: string;
   modOrganization: string;
   modTypeTxt: string;
+}
+
+export enum ZengoOnboardingOptions {
+  "moderators" = "moderators",
+  "citizens" = "citizens",
+  "off" = "off",
+}
+
+export enum ModeratorsTypes {
+  "Organizaciones Civiles" = "Organizaciones Civiles",
+  "Sector Privado" = "Sector Privado",
+  "Academia" = "Academia",
+  "Gobierno" = "Gobierno",
+  "Moderador abierto" = "Moderador abierto",
 }

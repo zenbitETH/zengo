@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IScanResponse } from "@/interfaces/index";
+import { IScanResponse } from "@/interfaces";
 
 export default async function handler(
   req: NextApiRequest,

@@ -1,6 +1,6 @@
 import { useOnboardingContextState } from "@/contexts/OnboardingContext";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 const RegisterModeratorRolePage = () => {
   const [moderatorType, setModeratorType] = useState<string>("0");
@@ -8,8 +8,14 @@ const RegisterModeratorRolePage = () => {
   const [moderatorOrganization, setModeratorOrganization] =
     useState<string>("");
 
-  const { setUserIsModerator, userIsModerator, connectedWallet, setVisible } =
-    useOnboardingContextState();
+  const {
+    setUserIsModerator,
+    userIsModerator,
+    connectedWallet,
+    setVisible,
+    getModeratorsListRefetch,
+    getModeratorsRefetch,
+  } = useOnboardingContextState();
 
   const router = useRouter();
 
@@ -19,27 +25,39 @@ const RegisterModeratorRolePage = () => {
     modPosition: string,
     modOrganization: string
   ) => {
-    const response = await fetch("/api/modregistration", {
-      method: "POST",
-      body: JSON.stringify({
-        modAddress,
-        modType,
-        modPosition,
-        modOrganization,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const responseData = await response.json();
-    console.log({ responseData });
-    if (responseData.receipt.status === 1) {
-      setUserIsModerator(true);
+    try {
+      const response = await fetch("/api/modregistration", {
+        method: "POST",
+        body: JSON.stringify({
+          modAddress,
+          modType,
+          modPosition,
+          modOrganization,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const responseData = await response.json();
+
+      console.log({ responseData });
+
+      if (responseData.receipt.status === 1) {
+        setUserIsModerator(true);
+        setVisible(false);
+        await getModeratorsListRefetch();
+        await getModeratorsRefetch();
+        router.push("/modsceremony");
+        return;
+      } else {
+        console.log("Error: status !== 1");
+        setVisible(false);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
       setVisible(false);
-      router.push("/modsceremony");
-    } else {
-      console.log("Error: status !== 1");
-      setVisible(false);
+      return;
     }
   };
 
@@ -50,12 +68,6 @@ const RegisterModeratorRolePage = () => {
       moderatorPosition !== "" &&
       moderatorOrganization !== ""
     ) {
-      // addModeratorCall({
-      //   modAddress: connectedWallet,
-      //   modType: moderatorType,
-      //   modPosition: moderatorPosition,
-      //   modOrganization: moderatorOrganization,
-      // });
       postAddModerator(
         connectedWallet,
         moderatorType,

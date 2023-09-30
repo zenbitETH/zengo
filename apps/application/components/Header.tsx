@@ -66,9 +66,10 @@ export default function Header() {
             <Link href="/">
               <div className="grid items-center">
                 <Image
-                  src={logo}
+                  src={"/assets/zengo.svg"}
                   alt="zengo presupuesto descentralizado"
                   width={200}
+                  height={50}
                 />
               </div>
             </Link>
