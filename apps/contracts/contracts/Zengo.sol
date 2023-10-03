@@ -132,6 +132,7 @@ contract ZengoDAO is Constants, ZengoStorage, GStates, PermissionsEnumerable, Co
         newProposal.votingIterationCount = 0;
         newProposal.verificationState = Structs.VerificationState(0);
         newProposal.streetAddress = _streetAddress;
+        newProposal.createdAt = block.timestamp;
         newProposal.latitude = _latitude;
         newProposal.longitude = _longitude;
         proposalEvidence[GOVERNANCE_CYCLE][proposalCount] = newEvidence;
