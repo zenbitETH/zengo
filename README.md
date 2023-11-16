@@ -11,10 +11,10 @@ Zengo: presupuesto descentralizado es una aplicación colaborativa que impulsa l
   Más información sobre Zengo
 </summary>
 
-[🗳️ Modelo Zengo](#🗳️-Modelo-Zengo)  
-[👪 Usuarios de Zengo](#👪-Usuarios-de-Zengo)  
-[🤝 Ciclos de gobernanza colaborativa](#🤝-Ciclos-de-gobernanza-colaborativa)  
-[⏳ Etapas de gobernanza](#⏳-Etapas-de-gobernanza)
+[🗳️ Modelo Zengo](#%EF%B8%8F-modelo-zengo)  
+[👪 Usuarios de Zengo](#-usuarios-de-zengo)  
+[🤝 Ciclos de gobernanza colaborativa](#-ciclos-de-gobernanza-colaborativa)  
+[⏳ Etapas de gobernanza](#-etapas-del-ciclo-de-gobernanza)
 
 ## 🗳️ Modelo Zengo
 
