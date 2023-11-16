@@ -2,7 +2,12 @@
 
 # 👋 Bienvenidos al repositorio de Zengo
 
-<a href="https://round3.optimism.io/projects/0xa0e0d386a862f8f1ee625bf5837bfb8ef5a8201d70c459efbe9172602ff3d831"> <img src="https://img.shields.io/badge/Vote%20for%20zengo!-badge?style=plastic&logo=ethereum&logoColor=red&label=OP%20RetroPGF%203&labelColor=white&color=gray&"  alt="Vote for zengo"/></a>
+<a href="https://round3.optimism.io/projects/0xa0e0d386a862f8f1ee625bf5837bfb8ef5a8201d70c459efbe9172602ff3d831"><img alt="Static Badge" src="https://img.shields.io/badge/Vota!-badge?style=plastic&logo=ethereum&logoColor=white&label=OP%20RetroPGF3&labelColor=FF0420&color=gray">
+</a>
+<a href="https://explorer.gitcoin.co/#/round/424/0xd4cc0dd193c7dc1d665ae244ce12d7fab337a008/0xd4cc0dd193c7dc1d665ae244ce12d7fab337a008-84"><img alt="Static Badge" src="https://img.shields.io/badge/Vota!-badge?style=plastic&logo=ethereum&logoColor=white&label=%23GG19%20Web3%20OSS&labelColor=16423B&color=3db8a4">
+</a>
+<a href="https://github.com/zenbitETH/zengo#readme"><img alt="Static Badge" src="https://img.shields.io/badge/English-badge?style=plastic&color=blue">
+</a>
 
 Zengo: presupuesto descentralizado es una aplicación colaborativa que impulsa la transparencia en la gobernanza urbana a través de software de código abierto y tecnologías descentralizadas. Nuestra plataforma permite la participación ciudadana mediante el registro de propuestas que abordan las necesidades reales de la comunidad, y cuenta con un presupuesto descentralizado que los moderadores pueden asignar a dichas propuestas.
 
@@ -12,7 +17,7 @@ Zengo: presupuesto descentralizado es una aplicación colaborativa que impulsa l
 </summary>
 
 [🗳️ Modelo Zengo](#%EF%B8%8F-modelo-zengo)  
-[👪 Usuarios de Zengo](#-usuarios-de-zengo)  
+[👪 Usuarios de Zengo](#-usuarios-de-zengo)
 [🤝 Ciclos de gobernanza colaborativa](#-ciclos-de-gobernanza-colaborativa)  
 [⏳ Etapas de gobernanza](#-etapas-del-ciclo-de-gobernanza)
 
