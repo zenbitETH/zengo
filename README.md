@@ -6,7 +6,7 @@
 </a>
 <a href="https://explorer.gitcoin.co/#/round/424/0xd4cc0dd193c7dc1d665ae244ce12d7fab337a008/0xd4cc0dd193c7dc1d665ae244ce12d7fab337a008-84"><img alt="Static Badge" src="https://img.shields.io/badge/Vota!-badge?style=plastic&logo=ethereum&logoColor=white&label=%23GG19%20Web3%20OSS&labelColor=16423B&color=3db8a4">
 </a>
-<a href="https://github.com/zenbitETH/READMEeng.md"><img alt="Static Badge" src="https://img.shields.io/badge/English-badge?style=plastic&color=blue">
+<a href="https://github.com/zenbitETH/READMEeng.md(https://github.com/zenbitETH/zengo/blob/main/READMEeng.md)"><img alt="Static Badge" src="https://img.shields.io/badge/English-badge?style=plastic&color=blue">
 </a>
 
 Zengo: presupuesto descentralizado es una aplicación colaborativa que impulsa la transparencia en la gobernanza urbana a través de software de código abierto y tecnologías descentralizadas. Nuestra plataforma permite la participación ciudadana mediante el registro de propuestas que abordan las necesidades reales de la comunidad, y cuenta con un presupuesto descentralizado que los moderadores pueden asignar a dichas propuestas.
