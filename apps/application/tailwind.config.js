@@ -16,6 +16,7 @@ module.exports = {
         bgc: "#e88110",
         cit: "#F3A754",
         mod: "#008A8A",
+        op: "#F35454",
       },
       fontFamily: {
         bau: ["Baumans"],

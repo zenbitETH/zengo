@@ -40,10 +40,14 @@
 
 /* Buttons */
 
-.homeBT,
-.poapBT {
-  @apply rounded-dd border  xl:px-5 px-3 py-3  
-  text-sm xl:text-2xl font-bau !important;
+.homeBT {
+  @apply bg-bgd/50
+  text-white
+  hover:shadow-xl
+  cursor-pointer
+  hover:bg-white/80
+  hover:text-bgd
+  !important;
 }
 
 .homeBT {
